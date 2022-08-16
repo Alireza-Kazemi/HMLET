@@ -146,7 +146,7 @@ plot(time_cluster_data)
 summary(time_cluster_data)
 set.seed(5)
 clust_analysis <- analyze_time_clusters(time_cluster_data, within_subj=TRUE, paired=TRUE,
-                                        samples=1000)
+                                        samples=2000)
 summary(clust_analysis)
 
 plot(clust_analysis)
