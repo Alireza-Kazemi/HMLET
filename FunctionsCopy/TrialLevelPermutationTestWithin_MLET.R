@@ -1,5 +1,4 @@
-TrialLevelPermutationTestWithin_MLET <- function(data, samples = 2000, paired = T){
-  
+TrialLevelPermutationTestWithin_MLET <- function(data, samples = 2000, paired = T, threshold_c){
   labels = unique(data[,c("ID","trial","condition")])
   labelsNew = NULL
   for (sID in unique(labels$ID)){
@@ -39,5 +38,4 @@ TrialLevelPermutationTestWithin_MLET <- function(data, samples = 2000, paired = 
   tValueDist$NullDist = ifelse(abs(tValueDist$Positive)>abs(tValueDist$Negative),tValueDist$Positive,tValueDist$Negative)
   close(pb)
   return(tValueDist)
-
 }

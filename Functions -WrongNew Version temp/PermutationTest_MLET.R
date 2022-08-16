@@ -4,14 +4,6 @@ PermutationTest_MLET <- function(data, samples = 2000, paired = T, permuteTrials
     num_sub = length(unique(data$ID))  
     threshold_t = qt(p=1-.05/2, df=num_sub-1)
   }
-<<<<<<< Updated upstream
-  print("Creating unique permutation labels:")
-  if(permuteTrialsWithinSubject){
-    tValueDist = TrialLevelPermutationTestWithin_MLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
-    
-  }else{
-    tValueDist = SubjectLevelPermutationTestWithin_MLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
-=======
   
   res = ClusterStats_MLET(data, paired = paired, detailed = T, threshold_t = threshold_t)
   clusterInf = res[[1]]
@@ -31,25 +23,18 @@ PermutationTest_MLET <- function(data, samples = 2000, paired = T, permuteTrials
     
   }else{
     tValueDist = SubjectLevelPermutationTestWithin_MLET(dataPerm, samples = samples, paired = paired)
->>>>>>> Stashed changes
   }
   
-  res = ClusterStats_MLET(data, paired = paired, detailed = T, threshold_t = threshold_t)
-  sdat = res[[1]]
-  tValues = res[[2]]
+  
 	
-  sdat$pValue = unique(NA)
-  for(i in 1:nrow(sdat)){
-    if(sdat$tStatistic[i]>=0){
-      sdat$pValue[i]=mean(as.numeric(tValueDist$NullDist>sdat$tStatistic[i]))
+  clusterInf$pValue = unique(NA)
+  for(i in 1:nrow(clusterInf)){
+    if(clusterInf$tStatistic[i]>=0){
+      clusterInf$pValue[i]=mean(as.numeric(tValueDist$NullDist>clusterInf$tStatistic[i]))
     }else{
-      sdat$pValue[i]=mean(as.numeric(tValueDist$NullDist<sdat$tStatistic[i]))
+      clusterInf$pValue[i]=mean(as.numeric(tValueDist$NullDist<clusterInf$tStatistic[i]))
     }
   }
   
-<<<<<<< Updated upstream
-  return(list(sdat, tValueDist, tValues, samples))
-=======
   return(list(clusterInf, tValueDist, tValues, samples, data))
->>>>>>> Stashed changes
 }

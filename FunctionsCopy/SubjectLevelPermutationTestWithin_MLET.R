@@ -1,28 +1,18 @@
-TrialLevelPermutationTestWithin_MLET <- function(data, samples = 2000, paired = T){
-  
-  labels = unique(data[,c("ID","trial","condition")])
-  labelsNew = NULL
-  for (sID in unique(labels$ID)){
-    L = UniquePermutations_MLET(labels[labels$ID==sID,"condition"], n = samples) 
-    labelsNew = rbind(labelsNew,L[,-1])
-  }
-  labels = cbind(labels,labelsNew)
-  names(labels) = c(names(labels)[1:3],paste("perm",names(labels)[-(1:3)],sep = ""))
+SubjectLevelPermutationTestWithin_MLET <- function(data, samples = 2000 , paired = T, threshold_c){
+  resp_time = as.data.frame(summarise(group_by(data,ID,timepoint,condition),prop = mean(AOI)))
+  labels = unique(resp_time[,c("ID","timepoint","condition")])
+  labels = ComputeSubjectLevelPerm_MLET(labels, n = samples)
   
   #----------------------------- Perform Permutation tests
   print("Estimate tStatistic distribution:")
   pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
   
+  clusterTimepoint = unique(resp_time[,c("timepoint","ClusterIdx")])
   tValueDist = NULL
   for (itt in 1:(samples)){
-    datItt = merge(data,labels[,c(1,2,3,3+itt)],by = c("ID","trial","condition"),all.x=T)
-    if(nrow(data)!=nrow(datItt)){
-      print(paste("Error in itt =", itt))
-    }
-    datItt$condition = datItt[, paste("perm",itt,sep = "")]
-    resp_time = as.data.frame(summarise(group_by(datItt,ID,timepoint,condition),prop = mean(AOI)))
-    tValues = ComputeTValues_MLET(resp_time, paired = paired)
-    tValues = FindClusters_MLET(tValues, threshold_t = threshold_t)
+    resp_time$condition = labels[,paste("perm",itt,sep = "")]
+    tValues = ComputeTValues_MLET(resp_time,paired = paired)
+    tValues = EstimateNullDist_MLET(tValues, clusterTimepoint, threshold_c = threshold_c)
     sdat = melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
     sdat = sdat[sdat$index!=0,]
     if(nrow(sdat)!=0){
@@ -39,5 +29,5 @@ TrialLevelPermutationTestWithin_MLET <- function(data, samples = 2000, paired = 
   tValueDist$NullDist = ifelse(abs(tValueDist$Positive)>abs(tValueDist$Negative),tValueDist$Positive,tValueDist$Negative)
   close(pb)
   return(tValueDist)
-
 }
+  

@@ -28,7 +28,7 @@ p_load(reshape2,
        emmeans,
        eyetrackingR,miceadds)
 
-path = "C:/Users/kazemi/Documents/GitHub/MLET/Functions"
+path = "C:/Users/kazemi/Documents/GitHub/MLET/FunctionsCopy"
 p_load(combinat,simctest,rray,purrr,utils)
 
 # remotes::install_github("r-lib/rray")
@@ -36,16 +36,16 @@ options(dplyr.summarise.inform = FALSE)
 
 source.all(path = path)
 ############################## test my dataset -----
-d = read.csv("sampleData_0.2.csv")
+data = read.csv("sampleData_0.2.csv")
 
-sdat = ClusterStats_MLET(d, paired = T, detailed = F)
+sdat = ClusterStats_MLET(data, paired = T, detailed = F)
 
 
 num_sub = length(unique(data$ID))  
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples = 2000
-Res = PermutationTest_MLET(d, samples = samples, paired = T, permuteTrialsWithinSubject = F, threshold_t = threshold_t)
+samples = 200
+Res = PermutationTest_MLET(data, samples = samples, paired = T, permuteTrialsWithinSubject = F, threshold_t = threshold_t)
 Res[[1]]
 ggplot(Res[[2]], aes(x=NullDist)) +
   geom_histogram( color="#e9ecef", position = 'identity', bins =50)
