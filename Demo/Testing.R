@@ -1,10 +1,6 @@
 ########################### Initialization ##########################
 rm(list=ls(all=TRUE))
 
-x = readline()
-D:\Projects\Hippotime\DataFiles\L7_Sarahs Novelty Paper Script
-setwd(x)
-getwd()
 
 library(pacman)
 p_load(reshape2,
@@ -30,97 +26,69 @@ p_load(reshape2,
        psych,
        rstatix,
        emmeans,
-       eyetrackingR)
-RD = "D:\\Projects\\Hippotime\\DataFiles\\L7_Sarahs Novelty Paper Script\\"
-WD = "D:\\Projects\\Hippotime\\DataFiles\\L7_Sarahs Novelty Paper Script\\"
-################################################################################
-Perm_I = read.csv("Exp1_Imp_perm.csv")
-d.Exp = read.csv("d.Exp.csv")
-# read in data
-Perm_I <- Perm_I %>%
-  rename(Old = AOI.Old, New = AOI.New) %>%
-  mutate(Track_Loss = ifelse(is.na(ValidityLeft) & is.na(ValidityRight),TRUE,FALSE))
+       eyetrackingR,miceadds)
 
-# dummy time column
-Perm_I$sampDur <- 16.67
+path = "C:/Users/kazemi/Documents/GitHub/MLET/Functions"
+p_load(combinat,simctest,rray,purrr,utils)
 
-# create our own time stamp based on number of samples in that trial for that subject
-Perm_I_2 <- Perm_I %>%
-  group_by(ParticipantName, Trial) %>%
-  mutate(cum_trial_time = cumsum(sampDur),
-         time = cum_trial_time - 16.67) 
+# remotes::install_github("r-lib/rray")
+options(dplyr.summarise.inform = FALSE)
 
-#Remove bad Trials
-# I.data$good <- 1
-# I.merge <- I.data[,c("Subject", "Trial", "good")]
+source.all(path = path)
+############################## test my dataset -----
+d = read.csv("sampleData_0.2.csv")
 
-# Perm_I_3 <- merge(Perm_I_2, I.merge, by.x = c("ParticipantName", "Trial"), by.y=c("Subject", "Trial"))
-
-Perm_I_3 <- Perm_I_2
-Perm_I_3$Acc_level <- d.Exp$Acc_level[match(Perm_I_3$ParticipantName, d.Exp$Subject)]
-Perm_I_4 <- subset(Perm_I_3[!(is.na(Perm_I_3$Acc_level)),])
-Perm_I_4 <- subset(Perm_I_4[Perm_I_4$time < 4501,])
-
-# Doing the actual permutation
-set.seed(5)
-d <-  make_eyetrackingr_data(Perm_I_4, participant_column = "ParticipantName", trial_column = "Trial", time_column = "time",trackloss_column = "Track_Loss", aoi_columns =c("Old", "New"), treat_non_aoi_looks_as_missing = TRUE)
-
-response_time <- make_time_sequence_data(d, time_bin_size = 16.67, predictor_columns = "Acc_level", aois = "New", summarize_by = "ParticipantName")
-
-plot(response_time, predictor_column = "Acc_level") +
-  theme_light()+
-  scale_fill_grey(start=.8, end=.2)  +
-  guides(fill="none")+ #takes out legend
-  # scale_colour_manual(values=c("gray47","black"))+
-  # coord_cartesian(ylim=c(0,1), xlim=c(0,4500),expand = c(0,0))+
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-  theme(panel.border = element_blank(), axis.line = element_line())+
-  geom_segment(aes(x=0,xend=4500,y=.50,yend=.50),linetype=2,color="black",size=1)+ #this adds the black, dotted line at .5
-  theme(text = element_text(size=18))
+sdat = ClusterStats_MLET(d, paired = T, detailed = F)
 
 
-num_sub = length(unique(d$ParticipantName))  
+num_sub = length(unique(data$ID))  
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
+set.seed(5)
+samples = 2000
+Res = PermutationTest_MLET(d, samples = samples, paired = T, permuteTrialsWithinSubject = F, threshold_t = threshold_t)
+Res[[1]]
+ggplot(Res[[2]], aes(x=NullDist)) +
+  geom_histogram( color="#e9ecef", position = 'identity', bins =50)
 
-df_timeclust <- make_time_cluster_data(response_time, 
-                                       test= "t.test", paired=FALSE,
-                                       predictor_column = "Acc_level", 
-                                       threshold = threshold_t) 
-plot(df_timeclust) +  ylab("T-Statistic") + theme_light()
-summary(df_timeclust)
 
-clust_analysis <- analyze_time_clusters(df_timeclust, within_subj=FALSE, paired=FALSE,
-                                        samples=100)
-plot(clust_analysis) + theme_light()
-summary(clust_analysis)
-#################################### test Dataset ----
+num_sub = length(unique(data$timepoint))
+threshold_t = qt(p=1-.05/2, df=num_sub-1)
+set.seed(5)
+samples2 = 20
+Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
+Res2[[1]]
 
-data(word_recognition)
-data <- make_eyetrackingr_data(word_recognition, 
-                               participant_column = "ParticipantName",
-                               trial_column = "Trial",
-                               time_column = "TimeFromTrialOnset",
-                               trackloss_column = "TrackLoss",
-                               aoi_columns = c('Animate','Inanimate'),
-                               treat_non_aoi_looks_as_missing = TRUE )
-response_window <- subset_by_window(data, window_start_time = 15500, window_end_time = 21000, 
-                                    rezero = FALSE)
-response_time <- make_time_sequence_data(response_window, time_bin_size = 500, aois = "Animate", 
-                                         predictor_columns = "Sex")
 
-plot(response_time, predictor_column = "Sex") 
+B = matrix(unlist(Res2[2]),nrow = samples2)
+B = data.frame(Positive = B[,1], Negative = B[,2])
+B$X = 1:nrow(B)
+B = melt(B,id.vars = "X", variable.name = "Dist" )
+ggplot(B, aes(x=value, fill=Dist)) +
+  geom_histogram( color="#e9ecef", position = 'identity', bins =50)+
+  facet_wrap(~Dist, nrow = 2)
 
-time_cluster_data <- make_time_cluster_data(data = response_time, predictor_column = "SexM", 
-                                            aoi = "Animate", test = "lmer", 
-                                            threshold = 1.5, 
-                                            formula = LogitAdjusted ~ Sex + (1|Trial) + (1|ParticipantName))
-summary(time_cluster_data)
-plot(time_cluster_data)
+sdat = ClusterStats_MLET(d, paired = T, detailed = T)
+tValue = sdat[[2]]
 
-tc_analysis <- analyze_time_clusters(time_cluster_data, within_subj = FALSE,
-                                     samples = 2000)
-plot(tc_analysis)
-summary(tc_analysis)
+###############################################################################
+Cdat = read.csv("TdistributionUnderNull.csv")
+
+Cdat = melt(Cdat,id.vars = "X", variable.name = "Dist" )
+
+ggplot(Cdat, aes(x=value, fill=Dist)) +
+  geom_histogram( color="#e9ecef", position = 'identity', bins =50)+
+  facet_wrap(~Dist, nrow = 3)
+
+tdist = reshape2::dcast(Cdat, X~Dist, value.var = "value" )
+tdist$Positive = ifelse(tdist$MyVersionPositiveT<0,NA,tdist$MyVersionPositiveT)
+tdist$Negative = ifelse(tdist$MyVersionNegativeT>=0,NA,tdist$MyVersionNegativeT)
+tdist$Positive[tdist$Positive==0 & tdist$Negative==0] = NA
+# tdist$Negative[is.na(tdist$Positive)] = NA
+
+B = tdist[,c("X","Positive","Negative")]
+B = melt(B,id.vars = "X", variable.name = "Dist" )
+ggplot(B, aes(x=value)) +
+  geom_histogram( color="#e9ecef", position = 'identity', bins =50)
 
 
 ############################# simctest test---------
@@ -176,9 +144,9 @@ time_cluster_data <- make_time_cluster_data(data = response_time, predictor_colu
                                             threshold = threshold_t)
 plot(time_cluster_data) 
 summary(time_cluster_data)
-
+set.seed(5)
 clust_analysis <- analyze_time_clusters(time_cluster_data, within_subj=TRUE, paired=TRUE,
-                                        samples=20)
+                                        samples=1000)
 summary(clust_analysis)
 
 plot(clust_analysis)
@@ -397,7 +365,7 @@ PermutationTest <- function(data, samples = 2000, permuteTrialsWithinSubject = F
     if(sdat$tStatistic[i]>=0){
       sdat$pValue[i]=mean(as.numeric(tValueDist$Positive>sdat$tStatistic[i]))
     }else{
-      sdat$pValue[i]=mean(as.numeric(tValueDist$Positive<sdat$tStatistic[i]))
+      sdat$pValue[i]=mean(as.numeric(tValueDist$Negative<sdat$tStatistic[i]))
     }
   }
   return(list(sdat,tValueDist,tValues))
