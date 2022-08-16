@@ -41,7 +41,7 @@ d = read.csv("sampleData_0.2.csv")
 sdat = ClusterStats_MLET(d, paired = T, detailed = F)
 
 
-num_sub = length(unique(data$ID))  
+num_sub = length(unique(d$ID))  
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
 samples = 2000
@@ -49,6 +49,18 @@ Res = PermutationTest_MLET(d, samples = samples, paired = T, permuteTrialsWithin
 Res[[1]]
 ggplot(Res[[2]], aes(x=NullDist)) +
   geom_histogram( color="#e9ecef", position = 'identity', bins =50)
+
+A = Res[[2]]
+A$cond = "MLET"
+A = A[,c("cond","NullDist")]
+B = A
+B$cond = "EyeTR"
+B$NullDist = clust_analysis$null_distribution
+datCompare = rbind(A,B)
+ggplot(datCompare, aes(x=NullDist)) +
+  geom_histogram( color="#e9ecef", position = 'identity', bins =50)+
+  facet_wrap(~cond, nrow = 2)
+
 
 
 num_sub = length(unique(data$timepoint))
@@ -129,7 +141,7 @@ data <- make_eyetrackingr_data(d,
                                time_column = "timepoint",
                                trackloss_column = "TrackLoss",
                                aoi_columns = c("AOI1","AOI2"),
-                               treat_non_aoi_looks_as_missing = TRUE )
+                               treat_non_aoi_looks_as_missing = TRUE)
 
 response_time <- make_time_sequence_data(data, time_bin_size = 1, aois = "AOI1", 
                                          predictor_columns = "condition",summarize_by = "ID")
@@ -146,7 +158,7 @@ plot(time_cluster_data)
 summary(time_cluster_data)
 set.seed(5)
 clust_analysis <- analyze_time_clusters(time_cluster_data, within_subj=TRUE, paired=TRUE,
-                                        samples=2000)
+                                        samples=1000)
 summary(clust_analysis)
 
 plot(clust_analysis)
