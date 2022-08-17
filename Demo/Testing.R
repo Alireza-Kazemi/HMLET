@@ -91,6 +91,7 @@ clust_analysis = RunEyeTrackingRRoutine(d,samples)
 
 summary(clust_analysis)
 Res[[1]]
+plot(clust_analysis)
 
 A = Res[[2]]
 A$cond = "MLETSL"
@@ -100,8 +101,17 @@ B$cond = "EyeTR"
 B$NullDist = clust_analysis$null_distribution
 datCompare = rbind(A,B)
 ggplot(datCompare, aes(x=NullDist, fill = cond)) +
-  geom_histogram( color="#e9ecef", position = 'identity', bins =100)+
+  geom_histogram(aes(y = ..density..), binwidth = sd(datCompare$NullDist)/4, color="white")+
+  geom_density(alpha = 0.5)+
+  # stat_density(kernel = "gaussian",bw = sd(datCompare$NullDist))+
   facet_wrap(~cond, nrow = 2)
+
+
+# ggplot(A, aes(x=NullDist)) +
+#   stat_density(kernel = "gaussian")+
+#   # geom_density()+
+#   # geom_histogram(aes(y = ..density..) , position = 'identity', bins =100)+
+#   facet_wrap(~cond, nrow = 2)
 
 B3000 = B
 #---------------------------------------   TrialLevel permutation
