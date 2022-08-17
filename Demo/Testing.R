@@ -104,10 +104,10 @@ ggplot(datCompare, aes(x=NullDist, fill = cond)) +
 
 #---------------------------------------   TrialLevel permutation
 
-num_sub = length(unique(data$timepoint))
+num_sub = length(unique(d$timepoint))
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples2 = 2000
+samples2 = 3000
 Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
 Res2[[1]]
 ggplot(Res2[[2]], aes(x=NullDist)) +
@@ -140,7 +140,7 @@ tdist$Positive[tdist$Positive==0 & tdist$Negative==0] = NA
 B = tdist[,c("X","Positive","Negative")]
 B = melt(B,id.vars = "X", variable.name = "Dist" )
 ggplot(B, aes(x=value)) +
-  geom_histogram( color="#e9ecef", position = 'identity', bins =50)
+  geom_histogram(color="#e9ecef", position = 'identity', bins =50)
 
 
 ############################# simctest test---------
