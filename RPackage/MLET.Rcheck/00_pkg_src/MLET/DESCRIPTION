@@ -2,11 +2,11 @@ Package: MLET
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Alireza Kazemi
+Maintainer: Alireza Kazemi <alireza.kzmi@gmail.com>
+Description: MLET uses machine learning algorithm to analyze Eye-Tracking data.
+License: MIT + file LICENSE
 Encoding: UTF-8
+RoxygenNote: 7.2.0
 NeedsCompilation: no
-Packaged: 2022-08-17 01:05:06 UTC; kazemi
+Packaged: 2022-08-17 20:33:41 UTC; kazemi

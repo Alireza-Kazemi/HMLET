@@ -1,3 +1,5 @@
+#' Generate unique random permutations
+#'
 ComputeSubjectLevelPerm_MLET <- function(labels, n = 1){
   condNum = length(unique(labels$condition))
   labelNew = unique(labels[,c("ID","timepoint")])
@@ -5,7 +7,7 @@ ComputeSubjectLevelPerm_MLET <- function(labels, n = 1){
   subjLevelPerms = UniquePermutations_MLET(listInput, n-1)
   condList = levels(factor(labels$condition))
   condLevelPerms = permn(factorial(condNum))
-  
+
   print("Converting labels:")
   pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
   for (i in 1:n){

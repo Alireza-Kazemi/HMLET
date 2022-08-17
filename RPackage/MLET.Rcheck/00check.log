@@ -19,10 +19,7 @@
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
-* checking DESCRIPTION meta-information ... WARNING
-Non-standard license specification:
-  What license is it under?
-Standardizable: FALSE
+* checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
@@ -141,18 +138,49 @@ Consider adding
   importFrom("stats", "qt", "sd")
   importFrom("utils", "setTxtProgressBar", "txtProgressBar")
 to your NAMESPACE file.
-* checking for missing documentation entries ... WARNING
-Undocumented code objects:
-  'ClusterStats_MLET' 'ComputeSubjectLevelPerm_MLET'
-  'ComputeTValues_MLET' 'FilterClustersTimepoints' 'FindClusters_MLET'
-  'GenerateRandomData_MLET' 'PermutationTest_MLET'
-  'SubjectLevelPermutationTestWithin_MLET'
-  'TrialLevelPermutationTestWithin_MLET' 'UniquePermutations_MLET'
-All user-level objects in a package should have documentation entries.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'ClusterStats_MLET'
+  'data' 'paired' 'detailed' 'threshold_t'
+
+Undocumented arguments in documentation object 'ComputeSubjectLevelPerm_MLET'
+  'labels' 'n'
+
+Undocumented arguments in documentation object 'ComputeTValues_MLET'
+  'respTime' 'paired'
+
+Undocumented arguments in documentation object 'FilterClustersTimepoints'
+  'data' 'clusterInf'
+
+Undocumented arguments in documentation object 'FindClusters_MLET'
+  'tValues' 'threshold_t'
+
+Undocumented arguments in documentation object 'GenerateRandomData_MLET'
+  'tMax' 'effectOffset' 'trialNum' 'subjNum' 'effectSize'
+
+Undocumented arguments in documentation object 'PermutationTest_MLET'
+  'data' 'samples' 'paired' 'permuteTrialsWithinSubject' 'threshold_t'
+
+Undocumented arguments in documentation object 'SubjectLevelPermutationTestWithin_MLET'
+  'data' 'samples' 'paired' 'threshold_t'
+
+Undocumented arguments in documentation object 'TrialLevelPermutationTestWithin_MLET'
+  'data' 'samples' 'paired' 'threshold_t'
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
 See chapter 'Writing R documentation files' in the 'Writing R
 Extensions' manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
 * checking examples ... NONE
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 2 WARNINGs, 1 NOTE
+Status: 1 WARNING, 1 NOTE

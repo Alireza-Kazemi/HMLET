@@ -1,8 +1,10 @@
+#' Generate unique random permutations
+#'
 GenerateRandomData_MLET <- function(tMax = 20, effectOffset = 5, trialNum = 40, subjNum = 20,
                               effectSize = .2){
   effectSize = .2*.25;
   data = NULL
-  
+
   # t = 1:tMax
   # for (sID in 1:subjNum){
   #   for (trials in 1:trialNum/2){
@@ -24,12 +26,12 @@ GenerateRandomData_MLET <- function(tMax = 20, effectOffset = 5, trialNum = 40, 
   #     timepoint = cat(1,timepoint,t);
   #   }
   # }
-  # 
-  
+  #
+
   # fix this functionm Later
-  
-  
-  
-  
+
+
+
+
   return(data)
 }

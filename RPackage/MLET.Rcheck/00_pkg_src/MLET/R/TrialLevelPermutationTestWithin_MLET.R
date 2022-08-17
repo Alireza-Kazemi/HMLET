@@ -1,17 +1,19 @@
+#' Generate unique random permutations
+#'
 TrialLevelPermutationTestWithin_MLET <- function(data, samples = 2000, paired = T, threshold_t = NA){
   labels = unique(data[,c("ID","trial","condition")])
   labelsNew = NULL
   for (sID in unique(labels$ID)){
-    L = UniquePermutations_MLET(labels[labels$ID==sID,"condition"], n = samples) 
+    L = UniquePermutations_MLET(labels[labels$ID==sID,"condition"], n = samples)
     labelsNew = rbind(labelsNew,L[,-1])
   }
   labels = cbind(labels,labelsNew)
   names(labels) = c(names(labels)[1:3],paste("perm",names(labels)[-(1:3)],sep = ""))
-  
+
   #----------------------------- Perform Permutation tests
   print("Estimate tStatistic distribution:")
   pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
-  
+
   tValueDist = NULL
   for (itt in 1:(samples)){
     datItt = merge(data,labels[,c(1,2,3,3+itt)],by = c("ID","trial","condition"),all.x=T)

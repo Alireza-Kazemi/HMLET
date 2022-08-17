@@ -1,3 +1,5 @@
+#' Generate unique random permutations
+#'
 ComputeTValues_MLET <- function(respTime, paired = TRUE){
   respTime = respTime[order(respTime$ID,respTime$timepoint,respTime$condition),]
   if(paired){

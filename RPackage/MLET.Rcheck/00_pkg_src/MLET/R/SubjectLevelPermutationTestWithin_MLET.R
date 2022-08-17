@@ -1,13 +1,15 @@
+#' SubjectLevelPermutationTestWithin_MLET
+#'
 SubjectLevelPermutationTestWithin_MLET <- function(data, samples = 2000 , paired = T, threshold_t = NA){
-    
+
   resp_time = as.data.frame(summarise(group_by(data,ID,timepoint,condition),prop = mean(AOI)))
   labels = unique(resp_time[,c("ID","timepoint","condition")])
   labels = ComputeSubjectLevelPerm_MLET(labels, n = samples)
-  
+
   #----------------------------- Perform Permutation tests
   print("Estimate tStatistic distribution:")
   pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
-  
+
   tValueDist = NULL
   for (itt in 1:(samples)){
     resp_time$condition = labels[,paste("perm",itt,sep = "")]
@@ -30,4 +32,3 @@ SubjectLevelPermutationTestWithin_MLET <- function(data, samples = 2000 , paired
   close(pb)
   return(tValueDist)
 }
-  
