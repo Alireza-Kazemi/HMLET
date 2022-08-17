@@ -37,6 +37,7 @@ options(dplyr.summarise.inform = FALSE)
 source.all(path = path)
 ############################## test my dataset -----
 d = read.csv("sampleData_0.2.csv")
+d = read.csv("SampleData1040.4.csv")
 
 sdat = ClusterStats_MLET(d, paired = T, detailed = F)
 
@@ -44,7 +45,7 @@ sdat = ClusterStats_MLET(d, paired = T, detailed = F)
 num_sub = length(unique(d$ID))  
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples = 2000
+samples = 500
 Res = PermutationTest_MLET(d, samples = samples, paired = T, permuteTrialsWithinSubject = F, threshold_t = threshold_t)
 Res[[1]]
 ggplot(Res[[2]], aes(x=NullDist)) +
@@ -71,7 +72,7 @@ ggplot(datCompare, aes(x=NullDist, fill = cond)) +
 num_sub = length(unique(data$timepoint))
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples2 = 2000
+samples2 = 500
 Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
 Res2[[1]]
 ggplot(Res2[[2]], aes(x=NullDist)) +
@@ -150,8 +151,8 @@ RunEyeTrackingRRoutine <- function(d,samples){
   
   response_time <- make_time_sequence_data(data, time_bin_size = 1, aois = "AOI1", 
                                            predictor_columns = "condition",summarize_by = "ID")
-  
-  plot(response_time, predictor_column = "condition") 
+  plot(response_time, predictor_column = "condition")
+   
   
   num_sub = length(unique(data$ID))  
   threshold_t = qt(p=1-.05/2, df=num_sub-1)
@@ -159,7 +160,7 @@ RunEyeTrackingRRoutine <- function(d,samples){
   time_cluster_data <- make_time_cluster_data(data = response_time, predictor_column = "condition", 
                                               aoi = "AOI1", test = "t.test",paired=T, 
                                               threshold = threshold_t)
-  # plot(time_cluster_data) 
+  plot(time_cluster_data)
   # summary(time_cluster_data)
   set.seed(5)
   clust_analysis <- analyze_time_clusters(time_cluster_data, within_subj=TRUE, paired=TRUE,
