@@ -50,37 +50,41 @@ Res[[1]]
 ggplot(Res[[2]], aes(x=NullDist)) +
   geom_histogram( color="#e9ecef", position = 'identity', bins =50)
 
+clust_analysis = RunEyeTrackingRRoutine(d,samples)
+
+summary(clust_analysis)
+Res[[1]]
+
 A = Res[[2]]
-A$cond = "MLET"
+A$cond = "MLETSL"
 A = A[,c("cond","NullDist")]
 B = A
 B$cond = "EyeTR"
 B$NullDist = clust_analysis$null_distribution
 datCompare = rbind(A,B)
-ggplot(datCompare, aes(x=NullDist)) +
-  geom_histogram( color="#e9ecef", position = 'identity', bins =50)+
+ggplot(datCompare, aes(x=NullDist, fill = cond)) +
+  geom_histogram( color="#e9ecef", position = 'identity', bins =100)+
   facet_wrap(~cond, nrow = 2)
 
-
+#---------------------------------------   TrialLevel permutation
 
 num_sub = length(unique(data$timepoint))
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples2 = 20
+samples2 = 2000
 Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
 Res2[[1]]
+ggplot(Res2[[2]], aes(x=NullDist)) +
+  geom_histogram( color="#e9ecef", position = 'identity', bins =50)
+
+Btemp = Res2[[2]]
+Btemp$cond = "MLETTL"
+datCompare = rbind(datCompare,Btemp[,c("cond","NullDist")])
+ggplot(datCompare, aes(x=NullDist, fill = cond)) +
+  geom_histogram( color="#e9ecef", position = 'identity', bins =100)+
+  facet_wrap(~cond, nrow = 3)
 
 
-B = matrix(unlist(Res2[2]),nrow = samples2)
-B = data.frame(Positive = B[,1], Negative = B[,2])
-B$X = 1:nrow(B)
-B = melt(B,id.vars = "X", variable.name = "Dist" )
-ggplot(B, aes(x=value, fill=Dist)) +
-  geom_histogram( color="#e9ecef", position = 'identity', bins =50)+
-  facet_wrap(~Dist, nrow = 2)
-
-sdat = ClusterStats_MLET(d, paired = T, detailed = T)
-tValue = sdat[[2]]
 
 ###############################################################################
 Cdat = read.csv("TdistributionUnderNull.csv")
@@ -130,39 +134,43 @@ res <- simctest(gen,maxsteps=5000)
 res
 ############################### test my Own Data------
 # this data should have difference in timepoint = 5seconds
-d = read.csv("sampleData_0.2.csv")
-d$TrackLoss = unique(FALSE)
-d$AOI1 = ifelse(d$AOI==1,TRUE,FALSE)
-d$AOI2 = ifelse(d$AOI==0,TRUE,FALSE)
+RunEyeTrackingRRoutine <- function(d,samples){
+  # d = read.csv("sampleData_0.2.csv")
+  d$TrackLoss = unique(FALSE)
+  d$AOI1 = ifelse(d$AOI==1,TRUE,FALSE)
+  d$AOI2 = ifelse(d$AOI==0,TRUE,FALSE)
+  
+  data <- make_eyetrackingr_data(d, 
+                                 participant_column = "ID",
+                                 trial_column = "trial",
+                                 time_column = "timepoint",
+                                 trackloss_column = "TrackLoss",
+                                 aoi_columns = c("AOI1","AOI2"),
+                                 treat_non_aoi_looks_as_missing = TRUE)
+  
+  response_time <- make_time_sequence_data(data, time_bin_size = 1, aois = "AOI1", 
+                                           predictor_columns = "condition",summarize_by = "ID")
+  
+  plot(response_time, predictor_column = "condition") 
+  
+  num_sub = length(unique(data$ID))  
+  threshold_t = qt(p=1-.05/2, df=num_sub-1)
+  
+  time_cluster_data <- make_time_cluster_data(data = response_time, predictor_column = "condition", 
+                                              aoi = "AOI1", test = "t.test",paired=T, 
+                                              threshold = threshold_t)
+  # plot(time_cluster_data) 
+  # summary(time_cluster_data)
+  set.seed(5)
+  clust_analysis <- analyze_time_clusters(time_cluster_data, within_subj=TRUE, paired=TRUE,
+                                          samples=samples)
+  return(clust_analysis)
 
-data <- make_eyetrackingr_data(d, 
-                               participant_column = "ID",
-                               trial_column = "trial",
-                               time_column = "timepoint",
-                               trackloss_column = "TrackLoss",
-                               aoi_columns = c("AOI1","AOI2"),
-                               treat_non_aoi_looks_as_missing = TRUE)
+}
 
-response_time <- make_time_sequence_data(data, time_bin_size = 1, aois = "AOI1", 
-                                         predictor_columns = "condition",summarize_by = "ID")
-
-plot(response_time, predictor_column = "condition") 
-
-num_sub = length(unique(data$ID))  
-threshold_t = qt(p=1-.05/2, df=num_sub-1)
-
-time_cluster_data <- make_time_cluster_data(data = response_time, predictor_column = "condition", 
-                                            aoi = "AOI1", test = "t.test",paired=T, 
-                                            threshold = threshold_t)
-plot(time_cluster_data) 
-summary(time_cluster_data)
-set.seed(5)
-clust_analysis <- analyze_time_clusters(time_cluster_data, within_subj=TRUE, paired=TRUE,
-                                        samples=1000)
 summary(clust_analysis)
 
 plot(clust_analysis)
-
 clust_analysis1000 = clust_analysis
 clust_analysis2000 = clust_analysis
 
