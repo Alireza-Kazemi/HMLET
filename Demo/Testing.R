@@ -101,11 +101,12 @@ B$cond = "EyeTR"
 B$NullDist = clust_analysis$null_distribution
 datCompare = rbind(A,B)
 ggplot(datCompare, aes(x=NullDist, fill = cond)) +
-  geom_histogram(aes(y = ..density..), binwidth = sd(datCompare$NullDist)/4, color="white")+
+  geom_histogram(aes(y = ..density..), binwidth = sd(datCompare$NullDist)/10, color="white")+
   geom_density(alpha = 0.5)+
   # stat_density(kernel = "gaussian",bw = sd(datCompare$NullDist))+
   facet_wrap(~cond, nrow = 2)
 
+write.csv(datCompare, "NullDistCompare.csv", row.names = F)
 
 # ggplot(A, aes(x=NullDist)) +
 #   stat_density(kernel = "gaussian")+
@@ -113,13 +114,12 @@ ggplot(datCompare, aes(x=NullDist, fill = cond)) +
 #   # geom_histogram(aes(y = ..density..) , position = 'identity', bins =100)+
 #   facet_wrap(~cond, nrow = 2)
 
-B3000 = B
 #---------------------------------------   TrialLevel permutation
 
-num_sub = length(unique(d$timepoint))
+num_sub = length(unique(d$trial))
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples2 = 3000
+samples2 = 300
 Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
 Res2[[1]]
 ggplot(Res2[[2]], aes(x=NullDist)) +
@@ -128,11 +128,55 @@ ggplot(Res2[[2]], aes(x=NullDist)) +
 Btemp = Res2[[2]]
 Btemp$cond = "MLETTL"
 datCompare = rbind(datCompare,Btemp[,c("cond","NullDist")])
+# ggplot(datCompare, aes(x=NullDist, fill = cond)) +
+#   geom_histogram( color="#e9ecef", position = 'identity', bins =100)+
+#   facet_wrap(~cond, nrow = 3)
+
 ggplot(datCompare, aes(x=NullDist, fill = cond)) +
-  geom_histogram( color="#e9ecef", position = 'identity', bins =100)+
+  geom_histogram(aes(y = ..density..), binwidth = sd(datCompare$NullDist)/10, color="white")+
+  geom_density(alpha = 0.5)+
+  # stat_density(kernel = "gaussian",bw = sd(datCompare$NullDist))+
   facet_wrap(~cond, nrow = 3)
 
 
+num_sub = length(unique(d$trial))
+threshold_t = qt(p=1-.05/2, df=num_sub-1)
+set.seed(5)
+samples2 = 500
+Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
+Res2[[1]]
+Btemp = Res2[[2]]
+Btemp$cond = "MLETTL500"
+datCompare = rbind(datCompare,Btemp[,c("cond","NullDist")])
+
+num_sub = length(unique(d$trial))
+threshold_t = qt(p=1-.05/2, df=num_sub-1)
+set.seed(5)
+samples2 = 700
+Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
+Res2[[1]]
+Btemp = Res2[[2]]
+Btemp$cond = "MLETTL700"
+datCompare = rbind(datCompare,Btemp[,c("cond","NullDist")])
+
+
+num_sub = length(unique(d$trial))
+threshold_t = qt(p=1-.05/2, df=num_sub-1)
+set.seed(5)
+samples2 = 1000
+Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
+Res2[[1]]
+Btemp = Res2[[2]]
+Btemp$cond = "MLETTL1000"
+datCompare = rbind(datCompare,Btemp[,c("cond","NullDist")])
+
+
+
+ggplot(datCompare, aes(x=NullDist, fill = cond)) +
+  geom_histogram(aes(y = ..density..),bins = 100, color="white")+
+  geom_density(alpha = 0.5)+
+  # stat_density(kernel = "gaussian",bw = sd(datCompare$NullDist))+
+  facet_wrap(~cond, nrow = 3)
 
 ###############################################################################
 Cdat = read.csv("TdistributionUnderNull.csv")
