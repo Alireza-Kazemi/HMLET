@@ -1,5 +1,6 @@
 #' Generate unique random permutations
 #'
+#'@export
 ComputeSubjectLevelPerm_MLET <- function(labels, n = 1){
   condNum = length(unique(labels$condition))
   labelNew = unique(labels[,c("ID","timepoint")])

@@ -1,5 +1,6 @@
 #' Generate unique random permutations
 #'
+#'@export
 FilterClustersTimepoints <- function(data, clusterInf = clusterInf){
   data$ClusterIdx = unique(NA)
   clusterInf$ClusterIdx = paste(clusterInf$Direction, clusterInf$index, sep = "_")

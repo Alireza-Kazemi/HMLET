@@ -2,6 +2,8 @@
 #'
 #' @param listInput Arbitrary list
 #' @param n An integer number indicating the number of permutations
+#'
+#' @export
 
 UniquePermutations_MLET <- function(listInput, n = 1){
   L = length(listInput)
@@ -16,7 +18,7 @@ UniquePermutations_MLET <- function(listInput, n = 1){
       newComb = rray(sample(indexList0, L, replace = F), dim = c(L,1))
       if(min(rray_sum(abs(indexList - newComb),axes = 1))>1 | rep>5000){
         # print(rray_sum(abs(indexList - newComb),axes = 1))  # ------------------> Debugging
-        if(rep>0){print(rep)}  # ------------------> Testing for repeat
+        # if(rep>0){print(rep)}  # ------------------> Testing for repeat
         break
       }
       rep = rep+1

@@ -2,7 +2,7 @@
 % Please edit documentation in R/PermutationTest_MLET.R
 \name{PermutationTest_MLET}
 \alias{PermutationTest_MLET}
-\title{Generate unique random permutations}
+\title{Permutation Test General Routine}
 \usage{
 PermutationTest_MLET(
   data,
@@ -13,5 +13,5 @@ PermutationTest_MLET(
 )
 }
 \description{
-Generate unique random permutations
+Permutation Test General Routine
 }

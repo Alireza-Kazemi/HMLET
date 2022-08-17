@@ -1,5 +1,6 @@
 #' Generate unique random permutations
 #'
+#'@export
 TrialLevelPermutationTestWithin_MLET <- function(data, samples = 2000, paired = T, threshold_t = NA){
   labels = unique(data[,c("ID","trial","condition")])
   labelsNew = NULL

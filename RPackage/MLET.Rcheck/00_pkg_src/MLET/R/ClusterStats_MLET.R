@@ -1,5 +1,6 @@
 #' Generate unique random permutations
 #'
+#' @export
 
 ClusterStats_MLET <- function(data, paired = T, detailed = F, threshold_t = NA){
   if(is.na(threshold_t)){

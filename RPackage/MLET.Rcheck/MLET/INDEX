@@ -7,7 +7,7 @@ FilterClustersTimepoints
 FindClusters_MLET       Generate unique random permutations
 GenerateRandomData_MLET
                         Generate unique random permutations
-PermutationTest_MLET    Generate unique random permutations
+PermutationTest_MLET    Permutation Test General Routine
 SubjectLevelPermutationTestWithin_MLET
                         SubjectLevelPermutationTestWithin_MLET
 TrialLevelPermutationTestWithin_MLET

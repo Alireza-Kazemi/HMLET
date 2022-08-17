@@ -1,5 +1,13 @@
-#' Generate unique random permutations
+#' Permutation Test General Routine
 #'
+#'
+#' @import dplyr
+#' @import miceadds
+#' @import purrr
+#' @import rray
+#' @import tidyr
+#' @import utils
+#' @export
 PermutationTest_MLET <- function(data, samples = 2000, paired = T, permuteTrialsWithinSubject = F,   threshold_t = NA){
   if(is.na(threshold_t)){
     # Treshold should be based on the permutation sampling

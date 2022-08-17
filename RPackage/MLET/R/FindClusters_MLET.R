@@ -1,5 +1,6 @@
 #' Generate unique random permutations
 #'
+#'@export
 FindClusters_MLET <- function(tValues, threshold_t = threshold_t){
   tValues$Positive = unique(0)
   tValues$Negative = unique(0)

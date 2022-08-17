@@ -38,9 +38,6 @@
 * checking foreign function calls ... OK
 * checking R code for possible problems ... NOTE
 ClusterStats_MLET: no visible global function definition for 'qt'
-ClusterStats_MLET: no visible global function definition for
-  'summarise'
-ClusterStats_MLET: no visible global function definition for 'group_by'
 ClusterStats_MLET: no visible binding for global variable 'ID'
 ClusterStats_MLET: no visible binding for global variable 'timepoint'
 ClusterStats_MLET: no visible binding for global variable 'condition'
@@ -51,31 +48,16 @@ ClusterStats_MLET: no visible binding for global variable 'index'
 ClusterStats_MLET: no visible binding for global variable 'value'
 ComputeSubjectLevelPerm_MLET: no visible global function definition for
   'permn'
-ComputeSubjectLevelPerm_MLET: no visible global function definition for
-  'txtProgressBar'
-ComputeSubjectLevelPerm_MLET: no visible global function definition for
-  'map_dfr'
-ComputeSubjectLevelPerm_MLET: no visible global function definition for
-  'setTxtProgressBar'
-ComputeTValues_MLET: no visible global function definition for
-  'summarise'
-ComputeTValues_MLET: no visible global function definition for
-  'group_by'
 ComputeTValues_MLET: no visible binding for global variable 'ID'
 ComputeTValues_MLET: no visible binding for global variable 'timepoint'
 ComputeTValues_MLET: no visible binding for global variable 'prop'
 ComputeTValues_MLET: no visible binding for global variable 'd'
-ComputeTValues_MLET: no visible global function definition for 'n'
 ComputeTValues_MLET: no visible binding for global variable 'condition'
 ComputeTValues_MLET: no visible global function definition for 'sd'
 ComputeTValues_MLET: no visible binding for global variable 'M'
 ComputeTValues_MLET: no visible binding for global variable 'SD'
 ComputeTValues_MLET: no visible binding for global variable 'N'
 PermutationTest_MLET: no visible global function definition for 'qt'
-SubjectLevelPermutationTestWithin_MLET: no visible global function
-  definition for 'summarise'
-SubjectLevelPermutationTestWithin_MLET: no visible global function
-  definition for 'group_by'
 SubjectLevelPermutationTestWithin_MLET: no visible binding for global
   variable 'ID'
 SubjectLevelPermutationTestWithin_MLET: no visible binding for global
@@ -85,8 +67,6 @@ SubjectLevelPermutationTestWithin_MLET: no visible binding for global
 SubjectLevelPermutationTestWithin_MLET: no visible binding for global
   variable 'AOI'
 SubjectLevelPermutationTestWithin_MLET: no visible global function
-  definition for 'txtProgressBar'
-SubjectLevelPermutationTestWithin_MLET: no visible global function
   definition for 'melt'
 SubjectLevelPermutationTestWithin_MLET: no visible binding for global
   variable 'Direction'
@@ -94,14 +74,6 @@ SubjectLevelPermutationTestWithin_MLET: no visible binding for global
   variable 'index'
 SubjectLevelPermutationTestWithin_MLET: no visible binding for global
   variable 'value'
-SubjectLevelPermutationTestWithin_MLET: no visible global function
-  definition for 'setTxtProgressBar'
-TrialLevelPermutationTestWithin_MLET: no visible global function
-  definition for 'txtProgressBar'
-TrialLevelPermutationTestWithin_MLET: no visible global function
-  definition for 'summarise'
-TrialLevelPermutationTestWithin_MLET: no visible global function
-  definition for 'group_by'
 TrialLevelPermutationTestWithin_MLET: no visible binding for global
   variable 'ID'
 TrialLevelPermutationTestWithin_MLET: no visible binding for global
@@ -118,25 +90,11 @@ TrialLevelPermutationTestWithin_MLET: no visible binding for global
   variable 'index'
 TrialLevelPermutationTestWithin_MLET: no visible binding for global
   variable 'value'
-TrialLevelPermutationTestWithin_MLET: no visible global function
-  definition for 'setTxtProgressBar'
-UniquePermutations_MLET: no visible global function definition for
-  'rray'
-UniquePermutations_MLET: no visible global function definition for
-  'txtProgressBar'
-UniquePermutations_MLET: no visible global function definition for
-  'rray_sum'
-UniquePermutations_MLET: no visible global function definition for
-  'rray_bind'
-UniquePermutations_MLET: no visible global function definition for
-  'setTxtProgressBar'
 Undefined global functions or variables:
-  AOI Direction ID M N SD condition d group_by index map_dfr melt n
-  permn prop qt rray rray_bind rray_sum sd setTxtProgressBar summarise
-  timepoint txtProgressBar value
+  AOI Direction ID M N SD condition d index melt permn prop qt sd
+  timepoint value
 Consider adding
   importFrom("stats", "qt", "sd")
-  importFrom("utils", "setTxtProgressBar", "txtProgressBar")
 to your NAMESPACE file.
 * checking Rd files ... OK
 * checking Rd metadata ... OK

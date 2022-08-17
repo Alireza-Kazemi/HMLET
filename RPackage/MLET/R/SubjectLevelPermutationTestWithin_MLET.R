@@ -1,5 +1,6 @@
 #' SubjectLevelPermutationTestWithin_MLET
 #'
+#'@export
 SubjectLevelPermutationTestWithin_MLET <- function(data, samples = 2000 , paired = T, threshold_t = NA){
 
   resp_time = as.data.frame(summarise(group_by(data,ID,timepoint,condition),prop = mean(AOI)))

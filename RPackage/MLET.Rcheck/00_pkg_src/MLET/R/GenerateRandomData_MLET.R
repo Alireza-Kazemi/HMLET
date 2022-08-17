@@ -1,5 +1,6 @@
 #' Generate unique random permutations
 #'
+#'@export
 GenerateRandomData_MLET <- function(tMax = 20, effectOffset = 5, trialNum = 40, subjNum = 20,
                               effectSize = .2){
   effectSize = .2*.25;

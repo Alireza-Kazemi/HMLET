@@ -1,12 +1,16 @@
-Package: MLET
 Type: Package
+Package: MLET
 Title: What the Package Does (Title Case)
 Version: 0.1.0
 Author: Alireza Kazemi
 Maintainer: Alireza Kazemi <alireza.kzmi@gmail.com>
-Description: MLET uses machine learning algorithm to analyze Eye-Tracking data.
+Description: MLET uses machine learning algorithm to analyze Eye-Tracking
+    data.
 License: MIT + file LICENSE
+Imports: dplyr, miceadds, purrr, rray, tidyr
+Author@R: person("Alireza", "Kazemi", email = "Alireza.kzmi@gmail.com",
+        role = c("aut", "cre"))
 Encoding: UTF-8
 RoxygenNote: 7.2.0
 NeedsCompilation: no
-Packaged: 2022-08-17 20:33:41 UTC; kazemi
+Packaged: 2022-08-17 22:08:49 UTC; kazemi
