@@ -100,7 +100,7 @@ B$cond = "EyeTR"
 B$NullDist = clust_analysis$null_distribution
 datCompare = rbind(A,B)
 ggplot(datCompare, aes(x=NullDist, fill = cond)) +
-  geom_histogram( color="#e9ecef", position = 'identity', bins =50)+
+  geom_histogram( color="#e9ecef", position = 'identity', bins =100)+
   facet_wrap(~cond, nrow = 2)
 
 B3000 = B
