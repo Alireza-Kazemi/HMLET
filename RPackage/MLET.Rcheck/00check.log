@@ -1,0 +1,158 @@
+* using log directory 'C:/Users/kazemi/Documents/GitHub/MLET/RPackage/MLET.Rcheck'
+* using R version 4.2.1 (2022-06-23 ucrt)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* using session charset: UTF-8
+* using options '--no-manual --as-cran'
+* checking for file 'MLET/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'MLET' version '0.1.0'
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking serialization versions ... OK
+* checking whether package 'MLET' can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... WARNING
+Non-standard license specification:
+  What license is it under?
+Standardizable: FALSE
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+ClusterStats_MLET: no visible global function definition for 'qt'
+ClusterStats_MLET: no visible global function definition for
+  'summarise'
+ClusterStats_MLET: no visible global function definition for 'group_by'
+ClusterStats_MLET: no visible binding for global variable 'ID'
+ClusterStats_MLET: no visible binding for global variable 'timepoint'
+ClusterStats_MLET: no visible binding for global variable 'condition'
+ClusterStats_MLET: no visible binding for global variable 'AOI'
+ClusterStats_MLET: no visible global function definition for 'melt'
+ClusterStats_MLET: no visible binding for global variable 'Direction'
+ClusterStats_MLET: no visible binding for global variable 'index'
+ClusterStats_MLET: no visible binding for global variable 'value'
+ComputeSubjectLevelPerm_MLET: no visible global function definition for
+  'permn'
+ComputeSubjectLevelPerm_MLET: no visible global function definition for
+  'txtProgressBar'
+ComputeSubjectLevelPerm_MLET: no visible global function definition for
+  'map_dfr'
+ComputeSubjectLevelPerm_MLET: no visible global function definition for
+  'setTxtProgressBar'
+ComputeTValues_MLET: no visible global function definition for
+  'summarise'
+ComputeTValues_MLET: no visible global function definition for
+  'group_by'
+ComputeTValues_MLET: no visible binding for global variable 'ID'
+ComputeTValues_MLET: no visible binding for global variable 'timepoint'
+ComputeTValues_MLET: no visible binding for global variable 'prop'
+ComputeTValues_MLET: no visible binding for global variable 'd'
+ComputeTValues_MLET: no visible global function definition for 'n'
+ComputeTValues_MLET: no visible binding for global variable 'condition'
+ComputeTValues_MLET: no visible global function definition for 'sd'
+ComputeTValues_MLET: no visible binding for global variable 'M'
+ComputeTValues_MLET: no visible binding for global variable 'SD'
+ComputeTValues_MLET: no visible binding for global variable 'N'
+PermutationTest_MLET: no visible global function definition for 'qt'
+SubjectLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'summarise'
+SubjectLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'group_by'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'ID'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'timepoint'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'condition'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'AOI'
+SubjectLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'txtProgressBar'
+SubjectLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'melt'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'Direction'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'index'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'value'
+SubjectLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'setTxtProgressBar'
+TrialLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'txtProgressBar'
+TrialLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'summarise'
+TrialLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'group_by'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'ID'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'timepoint'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'condition'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'AOI'
+TrialLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'melt'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'Direction'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'index'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'value'
+TrialLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'setTxtProgressBar'
+UniquePermutations_MLET: no visible global function definition for
+  'rray'
+UniquePermutations_MLET: no visible global function definition for
+  'txtProgressBar'
+UniquePermutations_MLET: no visible global function definition for
+  'rray_sum'
+UniquePermutations_MLET: no visible global function definition for
+  'rray_bind'
+UniquePermutations_MLET: no visible global function definition for
+  'setTxtProgressBar'
+Undefined global functions or variables:
+  AOI Direction ID M N SD condition d group_by index map_dfr melt n
+  permn prop qt rray rray_bind rray_sum sd setTxtProgressBar summarise
+  timepoint txtProgressBar value
+Consider adding
+  importFrom("stats", "qt", "sd")
+  importFrom("utils", "setTxtProgressBar", "txtProgressBar")
+to your NAMESPACE file.
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  'ClusterStats_MLET' 'ComputeSubjectLevelPerm_MLET'
+  'ComputeTValues_MLET' 'FilterClustersTimepoints' 'FindClusters_MLET'
+  'GenerateRandomData_MLET' 'PermutationTest_MLET'
+  'SubjectLevelPermutationTestWithin_MLET'
+  'TrialLevelPermutationTestWithin_MLET' 'UniquePermutations_MLET'
+All user-level objects in a package should have documentation entries.
+See chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
+* checking examples ... NONE
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 2 WARNINGs, 1 NOTE

@@ -45,7 +45,7 @@ sdat = ClusterStats_MLET(d, paired = T, detailed = F)
 num_sub = length(unique(d$ID))  
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples = 500
+samples = 2000
 Res = PermutationTest_MLET(d, samples = samples, paired = T, permuteTrialsWithinSubject = F, threshold_t = threshold_t)
 Res[[1]]
 ggplot(Res[[2]], aes(x=NullDist)) +
@@ -72,7 +72,7 @@ ggplot(datCompare, aes(x=NullDist, fill = cond)) +
 num_sub = length(unique(data$timepoint))
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples2 = 500
+samples2 = 2000
 Res2 = PermutationTest_MLET(d, samples = samples2, paired = T, permuteTrialsWithinSubject = T, threshold_t = threshold_t)
 Res2[[1]]
 ggplot(Res2[[2]], aes(x=NullDist)) +
