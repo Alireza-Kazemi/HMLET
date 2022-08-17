@@ -30,10 +30,45 @@ p_load(reshape2,
 
 path = "C:/Users/kazemi/Documents/GitHub/MLET/Functions"
 p_load(combinat,simctest,rray,purrr,utils)
-
-# remotes::install_github("r-lib/rray")
 options(dplyr.summarise.inform = FALSE)
+# remotes::install_github("r-lib/rray")
 
+### EyeTrackingR Routine Func -----
+RunEyeTrackingRRoutine <- function(d,samples){
+  # d = read.csv("sampleData_0.2.csv")
+  d$TrackLoss = unique(FALSE)
+  d$AOI1 = ifelse(d$AOI==1,TRUE,FALSE)
+  d$AOI2 = ifelse(d$AOI==0,TRUE,FALSE)
+  
+  data <- make_eyetrackingr_data(d, 
+                                 participant_column = "ID",
+                                 trial_column = "trial",
+                                 time_column = "timepoint",
+                                 trackloss_column = "TrackLoss",
+                                 aoi_columns = c("AOI1","AOI2"),
+                                 treat_non_aoi_looks_as_missing = TRUE)
+  
+  response_time <- make_time_sequence_data(data, time_bin_size = 1, aois = "AOI1", 
+                                           predictor_columns = "condition",summarize_by = "ID")
+  plot(response_time, predictor_column = "condition")
+  
+  
+  num_sub = length(unique(data$ID))  
+  threshold_t = qt(p=1-.05/2, df=num_sub-1)
+  
+  time_cluster_data <- make_time_cluster_data(data = response_time, predictor_column = "condition", 
+                                              aoi = "AOI1", test = "t.test",paired=T, 
+                                              threshold = threshold_t)
+  plot(time_cluster_data)
+  # summary(time_cluster_data)
+  set.seed(5)
+  clust_analysis <- analyze_time_clusters(time_cluster_data, within_subj=TRUE, paired=TRUE,
+                                          samples=samples)
+  return(clust_analysis)
+  
+}
+
+## Set source for test -----
 source.all(path = path)
 ############################## test my dataset -----
 d = read.csv("sampleData_0.2.csv")
@@ -45,7 +80,7 @@ sdat = ClusterStats_MLET(d, paired = T, detailed = F)
 num_sub = length(unique(d$ID))  
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples = 2000
+samples = 3000
 Res = PermutationTest_MLET(d, samples = samples, paired = T, permuteTrialsWithinSubject = F, threshold_t = threshold_t)
 Res[[1]]
 ggplot(Res[[2]], aes(x=NullDist)) +
