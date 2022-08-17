@@ -29,8 +29,9 @@ p_load(reshape2,
        eyetrackingR,miceadds)
 
 path = "C:/Users/kazemi/Documents/GitHub/MLET/Functions"
-p_load(combinat,simctest,rray,purrr,utils)
+p_load(combinat,simctest,rray,purrr,utils, pbapply)
 options(dplyr.summarise.inform = FALSE)
+library(MLET)
 # remotes::install_github("r-lib/rray")
 
 ### EyeTrackingR Routine Func -----
@@ -80,7 +81,7 @@ sdat = ClusterStats_MLET(d, paired = T, detailed = F)
 num_sub = length(unique(d$ID))  
 threshold_t = qt(p=1-.05/2, df=num_sub-1)
 set.seed(5)
-samples = 3000
+samples = 1000
 Res = PermutationTest_MLET(d, samples = samples, paired = T, permuteTrialsWithinSubject = F, threshold_t = threshold_t)
 Res[[1]]
 ggplot(Res[[2]], aes(x=NullDist)) +
@@ -102,6 +103,7 @@ ggplot(datCompare, aes(x=NullDist, fill = cond)) +
   geom_histogram( color="#e9ecef", position = 'identity', bins =100)+
   facet_wrap(~cond, nrow = 2)
 
+B3000 = B
 #---------------------------------------   TrialLevel permutation
 
 num_sub = length(unique(d$timepoint))
