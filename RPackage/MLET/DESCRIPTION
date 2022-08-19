@@ -12,7 +12,8 @@ Imports:
     miceadds,
     purrr,
     rray,
-    tidyr
+    tidyr,
+	combinat
 Author@R: person("Alireza", "Kazemi", email = "Alireza.kzmi@gmail.com",
     role = c("aut", "cre"))
 Encoding: UTF-8

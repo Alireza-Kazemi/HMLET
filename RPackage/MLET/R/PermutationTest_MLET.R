@@ -7,6 +7,7 @@
 #' @import rray
 #' @import tidyr
 #' @import utils
+#' @import combinat
 #' @export
 PermutationTest_MLET <- function(data, samples = 2000, paired = T, permuteTrialsWithinSubject = F,   threshold_t = NA){
   if(is.na(threshold_t)){
