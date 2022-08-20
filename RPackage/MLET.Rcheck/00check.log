@@ -1,0 +1,173 @@
+* using log directory 'C:/Users/kazemi/Documents/GitHub/MLET/RPackage/MLET.Rcheck'
+* using R version 4.2.1 (2022-06-23 ucrt)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* using session charset: UTF-8
+* using options '--no-manual --as-cran'
+* checking for file 'MLET/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'MLET' version '0.1.0'
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking serialization versions ... OK
+* checking whether package 'MLET' can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... WARNING
+'::' or ':::' import not declared from: 'reshape2'
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+ClusterStats_MLET: no visible global function definition for 'qt'
+ClusterStats_MLET: no visible binding for global variable 'ID'
+ClusterStats_MLET: no visible binding for global variable 'timepoint'
+ClusterStats_MLET: no visible binding for global variable 'condition'
+ClusterStats_MLET: no visible binding for global variable 'AOI'
+ClusterStats_MLET: no visible global function definition for 'melt'
+ClusterStats_MLET: no visible binding for global variable 'Direction'
+ClusterStats_MLET: no visible binding for global variable 'index'
+ClusterStats_MLET: no visible binding for global variable 'value'
+ComputeSubjectLevelPerm_MLET: no visible global function definition for
+  'txtProgressBar'
+ComputeSubjectLevelPerm_MLET: no visible global function definition for
+  'setTxtProgressBar'
+ComputeTValues_MLET: no visible binding for global variable 'ID'
+ComputeTValues_MLET: no visible binding for global variable 'timepoint'
+ComputeTValues_MLET: no visible binding for global variable 'prop'
+ComputeTValues_MLET: no visible binding for global variable 'd'
+ComputeTValues_MLET: no visible binding for global variable 'condition'
+ComputeTValues_MLET: no visible global function definition for 'sd'
+ComputeTValues_MLET: no visible binding for global variable 'M'
+ComputeTValues_MLET: no visible binding for global variable 'SD'
+ComputeTValues_MLET: no visible binding for global variable 'N'
+PermutationTest_MLET: no visible global function definition for 'qt'
+RemoveIncompleteTimePoints_MLET: no visible binding for global variable
+  'ID'
+RemoveIncompleteTimePoints_MLET: no visible binding for global variable
+  'timepoint'
+RemoveIncompleteTimePoints_MLET: no visible binding for global variable
+  'condition'
+RemoveIncompleteTimePoints_MLET: no visible binding for global variable
+  'AOI'
+RemoveIncompleteTimePoints_MLET: no visible global function definition
+  for 'complete.cases'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'ID'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'timepoint'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'condition'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'AOI'
+SubjectLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'txtProgressBar'
+SubjectLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'melt'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'Direction'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'index'
+SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'value'
+SubjectLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'setTxtProgressBar'
+TrialLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'txtProgressBar'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'ID'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'timepoint'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'condition'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'AOI'
+TrialLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'melt'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'Direction'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'index'
+TrialLevelPermutationTestWithin_MLET: no visible binding for global
+  variable 'value'
+TrialLevelPermutationTestWithin_MLET: no visible global function
+  definition for 'setTxtProgressBar'
+UniquePermutations_MLET: no visible global function definition for
+  'txtProgressBar'
+UniquePermutations_MLET: no visible global function definition for
+  'setTxtProgressBar'
+Undefined global functions or variables:
+  AOI Direction ID M N SD complete.cases condition d index melt prop qt
+  sd setTxtProgressBar timepoint txtProgressBar value
+Consider adding
+  importFrom("stats", "complete.cases", "qt", "sd")
+  importFrom("utils", "setTxtProgressBar", "txtProgressBar")
+to your NAMESPACE file.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'ClusterStats_MLET'
+  'data' 'paired' 'detailed' 'threshold_t'
+
+Undocumented arguments in documentation object 'ComputeSubjectLevelPerm_MLET'
+  'labels' 'n'
+
+Undocumented arguments in documentation object 'ComputeTValues_MLET'
+  'respTime' 'paired'
+
+Undocumented arguments in documentation object 'FilterClustersTimepoints'
+  'data' 'clusterInf'
+
+Undocumented arguments in documentation object 'FindClusters_MLET'
+  'tValues' 'threshold_t'
+
+Undocumented arguments in documentation object 'GenerateRandomData_MLET'
+  'tMax' 'effectOffset' 'trialNum' 'subjNum' 'effectSize'
+
+Undocumented arguments in documentation object 'PermutationTest_MLET'
+  'data' 'samples' 'paired' 'permuteTrialsWithinSubject' 'threshold_t'
+
+Undocumented arguments in documentation object 'RemoveIncompleteTimePoints_MLET'
+  'data'
+
+Undocumented arguments in documentation object 'SubjectLevelPermutationTestWithin_MLET'
+  'data' 'samples' 'paired' 'threshold_t'
+
+Undocumented arguments in documentation object 'TrialLevelPermutationTestWithin_MLET'
+  'data' 'samples' 'paired' 'threshold_t'
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... NONE
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 2 WARNINGs, 1 NOTE
