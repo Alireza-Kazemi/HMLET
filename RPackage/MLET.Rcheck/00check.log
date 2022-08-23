@@ -61,6 +61,26 @@ ComputeTValues_MLET: no visible binding for global variable 'M'
 ComputeTValues_MLET: no visible binding for global variable 'SD'
 ComputeTValues_MLET: no visible binding for global variable 'N'
 PermutationTest_MLET: no visible global function definition for 'qt'
+PlotNullDistribution_MLET: no visible global function definition for
+  'ggplot'
+PlotNullDistribution_MLET: no visible global function definition for
+  'aes'
+PlotNullDistribution_MLET: no visible binding for global variable
+  'NullDist'
+PlotNullDistribution_MLET: no visible binding for global variable
+  'cond'
+PlotNullDistribution_MLET: no visible global function definition for
+  'geom_histogram'
+PlotNullDistribution_MLET: no visible binding for global variable
+  '..density..'
+PlotNullDistribution_MLET: no visible global function definition for
+  'sd'
+PlotNullDistribution_MLET: no visible global function definition for
+  'geom_density'
+PlotNullDistribution_MLET: no visible global function definition for
+  'geom_vline'
+PlotNullDistribution_MLET: no visible binding for global variable
+  'xinter'
 RemoveIncompleteTimePoints_MLET: no visible binding for global variable
   'ID'
 RemoveIncompleteTimePoints_MLET: no visible binding for global variable
@@ -116,8 +136,9 @@ UniquePermutations_MLET: no visible global function definition for
 UniquePermutations_MLET: no visible global function definition for
   'setTxtProgressBar'
 Undefined global functions or variables:
-  AOI Direction ID M N SD complete.cases condition d index melt prop qt
-  sd setTxtProgressBar timepoint txtProgressBar value
+  ..density.. AOI Direction ID M N NullDist SD aes complete.cases cond
+  condition d geom_density geom_histogram geom_vline ggplot index melt
+  prop qt sd setTxtProgressBar timepoint txtProgressBar value xinter
 Consider adding
   importFrom("stats", "complete.cases", "qt", "sd")
   importFrom("utils", "setTxtProgressBar", "txtProgressBar")
@@ -149,6 +170,13 @@ Undocumented arguments in documentation object 'GenerateRandomData_MLET'
 
 Undocumented arguments in documentation object 'PermutationTest_MLET'
   'data' 'samples' 'paired' 'permuteTrialsWithinSubject' 'threshold_t'
+
+Undocumented arguments in documentation object 'PlotNullDistribution_MLET'
+  'resultList'
+
+Undocumented arguments in documentation object 'PrepareMLETData_MLET'
+  'data' 'ID' 'trial' 'timepoint' 'condition' 'AOI' 'conditionLevels'
+  'targetAOI'
 
 Undocumented arguments in documentation object 'RemoveIncompleteTimePoints_MLET'
   'data'

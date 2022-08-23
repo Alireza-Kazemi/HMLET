@@ -13,6 +13,7 @@ ClusterStats_MLET <- function(data, paired = T, detailed = F, threshold_t = NA){
   tValues = FindClusters_MLET(tValues, threshold_t = threshold_t)
   clusterInf = melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
   clusterInf = clusterInf[clusterInf$index!=0,]
+  clusterInf$testName = unique(data$testName)
   if (detailed){
     clusterInf = as.data.frame(summarise(group_by(clusterInf,Direction,index),tStatistic = sum(value), timeStart = min(timepoint), timeEnd = max(timepoint)))
 	return(list(clusterInf, tValues))

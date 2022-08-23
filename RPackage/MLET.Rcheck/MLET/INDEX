@@ -8,6 +8,9 @@ FindClusters_MLET       Generate unique random permutations
 GenerateRandomData_MLET
                         Generate unique random permutations
 PermutationTest_MLET    Permutation Test General Routine
+PlotNullDistribution_MLET
+                        Plot Null Distribution
+PrepareMLETData_MLET    Prepare dataa columns
 RemoveIncompleteTimePoints_MLET
                         Remove Time points with missing conditions
 SubjectLevelPermutationTestWithin_MLET
