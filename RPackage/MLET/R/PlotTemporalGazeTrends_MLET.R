@@ -7,6 +7,9 @@ PlotTemporalGazeTrends_MLET <- function(resultList, showDataPointNumbers = T,
                                         gazePropRibbonAlpha = .1,
                                         clusterFillColor = "#CC9933",
                                         clusterFillAlpha = .5,
+                                        pointSize = 1,
+                                        pointAlpha = 0.7,
+                                        pointFatten = 3,
                                         testNameOrder = NULL,
                                         conditionOrder = NULL,
                                         onlySignificantClusters = T,
@@ -85,10 +88,26 @@ PlotTemporalGazeTrends_MLET <- function(resultList, showDataPointNumbers = T,
   P = P +
     geom_line(data = linedata,
               aes(x=timepoint, y=M, group=condition, color = condition),
-              size=1)+
-    geom_ribbon(data = linedata,
-                aes(x=timepoint, y=M, ymin = M-SE, ymax = M+SE, fill = condition ),
-                alpha = gazePropRibbonAlpha)+
+              size=1)
+
+  if(is.numeric(linedata$timepoint)){
+    #-----------------------------------------------------------------------Update Graph Handle
+    P = P +
+      geom_ribbon(data = linedata,
+                  aes(x=timepoint, ymin = M-SE, ymax = M+SE, fill = condition ),
+                  alpha = gazePropRibbonAlpha)
+  }else{
+    #-----------------------------------------------------------------------Update Graph Handle
+    P = P +
+      # geom_point(data = linedata,
+      #            aes(x=timepoint, y=M, group=condition, color = condition))+
+      geom_pointrange(data = linedata,
+                      aes(x=timepoint, y=M, ymin=M-SE, ymax=M+SE, group=condition, color = condition),
+                      alpha = pointAlpha, size = pointSize, fatten = pointFatten)
+
+  }
+  #-----------------------------------------------------------------------Update Graph Handle
+  P = P +
     facet_wrap(~testName,nrow = 1)+
     theme(panel.background = element_rect(fill = "transparent",colour = NA))+
     theme(plot.background = element_rect(fill = "transparent",colour = NA))+

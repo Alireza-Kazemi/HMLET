@@ -2,8 +2,8 @@
 #'
 #' @export
 
-CreateTimeBinData_MLET<- function(data, groupingColumns, timeBinWidth =  250, timeMax = 3000, FixatedOn = "FixatedOn",
-                             timepoint = "timepoint", AOIs = NULL , timeForward = T){
+CreateTimeBinData_MLET<- function(data, groupingColumns = NULL, timeBinWidth =  250, timeMax = 3000, FixatedOn = "FixatedOn",
+                             timepoint = "timepoint", AOIs = NULL , timeForward = T, aggregateFun = mean){
 
   data = data[data[, timepoint]<timeMax, ]
   data$timeBin = floor(data[, timepoint]/timeBinWidth)*timeBinWidth+timeBinWidth/2
@@ -18,6 +18,8 @@ CreateTimeBinData_MLET<- function(data, groupingColumns, timeBinWidth =  250, ti
                                                                               timeBinsOrder+timeBinWidth/2,sep = "-"))
   }
 
+  data$timepoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
+
   if(is.null(AOIs)){
     AOIs = unique(data[,c(FixatedOn)])
     AOIs = AOIs[!is.na(AOIs)]
@@ -28,9 +30,12 @@ CreateTimeBinData_MLET<- function(data, groupingColumns, timeBinWidth =  250, ti
     data[, paste("AOI", AOIName, sep = "_")][data[, FixatedOn]==AOIName] = unique(1)
   }
 
-  data = data %>%
-    group_by_at(groupingColumns) %>%
-    summarise_at(c(paste("AOI", AOIs, sep="_")), sum, na.rm = TRUE)
+  if(!is.null(groupingColumns)){
+    groupingColumns = c(groupingColumns, "timeBin", "timepoint")
+    data = data %>%
+      group_by_at(groupingColumns) %>%
+      summarise_at(c(paste("AOI", AOIs, sep="_")), aggregateFun, na.rm = TRUE)
+  }
 
   return(data)
 }

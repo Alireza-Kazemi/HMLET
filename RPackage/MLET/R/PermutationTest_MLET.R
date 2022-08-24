@@ -9,6 +9,12 @@
 #' @import combinat
 #' @export
 PermutationTest_MLET <- function(data, samples = 2000, paired = T, permuteTrialsWithinSubject = F,   threshold_t = NA){
+  if(is.factor(data$timepoint)){
+    data$timeBin = data$timepoint
+    data$timepoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
+    warning(paste("\n    >> Timepoints are converted to numeric indexes: ",
+                  "\n    >> ",c(paste(levels(data$timeBin),1:length(levels(data$timeBin)), sep = " -> ", collapse = "   ")), sep = ""))
+  }
   datSave = data
 
   clusterInfAll = NULL
@@ -17,7 +23,7 @@ PermutationTest_MLET <- function(data, samples = 2000, paired = T, permuteTrials
   dataAll       = NULL
 
   for(testName in unique(datSave$testName)){
-    print(paste("          -------->","Running permutation test for:",testName,"<--------\n\n"))
+    print(paste("          -------->","Running permutation test for:",testName,"<--------"))
     data = datSave[datSave$testName == testName,]
 
     if(is.na(threshold_t)){
@@ -32,21 +38,24 @@ PermutationTest_MLET <- function(data, samples = 2000, paired = T, permuteTrials
     clusterInf = res[[1]]
     tValues = res[[2]]
 
-    if(nrow(clusterInf)<1) {stop("No Cluster is found based on this the current threshold")}
+    if(nrow(clusterInf)>0){
+      print("Creating unique permutation labels:")
+      if(permuteTrialsWithinSubject){
+        tValueDist = TrialLevelPermutationTestWithin_MLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
 
-    print("Creating unique permutation labels:")
-    if(permuteTrialsWithinSubject){
-      tValueDist = TrialLevelPermutationTestWithin_MLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
+      }else{
+        tValueDist = SubjectLevelPermutationTestWithin_MLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
+      }
+      tValueDist$testName = unique(testName)
+      tValueDist = tValueDist[,c("testName",names(tValueDist)[names(tValueDist)!="testName"])]
 
+      clusterInf$pValue = unique(NA)
+      for(i in 1:nrow(clusterInf)){
+        clusterInf$pValue[i]=mean(as.numeric(abs(tValueDist$NullDist)>abs(clusterInf$tStatistic[i])))
+      }
     }else{
-      tValueDist = SubjectLevelPermutationTestWithin_MLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
-    }
-    tValueDist$testName = unique(testName)
-    tValueDist = tValueDist[,c("testName",names(tValueDist)[names(tValueDist)!="testName"])]
-
-    clusterInf$pValue = unique(NA)
-    for(i in 1:nrow(clusterInf)){
-      clusterInf$pValue[i]=mean(as.numeric(abs(tValueDist$NullDist)>abs(clusterInf$tStatistic[i])))
+      clusterInf = NULL
+      tValueDist = NULL
     }
 
     clusterInfAll = rbind(clusterInfAll, clusterInf)

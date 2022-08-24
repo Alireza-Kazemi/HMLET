@@ -3,6 +3,14 @@
 #' @export
 
 ClusterStats_MLET <- function(data, paired = T, detailed = F, threshold_t = NA){
+  if(is.factor(data$timepoint)){
+    data$timeBin = data$timepoint
+    data$timepoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
+    warning(paste("\n    >> Timepoints are converted to numeric indexes: ",
+                  "\n    >> ",c(paste(levels(data$timeBin),1:length(levels(data$timeBin)), sep = " -> ", collapse = "   ")), sep = ""))
+  }
+
+
   datSave = data
 
   clusterInfAll = NULL
