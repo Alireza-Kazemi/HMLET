@@ -3,6 +3,7 @@
 export(ClusterStats_MLET)
 export(ComputeSubjectLevelPerm_MLET)
 export(ComputeTValues_MLET)
+export(CreateTimeBinData_MLET)
 export(FilterClustersTimepoints)
 export(FindClusters_MLET)
 export(GenerateRandomData_MLET)
