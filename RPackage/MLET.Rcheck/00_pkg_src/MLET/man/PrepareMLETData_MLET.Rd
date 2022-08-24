@@ -12,8 +12,12 @@ PrepareMLETData_MLET(
   condition,
   AOI,
   conditionLevels = NA,
-  targetAOI = NA
+  targetAOI = NA,
+  testName = "MLET"
 )
+}
+\arguments{
+\item{testName}{Name of this data -- can be used as condition name or test names to compare permutation test results between different tests/conditions later}
 }
 \description{
 Prepare dataa columns

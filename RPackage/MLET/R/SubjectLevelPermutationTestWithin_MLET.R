@@ -3,7 +3,7 @@
 #'@export
 SubjectLevelPermutationTestWithin_MLET <- function(data, samples = 2000 , paired = T, threshold_t = NA){
 
-  resp_time = as.data.frame(summarise(group_by(data,ID,timepoint,condition), prop = mean(AOI)))
+  resp_time = as.data.frame(summarise(group_by(data,ID,timepoint,condition), prop = mean(AOI, na.rm=T)))
   labels = unique(resp_time[,c("ID","timepoint","condition")])
   labels = ComputeSubjectLevelPerm_MLET(labels, n = samples)
 
@@ -19,7 +19,7 @@ SubjectLevelPermutationTestWithin_MLET <- function(data, samples = 2000 , paired
     sdat = melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
     sdat = sdat[sdat$index!=0,]
     if(nrow(sdat)!=0){
-      sdat = as.data.frame(summarise(group_by(sdat,Direction,index),tStatistic = sum(value)))
+      sdat = as.data.frame(summarise(group_by(sdat,Direction,index),tStatistic = sum(value, na.rm=T)))
       tValueTemp = data.frame(Positive =  max(sdat$tStatistic), Negative = min(sdat$tStatistic))
     }else{
       tValueTemp = data.frame(Positive =  0, Negative =0)

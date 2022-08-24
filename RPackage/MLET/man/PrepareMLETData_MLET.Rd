@@ -2,7 +2,7 @@
 % Please edit documentation in R/PrepareMLETData_MLET.R
 \name{PrepareMLETData_MLET}
 \alias{PrepareMLETData_MLET}
-\title{Prepare dataa columns}
+\title{Prepare data columns}
 \usage{
 PrepareMLETData_MLET(
   data,
@@ -12,9 +12,13 @@ PrepareMLETData_MLET(
   condition,
   AOI,
   conditionLevels = NA,
-  targetAOI = NA
+  targetAOI = NA,
+  testName = NA
 )
 }
+\arguments{
+\item{testName}{Name of this data -- can be used as condition name or test names to compare permutation test results between different tests/conditions later}
+}
 \description{
-Prepare dataa columns
+Prepare data columns
 }

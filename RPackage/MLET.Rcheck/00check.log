@@ -67,8 +67,6 @@ PlotNullDistribution_MLET: no visible global function definition for
   'aes'
 PlotNullDistribution_MLET: no visible binding for global variable
   'NullDist'
-PlotNullDistribution_MLET: no visible binding for global variable
-  'cond'
 PlotNullDistribution_MLET: no visible global function definition for
   'geom_histogram'
 PlotNullDistribution_MLET: no visible binding for global variable
@@ -77,10 +75,6 @@ PlotNullDistribution_MLET: no visible global function definition for
   'sd'
 PlotNullDistribution_MLET: no visible global function definition for
   'geom_density'
-PlotNullDistribution_MLET: no visible global function definition for
-  'geom_vline'
-PlotNullDistribution_MLET: no visible binding for global variable
-  'xinter'
 RemoveIncompleteTimePoints_MLET: no visible binding for global variable
   'ID'
 RemoveIncompleteTimePoints_MLET: no visible binding for global variable
@@ -136,9 +130,9 @@ UniquePermutations_MLET: no visible global function definition for
 UniquePermutations_MLET: no visible global function definition for
   'setTxtProgressBar'
 Undefined global functions or variables:
-  ..density.. AOI Direction ID M N NullDist SD aes complete.cases cond
-  condition d geom_density geom_histogram geom_vline ggplot index melt
-  prop qt sd setTxtProgressBar timepoint txtProgressBar value xinter
+  ..density.. AOI Direction ID M N NullDist SD aes complete.cases
+  condition d geom_density geom_histogram ggplot index melt prop qt sd
+  setTxtProgressBar timepoint txtProgressBar value
 Consider adding
   importFrom("stats", "complete.cases", "qt", "sd")
   importFrom("utils", "setTxtProgressBar", "txtProgressBar")

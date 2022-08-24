@@ -4,7 +4,7 @@
 #'
 #' @export
 RemoveIncompleteTimePoints_MLET <- function(data){
-  rmIdx = as.data.frame(summarise(group_by(data,ID,timepoint,condition), prop = mean(AOI)))
+  rmIdx = as.data.frame(summarise(group_by(data,ID,timepoint,condition), prop = mean(AOI, na.rm=T)))
   rmIdx = reshape2::dcast(rmIdx, ID+timepoint~condition, value.var = "prop")
   rmIdx = rmIdx[!complete.cases(rmIdx),]
   if(nrow(rmIdx)>0){
