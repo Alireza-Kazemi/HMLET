@@ -1,4 +1,4 @@
-#' Permutation Test General Routine
+#' Permutation Tests General Routine
 #'
 #'
 #' @import dplyr

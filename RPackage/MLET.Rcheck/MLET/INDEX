@@ -2,15 +2,25 @@ ClusterStats_MLET       Generate unique random permutations
 ComputeSubjectLevelPerm_MLET
                         Generate unique random permutations
 ComputeTValues_MLET     Generate unique random permutations
+CreateTimeBinData_MLET
+                        Collapse time points in specified time bins
+ExportDataForMATLAB_MLET
+                        Export to CSV file for MATLAB GUI
 FilterClustersTimepoints
                         Generate unique random permutations
 FindClusters_MLET       Generate unique random permutations
 GenerateRandomData_MLET
                         Generate unique random permutations
-PermutationTest_MLET    Permutation Test General Routine
+PermutationTestDataPrep_MLET
+                        Return a data frame compatible for permutation
+                        tests routine
+PermutationTest_MLET    Permutation Tests General Routine
 PlotNullDistribution_MLET
                         Plot Null Distribution
-PrepareMLETData_MLET    Prepare dataa columns
+PlotTemporalGazeTrends_MLET
+                        Plot temporal gaze trends
+PreprocessRawData_MLET
+                        Pre-Process data to extract AOIs
 RemoveIncompleteTimePoints_MLET
                         Remove Time points with missing conditions
 SubjectLevelPermutationTestWithin_MLET

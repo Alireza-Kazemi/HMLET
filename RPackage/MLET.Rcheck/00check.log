@@ -60,6 +60,10 @@ ComputeTValues_MLET: no visible global function definition for 'sd'
 ComputeTValues_MLET: no visible binding for global variable 'M'
 ComputeTValues_MLET: no visible binding for global variable 'SD'
 ComputeTValues_MLET: no visible binding for global variable 'N'
+ExportDataForMATLAB_MLET: missing arguments not allowed in calls to 'c'
+ExportDataForMATLAB_MLET: no visible global function definition for
+  'write.csv'
+ExportDataForMATLAB_MLET: no visible binding for global variable 'A'
 PermutationTest_MLET: no visible global function definition for 'qt'
 PlotNullDistribution_MLET: no visible global function definition for
   'ggplot'
@@ -67,6 +71,8 @@ PlotNullDistribution_MLET: no visible global function definition for
   'aes'
 PlotNullDistribution_MLET: no visible binding for global variable
   'NullDist'
+PlotNullDistribution_MLET: no visible binding for global variable
+  'testName'
 PlotNullDistribution_MLET: no visible global function definition for
   'geom_histogram'
 PlotNullDistribution_MLET: no visible binding for global variable
@@ -75,6 +81,61 @@ PlotNullDistribution_MLET: no visible global function definition for
   'sd'
 PlotNullDistribution_MLET: no visible global function definition for
   'geom_density'
+PlotNullDistribution_MLET: no visible global function definition for
+  'facet_wrap'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'ggplot'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'testName'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'ID'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'timepoint'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'condition'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'AOI'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'Prop'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'sd'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'geom_ribbon'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'aes'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'yMin'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'yMax'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'geom_line'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable 'y'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable 'M'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'SE'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'geom_pointrange'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'facet_wrap'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'theme'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'element_rect'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'element_line'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'ylab'
+PlotTemporalGazeTrends_MLET: no visible binding for global variable
+  'DataPercent'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'position_dodge'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'scale_y_continuous'
+PlotTemporalGazeTrends_MLET: no visible global function definition for
+  'sec_axis'
+PreprocessRawData_MLET: no visible global function definition for
+  'write.csv'
+PreprocessRawData_MLET: no visible binding for global variable 'A'
 RemoveIncompleteTimePoints_MLET: no visible binding for global variable
   'ID'
 RemoveIncompleteTimePoints_MLET: no visible binding for global variable
@@ -130,12 +191,15 @@ UniquePermutations_MLET: no visible global function definition for
 UniquePermutations_MLET: no visible global function definition for
   'setTxtProgressBar'
 Undefined global functions or variables:
-  ..density.. AOI Direction ID M N NullDist SD aes complete.cases
-  condition d geom_density geom_histogram ggplot index melt prop qt sd
-  setTxtProgressBar timepoint txtProgressBar value
+  ..density.. A AOI DataPercent Direction ID M N NullDist Prop SD SE
+  aes complete.cases condition d element_line element_rect facet_wrap
+  geom_density geom_histogram geom_line geom_pointrange geom_ribbon
+  ggplot index melt position_dodge prop qt scale_y_continuous sd
+  sec_axis setTxtProgressBar testName theme timepoint txtProgressBar
+  value write.csv y yMax yMin ylab
 Consider adding
   importFrom("stats", "complete.cases", "qt", "sd")
-  importFrom("utils", "setTxtProgressBar", "txtProgressBar")
+  importFrom("utils", "setTxtProgressBar", "txtProgressBar", "write.csv")
 to your NAMESPACE file.
 * checking Rd files ... OK
 * checking Rd metadata ... OK
@@ -153,6 +217,15 @@ Undocumented arguments in documentation object 'ComputeSubjectLevelPerm_MLET'
 Undocumented arguments in documentation object 'ComputeTValues_MLET'
   'respTime' 'paired'
 
+Undocumented arguments in documentation object 'CreateTimeBinData_MLET'
+  'data' 'groupingColumns' 'timeBinWidth' 'timeMax' 'FixatedOn'
+  'timepoint' 'AOIs' 'timeForward' 'aggregateFun'
+
+Undocumented arguments in documentation object 'ExportDataForMATLAB_MLET'
+  'data' 'ID' 'trial' 'timepoint' 'timeMax' 'samplingRate' 'gazeX'
+  'gazeY' 'gazeXRelative' 'gazeYRelative' 'AOINames' 'condition'
+  'testName' 'fileName' 'path'
+
 Undocumented arguments in documentation object 'FilterClustersTimepoints'
   'data' 'clusterInf'
 
@@ -162,15 +235,25 @@ Undocumented arguments in documentation object 'FindClusters_MLET'
 Undocumented arguments in documentation object 'GenerateRandomData_MLET'
   'tMax' 'effectOffset' 'trialNum' 'subjNum' 'effectSize'
 
+Undocumented arguments in documentation object 'PermutationTestDataPrep_MLET'
+  'data' 'ID' 'trial' 'timepoint' 'condition' 'gazeInAOI'
+  'conditionLevels' 'targetAOI'
+
 Undocumented arguments in documentation object 'PermutationTest_MLET'
   'data' 'samples' 'paired' 'permuteTrialsWithinSubject' 'threshold_t'
 
 Undocumented arguments in documentation object 'PlotNullDistribution_MLET'
   'resultList'
 
-Undocumented arguments in documentation object 'PrepareMLETData_MLET'
-  'data' 'ID' 'trial' 'timepoint' 'condition' 'AOI' 'conditionLevels'
-  'targetAOI'
+Undocumented arguments in documentation object 'PlotTemporalGazeTrends_MLET'
+  'showDataPointNumbers' 'gazePropRibbonAlpha' 'clusterFillColor'
+  'clusterFillAlpha' 'pointSize' 'pointAlpha' 'pointFatten'
+  'testNameOrder' 'conditionOrder' 'onlySignificantClusters'
+  'clusterData'
+
+Undocumented arguments in documentation object 'PreprocessRawData_MLET'
+  'data' 'ID' 'trial' 'timepoint' 'GazeX' 'GazeY' 'AOINames' 'fileName'
+  'path'
 
 Undocumented arguments in documentation object 'RemoveIncompleteTimePoints_MLET'
   'data'

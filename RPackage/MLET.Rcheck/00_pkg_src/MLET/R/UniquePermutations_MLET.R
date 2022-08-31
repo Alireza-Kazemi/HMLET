@@ -16,9 +16,13 @@ UniquePermutations_MLET <- function(listInput, n = 1){
     rep = 0
     repeat{
       newComb = rray(sample(indexList0, L, replace = F), dim = c(L,1))
-      if(min(rray_sum(abs(indexList - newComb),axes = 1))>1 | rep>5000){
+      if(min(rray_sum(abs(indexList - newComb),axes = 1))>1){
         # print(rray_sum(abs(indexList - newComb),axes = 1))  # ------------------> Debugging
         # if(rep>0){print(rep)}  # ------------------> Testing for repeat
+        break
+      }
+      if(rep>1000){
+        warning("Unique permutation hasn't been generated!(invalid results)")
         break
       }
       rep = rep+1

@@ -2,7 +2,7 @@
 % Please edit documentation in R/PermutationTest_MLET.R
 \name{PermutationTest_MLET}
 \alias{PermutationTest_MLET}
-\title{Permutation Test General Routine}
+\title{Permutation Tests General Routine}
 \usage{
 PermutationTest_MLET(
   data,
@@ -13,5 +13,5 @@ PermutationTest_MLET(
 )
 }
 \description{
-Permutation Test General Routine
+Permutation Tests General Routine
 }

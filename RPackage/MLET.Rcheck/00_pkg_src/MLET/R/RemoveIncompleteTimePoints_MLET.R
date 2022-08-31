@@ -8,10 +8,12 @@ RemoveIncompleteTimePoints_MLET <- function(data){
   rmIdx = reshape2::dcast(rmIdx, ID+timepoint~condition, value.var = "prop")
   rmIdx = rmIdx[!complete.cases(rmIdx),]
   if(nrow(rmIdx)>0){
-    warning("Time points with missing conditions removed!")
     rmIdx = paste(rmIdx$ID,rmIdx$timepoint,sep = "_")
     dIdx = paste(data$ID,data$timepoint,sep = "_")
     data = data[!(dIdx %in% rmIdx),]
+    warning(paste("\n    >> In test data: ",unique(data$testName),
+                  "\n    >> Time points with missing conditions removed! (N =",
+                  length(dIdx[dIdx %in% rmIdx]),")", sep = ""))
   }
   return(data)
 }
