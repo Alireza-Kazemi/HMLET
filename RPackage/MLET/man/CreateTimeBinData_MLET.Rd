@@ -6,13 +6,14 @@
 \usage{
 CreateTimeBinData_MLET(
   data,
-  groupingColumns,
+  groupingColumns = NULL,
   timeBinWidth = 250,
   timeMax = 3000,
   FixatedOn = "FixatedOn",
   timepoint = "timepoint",
   AOIs = NULL,
-  timeForward = T
+  timeForward = T,
+  aggregateFun = mean
 )
 }
 \description{
