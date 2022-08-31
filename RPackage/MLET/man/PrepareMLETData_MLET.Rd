@@ -11,9 +11,9 @@ PrepareMLETData_MLET(
   timepoint,
   condition,
   AOI,
-  conditionLevels = NA,
-  targetAOI = NA,
-  testName = NA
+  conditionLevels = NULL,
+  targetAOI = NULL,
+  testName = NULL
 )
 }
 \arguments{

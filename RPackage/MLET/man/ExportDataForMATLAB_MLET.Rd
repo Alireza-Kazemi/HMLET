@@ -2,14 +2,17 @@
 % Please edit documentation in R/ExportDataForMATLAB_MLET.R
 \name{ExportDataForMATLAB_MLET}
 \alias{ExportDataForMATLAB_MLET}
-\title{Prepare data columns}
+\title{Export to CSV file for MATLAB GUI}
 \usage{
 ExportDataForMATLAB_MLET(
   data,
+  GazeX = "GazeX_Relative",
+  GazeY = "GazeY_Relative",
+  AOINames = NULL,
   fileName = "ETDataforMATLAB.csv",
   path = getwd()
 )
 }
 \description{
-Prepare data columns
+Export to CSV file for MATLAB GUI
 }

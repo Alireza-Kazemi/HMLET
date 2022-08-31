@@ -1,9 +1,9 @@
-#' Export to CSV file for MATLAB GUI
+#' Pre-Process data to extract AOIs
 #'
 #'
 #'
 #' @export
-ExportDataForMATLAB_MLET <- function(data, GazeX = "GazeX_Relative", GazeY = "GazeY_Relative",
+PreprocessRawData_MLET <- function(data, GazeX = "GazeX_Relative", GazeY = "GazeY_Relative",
                                      AOINames = NULL, fileName = "ETDataforMATLAB.csv", path = getwd()){
 
   try(write.csv(data, paste(path, fileName, sep = .Platform$file.sep)))
