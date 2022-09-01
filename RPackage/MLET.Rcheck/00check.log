@@ -60,10 +60,8 @@ ComputeTValues_MLET: no visible global function definition for 'sd'
 ComputeTValues_MLET: no visible binding for global variable 'M'
 ComputeTValues_MLET: no visible binding for global variable 'SD'
 ComputeTValues_MLET: no visible binding for global variable 'N'
-ExportDataForMATLAB_MLET: missing arguments not allowed in calls to 'c'
 ExportDataForMATLAB_MLET: no visible global function definition for
   'write.csv'
-ExportDataForMATLAB_MLET: no visible binding for global variable 'A'
 PermutationTest_MLET: no visible global function definition for 'qt'
 PlotNullDistribution_MLET: no visible global function definition for
   'ggplot'
@@ -222,9 +220,9 @@ Undocumented arguments in documentation object 'CreateTimeBinData_MLET'
   'timepoint' 'AOIs' 'timeForward' 'aggregateFun'
 
 Undocumented arguments in documentation object 'ExportDataForMATLAB_MLET'
-  'data' 'ID' 'trial' 'timepoint' 'timeMax' 'samplingRate' 'gazeX'
-  'gazeY' 'gazeXRelative' 'gazeYRelative' 'AOINames' 'condition'
-  'testName' 'fileName' 'path'
+  'data' 'ID' 'trial' 'timepoint' 'timeMax' 'samplingDuration'
+  'timeForward' 'fixation' 'condition' 'testName' 'gazeX' 'gazeY'
+  'gazeXRelative' 'gazeYRelative' 'miscVars' 'fileName' 'path'
 
 Undocumented arguments in documentation object 'FilterClustersTimepoints'
   'data' 'clusterInf'
