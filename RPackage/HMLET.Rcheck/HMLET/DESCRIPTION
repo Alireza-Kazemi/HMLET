@@ -1,0 +1,17 @@
+Type: Package
+Package: HMLET
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: Alireza Kazemi
+Maintainer: Alireza Kazemi <alireza.kzmi@gmail.com>
+Description: MLET uses machine learning algorithm to analyze Eye-Tracking
+    data.
+License: MIT + file LICENSE
+Imports: combinat, dplyr, miceadds, purrr, rray, tidyr
+Author@R: person("Alireza", "Kazemi", email = "Alireza.kzmi@gmail.com",
+        role = c("aut", "cre"))
+Encoding: UTF-8
+RoxygenNote: 7.2.0
+NeedsCompilation: no
+Packaged: 2022-09-06 18:36:52 UTC; kazemi
+Built: R 4.2.1; ; 2022-09-06 18:36:58 UTC; windows

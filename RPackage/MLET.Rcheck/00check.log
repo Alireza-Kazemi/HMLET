@@ -1,4 +1,4 @@
-* using log directory 'C:/Users/kazemi/Documents/GitHub/MLET/RPackage/MLET.Rcheck'
+* using log directory 'C:/Users/kazemi/Documents/GitHub/HMLET/RPackage/MLET.Rcheck'
 * using R version 4.2.1 (2022-06-23 ucrt)
 * using platform: x86_64-w64-mingw32 (64-bit)
 * using session charset: UTF-8
@@ -38,155 +38,159 @@
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... NOTE
-ClusterStats_MLET: no visible global function definition for 'qt'
-ClusterStats_MLET: no visible binding for global variable 'ID'
-ClusterStats_MLET: no visible binding for global variable 'timepoint'
-ClusterStats_MLET: no visible binding for global variable 'condition'
-ClusterStats_MLET: no visible binding for global variable 'AOI'
-ClusterStats_MLET: no visible global function definition for 'melt'
-ClusterStats_MLET: no visible binding for global variable 'Direction'
-ClusterStats_MLET: no visible binding for global variable 'index'
-ClusterStats_MLET: no visible binding for global variable 'value'
-ComputeSubjectLevelPerm_MLET: no visible global function definition for
-  'txtProgressBar'
-ComputeSubjectLevelPerm_MLET: no visible global function definition for
-  'setTxtProgressBar'
-ComputeTValues_MLET: no visible binding for global variable 'ID'
-ComputeTValues_MLET: no visible binding for global variable 'timepoint'
-ComputeTValues_MLET: no visible binding for global variable 'prop'
-ComputeTValues_MLET: no visible binding for global variable 'd'
-ComputeTValues_MLET: no visible binding for global variable 'condition'
-ComputeTValues_MLET: no visible global function definition for 'sd'
-ComputeTValues_MLET: no visible binding for global variable 'M'
-ComputeTValues_MLET: no visible binding for global variable 'SD'
-ComputeTValues_MLET: no visible binding for global variable 'N'
-ExportDataForMATLAB_MLET: no visible global function definition for
+ClusterStats_HMLET: no visible global function definition for 'qt'
+ClusterStats_HMLET: no visible binding for global variable 'ID'
+ClusterStats_HMLET: no visible binding for global variable 'timepoint'
+ClusterStats_HMLET: no visible binding for global variable 'condition'
+ClusterStats_HMLET: no visible binding for global variable 'AOI'
+ClusterStats_HMLET: no visible global function definition for 'melt'
+ClusterStats_HMLET: no visible binding for global variable 'Direction'
+ClusterStats_HMLET: no visible binding for global variable 'index'
+ClusterStats_HMLET: no visible binding for global variable 'value'
+ComputeSubjectLevelPerm_HMLET: no visible global function definition
+  for 'txtProgressBar'
+ComputeSubjectLevelPerm_HMLET: no visible global function definition
+  for 'setTxtProgressBar'
+ComputeTValues_HMLET: no visible binding for global variable 'ID'
+ComputeTValues_HMLET: no visible binding for global variable
+  'timepoint'
+ComputeTValues_HMLET: no visible binding for global variable 'prop'
+ComputeTValues_HMLET: no visible binding for global variable 'd'
+ComputeTValues_HMLET: no visible binding for global variable
+  'condition'
+ComputeTValues_HMLET: no visible global function definition for 'sd'
+ComputeTValues_HMLET: no visible binding for global variable 'M'
+ComputeTValues_HMLET: no visible binding for global variable 'SD'
+ComputeTValues_HMLET: no visible binding for global variable 'N'
+ExportDataForMATLAB_HMLET: no visible global function definition for
   'write.csv'
-PermutationTest_MLET: no visible global function definition for 'qt'
-PlotNullDistribution_MLET: no visible global function definition for
+PermutationTest_HMLET: no visible global function definition for 'qt'
+PlotNullDistribution_HMLET: no visible global function definition for
   'ggplot'
-PlotNullDistribution_MLET: no visible global function definition for
+PlotNullDistribution_HMLET: no visible global function definition for
   'aes'
-PlotNullDistribution_MLET: no visible binding for global variable
+PlotNullDistribution_HMLET: no visible binding for global variable
   'NullDist'
-PlotNullDistribution_MLET: no visible binding for global variable
+PlotNullDistribution_HMLET: no visible binding for global variable
   'testName'
-PlotNullDistribution_MLET: no visible global function definition for
+PlotNullDistribution_HMLET: no visible global function definition for
   'geom_histogram'
-PlotNullDistribution_MLET: no visible binding for global variable
+PlotNullDistribution_HMLET: no visible binding for global variable
   '..density..'
-PlotNullDistribution_MLET: no visible global function definition for
+PlotNullDistribution_HMLET: no visible global function definition for
   'sd'
-PlotNullDistribution_MLET: no visible global function definition for
+PlotNullDistribution_HMLET: no visible global function definition for
   'geom_density'
-PlotNullDistribution_MLET: no visible global function definition for
+PlotNullDistribution_HMLET: no visible global function definition for
   'facet_wrap'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'ggplot'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'testName'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'ID'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'timepoint'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'condition'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'AOI'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'Prop'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'sd'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'geom_ribbon'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'aes'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'yMin'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'yMax'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'geom_line'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable 'y'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable 'M'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
+  'y'
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
+  'M'
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'SE'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'geom_pointrange'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'facet_wrap'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'theme'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'element_rect'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'element_line'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'ylab'
-PlotTemporalGazeTrends_MLET: no visible binding for global variable
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'DataPercent'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'position_dodge'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'scale_y_continuous'
-PlotTemporalGazeTrends_MLET: no visible global function definition for
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'sec_axis'
-PreprocessRawData_MLET: no visible global function definition for
+PreprocessRawData_HMLET: no visible global function definition for
   'write.csv'
-PreprocessRawData_MLET: no visible binding for global variable 'A'
-RemoveIncompleteTimePoints_MLET: no visible binding for global variable
-  'ID'
-RemoveIncompleteTimePoints_MLET: no visible binding for global variable
-  'timepoint'
-RemoveIncompleteTimePoints_MLET: no visible binding for global variable
-  'condition'
-RemoveIncompleteTimePoints_MLET: no visible binding for global variable
-  'AOI'
-RemoveIncompleteTimePoints_MLET: no visible global function definition
+PreprocessRawData_HMLET: no visible binding for global variable 'A'
+RemoveIncompleteTimePoints_HMLET: no visible binding for global
+  variable 'ID'
+RemoveIncompleteTimePoints_HMLET: no visible binding for global
+  variable 'timepoint'
+RemoveIncompleteTimePoints_HMLET: no visible binding for global
+  variable 'condition'
+RemoveIncompleteTimePoints_HMLET: no visible binding for global
+  variable 'AOI'
+RemoveIncompleteTimePoints_HMLET: no visible global function definition
   for 'complete.cases'
-SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+SubjectLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'ID'
-SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+SubjectLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'timepoint'
-SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+SubjectLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'condition'
-SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+SubjectLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'AOI'
-SubjectLevelPermutationTestWithin_MLET: no visible global function
+SubjectLevelPermutationTestWithin_HMLET: no visible global function
   definition for 'txtProgressBar'
-SubjectLevelPermutationTestWithin_MLET: no visible global function
+SubjectLevelPermutationTestWithin_HMLET: no visible global function
   definition for 'melt'
-SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+SubjectLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'Direction'
-SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+SubjectLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'index'
-SubjectLevelPermutationTestWithin_MLET: no visible binding for global
+SubjectLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'value'
-SubjectLevelPermutationTestWithin_MLET: no visible global function
+SubjectLevelPermutationTestWithin_HMLET: no visible global function
   definition for 'setTxtProgressBar'
-TrialLevelPermutationTestWithin_MLET: no visible global function
+TrialLevelPermutationTestWithin_HMLET: no visible global function
   definition for 'txtProgressBar'
-TrialLevelPermutationTestWithin_MLET: no visible binding for global
+TrialLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'ID'
-TrialLevelPermutationTestWithin_MLET: no visible binding for global
+TrialLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'timepoint'
-TrialLevelPermutationTestWithin_MLET: no visible binding for global
+TrialLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'condition'
-TrialLevelPermutationTestWithin_MLET: no visible binding for global
+TrialLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'AOI'
-TrialLevelPermutationTestWithin_MLET: no visible global function
+TrialLevelPermutationTestWithin_HMLET: no visible global function
   definition for 'melt'
-TrialLevelPermutationTestWithin_MLET: no visible binding for global
+TrialLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'Direction'
-TrialLevelPermutationTestWithin_MLET: no visible binding for global
+TrialLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'index'
-TrialLevelPermutationTestWithin_MLET: no visible binding for global
+TrialLevelPermutationTestWithin_HMLET: no visible binding for global
   variable 'value'
-TrialLevelPermutationTestWithin_MLET: no visible global function
+TrialLevelPermutationTestWithin_HMLET: no visible global function
   definition for 'setTxtProgressBar'
-UniquePermutations_MLET: no visible global function definition for
+UniquePermutations_HMLET: no visible global function definition for
   'txtProgressBar'
-UniquePermutations_MLET: no visible global function definition for
+UniquePermutations_HMLET: no visible global function definition for
   'setTxtProgressBar'
 Undefined global functions or variables:
   ..density.. A AOI DataPercent Direction ID M N NullDist Prop SD SE
@@ -206,60 +210,60 @@ to your NAMESPACE file.
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... WARNING
-Undocumented arguments in documentation object 'ClusterStats_MLET'
+Undocumented arguments in documentation object 'ClusterStats_HMLET'
   'data' 'paired' 'detailed' 'threshold_t'
 
-Undocumented arguments in documentation object 'ComputeSubjectLevelPerm_MLET'
+Undocumented arguments in documentation object 'ComputeSubjectLevelPerm_HMLET'
   'labels' 'n'
 
-Undocumented arguments in documentation object 'ComputeTValues_MLET'
+Undocumented arguments in documentation object 'ComputeTValues_HMLET'
   'respTime' 'paired'
 
-Undocumented arguments in documentation object 'CreateTimeBinData_MLET'
+Undocumented arguments in documentation object 'CreateTimeBinData_HMLET'
   'data' 'groupingColumns' 'timeBinWidth' 'timeMax' 'FixatedOn'
   'timepoint' 'AOIs' 'timeForward' 'aggregateFun'
 
-Undocumented arguments in documentation object 'ExportDataForMATLAB_MLET'
+Undocumented arguments in documentation object 'ExportDataForMATLAB_HMLET'
   'data' 'ID' 'trial' 'timepoint' 'timeMax' 'samplingDuration'
   'timeForward' 'fixation' 'condition' 'testName' 'gazeX' 'gazeY'
   'gazeXRelative' 'gazeYRelative' 'miscVars' 'fileName' 'path'
 
-Undocumented arguments in documentation object 'FilterClustersTimepoints'
+Undocumented arguments in documentation object 'FilterClustersTimepoints_HMELT'
   'data' 'clusterInf'
 
-Undocumented arguments in documentation object 'FindClusters_MLET'
+Undocumented arguments in documentation object 'FindClusters_HMLET'
   'tValues' 'threshold_t'
 
-Undocumented arguments in documentation object 'GenerateRandomData_MLET'
+Undocumented arguments in documentation object 'GenerateRandomData_HMLET'
   'tMax' 'effectOffset' 'trialNum' 'subjNum' 'effectSize'
 
-Undocumented arguments in documentation object 'PermutationTestDataPrep_MLET'
+Undocumented arguments in documentation object 'PermutationTestDataPrep_HMLET'
   'data' 'ID' 'trial' 'timepoint' 'condition' 'gazeInAOI'
   'conditionLevels' 'targetAOI'
 
-Undocumented arguments in documentation object 'PermutationTest_MLET'
+Undocumented arguments in documentation object 'PermutationTest_HMLET'
   'data' 'samples' 'paired' 'permuteTrialsWithinSubject' 'threshold_t'
 
-Undocumented arguments in documentation object 'PlotNullDistribution_MLET'
+Undocumented arguments in documentation object 'PlotNullDistribution_HMLET'
   'resultList'
 
-Undocumented arguments in documentation object 'PlotTemporalGazeTrends_MLET'
+Undocumented arguments in documentation object 'PlotTemporalGazeTrends_HMLET'
   'showDataPointNumbers' 'gazePropRibbonAlpha' 'clusterFillColor'
   'clusterFillAlpha' 'pointSize' 'pointAlpha' 'pointFatten'
   'testNameOrder' 'conditionOrder' 'onlySignificantClusters'
   'clusterData'
 
-Undocumented arguments in documentation object 'PreprocessRawData_MLET'
+Undocumented arguments in documentation object 'PreprocessRawData_HMLET'
   'data' 'ID' 'trial' 'timepoint' 'GazeX' 'GazeY' 'AOINames' 'fileName'
   'path'
 
-Undocumented arguments in documentation object 'RemoveIncompleteTimePoints_MLET'
+Undocumented arguments in documentation object 'RemoveIncompleteTimePoints_HMLET'
   'data'
 
-Undocumented arguments in documentation object 'SubjectLevelPermutationTestWithin_MLET'
+Undocumented arguments in documentation object 'SubjectLevelPermutationTestWithin_HMLET'
   'data' 'samples' 'paired' 'threshold_t'
 
-Undocumented arguments in documentation object 'TrialLevelPermutationTestWithin_MLET'
+Undocumented arguments in documentation object 'TrialLevelPermutationTestWithin_HMLET'
   'data' 'samples' 'paired' 'threshold_t'
 
 Functions with \usage entries need to have the appropriate \alias
