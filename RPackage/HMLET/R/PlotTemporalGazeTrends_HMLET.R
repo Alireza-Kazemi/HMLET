@@ -31,6 +31,11 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
 
   }
 
+  if("timeBinNames" %in% names(graphDat)){
+    timeBinFlag = TRUE
+    timeBinLabels = levels(graphDat$timeBinName)
+  }
+
   linedata = as.data.frame(summarise(group_by(graphDat,
                                               testName, ID, timepoint, condition),
                                      Prop = mean(AOI, na.rm=T)))
@@ -90,7 +95,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
               aes(x=timepoint, y=M, group=condition, color = condition),
               size=1)
 
-  if(is.numeric(linedata$timepoint)){
+  if(!timeBinFlag){
     #-----------------------------------------------------------------------Update Graph Handle
     P = P +
       geom_ribbon(data = linedata,
@@ -99,8 +104,6 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
   }else{
     #-----------------------------------------------------------------------Update Graph Handle
     P = P +
-      # geom_point(data = linedata,
-      #            aes(x=timepoint, y=M, group=condition, color = condition))+
       geom_pointrange(data = linedata,
                       aes(x=timepoint, y=M, ymin=M-SE, ymax=M+SE, group=condition, color = condition),
                       alpha = pointAlpha, size = pointSize, fatten = pointFatten)
