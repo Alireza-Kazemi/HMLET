@@ -1,4 +1,5 @@
 #' Generate unique random permutations
+#' This is a sample description
 #'
 #' @export
 
@@ -47,8 +48,10 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NA)
                     "\n    >> No significant cluster found based on threshold Alpha = ",
                     threshold_t, sep = ""))
     }
+    else{
     clusterInf = as.data.frame(summarise(group_by(clusterInf, testName, Direction, index),
                                          tStatistic = sum(value), timeStart = min(timepoint), timeEnd = max(timepoint)))
+    }
 
     clusterInfAll = rbind(clusterInfAll, clusterInf)
     tValuesAll    = rbind(tValuesAll, tValues)
