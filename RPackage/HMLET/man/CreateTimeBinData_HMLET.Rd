@@ -2,7 +2,7 @@
 % Please edit documentation in R/CreateTimeBinData_HMLET.R
 \name{CreateTimeBinData_HMLET}
 \alias{CreateTimeBinData_HMLET}
-\title{Collapse time points in specified time bins}
+\title{Collapse time points in specified time bins.}
 \usage{
 CreateTimeBinData_HMLET(
   data,
@@ -16,6 +16,28 @@ CreateTimeBinData_HMLET(
   aggregateFun = mean
 )
 }
+\arguments{
+\item{data}{dataframe containing temporal data}
+
+\item{groupingColumns}{optional array of strings for grouping variables, defaults to NULL}
+
+\item{timeBinWidth}{optional integer specified time interval for time bins, defaults to 250}
+
+\item{timeMax}{optional integer, defaults to 3000}
+
+\item{FixatedOn}{string for column name of specific AOI in dataframe to be fixated on}
+
+\item{timepoint}{optional string representing the name of the column for timepoints, defaults to "timepoint"}
+
+\item{AOIs}{optional <datatype> for areas of interest, defaults to NULL}
+
+\item{timeForward}{optional boolean to sort timebins, defaults to True for ascending order.}
+
+\item{aggregateFun}{optional function for aggregation, defaults to mean}
+}
+\value{
+temporal data with sorted time points into time bins
+}
 \description{
-Collapse time points in specified time bins
+Collapse time points in specified time bins.
 }
