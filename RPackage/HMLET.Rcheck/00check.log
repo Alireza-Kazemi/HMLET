@@ -1,5 +1,5 @@
-* using log directory 'C:/Users/kazemi/Documents/GitHub/HMLET/RPackage/HMLET.Rcheck'
-* using R version 4.2.1 (2022-06-23 ucrt)
+* using log directory 'D:/GithubRep/HMLET/RPackage/HMLET.Rcheck'
+* using R version 4.2.2 (2022-10-31 ucrt)
 * using platform: x86_64-w64-mingw32 (64-bit)
 * using session charset: UTF-8
 * using options '--no-manual --as-cran'
@@ -62,7 +62,7 @@ ComputeTValues_HMLET: no visible global function definition for 'sd'
 ComputeTValues_HMLET: no visible binding for global variable 'M'
 ComputeTValues_HMLET: no visible binding for global variable 'SD'
 ComputeTValues_HMLET: no visible binding for global variable 'N'
-ExportDataForMATLAB_HMLET: no visible global function definition for
+ExportDataForGUI_HMLET: no visible global function definition for
   'write.csv'
 PermutationTest_HMLET: no visible global function definition for 'qt'
 PlotNullDistribution_HMLET: no visible global function definition for
@@ -110,13 +110,13 @@ PlotTemporalGazeTrends_HMLET: no visible binding for global variable
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'geom_line'
 PlotTemporalGazeTrends_HMLET: no visible binding for global variable
-  'y'
-PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'M'
 PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'SE'
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'geom_pointrange'
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  'scale_x_continuous'
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   'facet_wrap'
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
@@ -196,9 +196,9 @@ Undefined global functions or variables:
   ..density.. A AOI DataPercent Direction ID M N NullDist Prop SD SE
   aes complete.cases condition d element_line element_rect facet_wrap
   geom_density geom_histogram geom_line geom_pointrange geom_ribbon
-  ggplot index melt position_dodge prop qt scale_y_continuous sd
-  sec_axis setTxtProgressBar testName theme timepoint txtProgressBar
-  value write.csv y yMax yMin ylab
+  ggplot index melt position_dodge prop qt scale_x_continuous
+  scale_y_continuous sd sec_axis setTxtProgressBar testName theme
+  timepoint txtProgressBar value write.csv yMax yMin ylab
 Consider adding
   importFrom("stats", "complete.cases", "qt", "sd")
   importFrom("utils", "setTxtProgressBar", "txtProgressBar", "write.csv")
@@ -223,10 +223,10 @@ Undocumented arguments in documentation object 'CreateTimeBinData_HMLET'
   'data' 'groupingColumns' 'timeBinWidth' 'timeMax' 'FixatedOn'
   'timepoint' 'AOIs' 'timeForward' 'aggregateFun'
 
-Undocumented arguments in documentation object 'ExportDataForMATLAB_HMLET'
-  'data' 'ID' 'trial' 'timepoint' 'timeMax' 'samplingDuration'
-  'timeForward' 'fixation' 'condition' 'testName' 'gazeX' 'gazeY'
-  'gazeXRelative' 'gazeYRelative' 'miscVars' 'fileName' 'path'
+Undocumented arguments in documentation object 'ExportDataForGUI_HMLET'
+  'data' 'ID' 'trial' 'timepoint' 'timeMax' 'dataPointDuration'
+  'fixation' 'condition' 'testName' 'gazeX' 'gazeY' 'gazeXRelative'
+  'gazeYRelative' 'miscVars' 'fileName' 'path'
 
 Undocumented arguments in documentation object 'FilterClustersTimepoints_HMELT'
   'data' 'clusterInf'
@@ -239,7 +239,7 @@ Undocumented arguments in documentation object 'GenerateRandomData_HMLET'
 
 Undocumented arguments in documentation object 'PermutationTestDataPrep_HMLET'
   'data' 'ID' 'trial' 'timepoint' 'condition' 'gazeInAOI'
-  'conditionLevels' 'targetAOI'
+  'conditionLevels' 'targetAOI' 'timeBinName'
 
 Undocumented arguments in documentation object 'PermutationTest_HMLET'
   'data' 'samples' 'paired' 'permuteTrialsWithinSubject' 'threshold_t'
@@ -274,9 +274,7 @@ Extensions' manual.
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
 * checking examples ... NONE
-* checking for non-standard things in the check directory ... NOTE
-Found the following files/directories:
-  '00LOCK-HMLET'
+* checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 2 WARNINGs, 2 NOTEs
+Status: 2 WARNINGs, 1 NOTE

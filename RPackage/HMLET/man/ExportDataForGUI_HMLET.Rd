@@ -9,9 +9,8 @@ ExportDataForGUI_HMLET(
   ID = "ID",
   trial = "trial",
   timepoint = "timepoint",
-  timeMax = 3000,
-  samplingDuration,
-  timeForward = T,
+  timeMax = NULL,
+  dataPointDuration,
   fixation,
   condition,
   testName = NULL,
@@ -20,7 +19,7 @@ ExportDataForGUI_HMLET(
   gazeXRelative = NULL,
   gazeYRelative = NULL,
   miscVars = NULL,
-  fileName = "ETDataforMATLAB.csv",
+  fileName = "HMLET_DataforMATLAB.csv",
   path = getwd()
 )
 }
