@@ -6,7 +6,7 @@
 #' @param trial string for column name that represents trials within data frame, for example "TrialNum"
 #' @param timepoint string for column name that represents time intervals, for example "timeStamp"
 #' @param condition string for column name that specifies a condition within the data frame
-#' @param gazeInAOI string for column name for specific AOI in dataframe. # TODO: CONFIRM
+#' @param gazeInAOI string for column name which includes name of the AOI that the subject is looking at each timepoint
 #' @param conditionLevels optional array of string column names to denote all the values of conditions, defaults to NULL
 #' @param targetAOI optional string for column name to focus on specific AOI, defaults to NULL
 #' @param testName optional string for name of data -- used as condition name or test names to compare permutation test results between different tests/conditions later, defaults to NULL

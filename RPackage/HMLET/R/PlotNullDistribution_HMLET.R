@@ -1,6 +1,7 @@
 #' Plot Null Distribution
 #'
-#' @param resultList dataframe of the data that is already prepared by PrepareMLETData_HMLET or a list that is the result of PermutationTest_HMLET
+#' @param resultList list of the dataframes that is already prepared by PrepareMLETData_HMLET or a list that is the result of PermutationTest_HMLET
+#' @return null distribution plot handle
 #'
 #' @export
 PlotNullDistribution_HMLET <- function(resultList){

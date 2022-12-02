@@ -8,12 +8,12 @@
 #' @param pointSize optional integer to change size of points on plot, defaults to 1
 #' @param pointAlpha optional float to change opacity of points on plot, defaults to 0.7
 #' @param pointFatten optional integer to change size of lines on plot, defaults to 3
-#' @param testNameOrder specify test name labels, defaults to NULL # ASK QUESTION
-#' @param conditionOrder specify condition name labels, defaults to NULL # ASK QUESTION
+#' @param testNameOrder specify order of test name labels, defaults to NULL
+#' @param conditionOrder specify order of condition levels, defaults to NULL
 #' @param onlySignificantClusters optional boolean to plot only the significant clusters, defaults to True
 #' @param clusterData data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL
 #'
-#' @return a ggplot that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET
+#' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET
 #' @export
 PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
                                         gazePropRibbonAlpha = .1,
