@@ -20,7 +20,32 @@ PlotTemporalGazeTrends_HMLET(
 )
 }
 \arguments{
-\item{resultList}{can be a dataframe of the data that is already prepared by PrepareMLETData_HMLET or a list that is the result of PermutationTest_MLET}
+\item{resultList}{dataframe of the data that is already prepared by PrepareMLETData_HMLET or a list that is the result of PermutationTest_HMLET}
+
+\item{showDataPointNumbers}{optional boolean to display data points on the axes, defaults to True}
+
+\item{gazePropRibbonAlpha}{optional float to change opacity of gaze ribbon, defaults to 0.1}
+
+\item{clusterFillColor}{optional string to change fill color of clustered data points, defaults to "#CC9933"}
+
+\item{clusterFillAlpha}{optional float to change opacity of clustered data points, defaults to 0.5}
+
+\item{pointSize}{optional integer to change size of points on plot, defaults to 1}
+
+\item{pointAlpha}{optional float to change opacity of points on plot, defaults to 0.7}
+
+\item{pointFatten}{optional integer to change size of lines on plot, defaults to 3}
+
+\item{testNameOrder}{specify test name labels, defaults to NULL # ASK QUESTION}
+
+\item{conditionOrder}{specify condition name labels, defaults to NULL # ASK QUESTION}
+
+\item{onlySignificantClusters}{optional boolean to plot only the significant clusters, defaults to True}
+
+\item{clusterData}{data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL}
+}
+\value{
+a ggplot that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET
 }
 \description{
 Plot temporal gaze trends

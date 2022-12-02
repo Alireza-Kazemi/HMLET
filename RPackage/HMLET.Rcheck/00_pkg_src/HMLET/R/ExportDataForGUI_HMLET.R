@@ -3,13 +3,16 @@
 #'
 #'
 #' @export
-ExportDataForMATLAB_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
-                                     timeMax = 3000, samplingDuration, timeForward = T,
-                                     fixation, condition, testName = NULL,
-                                     gazeX, gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
-                                     miscVars = NULL,
-                                     fileName = "ETDataforMATLAB.csv", path = getwd()){
+ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
+                                   timeMax = NULL, dataPointDuration, response,
+                                   fixation, condition, testName = NULL,
+                                   gazeX, gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
+                                   miscVars = NULL,
+                                   fileName = "HMLET_DataforMATLAB.csv", path = getwd()){
 
+  if(is.null(timeMax)){
+    timeMax = max(data[,timepoint])
+  }
   if(is.null(testName)){
     data$testName = unique("PermutationTest0")
     testName = "testName"
@@ -24,9 +27,9 @@ ExportDataForMATLAB_HMLET <- function(data, ID = "ID", trial = "trial", timepoin
     data$duration = unique(samplingDuration)
   }
 
-  data = data[,c(testName, ID, trial, timepoint, condition, "duration",
+  data = data[,c(testName, ID, trial, timepoint, condition, response, "duration",
                  gazeX, gazeY, gazeXRelative, gazeYRelative, fixation, miscVars)]
-  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "duration",
+  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "response", "duration",
                  "gazeX", "gazeY", "gazeXRelative", "gazeYRelative", "fixation", miscVars)
 
 

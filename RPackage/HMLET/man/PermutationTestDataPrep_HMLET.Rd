@@ -13,11 +13,31 @@ PermutationTestDataPrep_HMLET(
   gazeInAOI,
   conditionLevels = NULL,
   targetAOI = NULL,
-  testName = NULL
+  testName = NULL,
+  timeBinName = NULL
 )
 }
 \arguments{
-\item{testName}{Name of this data -- can be used as condition name or test names to compare permutation test results between different tests/conditions later}
+\item{data}{data frame with temporal data for permutation tests routine.}
+
+\item{ID}{optional string for column name that represents IDs within data frame, defaults to "ID"}
+
+\item{trial}{string for column name that represents trials within data frame, for example "TrialNum"}
+
+\item{timepoint}{string for column name that represents time intervals, for example "timeStamp"}
+
+\item{condition}{string for column name that specifies a condition within the data frame}
+
+\item{gazeInAOI}{string for column name for specific AOI in dataframe. # TODO: CONFIRM}
+
+\item{conditionLevels}{optional array of string column names to denote all the values of conditions, defaults to NULL}
+
+\item{targetAOI}{optional string for column name to focus on specific AOI, defaults to NULL}
+
+\item{testName}{optional string for name of data -- used as condition name or test names to compare permutation test results between different tests/conditions later, defaults to NULL}
+}
+\value{
+data frame compatible for permutation tests and other HMLET modules
 }
 \description{
 Return a data frame compatible for permutation tests routine

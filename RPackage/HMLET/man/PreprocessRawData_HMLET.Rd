@@ -2,7 +2,9 @@
 % Please edit documentation in R/PreprocessRawData_HMLET.R
 \name{PreprocessRawData_HMLET}
 \alias{PreprocessRawData_HMLET}
-\title{Pre-Process data to extract AOIs}
+\title{Pre-Process data to extract AOIs. \cr
+Creates a csv file that formats all data into a table. \cr
+Should be Completed later}
 \usage{
 PreprocessRawData_HMLET(
   data,
@@ -17,5 +19,7 @@ PreprocessRawData_HMLET(
 )
 }
 \description{
+Pre-Process data to extract AOIs. \cr
+Creates a csv file that formats all data into a table. \cr
 Should be Completed later
 }

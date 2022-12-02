@@ -17,26 +17,26 @@ CreateTimeBinData_HMLET(
 )
 }
 \arguments{
-\item{data}{dataframe containing temporal data}
+\item{data}{dataframe containing temporal data.}
 
-\item{groupingColumns}{optional array of strings for grouping variables, defaults to NULL}
+\item{groupingColumns}{optional array of strings for column names of variables to be grouped, defaults to NULL.}
 
-\item{timeBinWidth}{optional integer specified time interval for time bins, defaults to 250}
+\item{timeBinWidth}{optional integer specified time interval for time bins, defaults to 250.}
 
-\item{timeMax}{optional integer, defaults to 3000}
+\item{timeMax}{optional integer for maximum timepoint, defaults to 3000.}
 
-\item{FixatedOn}{string for column name of specific AOI in dataframe to be fixated on}
+\item{FixatedOn}{string for column name of specific AOI in dataframe to be fixated on.}
 
-\item{timepoint}{optional string representing the name of the column for timepoints, defaults to "timepoint"}
+\item{timepoint}{optional string representing column name for timepoints, defaults to "timepoint".}
 
-\item{AOIs}{optional <datatype> for areas of interest, defaults to NULL}
+\item{AOIs}{optional array of strings representing column names for areas of interest, defaults to NULL.}
 
 \item{timeForward}{optional boolean to sort timebins, defaults to True for ascending order.}
 
-\item{aggregateFun}{optional function for aggregation, defaults to mean}
+\item{aggregateFun}{optional function for aggregation, defaults to mean.}
 }
 \value{
-temporal data with sorted time points into time bins
+temporal data with sorted time points into time bins.
 }
 \description{
 Collapse time points in specified time bins.

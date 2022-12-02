@@ -6,6 +6,9 @@
 \usage{
 PlotNullDistribution_HMLET(resultList)
 }
+\arguments{
+\item{resultList}{dataframe of the data that is already prepared by PrepareMLETData_HMLET or a list that is the result of PermutationTest_HMLET}
+}
 \description{
 Plot Null Distribution
 }

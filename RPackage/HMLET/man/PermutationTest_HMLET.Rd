@@ -12,6 +12,20 @@ PermutationTest_HMLET(
   threshold_t = NA
 )
 }
+\arguments{
+\item{data}{data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R}
+
+\item{samples}{optional integer for number of samples, defaults to 2000}
+
+\item{paired}{optional boolean XX, defaults to True # ASK QUESTION}
+
+\item{permuteTrialsWithinSubject}{optional boolean to run permutation test pipeline in subject level or trial level, defaults to False to run trial level}
+
+\item{threshold_t}{optional value XX, defaults to NA # ASK QUESTION}
+}
+\value{
+a list of permutation tests in which distribution of desired statistic under the null hypothesis is estimated in a large number of permutations of the original data
+}
 \description{
 Permutation Tests General Routine
 }

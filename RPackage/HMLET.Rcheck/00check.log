@@ -2,6 +2,7 @@
 * using R version 4.2.1 (2022-06-23)
 * using platform: x86_64-apple-darwin17.0 (64-bit)
 * using session charset: UTF-8
+* using options ‘--no-manual --as-cran’
 * checking for file ‘HMLET/DESCRIPTION’ ... OK
 * checking extension type ... Package
 * this is package ‘HMLET’ version ‘0.1.0’
@@ -14,6 +15,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
+* checking serialization versions ... OK
 * checking whether package ‘HMLET’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
@@ -59,7 +61,7 @@ ComputeTValues_HMLET: no visible global function definition for ‘sd’
 ComputeTValues_HMLET: no visible binding for global variable ‘M’
 ComputeTValues_HMLET: no visible binding for global variable ‘SD’
 ComputeTValues_HMLET: no visible binding for global variable ‘N’
-ExportDataForMATLAB_HMLET: no visible global function definition for
+ExportDataForGUI_HMLET: no visible global function definition for
   ‘write.csv’
 PermutationTest_HMLET: no visible global function definition for ‘qt’
 PlotNullDistribution_HMLET: no visible global function definition for
@@ -107,13 +109,13 @@ PlotTemporalGazeTrends_HMLET: no visible binding for global variable
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   ‘geom_line’
 PlotTemporalGazeTrends_HMLET: no visible binding for global variable
-  ‘y’
-PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   ‘M’
 PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   ‘SE’
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   ‘geom_pointrange’
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  ‘scale_x_continuous’
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   ‘facet_wrap’
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
@@ -204,7 +206,28 @@ to your NAMESPACE file.
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
+* checking for code/documentation mismatches ... WARNING
+Codoc mismatches from documentation object 'ExportDataForGUI_HMLET':
+ExportDataForGUI_HMLET
+  Code: function(data, ID = "ID", trial = "trial", timepoint =
+                 "timepoint", timeMax = NULL, dataPointDuration,
+                 response, fixation, condition, testName = NULL, gazeX,
+                 gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
+                 miscVars = NULL, fileName = "HMLET_DataforMATLAB.csv",
+                 path = getwd())
+  Docs: function(data, ID = "ID", trial = "trial", timepoint =
+                 "timepoint", timeMax = NULL, dataPointDuration,
+                 fixation, condition, testName = NULL, gazeX, gazeY,
+                 gazeXRelative = NULL, gazeYRelative = NULL, miscVars =
+                 NULL, fileName = "HMLET_DataforMATLAB.csv", path =
+                 getwd())
+  Argument names in code not in docs:
+    response
+  Mismatches in argument names (first 3):
+    Position: 7 Code: response Docs: fixation
+    Position: 8 Code: fixation Docs: condition
+    Position: 9 Code: condition Docs: testName
+
 * checking Rd \usage sections ... WARNING
 Undocumented arguments in documentation object 'ClusterStats_HMLET'
   ‘data’ ‘paired’ ‘detailed’ ‘threshold_t’
@@ -219,10 +242,10 @@ Undocumented arguments in documentation object 'CreateTimeBinData_HMLET'
   ‘data’ ‘groupingColumns’ ‘timeBinWidth’ ‘timeMax’ ‘FixatedOn’
   ‘timepoint’ ‘AOIs’ ‘timeForward’ ‘aggregateFun’
 
-Undocumented arguments in documentation object 'ExportDataForMATLAB_HMLET'
-  ‘data’ ‘ID’ ‘trial’ ‘timepoint’ ‘timeMax’ ‘samplingDuration’
-  ‘timeForward’ ‘fixation’ ‘condition’ ‘testName’ ‘gazeX’ ‘gazeY’
-  ‘gazeXRelative’ ‘gazeYRelative’ ‘miscVars’ ‘fileName’ ‘path’
+Undocumented arguments in documentation object 'ExportDataForGUI_HMLET'
+  ‘data’ ‘ID’ ‘trial’ ‘timepoint’ ‘timeMax’ ‘dataPointDuration’
+  ‘fixation’ ‘condition’ ‘testName’ ‘gazeX’ ‘gazeY’ ‘gazeXRelative’
+  ‘gazeYRelative’ ‘miscVars’ ‘fileName’ ‘path’
 
 Undocumented arguments in documentation object 'FilterClustersTimepoints_HMELT'
   ‘data’ ‘clusterInf’
@@ -235,7 +258,7 @@ Undocumented arguments in documentation object 'GenerateRandomData_HMLET'
 
 Undocumented arguments in documentation object 'PermutationTestDataPrep_HMLET'
   ‘data’ ‘ID’ ‘trial’ ‘timepoint’ ‘condition’ ‘gazeInAOI’
-  ‘conditionLevels’ ‘targetAOI’
+  ‘conditionLevels’ ‘targetAOI’ ‘timeBinName’
 
 Undocumented arguments in documentation object 'PermutationTest_HMLET'
   ‘data’ ‘samples’ ‘paired’ ‘permuteTrialsWithinSubject’ ‘threshold_t’
@@ -276,4 +299,4 @@ This typically indicates Rd problems.
 * checking PDF version of manual without index ... ERROR
 Re-running with no redirection of stdout/stderr.
 * DONE
-Status: 1 ERROR, 3 WARNINGs, 1 NOTE
+Status: 3 WARNINGs, 1 NOTE
