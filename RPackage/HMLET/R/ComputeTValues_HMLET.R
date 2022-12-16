@@ -1,5 +1,9 @@
-#' Generate unique random permutations
+#' ComputeTValues_HMLET
 #'
+#' @param respTime <TODO> ask
+#' @param paired optional boolean to control T-tests. True is for statistical comparisons in paired mode,
+#'               False for a two-sample T-Test; defaults to True.
+#' @return a list of t values
 #'@export
 ComputeTValues_HMLET <- function(respTime, paired = TRUE){
   respTime = respTime[order(respTime$ID,respTime$timepoint,respTime$condition),]

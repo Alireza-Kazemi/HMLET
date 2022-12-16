@@ -1,4 +1,12 @@
-#' Generate unique random permutations
+#' FindClusters_HMLET
+#' // TODO: CHECK
+#' Select all samples whose t-value is larger than the threshold value.
+#' Cluster the selected samples in connected sets on the basis of temporal adjacency.
+#' @param tValues list of tValues calculated from ComputeTValues_HMLET
+#' @param threshold_t optional probability threshold for statistical comparison, defaults to NA and will be computed based on number of trials when "between trials
+#'                    permutation" is called or will be computed based on number of subjects when "between subjects permutation" is called.
+#'                    Alpha = 0.025.
+#' @return list of tValues after comparing it to threshold
 #'
 #'@export
 FindClusters_HMLET <- function(tValues, threshold_t = threshold_t){

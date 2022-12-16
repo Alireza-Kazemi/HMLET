@@ -1,6 +1,13 @@
 #' SubjectLevelPermutationTestWithin_HMLET
 #'
-#'@export
+#' @param data data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.
+#' @param samples optional number of resampling data, how many permutations needed.
+#' @param paired optional boolean to control T-tests. True is for statistical comparisons in paired mode,
+#'               False for a two-sample T-Test; defaults to True.
+#' @param threshold_t optional probability threshold for statistical comparison computed based on number of subjects.
+#'                    alpha = 0.025.
+#' @return returns t value distribution
+#' @export
 SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paired = T, threshold_t = NA){
 
   resp_time = as.data.frame(summarise(group_by(data,ID,timepoint,condition), prop = mean(AOI, na.rm=T)))

@@ -1,19 +1,20 @@
 #' Plot temporal gaze trends
 #'
-#' @param resultList dataframe of the data that is already prepared by PrepareMLETData_HMLET or a list that is the result of PermutationTest_HMLET
-#' @param showDataPointNumbers optional boolean to display data points on the axes, defaults to True
-#' @param gazePropRibbonAlpha optional float to change opacity of gaze ribbon, defaults to 0.1
-#' @param clusterFillColor optional string to change fill color of clustered data points, defaults to "#CC9933"
-#' @param clusterFillAlpha optional float to change opacity of clustered data points, defaults to 0.5
-#' @param pointSize optional integer to change size of points on plot, defaults to 1
-#' @param pointAlpha optional float to change opacity of points on plot, defaults to 0.7
-#' @param pointFatten optional integer to change size of lines on plot, defaults to 3
-#' @param testNameOrder specify order of test name labels, defaults to NULL
-#' @param conditionOrder specify order of condition levels, defaults to NULL
-#' @param onlySignificantClusters optional boolean to plot only the significant clusters, defaults to True
-#' @param clusterData data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL
+#' @param resultList dataframe of the data that is already prepared by PrepareMLETData_HMLET
+#'                   or a list that is the result of PermutationTest_HMLET.
+#' @param showDataPointNumbers optional boolean to display data points on the axes, defaults to True.
+#' @param gazePropRibbonAlpha optional float to change opacity of gaze ribbon, defaults to 0.1.
+#' @param clusterFillColor optional string to change fill color of clustered data points, defaults to "#CC9933".
+#' @param clusterFillAlpha optional float to change opacity of clustered data points, defaults to 0.5.
+#' @param pointSize optional integer to change size of points on plot, defaults to 1.
+#' @param pointAlpha optional float to change opacity of points on plot, defaults to 0.7.
+#' @param pointFatten optional integer to change size of lines on plot, defaults to 3.
+#' @param testNameOrder specify order of test name labels, defaults to NULL.
+#' @param conditionOrder specify order of condition levels, defaults to NULL.
+#' @param onlySignificantClusters optional boolean to plot only the significant clusters, defaults to True.
+#' @param clusterData data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL.
 #'
-#' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET
+#' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
 #' @export
 PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
                                         gazePropRibbonAlpha = .1,

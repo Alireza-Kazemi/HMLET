@@ -1,9 +1,9 @@
 #' Permutation Tests General Routine
 #'
-#' @param data data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R
-#' @param samples optional integer for number of samples, defaults to 2000
-#' @param paired optional boolean to control T-tests; True is for statistical comparisons in paired mode, False for a two-sample T-Test, defaults to True
-#' @param permuteTrialsWithinSubject optional boolean to run permutation test pipeline for conducting permutation tests between trials or between subjects, defaults to False
+#' @param data data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.
+#' @param samples optional integer for number of samples, defaults to 2000.
+#' @param paired optional boolean to control T-tests. True is for statistical comparisons in paired mode, False for a two-sample T-Test; defaults to True.
+#' @param permuteTrialsWithinSubject optional boolean to run permutation test pipeline for conducting permutation tests between trials or between subjects, defaults to False.
 #' @param threshold_t optional probability threshold for statistical comparison, defaults to NA and will be computed based on number of trials when "between trials
 #'                    permutation" is called or will be computed based on number of subjects when "between subjects permutation" is called.
 #'                    Alpha = 0.025.
