@@ -1,4 +1,5 @@
 #' Generate unique random permutations
+#' To be completed
 #'
 #'@export
 GenerateRandomData_HMLET <- function(tMax = 20, effectOffset = 5, trialNum = 40, subjNum = 20,

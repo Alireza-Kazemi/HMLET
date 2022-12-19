@@ -6,7 +6,7 @@
 #'               False for a two-sample T-Test; defaults to True.
 #' @param threshold_t optional probability threshold for statistical comparison computed based on number of subjects.
 #'                    alpha = 0.025.
-#' @return returns t value distribution
+#' @return returns t value distribution presented in a data frame.
 #' @export
 SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paired = T, threshold_t = NA){
 

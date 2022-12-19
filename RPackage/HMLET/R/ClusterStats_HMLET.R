@@ -1,5 +1,6 @@
 #' Generate unique random permutations
 #' This is a sample description
+#' adds cluster stats to t value data frame; all info for all tests
 #'
 #' @export
 

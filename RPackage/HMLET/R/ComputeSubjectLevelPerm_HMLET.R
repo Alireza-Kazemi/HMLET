@@ -1,8 +1,9 @@
 #' ComputeSubjectLevelPerm_HMLET
+#' Provides unique permututation indices within each subject.
 #'
 #' @param labels labels from the dataframe
 #' @param n optional integer for number of permutations for resampling data
-#' @return labels that include permutations to use for subject level permutation test
+#' @return labels of unique permutation indices to use for subject level permutation test
 #'@export
 ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   condNum = length(unique(labels$condition))

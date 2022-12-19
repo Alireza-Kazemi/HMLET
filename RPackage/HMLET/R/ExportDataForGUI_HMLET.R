@@ -1,5 +1,9 @@
 #' Export to CSV file for MATLAB GUI
-#'
+#' gazex/y are coordinates of gaze coordinate on the screen according to top left corner
+#' gazex/y relative: gaze points relative to an arbitrary center
+#' miscvars: add whatever variable to export file
+#' time max: max time in temporal order of time points (samples left out if longer)
+#' samples of trial are being exported to maximum time point
 #'
 #'
 #' @export

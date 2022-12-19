@@ -1,9 +1,9 @@
 #' ComputeTValues_HMLET
 #'
-#' @param respTime <TODO> ask
+#' @param respTime dataframe for responses in temporal order.
 #' @param paired optional boolean to control T-tests. True is for statistical comparisons in paired mode,
 #'               False for a two-sample T-Test; defaults to True.
-#' @return a list of t values
+#' @return t values in the format of a data frame.
 #'@export
 ComputeTValues_HMLET <- function(respTime, paired = TRUE){
   respTime = respTime[order(respTime$ID,respTime$timepoint,respTime$condition),]
