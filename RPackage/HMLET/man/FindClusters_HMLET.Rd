@@ -2,13 +2,12 @@
 % Please edit documentation in R/FindClusters_HMLET.R
 \name{FindClusters_HMLET}
 \alias{FindClusters_HMLET}
-\title{FindClusters_HMLET
-Cluster all samples whose t value is greater than threshold value by temporal adjacency.}
+\title{Cluster all samples whose t value is greater than threshold value by temporal adjacency.}
 \usage{
 FindClusters_HMLET(tValues, threshold_t = threshold_t)
 }
 \arguments{
-\item{tValues}{dataframe of t values calculated from ComputeTValues_HMLET}
+\item{tValues}{dataframe of t values calculated from ComputeTValues_HMLET.}
 
 \item{threshold_t}{optional probability threshold for statistical comparison, defaults to NA and will be computed based on number of trials when "between trials
 permutation" is called or will be computed based on number of subjects when "between subjects permutation" is called.
@@ -18,6 +17,5 @@ Alpha = 0.025.}
 t value dataframe with appended cluster information.
 }
 \description{
-FindClusters_HMLET
 Cluster all samples whose t value is greater than threshold value by temporal adjacency.
 }

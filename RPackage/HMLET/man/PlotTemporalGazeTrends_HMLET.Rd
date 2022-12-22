@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotTemporalGazeTrends_HMLET.R
 \name{PlotTemporalGazeTrends_HMLET}
 \alias{PlotTemporalGazeTrends_HMLET}
-\title{Plot temporal gaze trends}
+\title{Plot temporal gaze trends.}
 \usage{
 PlotTemporalGazeTrends_HMLET(
   resultList,
@@ -49,5 +49,5 @@ or a list that is the result of PermutationTest_HMLET.}
 a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
 }
 \description{
-Plot temporal gaze trends
+Plot temporal gaze trends.
 }

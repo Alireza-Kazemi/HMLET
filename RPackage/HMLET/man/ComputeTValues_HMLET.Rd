@@ -2,7 +2,7 @@
 % Please edit documentation in R/ComputeTValues_HMLET.R
 \name{ComputeTValues_HMLET}
 \alias{ComputeTValues_HMLET}
-\title{ComputeTValues_HMLET}
+\title{Compute t values for permutation tests.}
 \usage{
 ComputeTValues_HMLET(respTime, paired = TRUE)
 }
@@ -16,5 +16,5 @@ False for a two-sample T-Test; defaults to True.}
 t values in the format of a data frame.
 }
 \description{
-ComputeTValues_HMLET
+Compute t values for permutation tests.
 }

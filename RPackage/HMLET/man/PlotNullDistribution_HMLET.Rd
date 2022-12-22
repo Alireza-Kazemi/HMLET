@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotNullDistribution_HMLET.R
 \name{PlotNullDistribution_HMLET}
 \alias{PlotNullDistribution_HMLET}
-\title{Plot Null Distribution}
+\title{Plot Null Distribution.}
 \usage{
 PlotNullDistribution_HMLET(resultList)
 }
@@ -14,5 +14,5 @@ or a list that is the result of PermutationTest_HMLET.}
 null distribution plot handle.
 }
 \description{
-Plot Null Distribution
+Plot Null Distribution.
 }

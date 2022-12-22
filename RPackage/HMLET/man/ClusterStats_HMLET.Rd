@@ -2,8 +2,7 @@
 % Please edit documentation in R/ClusterStats_HMLET.R
 \name{ClusterStats_HMLET}
 \alias{ClusterStats_HMLET}
-\title{ClusterStats_HMLET
-Adds cluster statistics to t value dataframe; all info for all tests.}
+\title{Adds cluster statistics to t value dataframe, includes all info for all tests.}
 \usage{
 ClusterStats_HMLET(data, paired = T, detailed = F, threshold_t = NA)
 }
@@ -23,6 +22,5 @@ alpha = 0.025.}
 returns data frame with cluster statistics
 }
 \description{
-ClusterStats_HMLET
-Adds cluster statistics to t value dataframe; all info for all tests.
+Adds cluster statistics to t value dataframe, includes all info for all tests.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/PermutationTest_HMLET.R
 \name{PermutationTest_HMLET}
 \alias{PermutationTest_HMLET}
-\title{Permutation Tests General Routine}
+\title{Permutation Tests General Routine.}
 \usage{
 PermutationTest_HMLET(
   data,
@@ -29,5 +29,5 @@ Alpha = 0.025.}
 a list of permutation tests in which distribution of desired statistic under the null hypothesis is estimated in a large number of permutations of the original data
 }
 \description{
-Permutation Tests General Routine
+Permutation Tests General Routine.
 }

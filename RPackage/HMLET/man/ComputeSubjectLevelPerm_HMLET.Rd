@@ -2,20 +2,18 @@
 % Please edit documentation in R/ComputeSubjectLevelPerm_HMLET.R
 \name{ComputeSubjectLevelPerm_HMLET}
 \alias{ComputeSubjectLevelPerm_HMLET}
-\title{ComputeSubjectLevelPerm_HMLET
-Provides unique permututation indices within each subject.}
+\title{Provides unique permutation indices within each subject.}
 \usage{
 ComputeSubjectLevelPerm_HMLET(labels, n = 1)
 }
 \arguments{
-\item{labels}{labels from the dataframe}
+\item{labels}{labels from the data frame.}
 
-\item{n}{optional integer for number of permutations for resampling data}
+\item{n}{optional integer for number of permutations to resample data.}
 }
 \value{
-labels of unique permutation indices to use for subject level permutation test
+labels of unique permutation indices to use for subject level permutation test.
 }
 \description{
-ComputeSubjectLevelPerm_HMLET
-Provides unique permututation indices within each subject.
+Provides unique permutation indices within each subject.
 }

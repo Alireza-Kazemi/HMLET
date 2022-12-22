@@ -2,7 +2,7 @@
 % Please edit documentation in R/TrialLevelPermutationTestWithin_HMLET.R
 \name{TrialLevelPermutationTestWithin_HMLET}
 \alias{TrialLevelPermutationTestWithin_HMLET}
-\title{TrialLevelPermutationTestWithin_HMLET}
+\title{Conduct trial level permutation tests between trials.}
 \usage{
 TrialLevelPermutationTestWithin_HMLET(
   data,
@@ -26,5 +26,5 @@ alpha = 0.025.}
 returns t value distribution presented in a data frame.
 }
 \description{
-TrialLevelPermutationTestWithin_HMLET
+Conduct trial level permutation tests between trials.
 }

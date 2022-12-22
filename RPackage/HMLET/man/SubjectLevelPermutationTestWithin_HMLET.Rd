@@ -2,7 +2,7 @@
 % Please edit documentation in R/SubjectLevelPermutationTestWithin_HMLET.R
 \name{SubjectLevelPermutationTestWithin_HMLET}
 \alias{SubjectLevelPermutationTestWithin_HMLET}
-\title{SubjectLevelPermutationTestWithin_HMLET}
+\title{Conduct subject level permutation tests between trials.}
 \usage{
 SubjectLevelPermutationTestWithin_HMLET(
   data,
@@ -26,5 +26,5 @@ alpha = 0.025.}
 returns t value distribution presented in a data frame.
 }
 \description{
-SubjectLevelPermutationTestWithin_HMLET
+Conduct subject level permutation tests between trials.
 }

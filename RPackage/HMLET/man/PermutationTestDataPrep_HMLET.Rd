@@ -2,7 +2,7 @@
 % Please edit documentation in R/PermutationTestDataPrep_HMLET.R
 \name{PermutationTestDataPrep_HMLET}
 \alias{PermutationTestDataPrep_HMLET}
-\title{Return a data frame compatible for permutation tests routine}
+\title{Return a data frame compatible for permutation tests routine.}
 \usage{
 PermutationTestDataPrep_HMLET(
   data,
@@ -41,5 +41,5 @@ results between different tests/conditions later, defaults to NULL.}
 data frame compatible for permutation tests and other HMLET modules
 }
 \description{
-Return a data frame compatible for permutation tests routine
+Return a data frame compatible for permutation tests routine.
 }

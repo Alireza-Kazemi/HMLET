@@ -3,7 +3,7 @@
 \name{ExportDataForMATLAB_HMLET}
 \alias{ExportDataForMATLAB_HMLET}
 \title{ExportDataForGUI_HMLET
-Export samples of trial with maximum time point to CSV file for MATLAB GUI}
+Export samples of trial with maximum time point to CSV file for MATLAB GUI.}
 \usage{
 ExportDataForMATLAB_HMLET(
   data,
@@ -61,5 +61,5 @@ results between different tests/conditions later, defaults to NULL.}
 }
 \description{
 ExportDataForGUI_HMLET
-Export samples of trial with maximum time point to CSV file for MATLAB GUI
+Export samples of trial with maximum time point to CSV file for MATLAB GUI.
 }
