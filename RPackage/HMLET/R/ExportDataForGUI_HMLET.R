@@ -1,10 +1,23 @@
-#' Export to CSV file for MATLAB GUI
-#' gazex/y are coordinates of gaze coordinate on the screen according to top left corner
-#' gazex/y relative: gaze points relative to an arbitrary center
-#' miscvars: add whatever variable to export file
-#' time max: max time in temporal order of time points (samples left out if longer)
-#' samples of trial are being exported to maximum time point
+#' ExportDataForGUI_HMLET
+#' Export samples of trial with maximum time point to CSV file for MATLAB GUI
 #'
+#' @param data dataframe containing temporal data.
+#' @param ID optional string for column name that represents IDs within data frame, defaults to "ID."
+#' @param trial string for column name that represents trials within data frame, for example "TrialNum."
+#' @param timepoint string for column name that represents time intervals, for example "timeStamp."
+#' @param timeMax optional integer for maximum time in temporal order, samples are left out if duration is longer. Defaults to 3000.
+#' @param samplingDuration optional integer or character for specified duration of samples, used for time bins in CreateTimeBinData_HMLET.
+#' @param timeForward optional boolean to sort timebins, defaults to True for ascending order.
+#' @param fixation data for specific AOI in dataframe to be fixated on. #TODO: ASK
+#' @param condition string for column name that specifies a condition within the data frame.
+#' @param testName optional string for name of data -- used as condition name or test names to compare permutation test
+#'                 results between different tests/conditions later, defaults to NULL.
+#' @param gazeX integer X-coordinate of gaze point on the screen according to top left corner.
+#' @param gazeY integer Y-coordinate of gaze point on the screen according to top left corner.
+#' @param gazeXRelative optional integer X-coordinate of gaze point relative to an arbitrary center.
+#' @param gazeYRelative optional integer Y-coordinate of gaze point relative to an arbitrary center.
+#' @param miscVars optional list of strings containing column names of additional variables to be included in exported file
+#' @param fileName optional string for output csv file, defaults to "ETDataforMATLAB.csv."
 #'
 #' @export
 ExportDataForMATLAB_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",

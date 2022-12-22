@@ -3,7 +3,7 @@
 #' @param data dataframe containing temporal data.
 #' @param groupingColumns optional array of strings for column names of variables to be grouped, defaults to NULL.
 #' @param timeBinWidth optional integer specified time interval for time bins, defaults to 250.
-#' @param timeMax optional integer for maximum timepoint, defaults to 3000.
+#' @param timeMax optional integer for maximum time in temporal order, samples are left out if duration is longer. Defaults to 3000.
 #' @param FixatedOn string for column name of specific AOI in dataframe to be fixated on.
 #' @param timepoint optional string representing column name for timepoints, defaults to "timepoint".
 #' @param AOIs optional array of strings representing column names for areas of interest, defaults to NULL.

@@ -1,7 +1,14 @@
-#' Generate unique random permutations
-#' This is a sample description
-#' adds cluster stats to t value data frame; all info for all tests
+#' ClusterStats_HMLET
+#' Adds cluster statistics to t value dataframe; all info for all tests.
 #'
+#' @param data data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.
+#' @param detailed optional boolean to include cluster statistics and t value statistics within one dataframe.
+#'                 Defaults to False to populate dataframe only with cluster statistics.
+#' @param paired optional boolean to control T-tests. True is for statistical comparisons in paired mode,
+#'               False for a two-sample T-Test; defaults to True.
+#' @param threshold_t optional probability threshold for statistical comparison computed based on number of subjects.
+#'                    alpha = 0.025.
+#' @return returns data frame with cluster statistics
 #' @export
 
 ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NA){
