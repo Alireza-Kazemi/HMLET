@@ -2,10 +2,20 @@
 % Please edit documentation in R/ComputeSubjectLevelPerm_HMLET.R
 \name{ComputeSubjectLevelPerm_HMLET}
 \alias{ComputeSubjectLevelPerm_HMLET}
-\title{Generate unique random permutations}
+\title{ComputeSubjectLevelPerm_HMLET
+Provides unique permututation indices within each subject.}
 \usage{
 ComputeSubjectLevelPerm_HMLET(labels, n = 1)
 }
+\arguments{
+\item{labels}{labels from the dataframe}
+
+\item{n}{optional integer for number of permutations for resampling data}
+}
+\value{
+labels of unique permutation indices to use for subject level permutation test
+}
 \description{
-Generate unique random permutations
+ComputeSubjectLevelPerm_HMLET
+Provides unique permututation indices within each subject.
 }

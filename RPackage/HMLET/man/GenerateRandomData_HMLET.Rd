@@ -2,7 +2,8 @@
 % Please edit documentation in R/GenerateRandomData_HMLET.R
 \name{GenerateRandomData_HMLET}
 \alias{GenerateRandomData_HMLET}
-\title{Generate unique random permutations}
+\title{Generate unique random permutations
+To be completed}
 \usage{
 GenerateRandomData_HMLET(
   tMax = 20,
@@ -14,4 +15,5 @@ GenerateRandomData_HMLET(
 }
 \description{
 Generate unique random permutations
+To be completed
 }

@@ -7,7 +7,11 @@
 PlotNullDistribution_HMLET(resultList)
 }
 \arguments{
-\item{resultList}{dataframe of the data that is already prepared by PrepareMLETData_HMLET or a list that is the result of PermutationTest_HMLET}
+\item{resultList}{list of the dataframes that is already prepared by PrepareMLETData_HMLET
+or a list that is the result of PermutationTest_HMLET.}
+}
+\value{
+null distribution plot handle.
 }
 \description{
 Plot Null Distribution

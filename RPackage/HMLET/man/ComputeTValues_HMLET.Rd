@@ -2,10 +2,19 @@
 % Please edit documentation in R/ComputeTValues_HMLET.R
 \name{ComputeTValues_HMLET}
 \alias{ComputeTValues_HMLET}
-\title{Generate unique random permutations}
+\title{ComputeTValues_HMLET}
 \usage{
 ComputeTValues_HMLET(respTime, paired = TRUE)
 }
+\arguments{
+\item{respTime}{dataframe for responses in temporal order.}
+
+\item{paired}{optional boolean to control T-tests. True is for statistical comparisons in paired mode,
+False for a two-sample T-Test; defaults to True.}
+}
+\value{
+t values in the format of a data frame.
+}
 \description{
-Generate unique random permutations
+ComputeTValues_HMLET
 }

@@ -11,6 +11,20 @@ SubjectLevelPermutationTestWithin_HMLET(
   threshold_t = NA
 )
 }
+\arguments{
+\item{data}{data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.}
+
+\item{samples}{optional number of resampling data, how many permutations needed.}
+
+\item{paired}{optional boolean to control T-tests. True is for statistical comparisons in paired mode,
+False for a two-sample T-Test; defaults to True.}
+
+\item{threshold_t}{optional probability threshold for statistical comparison computed based on number of subjects.
+alpha = 0.025.}
+}
+\value{
+returns t value distribution presented in a data frame.
+}
 \description{
 SubjectLevelPermutationTestWithin_HMLET
 }

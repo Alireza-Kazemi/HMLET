@@ -2,12 +2,27 @@
 % Please edit documentation in R/ClusterStats_HMLET.R
 \name{ClusterStats_HMLET}
 \alias{ClusterStats_HMLET}
-\title{Generate unique random permutations
-This is a sample description}
+\title{ClusterStats_HMLET
+Adds cluster statistics to t value dataframe; all info for all tests.}
 \usage{
 ClusterStats_HMLET(data, paired = T, detailed = F, threshold_t = NA)
 }
+\arguments{
+\item{data}{data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.}
+
+\item{paired}{optional boolean to control T-tests. True is for statistical comparisons in paired mode,
+False for a two-sample T-Test; defaults to True.}
+
+\item{detailed}{optional boolean to include cluster statistics and t value statistics within one dataframe.
+Defaults to False to populate dataframe only with cluster statistics.}
+
+\item{threshold_t}{optional probability threshold for statistical comparison computed based on number of subjects.
+alpha = 0.025.}
+}
+\value{
+returns data frame with cluster statistics
+}
 \description{
-Generate unique random permutations
-This is a sample description
+ClusterStats_HMLET
+Adds cluster statistics to t value dataframe; all info for all tests.
 }

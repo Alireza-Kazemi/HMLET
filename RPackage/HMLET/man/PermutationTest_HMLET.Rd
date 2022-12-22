@@ -13,15 +13,17 @@ PermutationTest_HMLET(
 )
 }
 \arguments{
-\item{data}{data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R}
+\item{data}{data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.}
 
-\item{samples}{optional integer for number of samples, defaults to 2000}
+\item{samples}{optional integer for number of samples, defaults to 2000.}
 
-\item{paired}{optional boolean XX, defaults to True # ASK QUESTION}
+\item{paired}{optional boolean to control T-tests. True is for statistical comparisons in paired mode, False for a two-sample T-Test; defaults to True.}
 
-\item{permuteTrialsWithinSubject}{optional boolean to run permutation test pipeline in subject level or trial level, defaults to False to run trial level}
+\item{permuteTrialsWithinSubject}{optional boolean to run permutation test pipeline for conducting permutation tests between trials or between subjects, defaults to False.}
 
-\item{threshold_t}{optional value XX, defaults to NA # ASK QUESTION}
+\item{threshold_t}{optional probability threshold for statistical comparison, defaults to NA and will be computed based on number of trials when "between trials
+permutation" is called or will be computed based on number of subjects when "between subjects permutation" is called.
+Alpha = 0.025.}
 }
 \value{
 a list of permutation tests in which distribution of desired statistic under the null hypothesis is estimated in a large number of permutations of the original data

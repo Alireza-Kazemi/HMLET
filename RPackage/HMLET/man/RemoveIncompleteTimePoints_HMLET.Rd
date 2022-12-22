@@ -6,6 +6,12 @@
 \usage{
 RemoveIncompleteTimePoints_HMLET(data)
 }
+\arguments{
+\item{data}{dataframe containing temporal data.}
+}
+\value{
+data with no missing conditions.
+}
 \description{
 This function is currently only applicable for within participant manipulations
 }

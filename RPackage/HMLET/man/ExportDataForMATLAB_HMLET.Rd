@@ -2,7 +2,8 @@
 % Please edit documentation in R/ExportDataForGUI_HMLET.R
 \name{ExportDataForMATLAB_HMLET}
 \alias{ExportDataForMATLAB_HMLET}
-\title{Export to CSV file for MATLAB GUI}
+\title{ExportDataForGUI_HMLET
+Export samples of trial with maximum time point to CSV file for MATLAB GUI}
 \usage{
 ExportDataForMATLAB_HMLET(
   data,
@@ -24,6 +25,41 @@ ExportDataForMATLAB_HMLET(
   path = getwd()
 )
 }
+\arguments{
+\item{data}{dataframe containing temporal data.}
+
+\item{ID}{optional string for column name that represents IDs within data frame, defaults to "ID."}
+
+\item{trial}{string for column name that represents trials within data frame, for example "TrialNum."}
+
+\item{timepoint}{string for column name that represents time intervals, for example "timeStamp."}
+
+\item{timeMax}{optional integer for maximum time in temporal order, samples are left out if duration is longer. Defaults to 3000.}
+
+\item{samplingDuration}{optional integer or character for specified duration of samples, used for time bins in CreateTimeBinData_HMLET.}
+
+\item{timeForward}{optional boolean to sort timebins, defaults to True for ascending order.}
+
+\item{fixation}{data for specific AOI in dataframe to be fixated on. #TODO: ASK}
+
+\item{condition}{string for column name that specifies a condition within the data frame.}
+
+\item{testName}{optional string for name of data -- used as condition name or test names to compare permutation test
+results between different tests/conditions later, defaults to NULL.}
+
+\item{gazeX}{integer X-coordinate of gaze point on the screen according to top left corner.}
+
+\item{gazeY}{integer Y-coordinate of gaze point on the screen according to top left corner.}
+
+\item{gazeXRelative}{optional integer X-coordinate of gaze point relative to an arbitrary center.}
+
+\item{gazeYRelative}{optional integer Y-coordinate of gaze point relative to an arbitrary center.}
+
+\item{miscVars}{optional list of strings containing column names of additional variables to be included in exported file}
+
+\item{fileName}{optional string for output csv file, defaults to "ETDataforMATLAB.csv."}
+}
 \description{
-Export to CSV file for MATLAB GUI
+ExportDataForGUI_HMLET
+Export samples of trial with maximum time point to CSV file for MATLAB GUI
 }

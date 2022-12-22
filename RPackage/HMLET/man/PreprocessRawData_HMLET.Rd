@@ -18,6 +18,23 @@ PreprocessRawData_HMLET(
   path = getwd()
 )
 }
+\arguments{
+\item{data}{dataframe containing temporal data.}
+
+\item{ID}{optional string for column name that represents IDs within data frame, defaults to "ID."}
+
+\item{trial}{string for column name that represents trials within data frame, for example "TrialNum."}
+
+\item{timepoint}{string for column name that represents time intervals, for example "timeStamp."}
+
+\item{GazeX}{# TODO: ASK}
+
+\item{GazeY}{# TODO: ASK}
+
+\item{fileName}{optional string for output csv file, defaults to "ETDataforMATLAB.csv."}
+
+\item{path}{specifies working directory of project.}
+}
 \description{
 Pre-Process data to extract AOIs. \cr
 Creates a csv file that formats all data into a table. \cr

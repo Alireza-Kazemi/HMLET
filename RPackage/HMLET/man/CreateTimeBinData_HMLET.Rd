@@ -23,7 +23,7 @@ CreateTimeBinData_HMLET(
 
 \item{timeBinWidth}{optional integer specified time interval for time bins, defaults to 250.}
 
-\item{timeMax}{optional integer for maximum timepoint, defaults to 3000.}
+\item{timeMax}{optional integer for maximum time in temporal order, samples are left out if duration is longer. Defaults to 3000.}
 
 \item{FixatedOn}{string for column name of specific AOI in dataframe to be fixated on.}
 
