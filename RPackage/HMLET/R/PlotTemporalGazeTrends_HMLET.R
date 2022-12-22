@@ -1,4 +1,4 @@
-#' Plot temporal gaze trends
+#' Plot temporal gaze trends.
 #'
 #' @param resultList dataframe of the data that is already prepared by PrepareMLETData_HMLET
 #'                   or a list that is the result of PermutationTest_HMLET.

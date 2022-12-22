@@ -1,4 +1,4 @@
-#' Plot Null Distribution
+#' Plot Null Distribution.
 #'
 #' @param resultList list of the dataframes that is already prepared by PrepareMLETData_HMLET
 #'                   or a list that is the result of PermutationTest_HMLET.

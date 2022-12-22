@@ -1,4 +1,4 @@
-#' SubjectLevelPermutationTestWithin_HMLET
+#' Conduct subject level permutation tests between trials.
 #'
 #' @param data data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.
 #' @param samples optional number of resampling data, how many permutations needed.

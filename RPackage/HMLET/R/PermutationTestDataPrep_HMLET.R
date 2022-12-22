@@ -1,4 +1,4 @@
-#' Return a data frame compatible for permutation tests routine
+#' Return a data frame compatible for permutation tests routine.
 #'
 #'
 #' @param data data frame with temporal data for permutation tests routine.

@@ -1,4 +1,4 @@
-#' Permutation Tests General Routine
+#' Permutation Tests General Routine.
 #'
 #' @param data data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.
 #' @param samples optional integer for number of samples, defaults to 2000.

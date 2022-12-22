@@ -1,4 +1,4 @@
-#' ComputeTValues_HMLET
+#' Compute t values for permutation tests.
 #'
 #' @param respTime dataframe for responses in temporal order.
 #' @param paired optional boolean to control T-tests. True is for statistical comparisons in paired mode,

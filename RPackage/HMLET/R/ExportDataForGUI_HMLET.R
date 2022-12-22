@@ -1,5 +1,5 @@
 #' ExportDataForGUI_HMLET
-#' Export samples of trial with maximum time point to CSV file for MATLAB GUI
+#' Export samples of trial with maximum time point to CSV file for MATLAB GUI.
 #'
 #' @param data dataframe containing temporal data.
 #' @param ID optional string for column name that represents IDs within data frame, defaults to "ID."

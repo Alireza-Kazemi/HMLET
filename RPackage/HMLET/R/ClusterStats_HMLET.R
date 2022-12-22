@@ -1,5 +1,4 @@
-#' ClusterStats_HMLET
-#' Adds cluster statistics to t value dataframe; all info for all tests.
+#' Adds cluster statistics to t value dataframe, includes all info for all tests.
 #'
 #' @param data data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.
 #' @param detailed optional boolean to include cluster statistics and t value statistics within one dataframe.

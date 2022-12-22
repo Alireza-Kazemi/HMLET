@@ -1,7 +1,7 @@
-#' Generate unique random permutations
+#' Generate unique random permutations.
 #'
-#' @param listInput Arbitrary list
-#' @param n An integer number indicating the number of permutations
+#' @param listInput Arbitrary list.
+#' @param n An integer number indicating the number of permutations.
 #'
 #' @export
 

@@ -1,7 +1,6 @@
-#' FindClusters_HMLET
 #' Cluster all samples whose t value is greater than threshold value by temporal adjacency.
 #'
-#' @param tValues dataframe of t values calculated from ComputeTValues_HMLET
+#' @param tValues dataframe of t values calculated from ComputeTValues_HMLET.
 #' @param threshold_t optional probability threshold for statistical comparison, defaults to NA and will be computed based on number of trials when "between trials
 #'                    permutation" is called or will be computed based on number of subjects when "between subjects permutation" is called.
 #'                    Alpha = 0.025.
