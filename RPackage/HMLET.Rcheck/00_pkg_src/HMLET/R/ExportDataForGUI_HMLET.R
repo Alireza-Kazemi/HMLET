@@ -4,7 +4,7 @@
 #'
 #' @export
 ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
-                                   timeMax = NULL, dataPointDuration,
+                                   timeMax = NULL, dataPointDuration, response,
                                    fixation, condition, testName = NULL,
                                    gazeX, gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
                                    miscVars = NULL,
@@ -28,9 +28,9 @@ ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint =
   }
   data = data[data[, timepoint]<timeMax, ]
 
-  data = data[,c(testName, ID, trial, timepoint, condition, "duration",
+  data = data[,c(testName, ID, trial, timepoint, condition, response, "duration",
                  gazeX, gazeY, gazeXRelative, gazeYRelative, fixation, miscVars)]
-  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "duration",
+  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "response", "duration",
                  "gazeX", "gazeY", "gazeXRelative", "gazeYRelative", "fixation", miscVars)
 
 

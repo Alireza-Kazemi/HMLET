@@ -11,7 +11,6 @@ Imports: combinat, dplyr, miceadds, purrr, rray, tidyr
 Author@R: person("Alireza", "Kazemi", email = "Alireza.kzmi@gmail.com",
         role = c("aut", "cre"))
 Encoding: UTF-8
-RoxygenNote: 7.2.2
 NeedsCompilation: no
-Packaged: 2022-11-17 18:42:00 UTC; alire
-Built: R 4.2.2; ; 2022-11-17 18:42:11 UTC; windows
+Packaged: 2023-01-19 01:54:40 UTC; kazemi
+Built: R 4.2.1; ; 2023-01-19 01:54:50 UTC; windows
