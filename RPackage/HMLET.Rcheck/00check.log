@@ -32,8 +32,9 @@
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
-* checking dependencies in R code ... WARNING
-'::' or ':::' import not declared from: 'reshape2'
+* checking dependencies in R code ... NOTE
+Namespace in Imports field not imported from: 'ggplot2'
+  All declared Imports should be used.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
@@ -208,28 +209,7 @@ to your NAMESPACE file.
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... WARNING
-Codoc mismatches from documentation object 'ExportDataForGUI_HMLET':
-ExportDataForGUI_HMLET
-  Code: function(data, ID = "ID", trial = "trial", timepoint =
-                 "timepoint", timeMax = NULL, dataPointDuration,
-                 response, fixation, condition, testName = NULL, gazeX,
-                 gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
-                 miscVars = NULL, fileName = "HMLET_DataforMATLAB.csv",
-                 path = getwd())
-  Docs: function(data, ID = "ID", trial = "trial", timepoint =
-                 "timepoint", timeMax = NULL, dataPointDuration,
-                 fixation, condition, testName = NULL, gazeX, gazeY,
-                 gazeXRelative = NULL, gazeYRelative = NULL, miscVars =
-                 NULL, fileName = "HMLET_DataforMATLAB.csv", path =
-                 getwd())
-  Argument names in code not in docs:
-    response
-  Mismatches in argument names (first 3):
-    Position: 7 Code: response Docs: fixation
-    Position: 8 Code: fixation Docs: condition
-    Position: 9 Code: condition Docs: testName
-
+* checking for code/documentation mismatches ... OK
 * checking Rd \usage sections ... WARNING
 Undocumented arguments in documentation object 'ClusterStats_HMLET'
   'data' 'paired' 'detailed' 'threshold_t'
@@ -246,8 +226,8 @@ Undocumented arguments in documentation object 'CreateTimeBinData_HMLET'
 
 Undocumented arguments in documentation object 'ExportDataForGUI_HMLET'
   'data' 'ID' 'trial' 'timepoint' 'timeMax' 'dataPointDuration'
-  'fixation' 'condition' 'testName' 'gazeX' 'gazeY' 'gazeXRelative'
-  'gazeYRelative' 'miscVars' 'fileName' 'path'
+  'response' 'fixation' 'condition' 'testName' 'gazeX' 'gazeY'
+  'gazeXRelative' 'gazeYRelative' 'miscVars' 'fileName' 'path'
 
 Undocumented arguments in documentation object 'FilterClustersTimepoints_HMELT'
   'data' 'clusterInf'
@@ -298,4 +278,4 @@ Extensions' manual.
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 3 WARNINGs, 1 NOTE
+Status: 1 WARNING, 2 NOTEs

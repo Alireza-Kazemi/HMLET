@@ -2,12 +2,15 @@
 #'
 #'
 #' @param testName Name of this data -- can be used as condition name or test names to compare permutation test results between different tests/conditions later
+#'
+#' @import combinat
 #' @import dplyr
+#' @import ggplot2
 #' @import miceadds
 #' @import purrr
+#' @import reshape2
 #' @import rray
 #' @import tidyr
-#' @import combinat
 #' @export
 PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timepoint, condition, gazeInAOI,
                                   conditionLevels = NULL, targetAOI = NULL, testName = NULL, timeBinName = NULL){

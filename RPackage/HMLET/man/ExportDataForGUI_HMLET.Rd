@@ -11,6 +11,7 @@ ExportDataForGUI_HMLET(
   timepoint = "timepoint",
   timeMax = NULL,
   dataPointDuration,
+  response,
   fixation,
   condition,
   testName = NULL,
