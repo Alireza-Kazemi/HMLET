@@ -31,10 +31,8 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking dependencies in R code ... NOTE
-Namespace in Imports field not imported from: 'ggplot2'
-  All declared Imports should be used.
+* checking dependencies in R code ... WARNING
+'::' or ':::' import not declared from: ‘reshape2’
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
@@ -58,14 +56,14 @@ ComputeTValues_HMLET: no visible binding for global variable
 ComputeTValues_HMLET: no visible binding for global variable ‘prop’
 ComputeTValues_HMLET: no visible binding for global variable ‘d’
 ComputeTValues_HMLET: no visible binding for global variable
-  'condition'
-ComputeTValues_HMLET: no visible global function definition for 'sd'
-ComputeTValues_HMLET: no visible binding for global variable 'M'
-ComputeTValues_HMLET: no visible binding for global variable 'SD'
-ComputeTValues_HMLET: no visible binding for global variable 'N'
+  ‘condition’
+ComputeTValues_HMLET: no visible global function definition for ‘sd’
+ComputeTValues_HMLET: no visible binding for global variable ‘M’
+ComputeTValues_HMLET: no visible binding for global variable ‘SD’
+ComputeTValues_HMLET: no visible binding for global variable ‘N’
 ExportDataForGUI_HMLET: no visible global function definition for
-  'write.csv'
-PermutationTest_HMLET: no visible global function definition for 'qt'
+  ‘write.csv’
+PermutationTest_HMLET: no visible global function definition for ‘qt’
 PlotNullDistribution_HMLET: no visible global function definition for
   ‘ggplot’
 PlotNullDistribution_HMLET: no visible global function definition for
@@ -111,15 +109,29 @@ PlotTemporalGazeTrends_HMLET: no visible binding for global variable
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   ‘geom_line’
 PlotTemporalGazeTrends_HMLET: no visible binding for global variable
-  'M'
+  ‘M’
+PlotTemporalGazeTrends_HMLET: no visible binding for global variable
+  ‘SE’
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  ‘geom_pointrange’
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  ‘scale_x_continuous’
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  ‘facet_wrap’
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  ‘theme’
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  ‘element_rect’
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  ‘element_line’
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  ‘ylab’
 PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   ‘DataPercent’
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   ‘position_dodge’
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
-  'scale_x_continuous'
-PlotTemporalGazeTrends_HMLET: no visible global function definition for
-  'facet_wrap'
+  ‘scale_y_continuous’
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
   ‘sec_axis’
 PreprocessRawData_HMLET: no visible global function definition for
@@ -183,9 +195,9 @@ Undefined global functions or variables:
   ..density.. A AOI DataPercent Direction ID M N NullDist Prop SD SE
   aes complete.cases condition d element_line element_rect facet_wrap
   geom_density geom_histogram geom_line geom_pointrange geom_ribbon
-  ggplot index melt position_dodge prop qt scale_x_continuous
-  scale_y_continuous sd sec_axis setTxtProgressBar testName theme
-  timepoint txtProgressBar value write.csv yMax yMin ylab
+  ggplot index melt position_dodge prop qt scale_y_continuous sd
+  sec_axis setTxtProgressBar testName theme timepoint txtProgressBar
+  value write.csv y yMax yMin ylab
 Consider adding
   importFrom("stats", "complete.cases", "qt", "sd")
   importFrom("utils", "setTxtProgressBar", "txtProgressBar", "write.csv")
@@ -231,9 +243,9 @@ Undocumented arguments in documentation object 'CreateTimeBinData_HMLET'
   ‘timepoint’ ‘AOIs’ ‘timeForward’ ‘aggregateFun’
 
 Undocumented arguments in documentation object 'ExportDataForGUI_HMLET'
-  'data' 'ID' 'trial' 'timepoint' 'timeMax' 'dataPointDuration'
-  'response' 'fixation' 'condition' 'testName' 'gazeX' 'gazeY'
-  'gazeXRelative' 'gazeYRelative' 'miscVars' 'fileName' 'path'
+  ‘data’ ‘ID’ ‘trial’ ‘timepoint’ ‘timeMax’ ‘dataPointDuration’
+  ‘fixation’ ‘condition’ ‘testName’ ‘gazeX’ ‘gazeY’ ‘gazeXRelative’
+  ‘gazeYRelative’ ‘miscVars’ ‘fileName’ ‘path’
 
 Undocumented arguments in documentation object 'FilterClustersTimepoints_HMELT'
   ‘data’ ‘clusterInf’
@@ -245,8 +257,8 @@ Undocumented arguments in documentation object 'GenerateRandomData_HMLET'
   ‘tMax’ ‘effectOffset’ ‘trialNum’ ‘subjNum’ ‘effectSize’
 
 Undocumented arguments in documentation object 'PermutationTestDataPrep_HMLET'
-  'data' 'ID' 'trial' 'timepoint' 'condition' 'gazeInAOI'
-  'conditionLevels' 'targetAOI' 'timeBinName'
+  ‘data’ ‘ID’ ‘trial’ ‘timepoint’ ‘condition’ ‘gazeInAOI’
+  ‘conditionLevels’ ‘targetAOI’ ‘timeBinName’
 
 Undocumented arguments in documentation object 'PermutationTest_HMLET'
   ‘data’ ‘samples’ ‘paired’ ‘permuteTrialsWithinSubject’ ‘threshold_t’
@@ -281,7 +293,10 @@ Extensions’ manual.
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
 * checking examples ... NONE
-* checking for non-standard things in the check directory ... OK
-* checking for detritus in the temp directory ... OK
+* checking PDF version of manual ... WARNING
+LaTeX errors when creating PDF version.
+This typically indicates Rd problems.
+* checking PDF version of manual without index ... ERROR
+Re-running with no redirection of stdout/stderr.
 * DONE
-Status: 1 WARNING, 2 NOTEs
+Status: 3 WARNINGs, 1 NOTE

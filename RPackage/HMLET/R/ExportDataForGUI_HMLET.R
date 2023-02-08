@@ -20,16 +20,13 @@
 #' @param fileName optional string for output csv file, defaults to "ETDataforMATLAB.csv."
 #'
 #' @export
-ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
-                                   timeMax = NULL, dataPointDuration, response,
-                                   fixation, condition, testName = NULL,
-                                   gazeX, gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
-                                   miscVars = NULL,
-                                   fileName = "HMLET_DataforMATLAB.csv", path = getwd()){
+ExportDataForMATLAB_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
+                                     timeMax = 3000, samplingDuration, timeForward = T,
+                                     fixation, condition, testName = NULL,
+                                     gazeX, gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
+                                     miscVars = NULL,
+                                     fileName = "ETDataforMATLAB.csv", path = getwd()){
 
-  if(is.null(timeMax)){
-    timeMax = max(data[,timepoint])
-  }
   if(is.null(testName)){
     data$testName = unique("PermutationTest0")
     testName = "testName"
@@ -38,24 +35,22 @@ ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint =
     data$gazeXRelative = unique(NA)
     data$gazeYRelative = unique(NA)
   }
-  if(is.character(dataPointDuration)){
-    data$duration = data[,dataPointDuration]
-  }else if(is.numeric(dataPointDuration)){
-    data$duration = unique(dataPointDuration)
+  if(is.character(samplingDuration)){
+    data$duration = data[,samplingDuration]
+  }else if(is.numeric(samplingDuration)){
+    data$duration = unique(samplingDuration)
   }
-  data = data[data[, timepoint]<timeMax, ]
 
-  data = data[,c(testName, ID, trial, timepoint, condition, response, "duration",
+  data = data[,c(testName, ID, trial, timepoint, condition, "duration",
                  gazeX, gazeY, gazeXRelative, gazeYRelative, fixation, miscVars)]
-  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "response", "duration",
+  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "duration",
                  "gazeX", "gazeY", "gazeXRelative", "gazeYRelative", "fixation", miscVars)
 
 
-  # data = CreateTimeBinData_HMLET(data, groupingColumns = NULL,
-  #                                timeBinWidth =  unique(data$duration),
-  #                                timeMax = timeMax, FixatedOn = "fixation",
-  #                                timepoint = "timepoint", AOIs = NULL ,
-  #                                timeForward = timeForward, aggregateFun = NULL)
+  data = CreateTimeBinData_HMLET(data, groupingColumns = NULL, timeBinWidth =  unique(data$duration),
+                                timeMax = timeMax, FixatedOn = "fixation",
+                                timepoint = "timepoint", AOIs = NULL ,
+                                timeForward = timeForward, aggregateFun = mean)
 
 
 

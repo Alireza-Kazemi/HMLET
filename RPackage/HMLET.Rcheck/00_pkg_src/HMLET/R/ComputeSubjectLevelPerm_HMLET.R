@@ -7,7 +7,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   listInput = sample(x = 1:factorial(condNum), size =  nrow(labelNew), replace = T)
   subjLevelPerms = UniquePermutations_HMLET(listInput, n-1)
   condList = levels(factor(labels$condition))
-  condLevelPerms = combinat::permn(factorial(condNum))
+  condLevelPerms = permn(factorial(condNum))
 
   print("Converting labels:")
   pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)

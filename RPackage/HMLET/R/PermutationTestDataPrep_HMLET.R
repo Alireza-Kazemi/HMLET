@@ -12,10 +12,8 @@
 #' @param testName optional string for name of data -- used as condition name or test names to compare permutation test
 #'                 results between different tests/conditions later, defaults to NULL.
 #' @import dplyr
-#' @import ggplot2
 #' @import miceadds
 #' @import purrr
-#' @import reshape2
 #' @import rray
 #' @import tidyr
 #' @import combinat

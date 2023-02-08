@@ -43,9 +43,8 @@ CreateTimeBinData_HMLET<- function(data, groupingColumns = NULL, timeBinWidth = 
   if(!is.null(groupingColumns)){
     groupingColumns = c(groupingColumns, "timeBin", "timeBinIndex")
     data = data %>%
-      dplyr::group_by_at(groupingColumns) %>%
-      dplyr::summarise_at(c(paste("AOI", AOIs, sep="_")), aggregateFun, na.rm = TRUE) %>%
-      as.data.frame()
+      group_by_at(groupingColumns) %>%
+      summarise_at(c(paste("AOI", AOIs, sep="_")), aggregateFun, na.rm = TRUE)
   }
 
   return(data)

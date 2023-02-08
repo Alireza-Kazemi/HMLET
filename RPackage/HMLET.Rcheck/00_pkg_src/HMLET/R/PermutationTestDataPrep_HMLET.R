@@ -10,20 +10,14 @@
 #' @import combinat
 #' @export
 PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timepoint, condition, gazeInAOI,
-                                  conditionLevels = NULL, targetAOI = NULL, testName = NULL, timeBinName = NULL){
+                                  conditionLevels = NULL, targetAOI = NULL, testName = NULL){
   if(is.null(testName)){
     data$testName = unique("PermutationTest0")
     testName = "testName"
   }
 
-  if(is.null(timeBinName)){
-    dat = data[, c(testName, ID, trial, timepoint, condition, gazeInAOI)]
-    names(dat) = c("testName", "ID", "trial", "timepoint", "condition", "AOI")
-  }
-  else{
-    dat = data[, c(testName, ID, trial, timepoint, condition, gazeInAOI, timeBinName)]
-    names(dat) = c("testName", "ID", "trial", "timepoint", "condition", "AOI", "timeBinName")
-  }
+  dat = data[, c(testName, ID, trial, timepoint, condition, gazeInAOI)]
+  names(dat) = c("testName", "ID", "trial", "timepoint", "condition", "AOI")
   if(!is.null(conditionLevels)){
     dat$condition = factor(dat$condition,levels = conditionLevels)
   }
@@ -32,9 +26,6 @@ PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timepoint, con
   }
   if(!is.numeric(dat$AOI)){
     warning("AOI column must be in numeric form")
-  }
-  if(!is.numeric(dat$timepoint)){
-    warning("timepoint column must be in numeric form")
   }
 
   return(dat)
