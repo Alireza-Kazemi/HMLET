@@ -13,7 +13,8 @@ PermutationTestDataPrep_HMLET(
   gazeInAOI,
   conditionLevels = NULL,
   targetAOI = NULL,
-  testName = NULL
+  testName = NULL,
+  timeBinName = NULL
 )
 }
 \arguments{

@@ -24,6 +24,10 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     if(onlySignificantClusters){
       clusterData = clusterData[clusterData$pValue<0.05,]
     }
+    if(nrow(clusterData)==0){
+      clusterData = NULL
+      warning("No cluster has been found")
+    }
 
   }else{
     # only temporal trends are being plotted
@@ -31,10 +35,16 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
 
   }
 
-  linedata = as.data.frame(summarise(group_by(graphDat,
+  timeBinFlag = FALSE
+  if("timeBinName" %in% names(graphDat)){
+    timeBinFlag = TRUE
+    timeBinLabels = levels(graphDat$timeBinName)
+  }
+
+  linedata = as.data.frame(dplyr::summarise(dplyr::group_by(graphDat,
                                               testName, ID, timepoint, condition),
                                      Prop = mean(AOI, na.rm=T)))
-  linedata = as.data.frame(summarise(group_by(linedata,
+  linedata = as.data.frame(dplyr::summarise(dplyr::group_by(linedata,
                                               testName, timepoint, condition),
                                      M = mean(Prop, na.rm=T),SD = sd(Prop, na.rm = T),N = n()))
   linedata$SE = linedata$SD/sqrt(linedata$N)
@@ -68,19 +78,31 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
       Clusters = (linedataR$timepoint>=clusterData$timeStart[i] & linedataR$timepoint<=clusterData$timeEnd[i]) &
         (linedataR$testName == clusterData$testName[i])
       Clusters = linedataR[Clusters,]
-      if(nrow(Clusters)>1){
-        #-----------------------------------------------------------------------Update Graph Handle
+      # if(nrow(Clusters)>1){
+      #   #-----------------------------------------------------------------------Update Graph Handle
+      #   P = P +
+      #     geom_ribbon(data = Clusters,
+      #                 aes(x=timepoint, ymin = yMin, ymax = yMax),fill =  clusterFillColor, alpha = clusterFillAlpha)
+      # }else{
+      #   Clusters = rbind(Clusters,Clusters)
+      #   Clusters$y[1] = Clusters$yMin[1]
+      #   Clusters$y[2] = Clusters$yMax[2]
+      #   Clusters = length(unique(linedata$timepoint))
+      #   P = P +
+      #     geom_line(data = Clusters,
+      #                 aes(x=timepoint, y = y), size = 1, color =  clusterFillColor, alpha = clusterFillAlpha)
+      # }
+
+      if(nrow(Clusters)==1){
+        wRibbon = mean(diff(unique(linedata$timepoint)))/2
+        Clusters = rbind(Clusters,Clusters)
+        Clusters$timepoint[2] = Clusters$timepoint[1]+wRibbon
+      }
+      #-----------------------------------------------------------------------Update Graph Handle
         P = P +
           geom_ribbon(data = Clusters,
                       aes(x=timepoint, ymin = yMin, ymax = yMax),fill =  clusterFillColor, alpha = clusterFillAlpha)
-      }else{
-        Clusters = rbind(Clusters,Clusters)
-        Clusters$y[1] = Clusters$yMin[1]
-        Clusters$y[2] = Clusters$yMax[2]
-        P = P +
-          geom_line(data = Clusters,
-                      aes(x=timepoint, y = y), size = 1, color =  clusterFillColor, alpha = clusterFillAlpha)
-      }
+
     }
 
   }
@@ -90,20 +112,21 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
               aes(x=timepoint, y=M, group=condition, color = condition),
               size=1)
 
-  if(is.numeric(linedata$timepoint)){
+  if(!timeBinFlag){
     #-----------------------------------------------------------------------Update Graph Handle
     P = P +
       geom_ribbon(data = linedata,
                   aes(x=timepoint, ymin = M-SE, ymax = M+SE, fill = condition ),
                   alpha = gazePropRibbonAlpha)
+
+
   }else{
     #-----------------------------------------------------------------------Update Graph Handle
     P = P +
-      # geom_point(data = linedata,
-      #            aes(x=timepoint, y=M, group=condition, color = condition))+
       geom_pointrange(data = linedata,
                       aes(x=timepoint, y=M, ymin=M-SE, ymax=M+SE, group=condition, color = condition),
-                      alpha = pointAlpha, size = pointSize, fatten = pointFatten)
+                      alpha = pointAlpha, size = pointSize, fatten = pointFatten) +
+      scale_x_continuous(breaks = 1:length(timeBinLabels) , labels=timeBinLabels)
 
   }
   #-----------------------------------------------------------------------Update Graph Handle
@@ -111,7 +134,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     facet_wrap(~testName,nrow = 1)+
     theme(panel.background = element_rect(fill = "transparent",colour = NA))+
     theme(plot.background = element_rect(fill = "transparent",colour = NA))+
-    theme( axis.line = element_line(size = 1, linetype = "solid"))+
+    theme( axis.line = element_line(linewidth = 1, linetype = "solid"))+
     ylab("Gaze Proportion (%)")
 
   if(showDataPointNumbers){

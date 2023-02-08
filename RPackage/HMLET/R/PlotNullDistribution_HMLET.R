@@ -8,7 +8,7 @@
 PlotNullDistribution_HMLET <- function(resultList){
   graphDat = resultList[[2]]
   P = ggplot(graphDat, aes(x = NullDist, fill = testName)) +
-      geom_histogram(aes(y = ..density..), binwidth = sd(graphDat$NullDist)/10, color="white")+
+      geom_histogram(aes(y = after_stat(density)), binwidth = sd(graphDat$NullDist)/10, color="white")+
       geom_density(alpha = 0.5) +
       facet_wrap(~testName, ncol = 1)
 
