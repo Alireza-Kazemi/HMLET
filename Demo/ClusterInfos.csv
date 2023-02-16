@@ -1,0 +1,4 @@
+"testName","Direction","index","tStatistic","timeStart","timeEnd","pValue"
+"PermutationTest0","Positive",1,2.33333333333333,2,2,0.711
+"PermutationTest0","Positive",2,5.09030295361603,5,6,0.028
+"PermutationTest0","Negative",1,-4.47360681047595,11,11,0.073
