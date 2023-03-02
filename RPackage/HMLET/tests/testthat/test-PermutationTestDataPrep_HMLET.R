@@ -1,49 +1,49 @@
-# ASK: maybe run the matlab script and generate new sample data each time?
-datRead = read.csv("SampleData.csv")
-df = datRead[c("ID","trial","timepoint","condition","AOI")]
+inRead = read.csv("HMLET_Testing_Data.csv")
+input_df = inRead[c("ID","trial","timepoint","condition","AOI")]
+
+outRead = read.csv("Output_PermutationTestDataPrep.csv")
+output_df = outRead[c("testName","ID","trial","timepoint","condition","AOI")]
 
 test_that("all required parameters work", {
-  dfRet = PermutationTestDataPrep_HMLET(data=df, ID="ID", trial="trial",
-                                        timepoint="timepoint", condition="condition",
-                                        gazeInAOI="AOI")
-  # null test name parameter should populate df with default value:
-  expect_equal(unique(dfRet$testName), "PermutationTest0")
-  # null time bin name parameter should create df with the following columns:
-  expect_equal(names(dfRet), c("testName", "ID", "trial", "timepoint", "condition", "AOI"))
+  ret_df = PermutationTestDataPrep_HMLET(data = input_df, ID = "ID", trial = "trial", timepoint = "timepoint",
+                                         condition = "condition", conditionLevels = c("C1","C2"),
+                                         gazeInAOI = "AOI", targetAOI = 1)
+
+  expect_equal(names(ret_df), c("testName", "ID", "trial", "timepoint", "condition", "AOI"))
+
+  expect_equal(ret_df$testName, output_df$testName)
+  expect_equal(ret_df$ID, output_df$ID)
+  expect_equal(ret_df$trial, output_df$trial)
+  expect_equal(ret_df$timepoint, output_df$timepoint)
+  ret_df$condition <- as.character(ret_df$condition)
+  expect_equal(unique(ret_df$condition), unique(output_df$condition))
+  expect_equal(ret_df$AOI, output_df$AOI)
 })
 
 test_that("AOI column should be numeric", {
-  df$AOI = unique("Not_A_Number")
+  input_df$AOI = unique("Not_A_Number")
   expect_warning(
-    PermutationTestDataPrep_HMLET(data=df, ID="ID", trial="trial",
-                                  timepoint="timepoint", condition="condition",
-                                  gazeInAOI="AOI"),
-                 "AOI column must be in numeric form")
+    PermutationTestDataPrep_HMLET(data = input_df, ID = "ID", trial = "trial", timepoint = "timepoint",
+                                  condition = "condition", conditionLevels = c("C1","C2"),
+                                  gazeInAOI = "AOI"),
+    "AOI column must be in numeric form")
 })
 
+
 test_that("timepoint column should be numeric", {
-  df$timepoint = unique("Not_A_Number")
+  input_df$timepoint = unique("Not_A_Number")
   expect_warning(
-    PermutationTestDataPrep_HMLET(data=df, ID="ID", trial="trial",
-                                  timepoint="timepoint", condition="condition",
-                                  gazeInAOI="AOI"),
+    PermutationTestDataPrep_HMLET(data = input_df, ID = "ID", trial = "trial", timepoint = "timepoint",
+                                  condition = "condition", conditionLevels = c("C1","C2"),
+                                  gazeInAOI = "AOI", targetAOI = 1),
     "timepoint column must be in numeric form")
 })
 
-
-test_that("comtains time bin name column if exists", {
-  df = CreateTimeBinData_HMLET(data=df, FixatedOn = "AOI", AOIs = "AOI")
-  dfRet = PermutationTestDataPrep_HMLET(data=df, ID="ID", trial="trial",
-                                        timepoint="timepoint", condition="condition",
-                                        gazeInAOI="AOI", timeBinName = "timeBin")
-  expect_named(dfRet, c("testName", "ID", "trial", "timepoint", "condition",
-                        "AOI", "timeBinName"))
+test_that("contains time bin name column if exists", {
+  output = CreateTimeBinData_HMLET(data=input_df, FixatedOn = "AOI", AOIs = "AOI")
+  ret_df = PermutationTestDataPrep_HMLET(data=output, ID = "ID", trial = "trial", timepoint = "timepoint",
+                                         condition = "condition", conditionLevels = c("C1","C2"),
+                                         gazeInAOI = "AOI", targetAOI = 1, timeBinName = "timeBin")
+  expect_named(ret_df, c("testName", "ID", "trial", "timepoint", "condition",
+                         "AOI", "timeBinName"))
 })
-
-
-# generate test for not null condition levels (need more input data)
-# generate test for not null target aoi (need more input data)
-
-
-
-

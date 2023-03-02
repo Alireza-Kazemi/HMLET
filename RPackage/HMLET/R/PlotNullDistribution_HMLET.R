@@ -6,7 +6,7 @@
 #'
 #' @export
 PlotNullDistribution_HMLET <- function(resultList){
-  graphDat = resultList[[2]]
+  graphDat = resultList[[3]] # original: graphDat = resultList[[2]]
   P = ggplot(graphDat, aes(x = NullDist, fill = testName)) +
       geom_histogram(aes(y = ..density..), binwidth = sd(graphDat$NullDist)/10, color="white")+
       geom_density(alpha = 0.5) +
@@ -15,3 +15,4 @@ PlotNullDistribution_HMLET <- function(resultList){
   # geom_vline(data = resClose[[1]], aes(xintercept = tStatistic))+
   return(P)
 }
+# GRISHA: res[[2]] was null according to testing routine
