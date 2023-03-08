@@ -10,15 +10,18 @@ License: MIT + file LICENSE
 Imports: 
     combinat,
     dplyr,
+    ggplot2,
     miceadds,
     purrr,
+    reshape2,
     rray,
-    tidyr
+    tidyr,
+    vdiffr
+Suggests: 
+    testthat (>= 3.0.0)
 Author@R: person("Alireza", "Kazemi", email = "Alireza.kzmi@gmail.com",
     role = c("aut", "cre"))
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
