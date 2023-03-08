@@ -20,10 +20,10 @@ P = PlotTemporalGazeTrends_HMLET(datP)
 plot(P)
 
 Res = ClusterStats_HMLET(datP, paired = T, detailed = F)
-write.csv(Res,paste(RD,"Output_ClusterStats.csv",sep = ""),row.names = F)
+# write.csv(Res,paste(RD,"Output_ClusterStats.csv",sep = ""),row.names = F)
 
-P = PlotTemporalGazeTrends_HMLET(datP, clusterData = Res)
-plot(P)
+# P = PlotTemporalGazeTrends_HMLET(datP, clusterData = Res)
+# plot(P)
 
 set.seed(5)
 res = PermutationTest_HMLET(datP, samples = 1000, paired = T, permuteTrialsWithinSubject = F)
