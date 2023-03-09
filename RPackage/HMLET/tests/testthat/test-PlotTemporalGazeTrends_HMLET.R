@@ -1,3 +1,5 @@
+library(ggplot2)
+
 inRead = read.csv("Output_PermutationTestDataPrep.csv")
 input_df = inRead[c("testName","ID","trial","timepoint","condition","AOI")]
 

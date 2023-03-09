@@ -1,3 +1,6 @@
+library(ggplot2)
+library(reshape)
+
 inRead = read.csv("Output_PermutationTestDataPrep.csv")
 input_df = inRead[c("testName","ID","trial","timepoint","condition","AOI")]
 # note: can't test becaue of clusterstats blocker

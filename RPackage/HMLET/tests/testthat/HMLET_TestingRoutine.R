@@ -1,3 +1,8 @@
+library(HMLET)
+library(ggplot2)
+library(reshape)
+
+
 RD = "/Users/grishabandodkar/Documents/GitHub/HMLET/RPackage/HMLET/tests/testthat/"
 WR = "/Users/grishabandodkar/Documents/GitHub/HMLET/RPackage/HMLET/tests/testthat/"
 dat = read.table(paste(RD,"HMLET_Testing_Data.csv",sep = ""), header=TRUE, sep=",", strip.white = TRUE)

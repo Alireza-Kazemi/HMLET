@@ -13,12 +13,12 @@ Imports:
     miceadds,
     purrr,
     rray,
-    tidyr,
-    vdiffr
-Suggests: 
-    testthat (>= 3.0.0)
+    tidyr
 Author@R: person("Alireza", "Kazemi", email = "Alireza.kzmi@gmail.com",
     role = c("aut", "cre"))
-Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.2.3
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
