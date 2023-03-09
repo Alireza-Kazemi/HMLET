@@ -27,7 +27,7 @@ res = PermutationTest_HMLET(datP, samples = 1000, paired = T, permuteTrialsWithi
 
 write.csv(res[[1]],paste(RD,"ClusterInfos.csv",sep = ""),row.names = F)
 write.csv(res[[2]],paste(RD,"NullDistribution.csv",sep = ""),row.names = F)
-write.csv(res[[3]],paste(RD,"NullDistribution.csv",sep = ""),row.names = F)
+write.csv(res[[3]],paste(RD,"tValueDistribution.csv",sep = ""),row.names = F)
 write.table(res[[4]], paste(RD,"PermuationSampleNumber.txt",sep = ""), append = FALSE, sep = " ", dec = ".",
             row.names = F, col.names = F)
 write.csv(res[[5]],paste(RD,"Data.csv",sep = ""),row.names = F)
