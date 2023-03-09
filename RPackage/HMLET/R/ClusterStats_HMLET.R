@@ -32,14 +32,14 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NA)
       num_sub = length(unique(data$ID))
       threshold_t = qt(p=1-.05/2, df=num_sub-1)
     }
-    resp_time = as.data.frame(summarise(group_by(data, ID, timepoint, condition), prop = mean(AOI, na.rm = T)))
+    resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data, ID, timepoint, condition), prop = mean(AOI, na.rm = T)))
     tValues = ComputeTValues_HMLET(resp_time, paired = paired)
     tValues = FindClusters_HMLET(tValues, threshold_t = threshold_t)
 
-    sdat = melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
+    sdat = reshape2::melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
     sdat = sdat[sdat$index!=0,]
     if(nrow(sdat)!=0){
-      sdat = as.data.frame(summarise(group_by(sdat,Direction,index),tStatistic = sum(value, na.rm=T)))
+      sdat = as.data.frame(dplyr::summarise(dplyr::group_by(sdat,Direction,index),tStatistic = sum(value, na.rm=T)))
       tValueTemp = data.frame(Positive =  max(sdat$tStatistic), Negative = min(sdat$tStatistic))
     }else{
       tValueTemp = data.frame(Positive =  0, Negative =0)
@@ -56,7 +56,7 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NA)
                     threshold_t, sep = ""))
     }
     else{
-    clusterInf = as.data.frame(summarise(group_by(clusterInf, testName, Direction, index),
+    clusterInf = as.data.frame(dplyr::summarise(dplyr::group_by(clusterInf, testName, Direction, index),
                                          tStatistic = sum(value), timeStart = min(timepoint), timeEnd = max(timepoint)))
     }
 

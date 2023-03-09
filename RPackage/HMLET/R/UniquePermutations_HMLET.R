@@ -7,7 +7,7 @@
 
 UniquePermutations_HMLET <- function(listInput, n = 1){
   L = length(listInput)
-  indexList0 = rray(1:L, dim = c(L, 1))
+  indexList0 = rray::rray(1:L, dim = c(L, 1))
   indexList = indexList0
 
   pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
@@ -15,7 +15,7 @@ UniquePermutations_HMLET <- function(listInput, n = 1){
   for (i in 1:n){
     rep = 0
     repeat{
-      newComb = rray(sample(indexList0, L, replace = F), dim = c(L,1))
+      newComb = rray::rray(sample(indexList0, L, replace = F), dim = c(L,1))
       if(min(rray_sum(abs(indexList - newComb),axes = 1))>1){
         # print(rray_sum(abs(indexList - newComb),axes = 1))  # ------------------> Debugging
         # if(rep>0){print(rep)}  # ------------------> Testing for repeat
@@ -27,7 +27,7 @@ UniquePermutations_HMLET <- function(listInput, n = 1){
       }
       rep = rep+1
     }
-    indexList = rray_bind (indexList,newComb, .axis = 2)
+    indexList = rray::rray_bind (indexList,newComb, .axis = 2)
     setTxtProgressBar(pb,i/n)
   }
   # print(rep)                                              # ------------------> Debugging

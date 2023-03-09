@@ -12,14 +12,15 @@
 #' @param targetAOI optional string for column name to focus on specific AOI, defaults to NULL.
 #' @param testName optional string for name of data -- used as condition name or test names to compare permutation test
 #'                 results between different tests/conditions later, defaults to NULL.
-#' @import dplyr
+#' @import dplyr			  
 #' @import miceadds
 #' @import purrr
+#' @import ggplot2				   
 #' @import rray
 #' @import tidyr
 #' @import vdiffr
 #' @import combinat
-#'
+#' @import reshape2
 #' @return data frame compatible for permutation tests and other HMLET modules
 #' @export
 PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timepoint, condition, gazeInAOI,

@@ -1,5 +1,4 @@
 #' Remove Time points with missing conditions.
-#'
 #' This function is currently only applicable for within participant manipulations.
 #' @param data dataframe containing temporal data.
 #' @return data with no missing conditions.

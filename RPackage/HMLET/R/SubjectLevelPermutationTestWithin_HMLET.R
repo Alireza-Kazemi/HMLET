@@ -26,7 +26,7 @@ SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paire
     sdat = melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
     sdat = sdat[sdat$index!=0,]
     if(nrow(sdat)!=0){
-      sdat = as.data.frame(summarise(group_by(sdat,Direction,index),tStatistic = sum(value, na.rm=T)))
+      sdat = as.data.frame(dplyr::summarise(dplyr::group_by(sdat,Direction,index),tStatistic = sum(value, na.rm=T)))
       tValueTemp = data.frame(Positive =  max(sdat$tStatistic), Negative = min(sdat$tStatistic))
     }else{
       tValueTemp = data.frame(Positive =  0, Negative =0)

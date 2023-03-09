@@ -6,8 +6,8 @@
 #' @param trial string for column name that represents trials within data frame, for example "TrialNum."
 #' @param timepoint string for column name that represents time intervals, for example "timeStamp."
 #' @param timeMax optional integer for maximum time in temporal order, samples are left out if duration is longer. Defaults to 3000.
-#' @param samplingDuration optional integer or character for specified duration of samples, used for time bins in CreateTimeBinData_HMLET.
-#' @param timeForward optional boolean to sort timebins, defaults to True for ascending order.
+#' @param dataPointDuration optional integer or character for specified duration of samples, used for time bins in CreateTimeBinData_HMLET.
+#' @param reponse the column in which participants' responses are stored e.g., HIT, Miss, FA, and CR.
 #' @param fixation data for specific AOI in dataframe to be fixated on. #TODO: ASK
 #' @param condition string for column name that specifies a condition within the data frame.
 #' @param testName optional string for name of data -- used as condition name or test names to compare permutation test
@@ -17,16 +17,19 @@
 #' @param gazeXRelative optional integer X-coordinate of gaze point relative to an arbitrary center.
 #' @param gazeYRelative optional integer Y-coordinate of gaze point relative to an arbitrary center.
 #' @param miscVars optional list of strings containing column names of additional variables to be included in exported file
-#' @param fileName optional string for output csv file, defaults to "ETDataforMATLAB.csv."
+#' @param fileName optional string for output csv file, defaults to "HMLET_DataforGUI.csv."
 #'
 #' @export
-ExportDataForMATLAB_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
-                                     timeMax = 3000, samplingDuration, timeForward = T,
+ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
+                                     timeMax = 3000, dataPointDuration, response,
                                      fixation, condition, testName = NULL,
                                      gazeX, gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
                                      miscVars = NULL,
-                                     fileName = "ETDataforMATLAB.csv", path = getwd()){
+                                     fileName = "HMLET_DataforGUI.csv", path = getwd()){
 
+  if(is.null(timeMax)){
+    timeMax = max(data[,timepoint])
+  }
   if(is.null(testName)){
     data$testName = unique("PermutationTest0")
     testName = "testName"
@@ -35,22 +38,24 @@ ExportDataForMATLAB_HMLET <- function(data, ID = "ID", trial = "trial", timepoin
     data$gazeXRelative = unique(NA)
     data$gazeYRelative = unique(NA)
   }
-  if(is.character(samplingDuration)){
-    data$duration = data[,samplingDuration]
-  }else if(is.numeric(samplingDuration)){
-    data$duration = unique(samplingDuration)
+  if(is.character(dataPointDuration)){
+    data$duration = data[,dataPointDuration]
+  }else if(is.numeric(dataPointDuration)){
+    data$duration = unique(dataPointDuration)
   }
+  data = data[data[, timepoint]<timeMax, ]
 
-  data = data[,c(testName, ID, trial, timepoint, condition, "duration",
+  data = data[,c(testName, ID, trial, timepoint, condition, response, "duration",
                  gazeX, gazeY, gazeXRelative, gazeYRelative, fixation, miscVars)]
-  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "duration",
+  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "response", "duration",
                  "gazeX", "gazeY", "gazeXRelative", "gazeYRelative", "fixation", miscVars)
 
 
-  data = CreateTimeBinData_HMLET(data, groupingColumns = NULL, timeBinWidth =  unique(data$duration),
-                                timeMax = timeMax, FixatedOn = "fixation",
-                                timepoint = "timepoint", AOIs = NULL ,
-                                timeForward = timeForward, aggregateFun = mean)
+  # data = CreateTimeBinData_HMLET(data, groupingColumns = NULL,
+  #                                timeBinWidth =  unique(data$duration),
+  #                                timeMax = timeMax, FixatedOn = "fixation",
+  #                                timepoint = "timepoint", AOIs = NULL ,
+  #                                timeForward = timeForward, aggregateFun = NULL)
 
 
 

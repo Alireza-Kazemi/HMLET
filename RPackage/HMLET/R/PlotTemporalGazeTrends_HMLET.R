@@ -37,6 +37,10 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     if(onlySignificantClusters){
       clusterData = clusterData[clusterData$pValue<0.05,]
     }
+    if(nrow(clusterData)==0){
+      clusterData = NULL
+      warning("No cluster has been found")
+    }
 
   }else{
     # only temporal trends are being plotted
@@ -50,10 +54,10 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     timeBinLabels = levels(graphDat$timeBinName)
   }
 
-  linedata = as.data.frame(summarise(group_by(graphDat,
+  linedata = as.data.frame(dplyr::summarise(dplyr::group_by(graphDat,
                                               testName, ID, timepoint, condition),
                                      Prop = mean(AOI, na.rm=T)))
-  linedata = as.data.frame(summarise(group_by(linedata,
+  linedata = as.data.frame(dplyr::summarise(dplyr::group_by(linedata,
                                               testName, timepoint, condition),
                                      M = mean(Prop, na.rm=T),SD = sd(Prop, na.rm = T),N = n()))
   linedata$SE = linedata$SD/sqrt(linedata$N)
@@ -143,7 +147,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     facet_wrap(~testName,nrow = 1)+
     theme(panel.background = element_rect(fill = "transparent",colour = NA))+
     theme(plot.background = element_rect(fill = "transparent",colour = NA))+
-    theme( axis.line = element_line(size = 1, linetype = "solid"))+
+    theme( axis.line = element_line(linewidth = 1, linetype = "solid"))+
     ylab("Gaze Proportion (%)")
 
   if(showDataPointNumbers){
