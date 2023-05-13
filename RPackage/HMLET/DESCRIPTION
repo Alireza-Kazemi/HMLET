@@ -19,8 +19,9 @@ Imports:
     vdiffr
 Suggests: 
     testthat (>= 3.0.0)
-Author@R: person("Alireza", "Kazemi", email = "Alireza.kzmi@gmail.com",
-    role = c("aut", "cre"))
+Author@R: person("Alireza", "Kazemi", email = "kazemi@gmail.com", role =
+    c("aut", "cre")),person("Grisha", "Bandodkar", email =
+    "gbandodkar@ucdavis.edu", role = c("ctb","com"))
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
