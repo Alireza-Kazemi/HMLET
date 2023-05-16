@@ -14,3 +14,4 @@ test_that("all required parameters work", {
   #expect_equal(ret_df$value, output_df$value)
   #expect_equal(ret_df$variable, output_df$variable)
 })
+

@@ -47,3 +47,5 @@ test_that("contains time bin name column if exists", {
   expect_named(ret_df, c("testName", "ID", "trial", "timepoint", "condition",
                          "AOI", "timeBinName"))
 })
+
+

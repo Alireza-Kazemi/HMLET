@@ -5,7 +5,7 @@
 #' @param ID optional string for column name that represents IDs within data frame, defaults to "ID."
 #' @param trial string for column name that represents trials within data frame, for example "TrialNum."
 #' @param timepoint string for column name that represents time intervals, for example "timeStamp."
-#' @param timeMax optional integer for maximum time in temporal order, samples are left out if duration is longer. Defaults to 3000.
+#' @param timeMax optional integer for maximum time in temporal order, samples are left out if duration is longer. Default is NULL
 #' @param dataPointDuration optional integer or character for specified duration of samples, used for time bins in CreateTimeBinData_HMLET.
 #' @param response the column in which participants' responses are stored e.g., HIT, Miss, FA, and CR.
 #' @param fixation data for specific AOI in dataframe to be fixated on. #TODO: ASK
@@ -22,7 +22,7 @@
 #'
 #' @export
 ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
-                                     timeMax = 3000, dataPointDuration, response,
+                                     timeMax = NULL, dataPointDuration, response,
                                      fixation, condition, testName = NULL,
                                      gazeX, gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
                                      miscVars = NULL,

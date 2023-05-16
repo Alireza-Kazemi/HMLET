@@ -10,7 +10,7 @@ ExportDataForGUI_HMLET(
   ID = "ID",
   trial = "trial",
   timepoint = "timepoint",
-  timeMax = 3000,
+  timeMax = NULL,
   dataPointDuration,
   response,
   fixation,
@@ -34,7 +34,7 @@ ExportDataForGUI_HMLET(
 
 \item{timepoint}{string for column name that represents time intervals, for example "timeStamp."}
 
-\item{timeMax}{optional integer for maximum time in temporal order, samples are left out if duration is longer. Defaults to 3000.}
+\item{timeMax}{optional integer for maximum time in temporal order, samples are left out if duration is longer. Default is NULL}
 
 \item{dataPointDuration}{optional integer or character for specified duration of samples, used for time bins in CreateTimeBinData_HMLET.}
 

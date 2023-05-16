@@ -8,7 +8,14 @@ output_df = outRead[c("testName","timepoint","value","Positive","Negative")]
 # note: can't test becaue of clusterstats blocker
 
 test_that("all required parameters work", {
-  ret_df = PermutationTest_HMLET(input_df, samples = 1000, paired = T, permuteTrialsWithinSubject = F)
+  set.seed(5)
+  res = PermutationTest_HMLET(input_df, samples = 1000, paired = T, permuteTrialsWithinSubject = F)
+  test_plotNULL <- PlotNullDistribution_HMLET(res)
+  test_plotGT <- PlotTemporalGazeTrends_HMLET(res)
 
-  expect_equal(names(ret_df[[3]]), names(output_df))
+  expect_equal(names(res[[3]]), names(output_df))
+  vdiffr::expect_doppelganger("Null Distribution", test_plotNULL)
+  vdiffr::expect_doppelganger("Temporal Gaze Trends", test_plotGT)
 })
+
+
