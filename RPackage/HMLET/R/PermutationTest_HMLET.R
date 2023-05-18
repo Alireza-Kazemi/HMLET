@@ -62,8 +62,10 @@ PermutationTest_HMLET <- function(data, samples = 2000, paired = T, permuteTrial
       tValueDist = tValueDist[,c("testName",names(tValueDist)[names(tValueDist)!="testName"])]
 
       clusterInf$pValue = unique(NA)
+      clusterInf$significant = unique("")
       for(i in 1:nrow(clusterInf)){
         clusterInf$pValue[i]=mean(as.numeric(abs(tValueDist$NullDist)>abs(clusterInf$tStatistic[i])))
+        clusterInf$significant[i] = ifelse(clusterInf$pValue[i]<0.05,"*",ifelse(clusterInf$pValue[i]<0.1,".",""))
       }
     }else{
       clusterInf = NULL
