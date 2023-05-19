@@ -54,6 +54,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     timeBinLabels = levels(graphDat$timeBinName)
   }
 
+  graphDat = graphDat[complete.cases(graphDat),] ## Added to fix datapoint number issue that counted NaNs
   linedata = as.data.frame(dplyr::summarise(dplyr::group_by(graphDat,
                                               testName, ID, timepoint, condition),
                                      Prop = mean(AOI, na.rm=T)))
