@@ -86,6 +86,8 @@ PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'condition'
 PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'AOI'
+PlotTemporalGazeTrends_HMLET: no visible global function definition for
+  'complete.cases'
 PlotTemporalGazeTrends_HMLET: no visible binding for global variable
   'Prop'
 PlotTemporalGazeTrends_HMLET: no visible global function definition for
@@ -194,8 +196,8 @@ Extensions' manual.
 * checking for unstated dependencies in examples ... OK
 * checking examples ... NONE
 * checking for unstated dependencies in 'tests' ... OK
-* checking tests ... [68s] OK
-  Running 'testthat.R' [68s]
+* checking tests ... [72s] OK
+  Running 'testthat.R' [71s]
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE

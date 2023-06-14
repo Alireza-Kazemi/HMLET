@@ -71,6 +71,9 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
   linedata = as.data.frame(dplyr::summarise(dplyr::group_by(linedata,
                                               testName, timepoint, condition),
                                      M = mean(Prop, na.rm=T),SD = sd(Prop, na.rm = T),N = n()))
+  ## Added to fix the issue about SD for timepoints with 1 participant
+  linedata$SD[is.na(linedata$SD)]=unique(0)
+
   linedata$SE = linedata$SD/sqrt(linedata$N)
   linedata$DataPercent = linedata$N/max(linedata$N)
   secondAxisScale = max(linedata$M+linedata$SE)
