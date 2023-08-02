@@ -13,6 +13,9 @@
 #' @param conditionOrder specify order of condition levels, defaults to NULL.
 #' @param onlySignificantClusters optional boolean to plot only the significant clusters, defaults to True.
 #' @param clusterData data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL.
+#' @param yLabel = "Gaze Proportion" specify label for the y axis.
+#' @param xLabel = "Time (ms)" specify label for the x axis.
+#' @param dataAxisLabel = "Data Points (%)" specify label for the second y axis on the right.
 #'
 #' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
 #' @export
@@ -26,7 +29,10 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
                                         testNameOrder = NULL,
                                         conditionOrder = NULL,
                                         onlySignificantClusters = T,
-                                        clusterData = NULL){
+                                        clusterData = NULL,
+										yLabel = "Gaze Proportion",
+										dataAxisLabel = "Data Points (%)",
+										xLabel = "Time (ms)"){
   #-------------------Update Graph Handle
   P = ggplot()
 
@@ -162,14 +168,15 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     theme(panel.background = element_rect(fill = "transparent",colour = NA))+
     theme(plot.background = element_rect(fill = "transparent",colour = NA))+
     theme( axis.line = element_line(linewidth = 1, linetype = "solid"))+
-    ylab("Gaze Proportion (%)")
+    ylab(yLabel)+
+	xlab(xLabel)
 
   if(showDataPointNumbers){
     P = P +
       geom_line(data = linedata,
                 aes(x=timepoint, y=DataPercent, group=condition, color=condition),
                 linetype="dashed", linewidth=1, alpha = 0.7, position = position_dodge(width = .7))+
-      scale_y_continuous(sec.axis = sec_axis(~.*(1/secondAxisScale), name="Data Points (%)"))
+      scale_y_continuous(sec.axis = sec_axis(~.*(1/secondAxisScale)*100, name=dataAxisLabel))
   }
 
 

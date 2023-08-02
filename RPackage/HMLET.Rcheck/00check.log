@@ -19,7 +19,13 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking serialization versions ... OK
-* checking whether package 'HMLET' can be installed ... OK
+* checking whether package 'HMLET' can be installed ... WARNING
+Found the following significant warnings:
+  Warning: PlotTemporalGazeTrends_HMLET.Rd:55: unknown macro '\item'
+  Warning: PlotTemporalGazeTrends_HMLET.Rd:57: unexpected section header '\value'
+  Warning: PlotTemporalGazeTrends_HMLET.Rd:60: unexpected section header '\description'
+  Warning: PlotTemporalGazeTrends_HMLET.Rd:63: unexpected END_OF_INPUT '
+See 'C:/Users/kazemi/Documents/GitHub/HMLET/RPackage/HMLET.Rcheck/00install.out' for details.
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -165,7 +171,13 @@ Consider adding
   importFrom("stats", "complete.cases", "density", "qt", "sd")
   importFrom("utils", "setTxtProgressBar", "txtProgressBar", "write.csv")
 to your NAMESPACE file.
-* checking Rd files ... OK
+* checking Rd files ... WARNING
+prepare_Rd: PlotTemporalGazeTrends_HMLET.Rd:55: unknown macro '\item'
+prepare_Rd: PlotTemporalGazeTrends_HMLET.Rd:57: unexpected section header '\value'
+prepare_Rd: PlotTemporalGazeTrends_HMLET.Rd:60: unexpected section header '\description'
+prepare_Rd: PlotTemporalGazeTrends_HMLET.Rd:63: unexpected END_OF_INPUT '
+'
+checkRd: (5) PlotTemporalGazeTrends_HMLET.Rd:0-64: Must have a \description
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
@@ -186,6 +198,9 @@ Undocumented arguments in documentation object 'GenerateRandomData_HMLET'
 Undocumented arguments in documentation object 'PermutationTestDataPrep_HMLET'
   'timeBinName'
 
+Undocumented arguments in documentation object 'PlotTemporalGazeTrends_HMLET'
+  'xLabel'
+
 Undocumented arguments in documentation object 'PreprocessRawData_HMLET'
   'AOINames'
 
@@ -198,9 +213,9 @@ Extensions' manual.
 * checking for unstated dependencies in examples ... OK
 * checking examples ... NONE
 * checking for unstated dependencies in 'tests' ... OK
-* checking tests ... [64s] OK
-  Running 'testthat.R' [64s]
+* checking tests ... [66s] OK
+  Running 'testthat.R' [66s]
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 1 WARNING, 1 NOTE
+Status: 3 WARNINGs, 1 NOTE

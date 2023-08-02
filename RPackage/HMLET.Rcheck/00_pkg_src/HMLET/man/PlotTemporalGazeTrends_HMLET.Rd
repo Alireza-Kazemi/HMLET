@@ -16,7 +16,10 @@ PlotTemporalGazeTrends_HMLET(
   testNameOrder = NULL,
   conditionOrder = NULL,
   onlySignificantClusters = T,
-  clusterData = NULL
+  clusterData = NULL,
+  yLabel = "Gaze Proportion",
+  dataAxisLabel = "Data Points (\%)",
+  xLabel = "Time (ms)"
 )
 }
 \arguments{
@@ -44,6 +47,12 @@ or a list that is the result of PermutationTest_HMLET.}
 \item{onlySignificantClusters}{optional boolean to plot only the significant clusters, defaults to True.}
 
 \item{clusterData}{data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL.}
+
+\item{yLabel}{= "Gaze Proportion" specify label for the y axis.}
+
+\item{dataAxisLabel}{= "Data Points (%)" specify label for the second y axis on the right.}
+
+\item{xLabel}{= "Time (ms)" specify label for the x axis.}
 }
 \value{
 a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
