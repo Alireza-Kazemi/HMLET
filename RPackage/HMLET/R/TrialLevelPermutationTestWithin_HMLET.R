@@ -10,14 +10,19 @@
 #' @export
 TrialLevelPermutationTestWithin_HMLET <- function(data, samples = 2000, paired = T, threshold_t = NA){
 
+  print("Compute unique permutation labels per subject:")
   labels = unique(data[,c("ID","trial","condition")])
-  labelsNew = NULL
+  labelsPerm = NULL
   for (sID in unique(labels$ID)){
-    L = UniquePermutations_HMLET(labels[labels$ID==sID,"condition"], n = samples)
-    labelsNew = rbind(labelsNew,L[,-1])
+    labelTemp = labels[labels$ID==sID,]
+    L = UniquePermutations_HMLET(labelTemp[,"condition"], n = samples)
+    L = data.frame(L)
+    names(L) = 1:ncol(L)
+    labelTemp = cbind(labelTemp,L)
+    names(labelTemp) = c(names(labelTemp)[1:3],paste("perm",names(labelTemp)[-(1:3)],sep = ""))
+    labelsPerm = rbind(labelsPerm,labelTemp)
   }
-  labels = cbind(labels,labelsNew)
-  names(labels) = c(names(labels)[1:3],paste("perm",names(labels)[-(1:3)],sep = ""))
+  labels = merge(labels,labelsPerm, by = c("ID","trial","condition"))
 
   #----------------------------- Perform Permutation tests
   print("Estimate tStatistic distribution:")
