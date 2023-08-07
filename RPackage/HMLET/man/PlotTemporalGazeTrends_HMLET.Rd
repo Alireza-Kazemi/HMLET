@@ -6,8 +6,8 @@
 \usage{
 PlotTemporalGazeTrends_HMLET(
   resultList,
-  showDataPointNumbers = T,
-  showOverallMean = T,
+  showDataPointProp = T,
+  showOverallMean = "Point",
   gazePropRibbonAlpha = 0.1,
   clusterFillColor = "#CC9933",
   clusterFillAlpha = 0.5,
@@ -22,19 +22,20 @@ PlotTemporalGazeTrends_HMLET(
   dataAxisLabel = "Data Points (\%)",
   xLabel = "Time (ms)",
   lineWidthGazeProp = 1,
-  lineWidthDataPointNumbers = 1,
+  lineWidthDataPointProp = 1,
   lineWidthOverallMean = 1,
-  lineTypeOverallMean = "dashed",
-  alphaOverallMean = 0.5
+  lineTypeOverallMean = "dotted",
+  alphaOverallMean = 0.5,
+  tickSizeOverallMean = NULL
 )
 }
 \arguments{
 \item{resultList}{dataframe of the data that is already prepared by PrepareMLETData_HMLET
 or a list that is the result of PermutationTest_HMLET.}
 
-\item{showDataPointNumbers}{optional boolean to display data points on the axes, defaults to True.}
+\item{showDataPointProp}{optional boolean to display data points on the axes, defaults to True.}
 
-\item{showOverallMean}{optional boolean to display a horizontal line on the y = average across all time points, defaults to True.}
+\item{showOverallMean}{= "Point" optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it. defaults to "Point".}
 
 \item{gazePropRibbonAlpha}{optional float to change opacity of gaze ribbon, defaults to 0.1.}
 
@@ -64,13 +65,15 @@ or a list that is the result of PermutationTest_HMLET.}
 
 \item{lineWidthGazeProp}{= 1 specify line width for gaze proportion}
 
-\item{lineWidthDataPointNumbers}{= 1 specify line width for data point numbers}
+\item{lineWidthDataPointProp}{= 1 specify line width for data point numbers}
 
 \item{lineWidthOverallMean}{= 1 specify line width for overall mean}
 
 \item{lineTypeOverallMean}{= "dashed" specify line type for overall mean}
 
 \item{alphaOverallMean}{= 0.5 specify alpha for overall mean}
+
+\item{tickSizeOverallMean}{= NULL Optional to specify where to plot the overall means when showOverallMean = "Point"}
 }
 \value{
 a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
