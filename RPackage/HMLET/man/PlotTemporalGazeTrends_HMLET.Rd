@@ -7,6 +7,7 @@
 PlotTemporalGazeTrends_HMLET(
   resultList,
   showDataPointNumbers = T,
+  showOverallMean = T,
   gazePropRibbonAlpha = 0.1,
   clusterFillColor = "#CC9933",
   clusterFillAlpha = 0.5,
@@ -19,7 +20,11 @@ PlotTemporalGazeTrends_HMLET(
   clusterData = NULL,
   yLabel = "Gaze Proportion",
   dataAxisLabel = "Data Points (\%)",
-  xLabel = "Time (ms)"
+  xLabel = "Time (ms)",
+  lineWidthOverallMean = 1,
+  lineWidthGazeProp = 1,
+  lineWidthDataPointNumbers = 1,
+  lineTypeOverallMean = "dashed"
 )
 }
 \arguments{
@@ -27,6 +32,8 @@ PlotTemporalGazeTrends_HMLET(
 or a list that is the result of PermutationTest_HMLET.}
 
 \item{showDataPointNumbers}{optional boolean to display data points on the axes, defaults to True.}
+
+\item{showOverallMean}{optional boolean to display a horizontal line on the y = average across all time points, defaults to True.}
 
 \item{gazePropRibbonAlpha}{optional float to change opacity of gaze ribbon, defaults to 0.1.}
 
@@ -44,7 +51,7 @@ or a list that is the result of PermutationTest_HMLET.}
 
 \item{conditionOrder}{specify order of condition levels, defaults to NULL.}
 
-\item{onlySignificantClusters}{optional boolean to plot only the significant clusters, defaults to True.}
+\item{onlySignificantClusters}{optional Boolean to plot only the significant clusters, defaults to True.}
 
 \item{clusterData}{data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL.}
 
@@ -53,6 +60,14 @@ or a list that is the result of PermutationTest_HMLET.}
 \item{dataAxisLabel}{= "Data Points (%)" specify label for the second y axis on the right.}
 
 \item{xLabel}{= "Time (ms)" specify label for the x axis.}
+
+\item{lineWidthOverallMean}{= 1 specify line width for overall mean}
+
+\item{lineWidthGazeProp}{= 1 specify line width for gaze proportion}
+
+\item{lineWidthDataPointNumbers}{= 1 specify line width for data point numbers}
+
+\item{lineTypeOverallMean}{= "dashed" specify line type for overall mean}
 }
 \value{
 a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.

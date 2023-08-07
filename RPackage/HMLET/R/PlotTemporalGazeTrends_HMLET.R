@@ -3,6 +3,7 @@
 #' @param resultList dataframe of the data that is already prepared by PrepareMLETData_HMLET
 #'                   or a list that is the result of PermutationTest_HMLET.
 #' @param showDataPointNumbers optional boolean to display data points on the axes, defaults to True.
+#' @param showOverallMean optional boolean to display a horizontal line on the y = average across all time points, defaults to True.
 #' @param gazePropRibbonAlpha optional float to change opacity of gaze ribbon, defaults to 0.1.
 #' @param clusterFillColor optional string to change fill color of clustered data points, defaults to "#CC9933".
 #' @param clusterFillAlpha optional float to change opacity of clustered data points, defaults to 0.5.
@@ -11,28 +12,39 @@
 #' @param pointFatten optional integer to change size of lines on plot, defaults to 3.
 #' @param testNameOrder specify order of test name labels, defaults to NULL.
 #' @param conditionOrder specify order of condition levels, defaults to NULL.
-#' @param onlySignificantClusters optional boolean to plot only the significant clusters, defaults to True.
+#' @param onlySignificantClusters optional Boolean to plot only the significant clusters, defaults to True.
 #' @param clusterData data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL.
 #' @param yLabel = "Gaze Proportion" specify label for the y axis.
 #' @param xLabel = "Time (ms)" specify label for the x axis.
 #' @param dataAxisLabel = "Data Points (%)" specify label for the second y axis on the right.
+#' @param lineWidthOverallMean = 1 specify line width for overall mean
+#' @param lineWidthGazeProp = 1 specify line width for gaze proportion
+#' @param lineWidthDataPointNumbers = 1 specify line width for data point numbers
+#' @param lineTypeOverallMean = "dashed" specify line type for overall mean
+#' @param alphaOverallMean = 0.5 specify alpha for overall mean
 #'
 #' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
 #' @export
 PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
-                                        gazePropRibbonAlpha = .1,
-                                        clusterFillColor = "#CC9933",
-                                        clusterFillAlpha = .5,
-                                        pointSize = 1,
-                                        pointAlpha = 0.7,
-                                        pointFatten = 3,
-                                        testNameOrder = NULL,
-                                        conditionOrder = NULL,
-                                        onlySignificantClusters = T,
-                                        clusterData = NULL,
-										yLabel = "Gaze Proportion",
-										dataAxisLabel = "Data Points (%)",
-										xLabel = "Time (ms)"){
+                                         showOverallMean = T,
+                                         gazePropRibbonAlpha = .1,
+                                         clusterFillColor = "#CC9933",
+                                         clusterFillAlpha = .5,
+                                         pointSize = 1,
+                                         pointAlpha = 0.7,
+                                         pointFatten = 3,
+                                         testNameOrder = NULL,
+                                         conditionOrder = NULL,
+                                         onlySignificantClusters = T,
+                                         clusterData = NULL,
+                                         yLabel = "Gaze Proportion",
+                                         dataAxisLabel = "Data Points (%)",
+                                         xLabel = "Time (ms)",
+                                         lineWidthGazeProp = 1,
+                                         lineWidthDataPointNumbers = 1,
+                                         lineWidthOverallMean = 1,
+                                         lineTypeOverallMean = "dashed",
+                                         alphaOverallMean = 0.5){
   #-------------------Update Graph Handle
   P = ggplot()
 
@@ -77,6 +89,10 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
   linedata = as.data.frame(dplyr::summarise(dplyr::group_by(linedata,
                                               testName, timepoint, condition),
                                      M = mean(Prop, na.rm=T),SD = sd(Prop, na.rm = T),N = n()))
+
+  OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(linedata,
+                                                              testName, condition),
+                                              yMean = mean(M, na.rm=T)))
   ## Added to fix the issue about SD for timepoints with 1 participant
   linedata$SD[is.na(linedata$SD)]=unique(0)
 
@@ -139,11 +155,21 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     }
 
   }
+  if(showOverallMean){
+    #-----------------------------------------------------------------------Update Graph Handle
+    P = P +
+      geom_hline(data = OverallMean,
+                  aes(yintercept=yMean, color = condition),
+                 linetype = lineTypeOverallMean,
+                 linewidth = lineWidthOverallMean,
+                 alpha = alphaOverallMean)
+  }
+
   #-----------------------------------------------------------------------Update Graph Handle
   P = P +
     geom_line(data = linedata,
               aes(x=timepoint, y=M, group=condition, color = condition),
-              linewidth=1)
+              linewidth=lineWidthGazeProp)
 
   if(!timeBinFlag){
     #-----------------------------------------------------------------------Update Graph Handle
@@ -160,8 +186,8 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
                       aes(x=timepoint, y=M, ymin=M-SE, ymax=M+SE, group=condition, color = condition),
                       alpha = pointAlpha, size = pointSize, fatten = pointFatten) +
       scale_x_continuous(breaks = 1:length(timeBinLabels) , labels=timeBinLabels)
-
   }
+
   #-----------------------------------------------------------------------Update Graph Handle
   P = P +
     facet_wrap(~testName,nrow = 1)+
@@ -175,7 +201,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointNumbers = T,
     P = P +
       geom_line(data = linedata,
                 aes(x=timepoint, y=DataPercent, group=condition, color=condition),
-                linetype="dashed", linewidth=1, alpha = 0.7, position = position_dodge(width = .7))+
+                linetype="dashed", linewidth=lineWidthDataPointNumbers, alpha = 0.7, position = position_dodge(width = .7))+
       scale_y_continuous(sec.axis = sec_axis(~.*(1/secondAxisScale)*100, name=dataAxisLabel))
   }
 
