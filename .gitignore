@@ -106,3 +106,6 @@ RPackage/HMLET.Rcheck/tests/testthat/test-ClusterStats_HMLET.R
 RPackage/HMLET.Rcheck/tests/testthat/test-CreateTimeBinData_HMLET.R
 RPackage/HMLET.Rcheck/tests/testthat/test-PermutationTest_HMLET.R
 RPackage/HMLET.Rcheck/tests/testthat/test-PermutationTestDataPrep_HMLET.R
+RPackage/HMLET.Rcheck/tests/testthat/testthat-problems.rds
+RPackage/HMLET.Rcheck/tests/testthat/_snaps/PermutationTest_HMLET/temporal-gaze-trends.new.svg
+RPackage/HMLET.Rcheck/tests/testthat.Rout.fail

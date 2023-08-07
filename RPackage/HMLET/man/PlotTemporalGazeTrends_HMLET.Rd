@@ -21,10 +21,11 @@ PlotTemporalGazeTrends_HMLET(
   yLabel = "Gaze Proportion",
   dataAxisLabel = "Data Points (\%)",
   xLabel = "Time (ms)",
-  lineWidthOverallMean = 1,
   lineWidthGazeProp = 1,
   lineWidthDataPointNumbers = 1,
-  lineTypeOverallMean = "dashed"
+  lineWidthOverallMean = 1,
+  lineTypeOverallMean = "dashed",
+  alphaOverallMean = 0.5
 )
 }
 \arguments{
@@ -61,13 +62,15 @@ or a list that is the result of PermutationTest_HMLET.}
 
 \item{xLabel}{= "Time (ms)" specify label for the x axis.}
 
-\item{lineWidthOverallMean}{= 1 specify line width for overall mean}
-
 \item{lineWidthGazeProp}{= 1 specify line width for gaze proportion}
 
 \item{lineWidthDataPointNumbers}{= 1 specify line width for data point numbers}
 
+\item{lineWidthOverallMean}{= 1 specify line width for overall mean}
+
 \item{lineTypeOverallMean}{= "dashed" specify line type for overall mean}
+
+\item{alphaOverallMean}{= 0.5 specify alpha for overall mean}
 }
 \value{
 a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
