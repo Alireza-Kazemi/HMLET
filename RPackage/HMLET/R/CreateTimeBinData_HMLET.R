@@ -30,7 +30,7 @@ CreateTimeBinData_HMLET<- function(data, groupingColumns = NULL, timeBinWidth = 
   }
 
   # applies aggregating function on binary AOIs within time bins per each level of grouping variables in specified order
-  data = data[data[, timepoint]<timeMax, ]
+  data = data[data[, timepoint]<=timeMax, ]
   data$timeBin = ceiling(data[, timepoint]/timeBinWidth-1)*timeBinWidth+timeBinWidth/2
   timeBinsOrder = unique(data$timeBin)
   timeBinsOrder = timeBinsOrder[order(timeBinsOrder)]
