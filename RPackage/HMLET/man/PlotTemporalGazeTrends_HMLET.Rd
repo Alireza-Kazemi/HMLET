@@ -59,9 +59,9 @@ or a list that is the result of PermutationTest_HMLET.}
 
 \item{yLabel}{Proportion" specify label for the y axis, defaults to "Gaze"}
 
-\item{dataAxisLabel}{Specify label for the second y axis on the right, defaults to "Data Points (%)".}
+\item{dataAxisLabel}{Specify label for the second y axis on the right, defaults to "Data Points \(\%\)".}
 
-\item{xLabel}{Specify label for the x axis, defaults to "Time (ms)"}
+\item{xLabel}{Specify label for the x axis, defaults to "Time \(ms\)"}
 
 \item{lineWidthGazeProp}{Specify line width for gaze proportion, defaults to 1.}
 

@@ -15,8 +15,8 @@
 #' @param onlySignificantClusters optional Boolean to plot only the significant clusters, defaults to True.
 #' @param clusterData data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL.
 #' @param yLabel Proportion" specify label for the y axis, defaults to "Gaze"
-#' @param xLabel Specify label for the x axis, defaults to "Time (ms)"
-#' @param dataAxisLabel Specify label for the second y axis on the right, defaults to "Data Points (%)".
+#' @param xLabel Specify label for the x axis, defaults to "Time \(ms\)"
+#' @param dataAxisLabel Specify label for the second y axis on the right, defaults to "Data Points \(\%\)".
 #' @param lineWidthOverallMean Specify line width for overall mean, defaults to 1.
 #' @param lineWidthGazeProp Specify line width for gaze proportion, defaults to 1.
 #' @param lineWidthDataPointProp Specify line width for data point numbers, defaults to 1.
