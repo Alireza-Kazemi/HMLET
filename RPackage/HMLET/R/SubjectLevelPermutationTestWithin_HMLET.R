@@ -10,7 +10,7 @@
 #' @export
 SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paired = T, threshold_t = NA){
 
-  resp_time = as.data.frame(summarise(group_by(data,ID,timepoint,condition), prop = mean(AOI, na.rm=T)))
+  resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data,ID,timepoint,condition), prop = mean(AOI, na.rm=T)))
   labels = unique(resp_time[,c("ID","timepoint","condition")])
   labels = ComputeSubjectLevelPerm_HMLET(labels, n = samples)
 

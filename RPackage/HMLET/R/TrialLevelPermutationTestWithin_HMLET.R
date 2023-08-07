@@ -35,7 +35,7 @@ TrialLevelPermutationTestWithin_HMLET <- function(data, samples = 2000, paired =
       print(paste("Error in itt =", itt))
     }
     datItt$condition = datItt[, paste("perm",itt,sep = "")]
-    resp_time = as.data.frame(summarise(group_by(datItt,ID,timepoint,condition),prop = mean(AOI, na.rm=T)))
+    resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(datItt,ID,timepoint,condition),prop = mean(AOI, na.rm=T)))
     tValues = ComputeTValues_HMLET(resp_time, paired = paired)
     tValues = FindClusters_HMLET(tValues, threshold_t = threshold_t)
     sdat = melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
