@@ -35,7 +35,7 @@ or a list that is the result of PermutationTest_HMLET.}
 
 \item{showDataPointProp}{optional boolean to display data points on the axes, defaults to True.}
 
-\item{showOverallMean}{= "Point" optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it. defaults to "Point".}
+\item{showOverallMean}{optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it, defaults to "Point".}
 
 \item{gazePropRibbonAlpha}{optional float to change opacity of gaze ribbon, defaults to 0.1.}
 
@@ -57,23 +57,23 @@ or a list that is the result of PermutationTest_HMLET.}
 
 \item{clusterData}{data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL.}
 
-\item{yLabel}{= "Gaze Proportion" specify label for the y axis.}
+\item{yLabel}{Proportion" specify label for the y axis, defaults to "Gaze"}
 
-\item{dataAxisLabel}{= "Data Points (%)" specify label for the second y axis on the right.}
+\item{dataAxisLabel}{Specify label for the second y axis on the right, defaults to "Data Points (%)".}
 
-\item{xLabel}{= "Time (ms)" specify label for the x axis.}
+\item{xLabel}{Specify label for the x axis, defaults to "Time (ms)"}
 
-\item{lineWidthGazeProp}{= 1 specify line width for gaze proportion}
+\item{lineWidthGazeProp}{Specify line width for gaze proportion, defaults to 1.}
 
-\item{lineWidthDataPointProp}{= 1 specify line width for data point numbers}
+\item{lineWidthDataPointProp}{Specify line width for data point numbers, defaults to 1.}
 
-\item{lineWidthOverallMean}{= 1 specify line width for overall mean}
+\item{lineWidthOverallMean}{Specify line width for overall mean, defaults to 1.}
 
-\item{lineTypeOverallMean}{= "dashed" specify line type for overall mean}
+\item{lineTypeOverallMean}{Specify line type for overall mean, defaults to "dotted".}
 
-\item{alphaOverallMean}{= 0.5 specify alpha for overall mean}
+\item{alphaOverallMean}{Specify alpha for overall mean, defaults to 0.5.}
 
-\item{tickSizeOverallMean}{= NULL Optional to specify where to plot the overall means when showOverallMean = "Point"}
+\item{tickSizeOverallMean}{Optional to specify where to plot the overall means when showOverallMean = "Point", defaults to NULL.}
 }
 \value{
 a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.

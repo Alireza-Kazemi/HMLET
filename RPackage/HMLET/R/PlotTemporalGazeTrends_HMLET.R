@@ -3,7 +3,7 @@
 #' @param resultList dataframe of the data that is already prepared by PrepareMLETData_HMLET
 #'                   or a list that is the result of PermutationTest_HMLET.
 #' @param showDataPointProp optional boolean to display data points on the axes, defaults to True.
-#' @param showOverallMean = "Point" optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it. defaults to "Point".
+#' @param showOverallMean optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it, defaults to "Point".
 #' @param gazePropRibbonAlpha optional float to change opacity of gaze ribbon, defaults to 0.1.
 #' @param clusterFillColor optional string to change fill color of clustered data points, defaults to "#CC9933".
 #' @param clusterFillAlpha optional float to change opacity of clustered data points, defaults to 0.5.
@@ -14,15 +14,15 @@
 #' @param conditionOrder specify order of condition levels, defaults to NULL.
 #' @param onlySignificantClusters optional Boolean to plot only the significant clusters, defaults to True.
 #' @param clusterData data containing all clusters generated from ClusterStats_HMLET to display on plot, defaults to NULL.
-#' @param yLabel = "Gaze Proportion" specify label for the y axis.
-#' @param xLabel = "Time (ms)" specify label for the x axis.
-#' @param dataAxisLabel = "Data Points (%)" specify label for the second y axis on the right.
-#' @param lineWidthOverallMean = 1 specify line width for overall mean
-#' @param lineWidthGazeProp = 1 specify line width for gaze proportion
-#' @param lineWidthDataPointProp = 1 specify line width for data point numbers
-#' @param lineTypeOverallMean = "dashed" specify line type for overall mean
-#' @param alphaOverallMean = 0.5 specify alpha for overall mean
-#' @param tickSizeOverallMean = NULL Optional to specify where to plot the overall means when showOverallMean = "Point"
+#' @param yLabel Proportion" specify label for the y axis, defaults to "Gaze"
+#' @param xLabel Specify label for the x axis, defaults to "Time (ms)"
+#' @param dataAxisLabel Specify label for the second y axis on the right, defaults to "Data Points (%)".
+#' @param lineWidthOverallMean Specify line width for overall mean, defaults to 1.
+#' @param lineWidthGazeProp Specify line width for gaze proportion, defaults to 1.
+#' @param lineWidthDataPointProp Specify line width for data point numbers, defaults to 1.
+#' @param lineTypeOverallMean Specify line type for overall mean, defaults to "dotted".
+#' @param alphaOverallMean Specify alpha for overall mean, defaults to 0.5.
+#' @param tickSizeOverallMean Optional to specify where to plot the overall means when showOverallMean = "Point", defaults to NULL.
 #'
 #' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
 #' @export
