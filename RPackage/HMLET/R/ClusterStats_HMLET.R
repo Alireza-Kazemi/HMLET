@@ -30,7 +30,7 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NUL
     data = RemoveIncompleteTimePoints_HMLET(data)
     if(is.null(threshold_t)){
       num_sub = length(unique(data$ID))
-      threshold_t = qt(p=1-.05/2, df=num_sub-1)
+      threshold_t = stats::qt(p=1-.05/2, df=num_sub-1)
     }
     resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data, ID, timepoint, condition), prop = mean(AOI, na.rm = T)))
     tValues = ComputeTValues_HMLET(resp_time, paired = paired)

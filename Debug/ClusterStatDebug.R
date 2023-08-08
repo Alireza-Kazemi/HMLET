@@ -1,4 +1,94 @@
+dat = datRet[datRet$PostDec==0,c("SID","TrialNum","Retrieval","ConditionName","timeStamp","Target2","RespType2","FixatedOn")]
+dat = dat[dat$RespType2 %in% c("Corr Loc","Incorr Loc"),]
+dat = dat[dat$timeStamp>=200,]
+# dat = dat[dat$timeStamp<=2000,]
+groupingColumns = c("SID","TrialNum","Retrieval","timeStamp","ConditionName","Target2","RespType2")
+dat = CreateTimeBinData_HMLET(data = dat,  timeBinWidth =  16.67, timeMax = 2000, timepoint = "timeStamp",
+                              FixatedOn = "FixatedOn",groupingColumns = groupingColumns)
 
+dat[dat$timeStamp<250,] %>%
+  group_by(ConditionName,SID,timeStamp,RespType2) %>%
+  summarise(N=n(),M = mean(AOI_Target,na.rm = T)) %>%
+  group_by(ConditionName,timeStamp,RespType2) %>%
+  summarise(N=sum(N, na.rm = T),M = mean(M,na.rm = T)) %>%
+  as.data.frame()
+
+
+
+dat = datRet[datRet$PostDec==0,c("SID","TrialNum","Retrieval","ConditionName","timeStamp","Target2","RespType2","FixatedOn")]
+dat = dat[dat$RespType2 %in% c("Corr Loc","Incorr Loc"),]
+dat = dat[dat$timeStamp>200,]
+# dat = dat[dat$timeStamp<=2000,]
+groupingColumns = c("SID","TrialNum","Retrieval","timeStamp","ConditionName","Target2","RespType2")
+dat = CreateTimeBinData_HMLET(data = dat,  timeBinWidth =  16.67, timeMax = 1999, timepoint = "timeStamp",
+                              FixatedOn = "FixatedOn",groupingColumns = groupingColumns)
+
+dat[dat$timeStamp<250,] %>%
+  group_by(ConditionName,SID,timeStamp,RespType2) %>%
+  summarise(N=n(),M = mean(AOI_Target,na.rm = T)) %>%
+  group_by(ConditionName,timeStamp,RespType2) %>%
+  summarise(N=sum(N, na.rm = T),M = mean(M,na.rm = T)) %>%
+  as.data.frame()
+
+
+
+dat$Gazeprop = case_when(dat$RespType2 == "Corr Loc" ~  dat$AOI_Target/
+                           (dat$AOI_Target+dat$AOI_Lure),
+                         dat$RespType2 == "Incorr Loc" ~  dat$AOI_Target/
+                           (dat$AOI_Target+dat$AOI_Lure))
+dat$Gazeprop[is.nan(dat$Gazeprop)] = NA
+
+sDat = as.data.frame(summarise(group_by(dat,SID,TrialNum,ConditionName,RespType2), 
+                               Content = sum(AOI_Content),
+                               Lure = sum(AOI_Lure),
+                               Target = sum(AOI_Target)))
+
+sDat$N = sDat$Lure + sDat$Target + sDat$Content
+sDat$Lure = round(sDat$Lure/sDat$N * 100)
+sDat$Target = round(sDat$Target/sDat$N * 100)
+dispropotionCriterion = 10
+sDat$DP = case_when((sDat$Target - sDat$Lure)>dispropotionCriterion ~ "DPT",
+                    (sDat$Lure - sDat$Target)>dispropotionCriterion ~ "DPL",
+                    TRUE ~ "Equal")
+sDat = sDat[,c("SID", "TrialNum", "ConditionName", "RespType2","DP")]
+datDP = merge(dat,sDat,by = c("SID", "TrialNum", "ConditionName", "RespType2"))
+
+datDP$DPConditionName = paste(datDP$ConditionName , datDP$DP, sep = "_")
+datDP$AccConditionName = paste(datDP$ConditionName , datDP$RespType2, sep = "_")
+datDP$DPACC = paste(datDP$RespType2 , datDP$DP, sep = "_")
+
+dat = datDP[datDP$DP != "Equal" & datDP$DPACC %in% c("Corr Loc_DPT","Incorr Loc_DPT"),] # c("Corr Loc_DPT","Incorr Loc_DPL"),]   #
+dat = PermutationTestDataPrep_HMLET(data = dat, ID = "SID", trial = "TrialNum", 
+                                    timepoint = "timeStamp",
+                                    condition = "DPACC",
+                                    gazeInAOI = "Gazeprop", testName = "ConditionName")
+
+Res = ClusterStats_HMLET(dat, paired = T, detailed = F)
+
+PlotTemporalGazeTrends_HMLET(dat, clusterData = Res,showDataPointProp = F,
+                             gazePropRibbonAlpha = 0.2,yLabel = "Target Viewing Proportion")
+
+dat2 = dat
+dat1 = dat
+
+
+dat1 = dat1[dat1$timepoint<400,]
+dat2 = dat2[dat2$timepoint<400,]
+
+dat1 = RemoveIncompleteTimePoints_HMLET(dat1)
+A1 = as.data.frame(summarise(group_by(dat1,testName, timepoint,condition), N=n()))
+
+dat2 = RemoveIncompleteTimePoints_HMLET(dat2)
+A2 = as.data.frame(summarise(group_by(dat2,testName, timepoint,condition), N=n()))
+
+names(A1) = c("test","t","c","N1")
+names(A2) = c("test","t","c","N2")
+B = merge(A1,A2,all = T)
+B$diff= B$N1 - B$N2
+B = B[order(B$t),]
+
+
+#################################################
 
 data = dat
 paired = T
@@ -37,6 +127,12 @@ if(is.factor(data$timepoint)){
     # why we have difference here:
     A = as.data.frame(summarise(group_by(data, timepoint,condition), N=n()))
     
+    # names(A1) = c("t","c","N1")
+    # names(A2) = c("t","c","N2")
+    # B = merge(A1,A2,all = T)
+    # B$diff= B$N1 - B$N2
+    # B = B[order(B$t),]
+    B[B$diff!=0,]
     
     if(is.null(threshold_t)){
       num_sub = length(unique(data$ID))

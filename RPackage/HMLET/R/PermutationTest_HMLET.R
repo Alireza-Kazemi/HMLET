@@ -16,6 +16,7 @@
 #' @import rray
 #' @import tidyr
 #' @import vdiffr
+#' @import stats
 #'
 #' @return a list of permutation tests in which distribution of desired statistic under the null hypothesis is estimated in a large number of permutations of the original data
 #' @export
@@ -41,7 +42,7 @@ PermutationTest_HMLET <- function(data, samples = 2000, paired = T, permuteTrial
     if(is.na(threshold_t)){
       # Treshold should be based on the permutation sampling
       num_sub = length(unique(data$ID))
-      threshold_t = qt(p=1-.05/2, df=num_sub-1)
+      threshold_t = stats::qt(p=1-.05/2, df=num_sub-1)
     }
     data = RemoveIncompleteTimePoints_HMLET(data)
 

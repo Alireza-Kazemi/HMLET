@@ -15,6 +15,7 @@ Imports:
     purrr,
     reshape2,
     rray,
+    stats,
     tidyr,
     vdiffr
 Suggests: 
