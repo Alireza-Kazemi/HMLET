@@ -4,7 +4,7 @@
 \alias{ClusterStats_HMLET}
 \title{Adds cluster statistics to t value dataframe, includes all info for all tests.}
 \usage{
-ClusterStats_HMLET(data, paired = T, detailed = F, threshold_t = NA)
+ClusterStats_HMLET(data, paired = T, detailed = F, threshold_t = NULL)
 }
 \arguments{
 \item{data}{data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.}

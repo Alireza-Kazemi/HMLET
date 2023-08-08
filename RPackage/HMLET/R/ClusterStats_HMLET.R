@@ -10,7 +10,7 @@
 #' @return returns data frame with cluster statistics
 #' @export
 
-ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NA){
+ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NULL){
   if(is.factor(data$timepoint)){
     data$timeBin = data$timepoint
     data$timepoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
@@ -28,7 +28,7 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NA)
     data = datSave[datSave$testName == testName,]
 
     data = RemoveIncompleteTimePoints_HMLET(data)
-    if(is.na(threshold_t)){
+    if(is.null(threshold_t)){
       num_sub = length(unique(data$ID))
       threshold_t = qt(p=1-.05/2, df=num_sub-1)
     }
