@@ -105,6 +105,8 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
                                                tickSize = max(tickSize,na.rm = T) ))
   if(!is.null(tickSizeOverallMean)){
     OverallMean$tickSize = tickSizeOverallMean
+  }else{
+    OverallMean$tickSize = mean(OverallMean$tickSize) # Make sure the tickSize is unique
   }
   ## Added to fix the issue about SD for timepoints with 1 participant
   linedata$SD[is.na(linedata$SD)]=unique(0)
