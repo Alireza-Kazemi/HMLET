@@ -4,8 +4,12 @@ dTest = dTest[as.numeric(as.character(dTest$timepoint))<300,]
 resp_time = as.data.frame(summarise(group_by(dTest,ID,timepoint,condition), prop = mean(AOI, na.rm=T)))
 labels = unique(resp_time[,c("ID","timepoint","condition")])
 
+data = dat[dat$testName == "Far",]
+data = RemoveIncompleteTimePoints_HMLET(data)
+resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data,ID,timepoint,condition), prop = mean(AOI, na.rm=T)))
+labels = unique(resp_time[,c("ID","timepoint","condition")])
 
-n = 100
+n = 1000
 set.seed(5)
 
 condNum = length(unique(labels$condition))
@@ -56,29 +60,30 @@ pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
 #------------------------------------------> Debugging for duplicated permutation sample list
 A=NULL
 # ------------------------------------------>End
+n=100
 for (i in 1:n){
   #------------------------------------------> Debugging for duplicated permutation sample list
-  A = rbind(A,paste(purrr::map_dfr(as.list(subjLevelPerms[,i]),function(x){
-                    data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
-                    })$perm, collapse = ""))
+  # A = rbind(A,paste(purrr::map_dfr(as.list(subjLevelPerms[,i]),function(x){
+  #                   data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
+  #                   })$perm, collapse = ""))
   # ------------------------------------------>End
   labels <- cbind(labels,
                   purrr::map_dfr(as.list(subjLevelPerms[,i]),function(x){
                     data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
                   }))
-  setTxtProgressBar(pb,i/n)
+  # setTxtProgressBar(pb,i/n)
 }
 close(pb)
 names(labels) = c(names(labels)[1:3],paste(names(labels)[-(1:3)],1:n,sep = ""))
 
 #------------------------------------------> Debugging for duplicated permutation sample list
-A = as.data.frame(A)
-names(A) = c("V1")
-length(unique(A$V1))
-A$index = 1:nrow(A)
-A$UnikIdx =  as.numeric(factor(A$V1))
-A = as.data.frame(mutate(group_by(A,V1), nRep = n()))
-A[A$nRep>1,]
+# A = as.data.frame(A)
+# names(A) = c("V1")
+# length(unique(A$V1))
+# A$index = 1:nrow(A)
+# A$UnikIdx =  as.numeric(factor(A$V1))
+# A = as.data.frame(mutate(group_by(A,V1), nRep = n()))
+# A[A$nRep>1,]
 # ------------------------------------------>End
 
 #################################################################################

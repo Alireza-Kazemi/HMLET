@@ -92,14 +92,19 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
                                                             testName, timepoint, condition),
                                             M = mean(Prop, na.rm=T),SD = sd(Prop, na.rm = T),N = n()))
 
-  # First over timepoints within trials
-  OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(graphDat,
-                                                               testName, ID, trial, condition),
+  # First over timepoints within IDs+trials
+  OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(graphDat, testName,
+                                                               ID, trial, condition),
                                                M = mean(AOI, na.rm=T),
-                                               tickSize = mean(diff(timepoint,na.rm = T),na.rm = T)))
-  # Second over IDs within trials
-  OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(OverallMean,
-                                                               testName, condition),
+                                               tickSize = mean(diff(timepoint, na.rm = T), na.rm = T)))
+  # Second over trials within IDs
+  OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(OverallMean, testName,
+                                                               ID, condition),
+                                               M = mean(M, na.rm=T),
+                                               tickSize = max(tickSize, na.rm = T) ))
+  # Finally over IDs
+  OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(OverallMean, testName,
+                                                               condition),
                                                yM = mean(M, na.rm=T),
                                                ySE = sd(M, na.rm=T)/sqrt(n()),
                                                tickSize = max(tickSize,na.rm = T) ))

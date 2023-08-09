@@ -37,13 +37,13 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   subjLevelPerms = subjLevelPerms[, 2:ncol(subjLevelPerms)]  # remove the original labels
 
   #------------------------------------------> Debugging for duplicated permutation sample list
-  C = t(subjLevelPerms)
-  C = data.frame(apply(C, 1, function(row) {paste(row, collapse = "")}))
-  names(C) = c("V1")
-  C$index = 1:nrow(C)
-  C$UnikIdx =  as.numeric(factor(C$V1))
-  C = as.data.frame(mutate(group_by(C,V1), nRep = n()))
-  C[C$nRep>1,]
+  # C = t(subjLevelPerms)
+  # C = data.frame(apply(C, 1, function(row) {paste(row, collapse = "")}))
+  # names(C) = c("V1")
+  # C$index = 1:nrow(C)
+  # C$UnikIdx =  as.numeric(factor(C$V1))
+  # C = as.data.frame(mutate(group_by(C,V1), nRep = n()))
+  # C[C$nRep>1,]
   # ------------------------------------------>End
 
   ################################################### Compute condition-level unique labels
