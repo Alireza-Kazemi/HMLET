@@ -52,16 +52,7 @@ ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint =
                  "gazeX", "gazeY", "gazeXRelative", "gazeYRelative", "fixation", miscVars)
 
 
-  # data = CreateTimeBinData_HMLET(data, groupingColumns = NULL,
-  #                                timeBinWidth =  unique(data$duration),
-  #                                timeMax = timeMax, FixatedOn = "fixation",
-  #                                timepoint = "timepoint", AOIs = NULL ,
-  #                                timeForward = timeForward, aggregateFun = NULL)
-
-
-
-
   write.csv(data, paste(path, fileName, sep = .Platform$file.sep), row.names = F)
   print(paste("Data is saved in",getwd(),.Platform$file.sep,fileName, sep=""))
-
+  return(data)
 }
