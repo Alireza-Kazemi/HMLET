@@ -34,7 +34,7 @@ tValues = res[[2]]
 
 
 print("Creating unique permutation labels:")
-tValueDist = TrialLevelPermutationTestWithin_HMLET(data, samples = samples, paired = paired, threshold_t = threshold_t)----
+tValueDist = TrialLevelPermutationTestWithin_HMLET(data, samples = samples, paired = paired, threshold_t = threshold_t) #----
     
 print("Compute unique permutation labels per subject:")
 labels = unique(data[,c("ID","trial","condition")])
