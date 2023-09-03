@@ -44,7 +44,7 @@ ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint =
   }else if(is.numeric(dataPointDuration)){
     data$duration = unique(dataPointDuration)
   }
-  data = data[data[, timepoint]<timeMax, ]
+  data = data[data[, timepoint]<=timeMax, ]
 
   data = data[,c(testName, ID, trial, timepoint, condition, response, "duration",
                  gazeX, gazeY, gazeXRelative, gazeYRelative, fixation, miscVars)]
@@ -53,5 +53,5 @@ ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint =
 
 
   write.csv(data, paste(path, fileName, sep = .Platform$file.sep), row.names = F)
-  print(paste("Data is saved in",path,.Platform$file.sep,fileName, sep=""))
+  print(paste("Data is saved in ",path,.Platform$file.sep,fileName, sep=""))
 }
