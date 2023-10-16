@@ -22,6 +22,7 @@
 #' @param lineWidthDataPointProp Specify line width for data point numbers, defaults to 1.
 #' @param lineTypeOverallMean Specify line type for overall mean, defaults to "dotted".
 #' @param alphaOverallMean Specify alpha for overall mean, defaults to 0.5.
+#' @param shapeCodeOverallMean Specify the shape of the overall mean points when showOverallMean = "Point", defaults to 1 \(circle\).
 #' @param tickSizeOverallMean Optional to specify where to plot the overall means when showOverallMean = "Point", defaults to NULL.
 #'
 #' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
@@ -46,6 +47,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
                                          lineWidthOverallMean = 1,
                                          lineTypeOverallMean = "dotted",
                                          alphaOverallMean = 0.5,
+                                         shapeCodeOverallMean = 1,
                                          tickSizeOverallMean = NULL){
   #-------------------Update Graph Handle
   P = ggplot()
@@ -180,7 +182,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
                       position = position_dodge(width = max(OverallMean$tickSize)/2))+
       scale_shape_manual(name = NULL,
                          limits = c("overallMeanShape"),
-                         values = c(18),
+                         values = c(shapeCodeOverallMean),
                          labels = c("Overall Means"))+
       geom_rect(data = OverallMean,
                 aes(xmin = tickSize/2+max(linedata$timepoint),

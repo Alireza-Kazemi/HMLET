@@ -26,6 +26,7 @@ PlotTemporalGazeTrends_HMLET(
   lineWidthOverallMean = 1,
   lineTypeOverallMean = "dotted",
   alphaOverallMean = 0.5,
+  shapeCodeOverallMean = 1,
   tickSizeOverallMean = NULL
 )
 }
@@ -72,6 +73,8 @@ or a list that is the result of PermutationTest_HMLET.}
 \item{lineTypeOverallMean}{Specify line type for overall mean, defaults to "dotted".}
 
 \item{alphaOverallMean}{Specify alpha for overall mean, defaults to 0.5.}
+
+\item{shapeCodeOverallMean}{Specify the shape of the overall mean points when showOverallMean = "Point", defaults to 1 \(circle\).}
 
 \item{tickSizeOverallMean}{Optional to specify where to plot the overall means when showOverallMean = "Point", defaults to NULL.}
 }
