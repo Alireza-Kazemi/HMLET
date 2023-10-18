@@ -250,10 +250,10 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
 
   #-----------------------------------------------------------------------Update Graph Handle
   P = P +
-    facet_wrap(~testName,nrow = 1)+
+    facet_wrap(~testName,ncol = 1)+
     theme(panel.background = element_rect(fill = "transparent",colour = NA))+
     theme(plot.background = element_rect(fill = "transparent",colour = NA))+
-    theme( axis.line = element_line(linewidth = 1, linetype = "solid"))+
+    theme(axis.line = element_line(linewidth = 1, linetype = "solid"))+
     theme(legend.position = "bottom")+
     ylab(yLabel)+
     xlab(xLabel)
