@@ -23,7 +23,7 @@
 #' @import reshape2
 #' @return data frame compatible for permutation tests and other HMLET modules
 #' @export
-PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timepoint, condition, gazeMeasure,
+PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timePoint, condition, gazeMeasure,
                                   conditionLevels = NULL, targetAOI = NULL, testName = NULL, timeBinName = NULL){
   if(is.null(testName)){
     data$testName = unique("PermutationTest0")
