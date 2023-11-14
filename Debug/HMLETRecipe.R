@@ -4,43 +4,56 @@
 #-------------------------------------------------------- Interpolation -----
 # requires zoo package
 Interpolation_HMLET <- function(data, gazeXCoordinate, gazeYCoordinate, timePoint,
-                                trial,
-                                maxBlinkDuration = 75, samplingDuration = NULL,
-                                method = "linear"){
+                                trial = "trial", ID = "ID", groupingVars = NULL,
+                                maxBlinkDuration = 75, samplingDuration = NULL){
   if(is.null(samplingDuration)){
-    samplingDuration = mean(data[,timeStamp])
+    samplingDuration = mean(data[,timePoint])
   }
+  maxGap = ceiling(maxBlinkDuration/samplingDuration)
+  datapointIdx = ""
   
-  maxgap = ceiling(maxBlinkDuration/samplingDuration)
+  for (gVar in unique(c(trial, ID, groupingVars))){
+    datapointIdx = paste(datapointIdx, data[,gVar], sep = "_")
+  }
+
+  gazeXInterp = paste(gazeXCoordinate,"_Interp",sep = "")
+  gazeYInterp = paste(gazeYCoordinate,"_Interp",sep = "")
   
+  data[, gazeXInterp] = unique(NA)
+  data[, gazeYInterp] = unique(NA)
   
-  
-  data[,gazeXCoordinate]
+  for(dpIdx in unique(datapointIdx)){
+    timePoints = data[datapointIdx == dpIdx, timePoint]
+    
+    values = data[datapointIdx == dpIdx, gazeXCoordinate]
+    values = zoo::na.approx(values, x = timePoints, na.rm = FALSE, maxgap = maxGap)
+    data[datapointIdx == dpIdx, gazeXInterp] = values
+    
+    values = data[datapointIdx == dpIdx, gazeYCoordinate]
+    values = zoo::na.approx(values, x = timePoints, na.rm = FALSE, maxgap = maxGap)
+    data[datapointIdx == dpIdx, gazeYInterp] = values
+  }
+  return(data)
 }
 
 
-d$Interpolated = unique(0)
-d$Interpolated[is.na(d$GazeX)|is.na(d$GazeY)] = unique(1)
+RD = "D:\\Projects\\HMLET\\DataFiles\\Debug\\"
+dat = read.table(paste(RD,"AlirezaTest2022.csv",sep = ""), header=TRUE, sep=",", strip.white = TRUE)
+dat = dat[dat$PostDec == 0,]
+dat = dat[!(dat$MediaName %in% c("center.jpg","waitTime","Retrieval summary.png")),]
+dat$RecordingTimestamp = dat$RecordingTimestamp-min(dat$RecordingTimestamp)+1
+names(dat)
+dat = dat %>% group_by(trialName) %>%
+          mutate(timeStamp = RecordingTimestamp-min(RecordingTimestamp)+1)%>%
+          as.data.frame()
 
-d$GazeYO = d$GazeY
-d$GazeXO = d$GazeX
+datN = Interpolation_HMLET(data = dat, gazeXCoordinate = "GazeX", 
+                    gazeYCoordinate = "GazeY", 
+                    timePoint = "timeStamp",
+                    trial = "trialName", ID = "ParticipantName", groupingVars = NULL,
+                    maxBlinkDuration = 75, samplingDuration = NULL)
 
-d$timeStampOrig = d$timeStamp
-for(dpIdx in unique(d$DataPointID)){
-  d$GazeY[d$DataPointID == dpIdx] = zoo::na.approx(d$GazeYO[d$DataPointID == dpIdx], x = d$timeStamp[d$DataPointID == dpIdx],na.rm = FALSE)
-  d$GazeX[d$DataPointID == dpIdx] = zoo::na.approx(d$GazeXO[d$DataPointID == dpIdx], x = d$timeStamp[d$DataPointID == dpIdx],na.rm = FALSE)
-}
-d$timeStamp = d$SampleIndex*d$Duration
-
-
-
-
-
-
-
-
-
-
+write.csv(datN,paste(RD,"interpolated.csv",sep = ""), row.names = F)
 
 
 #--------------------------------------------------------- Permutation Test N>5samples----
