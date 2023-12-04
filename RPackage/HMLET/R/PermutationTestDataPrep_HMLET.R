@@ -5,7 +5,7 @@
 #' @param data data frame with temporal data for permutation tests routine.
 #' @param ID optional string for column name that represents IDs within data frame, defaults to "ID".
 #' @param trial string for column name that represents trials within data frame.
-#' @param timepoint string for column name that represents time intervals.
+#' @param timePoint string for column name that represents time intervals.
 #' @param condition string for column name that specifies a condition within the data frame.
 #' @param gazeMeasure string for column name which includes numerical value of the gaze measure at each time point such as gazeproportion.
 #' @param conditionLevels optional array of string column names to denote all the values of conditions, defaults to NULL.
@@ -31,11 +31,11 @@ PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timePoint, con
   }
 
   if(is.null(timeBinName)){
-    dat = data[, c(testName, ID, trial, timepoint, condition, gazeInAOI)]
+    dat = data[, c(testName, ID, trial, timePoint, condition, gazeMeasure)]
     names(dat) = c("testName", "ID", "trial", "timepoint", "condition", "AOI")
   }
   else{
-    dat = data[, c(testName, ID, trial, timepoint, condition, gazeInAOI, timeBinName)]
+    dat = data[, c(testName, ID, trial, timePoint, condition, gazeMeasure, timeBinName)]
     names(dat) = c("testName", "ID", "trial", "timepoint", "condition", "AOI", "timeBinName")
   }
   if(!is.null(conditionLevels)){

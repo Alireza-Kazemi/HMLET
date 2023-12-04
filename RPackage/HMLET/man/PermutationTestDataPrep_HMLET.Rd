@@ -8,9 +8,9 @@ PermutationTestDataPrep_HMLET(
   data,
   ID = "ID",
   trial,
-  timepoint,
+  timePoint,
   condition,
-  gazeInAOI,
+  gazeMeasure,
   conditionLevels = NULL,
   targetAOI = NULL,
   testName = NULL,
@@ -24,11 +24,11 @@ PermutationTestDataPrep_HMLET(
 
 \item{trial}{string for column name that represents trials within data frame.}
 
-\item{timepoint}{string for column name that represents time intervals.}
+\item{timePoint}{string for column name that represents time intervals.}
 
 \item{condition}{string for column name that specifies a condition within the data frame.}
 
-\item{gazeInAOI}{string for column name which includes name of the AOI that the subject is looking at each timepoint.}
+\item{gazeMeasure}{string for column name which includes numerical value of the gaze measure at each time point such as gazeproportion.}
 
 \item{conditionLevels}{optional array of string column names to denote all the values of conditions, defaults to NULL.}
 
