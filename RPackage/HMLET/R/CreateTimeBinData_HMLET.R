@@ -5,7 +5,7 @@
 #' @param timeBinWidth optional integer specified time interval for time bins, defaults to 250.
 #' @param timeMax optional integer for maximum time in temporal order, samples are left out if duration is longer. Defaults to 3000.
 #' @param FixatedOn string for column name of specific AOI in dataframe to be fixated on.
-#' @param timepoint optional string representing column name for timepoints, defaults to "timepoint".
+#' @param timePoint optional string representing column name for time Stamps, defaults to "timeStamp".
 #' @param AOIs optional array of strings representing column names for areas of interest, defaults to NULL.
 #' @param timeForward optional boolean to sort timebins, defaults to True for ascending order.
 #' @param aggregateFun optional function for aggregation, defaults to mean.
@@ -15,7 +15,7 @@
 #' @export
 
 CreateTimeBinData_HMLET<- function(data, groupingColumns = NULL, timeBinWidth =  250, timeMax = 3000, FixatedOn,
-                             timepoint = "timepoint", AOIs = NULL , timeForward = T, aggregateFun = mean){
+                             timePoint = "timeStamp", AOIs = NULL , timeForward = T, aggregateFun = mean){
 
   # This is just a check to make sure time bin size is not out of order
   minTimeStep = round(abs(diff(data[, timepoint])),2)
