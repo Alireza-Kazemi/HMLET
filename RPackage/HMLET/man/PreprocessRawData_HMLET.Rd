@@ -10,7 +10,7 @@ PreprocessRawData_HMLET(
   data,
   ID = "ID",
   trial = "trial",
-  timepoint = "timepoint",
+  timePoint = "timePoint",
   GazeX = "GazeX_Relative",
   GazeY = "GazeY_Relative",
   AOINames = NULL,
@@ -25,7 +25,7 @@ PreprocessRawData_HMLET(
 
 \item{trial}{string for column name that represents trials within data frame, for example "TrialNum."}
 
-\item{timepoint}{string for column name that represents time intervals, for example "timeStamp."}
+\item{timePoint}{string for column name that represents time intervals, for example "timeStamp."}
 
 \item{GazeX}{# TODO: ASK}
 

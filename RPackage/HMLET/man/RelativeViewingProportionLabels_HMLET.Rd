@@ -21,7 +21,7 @@ RelativeViewingProportionLabels_HMLET(
 
 \item{trial}{string for column name that represents trials within data frame.}
 
-\item{AOIName}{string for column name which includes name of the AOI that the subject is looking at each timepoint.}
+\item{AOIName}{string for column name which includes name of the AOI that the subject is looking at each timePoint.}
 
 \item{comparingAOI}{names of the two AOIs that are their looking proportion should be compared.}
 

@@ -10,7 +10,7 @@ CreateTimeBinData_HMLET(
   timeBinWidth = 250,
   timeMax = 3000,
   FixatedOn,
-  timepoint = "timepoint",
+  timePoint = "timeStamp",
   AOIs = NULL,
   timeForward = T,
   aggregateFun = mean
@@ -27,7 +27,7 @@ CreateTimeBinData_HMLET(
 
 \item{FixatedOn}{string for column name of specific AOI in dataframe to be fixated on.}
 
-\item{timepoint}{optional string representing column name for timepoints, defaults to "timepoint".}
+\item{timePoint}{optional string representing column name for time Stamps, defaults to "timeStamp".}
 
 \item{AOIs}{optional array of strings representing column names for areas of interest, defaults to NULL.}
 

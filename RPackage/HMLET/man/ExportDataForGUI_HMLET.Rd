@@ -9,7 +9,7 @@ ExportDataForGUI_HMLET(
   data,
   ID = "ID",
   trial = "trial",
-  timepoint = "timepoint",
+  timePoint = "timePoint",
   timeMax = NULL,
   dataPointDuration,
   response,
@@ -32,7 +32,7 @@ ExportDataForGUI_HMLET(
 
 \item{trial}{string for column name that represents trials within data frame, for example "TrialNum."}
 
-\item{timepoint}{string for column name that represents time intervals, for example "timeStamp."}
+\item{timePoint}{string for column name that represents time intervals, for example "timeStamp."}
 
 \item{timeMax}{optional integer for maximum time in temporal order, samples are left out if duration is longer. Default is NULL}
 
