@@ -16,7 +16,7 @@ GenerateRandomData_HMLET <- function(tMax = 20, effectOffset = 5, trialNum = 40,
   #     condition = cat(1,condition,repmat("C1",[tMax,1]));
   #     trial = cat(1,trial,repmat(trials,[tMax,1]));
   #     ID = cat(1,ID,repmat(sID,[tMax,1]));
-  #     timepoint = cat(1,timepoint,t);
+  #     timePoint = cat(1,timePoint,t);
   #   }
   #   for (trials in ((trialNum/2+1):trialNum)){
   #     A = round(rand(tMax,1)/2+.25);
@@ -25,7 +25,7 @@ GenerateRandomData_HMLET <- function(tMax = 20, effectOffset = 5, trialNum = 40,
   #     condition = cat(1,condition,repmat("C2",[tMax,1]));
   #     trial = cat(1,trial,repmat(trials,[tMax,1]));
   #     ID = cat(1,ID,repmat(sID,[tMax,1]));
-  #     timepoint = cat(1,timepoint,t);
+  #     timePoint = cat(1,timePoint,t);
   #   }
   # }
   #

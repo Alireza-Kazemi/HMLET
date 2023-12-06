@@ -5,7 +5,7 @@
 #' @param data data frame with temporal data for permutation tests routine.
 #' @param ID optional string for column name that represents IDs within data frame, defaults to "ID".
 #' @param trial string for column name that represents trials within data frame.
-#' @param AOIName string for column name which includes name of the AOI that the subject is looking at each timepoint.
+#' @param AOIName string for column name which includes name of the AOI that the subject is looking at each timePoint.
 #' @param comparingAOI names of the two AOIs that are their looking proportion should be compared.
 #' @param targetAOI names of the two AOIs that are their looking proportion should be compared.
 #' @param dispropotionCriterion optional string for column name to focus on specific AOI, defaults to NULL.
@@ -25,8 +25,8 @@ RelativeViewingProportionLabels_HMLET <- function(data, ID = "ID", trial, AOINam
   if(!is.numeric(dat[,AOIName])){
     warning("AOIName column must be in numeric form")
   }
-  if(!is.numeric(dat$timepoint)){
-    warning("timepoint column must be in numeric form")
+  if(!is.numeric(dat$timePoint)){
+    warning("timePoint column must be in numeric form")
   }
 
   return(dat)

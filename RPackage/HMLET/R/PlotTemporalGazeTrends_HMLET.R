@@ -80,25 +80,25 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
 
 
   linedata = as.data.frame(dplyr::summarise(dplyr::group_by(graphDat,
-                                                            testName, ID, timepoint, condition),
+                                                            testName, ID, timePoint, condition),
                                             Prop = mean(AOI, na.rm=T)))
 
   ## Added to fix datapoint number issue that counted NaNs
   ### Find complete cases in the data
   linedata = linedata[complete.cases(linedata),]
-  keepIdx = unique(paste(linedata$ID,linedata$timepoint,sep = "_"))
-  dataIdx = paste(graphDat$ID,graphDat$timepoint, sep = "_")
+  keepIdx = unique(paste(linedata$ID,linedata$timePoint,sep = "_"))
+  dataIdx = paste(graphDat$ID,graphDat$timePoint, sep = "_")
   graphDat = graphDat[dataIdx %in% keepIdx,]
 
   linedata = as.data.frame(dplyr::summarise(dplyr::group_by(linedata,
-                                                            testName, timepoint, condition),
+                                                            testName, timePoint, condition),
                                             M = mean(Prop, na.rm=T),SD = sd(Prop, na.rm = T),N = n()))
 
-  # First over timepoints within IDs+trials
+  # First over timePoints within IDs+trials
   OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(graphDat, testName,
                                                                ID, trial, condition),
                                                M = mean(AOI, na.rm=T),
-                                               tickSize = mean(diff(timepoint, na.rm = T), na.rm = T)))
+                                               tickSize = mean(diff(timePoint, na.rm = T), na.rm = T)))
   # Second over trials within IDs
   OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(OverallMean, testName,
                                                                ID, condition),
@@ -115,7 +115,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
   }else{
     OverallMean$tickSize = mean(OverallMean$tickSize) # Make sure the tickSize is unique
   }
-  ## Added to fix the issue about SD for timepoints with 1 participant
+  ## Added to fix the issue about SD for timePoints with 1 participant
   linedata$SD[is.na(linedata$SD)]=unique(0)
 
   linedata$SE = linedata$SD/sqrt(linedata$N)
@@ -140,25 +140,25 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
       clusterData$testName = factor(clusterData$testName,levels = testNameOrder)
     }
 
-    linedataR = reshape2::dcast(linedata, timepoint+ testName ~ condition, value.var = c("M"))
-    names(linedataR) = c("timepoint","testName","C1","C2")
+    linedataR = reshape2::dcast(linedata, timePoint+ testName ~ condition, value.var = c("M"))
+    names(linedataR) = c("timePoint","testName","C1","C2")
     linedataR$yMin = pmin(linedataR$C1,linedataR$C2)
     linedataR$yMax = pmax(linedataR$C1,linedataR$C2)
 
     for(i in 1:nrow(clusterData)){
-      Clusters = (linedataR$timepoint>=clusterData$timeStart[i] & linedataR$timepoint<=clusterData$timeEnd[i]) &
+      Clusters = (linedataR$timePoint>=clusterData$timeStart[i] & linedataR$timePoint<=clusterData$timeEnd[i]) &
         (linedataR$testName == clusterData$testName[i])
       Clusters = linedataR[Clusters,]
 
       if(nrow(Clusters)==1){
-        wRibbon = mean(diff(unique(linedata$timepoint)))/2
+        wRibbon = mean(diff(unique(linedata$timePoint)))/2
         Clusters = rbind(Clusters,Clusters)
-        Clusters$timepoint[2] = Clusters$timepoint[1]+wRibbon
+        Clusters$timePoint[2] = Clusters$timePoint[1]+wRibbon
       }
       #-----------------------------------------------------------------------Update Graph Handle
       P = P +
         geom_ribbon(data = Clusters,
-                    aes(x=timepoint, ymin = yMin, ymax = yMax),fill =  clusterFillColor, alpha = clusterFillAlpha)
+                    aes(x=timePoint, ymin = yMin, ymax = yMax),fill =  clusterFillColor, alpha = clusterFillAlpha)
 
     }
 
@@ -175,7 +175,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
     #-----------------------------------------------------------------------Update Graph Handle
     P = P +
       geom_pointrange(data = OverallMean,
-                      aes(x=tickSize+max(linedata$timepoint),
+                      aes(x=tickSize+max(linedata$timePoint),
                           y=yM, ymin=yM-ySE, ymax=yM+ySE, color = condition,
                           shape = "overallMeanShape"),
                       size = pointSize, fatten = pointFatten,
@@ -185,8 +185,8 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
                          values = c(shapeCodeOverallMean),
                          labels = c("Overall Means"))+
       geom_rect(data = OverallMean,
-                aes(xmin = tickSize/2+max(linedata$timepoint),
-                    xmax = tickSize*3/2+max(linedata$timepoint),
+                aes(xmin = tickSize/2+max(linedata$timePoint),
+                    xmax = tickSize*3/2+max(linedata$timePoint),
                     ymin = -Inf, ymax = Inf),
                 fill = "gray", alpha = 0.2)
   }
@@ -195,7 +195,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
     #-----------------------------------------------------------------------Update Graph Handle
     P = P +
       geom_line(data = linedata,
-                aes(x=timepoint, y=DataPercent, group=condition, color=condition,linetype="DataPointProp"),
+                aes(x=timePoint, y=DataPercent, group=condition, color=condition,linetype="DataPointProp"),
                 linewidth=lineWidthDataPointProp, alpha = 0.7, position = position_dodge(width = .7))+
       scale_y_continuous(sec.axis = sec_axis(~.*(1/secondAxisScale)*100, name=dataAxisLabel))
   }
@@ -228,14 +228,14 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
   #-----------------------------------------------------------------------Update Graph Handle
   P = P +
     geom_line(data = linedata,
-              aes(x=timepoint, y=M, group=condition, color = condition),
+              aes(x=timePoint, y=M, group=condition, color = condition),
               linewidth=lineWidthGazeProp)
 
   if(!timeBinFlag){
     #-----------------------------------------------------------------------Update Graph Handle
     P = P +
       geom_ribbon(data = linedata,
-                  aes(x=timepoint, ymin = M-SE, ymax = M+SE, fill = condition ),
+                  aes(x=timePoint, ymin = M-SE, ymax = M+SE, fill = condition ),
                   alpha = gazePropRibbonAlpha)
 
 
@@ -243,7 +243,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
     #-----------------------------------------------------------------------Update Graph Handle
     P = P +
       geom_pointrange(data = linedata,
-                      aes(x=timepoint, y=M, ymin=M-SE, ymax=M+SE, group=condition, color = condition),
+                      aes(x=timePoint, y=M, ymin=M-SE, ymax=M+SE, group=condition, color = condition),
                       alpha = pointAlpha, size = pointSize, fatten = pointFatten) +
       scale_x_continuous(breaks = 1:length(timeBinLabels) , labels=timeBinLabels)
   }
