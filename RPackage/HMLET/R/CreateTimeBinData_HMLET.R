@@ -18,20 +18,20 @@ CreateTimeBinData_HMLET<- function(data, groupingColumns = NULL, timeBinWidth = 
                              timePoint = "timeStamp", AOIs = NULL , timeForward = T, aggregateFun = mean){
 
   # This is just a check to make sure time bin size is not out of order
-  minTimeStep = round(abs(diff(data[, timepoint])),2)
+  minTimeStep = round(abs(diff(data[, timePoint])),2)
   minTimeStep = minTimeStep[minTimeStep>0]
   minTimeStep = min(minTimeStep, na.rm = T)
   if(timeBinWidth<minTimeStep){
-    warning(paste("\n    >> Time bin width (",timeBinWidth,") is smaller than timepoint steps",
-                  "\n    >> Time bin width is set to smallest non-zero timepoint step  =",
+    warning(paste("\n    >> Time bin width (",timeBinWidth,") is smaller than timePoint steps",
+                  "\n    >> Time bin width is set to smallest non-zero timePoint step  =",
                   minTimeStep, sep = ""))
     timeBinWidth = minTimeStep
 
   }
 
   # applies aggregating function on binary AOIs within time bins per each level of grouping variables in specified order
-  data = data[data[, timepoint]<=timeMax, ]
-  data$timeBin = ceiling(data[, timepoint]/timeBinWidth-1)*timeBinWidth+timeBinWidth/2
+  data = data[data[, timePoint]<=timeMax, ]
+  data$timeBin = ceiling(data[, timePoint]/timeBinWidth-1)*timeBinWidth+timeBinWidth/2
   timeBinsOrder = unique(data$timeBin)
   timeBinsOrder = timeBinsOrder[order(timeBinsOrder)]
   if(timeForward){
