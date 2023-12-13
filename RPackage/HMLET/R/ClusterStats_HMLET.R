@@ -11,10 +11,10 @@
 #' @export
 
 ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NULL){
-  if(is.factor(data$timepoint)){
-    data$timeBin = data$timepoint
-    data$timepoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
-    warning(paste("\n    >> Timepoints are converted to numeric indexes: ",
+  if(is.factor(data$timePoint)){
+    data$timeBin = data$timePoint
+    data$timePoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
+    warning(paste("\n    >> timePoints are converted to numeric indexes: ",
                   "\n    >> ",c(paste(levels(data$timeBin),1:length(levels(data$timeBin)), sep = " -> ", collapse = "   ")), sep = ""))
   }
 
@@ -27,16 +27,16 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NUL
   for(testName in unique(datSave$testName)){
     data = datSave[datSave$testName == testName,]
 
-    data = RemoveIncompleteTimePoints_HMLET(data)
+    data = RemoveIncompletetimePoints_HMLET(data)
     if(is.null(threshold_t)){
       num_sub = length(unique(data$ID))
       threshold_t = stats::qt(p=1-.05/2, df=num_sub-1)
     }
-    resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data, ID, timepoint, condition), prop = mean(AOI, na.rm = T)))
+    resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data, ID, timePoint, condition), prop = mean(AOI, na.rm = T)))
     tValues = ComputeTValues_HMLET(resp_time, paired = paired)
     tValues = FindClusters_HMLET(tValues, threshold_t = threshold_t)
 
-    sdat = reshape2::melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
+    sdat = reshape2::melt(tValues,id.vars = c("timePoint","value"),variable.name = "Direction", value.name = "index")
     sdat = sdat[sdat$index!=0,]
     if(nrow(sdat)!=0){
       sdat = as.data.frame(dplyr::summarise(dplyr::group_by(sdat,Direction,index),tStatistic = sum(value, na.rm=T)))
@@ -48,7 +48,7 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NUL
     tValues$testName = unique(data$testName)
     tValues = tValues[,c("testName",names(tValues)[names(tValues)!="testName"])]
 
-    clusterInf = melt(tValues,id.vars = c("testName","timepoint","value"),variable.name = "Direction", value.name = "index")
+    clusterInf = melt(tValues,id.vars = c("testName","timePoint","value"),variable.name = "Direction", value.name = "index")
     clusterInf = clusterInf[clusterInf$index!=0,]
     if(nrow(clusterInf)==0){
       warning(paste("\n    >> In test data: ",unique(data$testName),
@@ -57,7 +57,7 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NUL
     }
     else{
     clusterInf = as.data.frame(dplyr::summarise(dplyr::group_by(clusterInf, testName, Direction, index),
-                                         tStatistic = sum(value), timeStart = min(timepoint), timeEnd = max(timepoint)))
+                                         tStatistic = sum(value), timeStart = min(timePoint), timeEnd = max(timePoint)))
     }
 
     clusterInfAll = rbind(clusterInfAll, clusterInf)

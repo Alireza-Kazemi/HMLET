@@ -4,13 +4,13 @@
 #' @param data dataframe containing temporal data.
 #' @param ID optional string for column name that represents IDs within data frame, defaults to "ID."
 #' @param trial string for column name that represents trials within data frame, for example "TrialNum."
-#' @param timepoint string for column name that represents time intervals, for example "timeStamp."
+#' @param timePoint string for column name that represents time intervals, for example "timeStamp."
 #' @param GazeX # TODO: ASK
 #' @param GazeY # TODO: ASK
 #' @param fileName optional string for output csv file, defaults to "ETDataforMATLAB.csv."
 #' @param path specifies working directory of project.
 #' @export
-PreprocessRawData_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
+PreprocessRawData_HMLET <- function(data, ID = "ID", trial = "trial", timePoint = "timePoint",
                                    GazeX = "GazeX_Relative", GazeY = "GazeY_Relative",
                                    AOINames = NULL, fileName = "ETDataforMATLAB.csv", path = getwd()){
 

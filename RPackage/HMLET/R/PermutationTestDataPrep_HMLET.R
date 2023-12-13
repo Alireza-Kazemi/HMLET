@@ -32,11 +32,11 @@ PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timePoint, con
 
   if(is.null(timeBinName)){
     dat = data[, c(testName, ID, trial, timePoint, condition, gazeMeasure)]
-    names(dat) = c("testName", "ID", "trial", "timepoint", "condition", "AOI")
+    names(dat) = c("testName", "ID", "trial", "timePoint", "condition", "AOI")
   }
   else{
     dat = data[, c(testName, ID, trial, timePoint, condition, gazeMeasure, timeBinName)]
-    names(dat) = c("testName", "ID", "trial", "timepoint", "condition", "AOI", "timeBinName")
+    names(dat) = c("testName", "ID", "trial", "timePoint", "condition", "AOI", "timeBinName")
   }
   if(!is.null(conditionLevels)){
     dat$condition = factor(dat$condition,levels = conditionLevels)
@@ -47,8 +47,8 @@ PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timePoint, con
   if(!is.numeric(dat$AOI)){
     warning("gazeMeasure column must be in numeric form")
   }
-  if(!is.numeric(dat$timepoint)){
-    warning("timepoint column must be in numeric form")
+  if(!is.numeric(dat$timePoint)){
+    warning("timePoint column must be in numeric form")
   }
 
   return(dat)

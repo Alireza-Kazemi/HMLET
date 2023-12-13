@@ -10,8 +10,8 @@
 #' @export
 SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paired = T, threshold_t = NA){
 
-  resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data,ID,timepoint,condition), prop = mean(AOI, na.rm=T)))
-  labels = unique(resp_time[,c("ID","timepoint","condition")])
+  resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data,ID,timePoint,condition), prop = mean(AOI, na.rm=T)))
+  labels = unique(resp_time[,c("ID","timePoint","condition")])
   labels = ComputeSubjectLevelPerm_HMLET(labels, n = samples)
 
   #----------------------------- Perform Permutation tests
@@ -23,7 +23,7 @@ SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paire
     resp_time$condition = labels[,paste("perm",itt,sep = "")]
     tValues = ComputeTValues_HMLET(resp_time,paired = paired)
     tValues = FindClusters_HMLET(tValues, threshold_t = threshold_t)
-    sdat = melt(tValues,id.vars = c("timepoint","value"),variable.name = "Direction", value.name = "index")
+    sdat = melt(tValues,id.vars = c("timePoint","value"),variable.name = "Direction", value.name = "index")
     sdat = sdat[sdat$index!=0,]
     if(nrow(sdat)!=0){
       sdat = as.data.frame(dplyr::summarise(dplyr::group_by(sdat,Direction,index),tStatistic = sum(value, na.rm=T)))

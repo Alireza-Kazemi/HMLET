@@ -4,7 +4,7 @@
 #' @param data dataframe containing temporal data.
 #' @param ID optional string for column name that represents IDs within data frame, defaults to "ID."
 #' @param trial string for column name that represents trials within data frame, for example "TrialNum."
-#' @param timepoint string for column name that represents time intervals, for example "timeStamp."
+#' @param timePoint string for column name that represents time intervals, for example "timeStamp."
 #' @param timeMax optional integer for maximum time in temporal order, samples are left out if duration is longer. Default is NULL
 #' @param dataPointDuration optional integer or character for specified duration of samples, used for time bins in CreateTimeBinData_HMLET.
 #' @param response the column in which participants' responses are stored e.g., HIT, Miss, FA, and CR.
@@ -21,7 +21,7 @@
 #' @param Path optional path to identify the destination location default: current working directory
 #'
 #' @export
-ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint = "timepoint",
+ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timePoint = "timePoint",
                                      timeMax = NULL, dataPointDuration, response,
                                      fixation, condition, testName = NULL,
                                      gazeX, gazeY, gazeXRelative = NULL, gazeYRelative = NULL,
@@ -29,7 +29,7 @@ ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint =
                                      fileName = "HMLET_DataforGUI.csv", path = getwd()){
 
   if(is.null(timeMax)){
-    timeMax = max(data[,timepoint])
+    timeMax = max(data[,timePoint])
   }
   if(is.null(testName)){
     data$testName = unique("PermutationTest0")
@@ -44,11 +44,11 @@ ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timepoint =
   }else if(is.numeric(dataPointDuration)){
     data$duration = unique(dataPointDuration)
   }
-  data = data[data[, timepoint]<=timeMax, ]
+  data = data[data[, timePoint]<=timeMax, ]
 
-  data = data[,c(testName, ID, trial, timepoint, condition, response, "duration",
+  data = data[,c(testName, ID, trial, timePoint, condition, response, "duration",
                  gazeX, gazeY, gazeXRelative, gazeYRelative, fixation, miscVars)]
-  names(data) = c("testName", "ID", "trial", "timepoint", "condition", "response", "duration",
+  names(data) = c("testName", "ID", "trial", "timePoint", "condition", "response", "duration",
                  "gazeX", "gazeY", "gazeXRelative", "gazeYRelative", "fixation", miscVars)
 
 

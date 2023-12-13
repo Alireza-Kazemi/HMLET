@@ -1,10 +1,10 @@
 inRead = read.csv("HMLET_Testing_Data.csv")
-input_df = inRead[c("ID","trial","timepoint","condition","AOI")]
+input_df = inRead[c("ID","trial","timePoint","condition","AOI")]
 
 test_that("all required parameters work", {
   ret_df = CreateTimeBinData_HMLET(data=input_df,
                                    FixatedOn = "AOI", AOIs = "AOI")
-  expect_equal(names(ret_df), c("ID", "trial", "timepoint", "condition", "AOI",
+  expect_equal(names(ret_df), c("ID", "trial", "timePoint", "condition", "AOI",
                                 "timeBin", "timeBinIndex", "AOI_AOI"))
 })
 

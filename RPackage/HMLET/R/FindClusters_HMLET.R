@@ -21,6 +21,6 @@ FindClusters_HMLET <- function(tValues, threshold_t = threshold_t){
   tValues$temp = cumsum(tValues$temp)
   tValues$Positive = tValues$Positive*tValues$temp
 
-  tValues = tValues[,c("timepoint","value","Positive","Negative")]
+  tValues = tValues[,c("timePoint","value","Positive","Negative")]
   return(tValues)
 }

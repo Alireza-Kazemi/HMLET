@@ -22,10 +22,10 @@
 #' @export
 #'
 PermutationTest_HMLET <- function(data, samples = 2000, paired = T, permuteTrialsWithinSubject = F,   threshold_t = NA){
-  if(is.factor(data$timepoint)){
-    data$timeBin = data$timepoint
-    data$timepoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
-    warning(paste("\n    >> Timepoints are converted to numeric indexes: ",
+  if(is.factor(data$timePoint)){
+    data$timeBin = data$timePoint
+    data$timePoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
+    warning(paste("\n    >> timePoints are converted to numeric indexes: ",
                   "\n    >> ",c(paste(levels(data$timeBin),1:length(levels(data$timeBin)), sep = " -> ", collapse = "   ")), sep = ""))
   }
   datSave = data
@@ -44,7 +44,7 @@ PermutationTest_HMLET <- function(data, samples = 2000, paired = T, permuteTrial
       num_sub = length(unique(data$ID))
       threshold_t = stats::qt(p=1-.05/2, df=num_sub-1)
     }
-    data = RemoveIncompleteTimePoints_HMLET(data)
+    data = RemoveIncompletetimePoints_HMLET(data)
 
 
     res = ClusterStats_HMLET(data, paired = paired, detailed = T, threshold_t = threshold_t)
