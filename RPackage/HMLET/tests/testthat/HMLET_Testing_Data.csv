@@ -1,4 +1,4 @@
-ID,trial,timepoint,condition,AOI
+ID,trial,timePoint,condition,AOI
 1,1,1,C1,0
 1,1,2,C1,0
 1,1,3,C1,0

@@ -20,32 +20,33 @@ test_that("all required parameters work", {
   expect_equal(ret_df$AOI, output_df$AOI)
 })
 
-# test_that("gazeMeasure column should be numeric", {
-#   input_df$AOI = unique("Not_A_Number")
-#   expect_warning(
-#     PermutationTestDataPrep_HMLET(data = input_df, ID = "ID", trial = "trial", timePoint = "timePoint",
-#                                   condition = "condition", conditionLevels = c("C1","C2"),
-#                                   gazeMeasure = "AOI"),
-#     "gazeMeasure column must be in numeric form")
-# })
-#
-#
-# test_that("timePoint column should be numeric", {
-#   input_df$timePoint = unique("Not_A_Number")
-#   expect_warning(
-#     PermutationTestDataPrep_HMLET(data = input_df, ID = "ID", trial = "trial", timePoint = "timePoint",
-#                                   condition = "condition", conditionLevels = c("C1","C2"),
-#                                   gazeMeasure = "AOI", targetAOI = 1),
-#     "timePoint column must be in numeric form")
-# })
-#
-# test_that("contains time bin name column if exists", {
-#   output = CreateTimeBinData_HMLET(data=input_df, FixatedOn = "AOI", AOIs = "AOI")
-#   ret_df = PermutationTestDataPrep_HMLET(data=output, ID = "ID", trial = "trial", timePoint = "timePoint",
-#                                          condition = "condition", conditionLevels = c("C1","C2"),
-#                                          gazeMeasure = "AOI", targetAOI = 1, timeBinName = "timeBin")
-#   expect_named(ret_df, c("testName", "ID", "trial", "timePoint", "condition",
-#                          "AOI", "timeBinName"))
-# })
+test_that("gazeMeasure column should be numeric", {
+  input_df$AOI = unique("Not_A_Number")
+  expect_warning(
+    PermutationTestDataPrep_HMLET(data = input_df, ID = "ID", trial = "trial", timePoint = "timePoint",
+                                  condition = "condition", conditionLevels = c("C1","C2"),
+                                  gazeMeasure = "AOI"),
+    "gazeMeasure column must be in numeric form")
+})
+
+
+test_that("timePoint column should be numeric", {
+  input_df$timePoint = unique("Not_A_Number")
+  expect_warning(
+    PermutationTestDataPrep_HMLET(data = input_df, ID = "ID", trial = "trial", timePoint = "timePoint",
+                                  condition = "condition", conditionLevels = c("C1","C2"),
+                                  gazeMeasure = "AOI", targetAOI = 1),
+    "timePoint column must be in numeric form")
+})
+
+test_that("contains time bin name column if exists", {
+  output = CreateTimeBinData_HMLET(data=input_df,  timePoint = "timePoint",
+                                   FixatedOn = "AOI")
+  ret_df = PermutationTestDataPrep_HMLET(data=output, ID = "ID", trial = "trial", timePoint = "timePoint",
+                                         condition = "condition", conditionLevels = c("C1","C2"),
+                                         gazeMeasure = "AOI", targetAOI = 1, timeBinName = "timeBin")
+  expect_named(ret_df, c("testName", "ID", "trial", "timePoint", "condition",
+                         "AOI", "timeBinName"))
+})
 
 

@@ -7,12 +7,13 @@ library(reshape2)
 # WR = "/Users/grishabandodkar/Documents/GitHub/HMLET/RPackage/HMLET/tests/testthat/"
 dat = read.table("HMLET_Testing_Data.csv", header=TRUE, sep=",", strip.white = TRUE)
 
+d1= CreateTimeBinData_HMLET(data=dat, timePoint = "timePoint",
+                              FixatedOn = "AOI")
 
 
-
-datP = PermutationTestDataPrep_HMLET(data = dat, ID = "ID", trial = "trial", timepoint = "timepoint",
+datP = PermutationTestDataPrep_HMLET(data = dat, ID = "ID", trial = "trial", timePoint = "timePoint",
                                     condition = "condition", conditionLevels = c("C1","C2"),
-                                    gazeInAOI = "AOI", targetAOI = 1)
+                                    gazeMeasure = "AOI", targetAOI = 1)
 
 write.csv(datP,paste(RD,"Output_PermutationTestDataPrep.csv",sep = ""),row.names = F)
 
