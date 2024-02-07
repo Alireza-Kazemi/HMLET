@@ -30,6 +30,6 @@ ComputeSamplingInterval_HMLET(
 This function estimates the sampling interval for each trial based on the time
 differences between each time point and uses mode to find the interval.
 Note that your dataset has to have a unique consistent time interval between all samples.
-In case, several time intervals is estimated for your dataset it use \"Preprocess_FixSampling_HMLET\"
+In case, several time intervals is estimated for your dataset it use "Preprocess_FixSampling_HMLET"
 function and pass the highest sampling interval to fix the inconsistency.
 }

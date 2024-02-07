@@ -4,7 +4,7 @@
 #' This function estimates the sampling interval for each trial based on the time
 #' differences between each time point and uses mode to find the interval.
 #' Note that your dataset has to have a unique consistent time interval between all samples.
-#' In case, several time intervals is estimated for your dataset it use \"Preprocess_FixSampling_HMLET\"
+#' In case, several time intervals is estimated for your dataset it use "Preprocess_FixSampling_HMLET"
 #' function and pass the highest sampling interval to fix the inconsistency.
 #'
 #' @param data long format dataframe containing temporal data.
@@ -38,7 +38,7 @@ ComputeSamplingInterval_HMLET <- function(data, ID = "ID", trial, timePoint, app
     if(length(unique(intervals))>1){
       warning("There should be only 1 sampling interval.
                You have inconsistent sampling intervals.
-               You may need to use function\"Preprocess_FixSampling_HMLET\" to fix samplings!")
+               You may need to use function \"Preprocess_FixSampling_HMLET\" to fix samplings!")
     }
   }
 
