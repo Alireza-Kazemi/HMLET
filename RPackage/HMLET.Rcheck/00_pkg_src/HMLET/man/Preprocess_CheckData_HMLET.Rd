@@ -11,7 +11,9 @@ Preprocess_CheckData_HMLET(
   timePoint,
   GazeX,
   GazeY,
-  missRateCap = 50
+  groupingColumns = NULL,
+  missRateCap = 50,
+  shortTrialsThreshold = 2
 )
 }
 \arguments{
@@ -23,15 +25,31 @@ Preprocess_CheckData_HMLET(
 
 \item{timePoint}{string for column name that represents time stamps of each sample.}
 
-\item{GazeX}{string for column name that includes X coordinate of gazepoints}
+\item{GazeX}{string for column name that includes X coordinate of gaze points}
 
-\item{GazeY}{string for column name that includes Y coordinate of gazepoints}
+\item{GazeY}{string for column name that includes Y coordinate of gaze points}
 
-\item{missRateCap}{Specify the percentage of missing gazepoints cap to be counted as high Miss Rate}
+\item{groupingColumns}{optional array of strings for column names of variables to be grouped for the final miss Rate Summary report, defaults to NULL.}
+
+\item{missRateCap}{Specify the percentage of missing gaze points cap to be counted as high Miss Rate}
+
+\item{shortTrialsThreshold}{Specify the minimum number of samples that should be available within a trial to be counted as a valid trial. defaults to 2}
 }
 \description{
 Raw eye-tracking data comes with time stamps of each sample and Gaze Coordinates. These time stamps
 has to have consistent and unique time interval across all datapoints.
 Gaze Coordinates may have missing values due to blinks, head movement, etc.
 This function reports issues about inconsistent sampling intervals and missing Gaze coordinates.
+}
+\details{
+This function returns a dataframe with summary of missing gaze points
+The summary dataframe has 4 columns:
+ID(with the original column name): indicate participant's ID
+nTrials: number of trials
+nTrialsMoreThanCap: number of trials in which, more than missRateCap (defaults to 50%) of their time points have missing gaze points
+averageMissRate: Average percentage of missing gaze points across all trials of each participant.
+
+Data Cleaning Note: You may want to remove trials with more than missRateCap
+(defaults to 50%) rate of missing gaze points. Also you may want to remove
+participants that most of their trials has high rate of missing gazepoints.
 }

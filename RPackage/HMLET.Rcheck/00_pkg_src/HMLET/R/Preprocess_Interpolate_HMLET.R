@@ -5,6 +5,13 @@
 #' This function fill the NA Gaze points with linear interpolation. You can specify
 #' how many consecutive NAs should be interpolated by passing maxNAToFill parameter.
 #'
+#' @details
+#' The output is the same dataframe as input with three new columns:
+#' "GazeX_Interpolated": includes all original GazeX coordinates and interpolated values
+#' "GazeY_Interpolated": includes all original GazeY coordinates and interpolated values
+#' "Interpolated": is a flag that is 1 for samples that are interpolated and 0 otherwise.
+#' Note: If your dataframe has columns with same names make sure to rename them before using this function.
+#'
 #' @param data long format dataframe containing temporal data.
 #' @param ID string for column name that represents IDs within data frame, defaults to "ID".
 #' @param trial string for column name that identify unique trials within data frame. Can be numerical or categorical.
