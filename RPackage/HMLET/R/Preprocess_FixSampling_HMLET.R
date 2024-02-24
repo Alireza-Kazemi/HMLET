@@ -57,7 +57,7 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
               dplyr::summarise(nInvalidTrials = n(),.groups = "drop")%>%
               as.data.frame()
       print("------------------------------------------------------------------------------------------------")
-      print(paste("Invalid trials with which had less than ",shortTrialsThreshold," non-NA gaze points are removed:",sep = ""))
+      print(paste("Invalid trials with less than ",shortTrialsThreshold," non-NA gaze points are removed:",sep = ""))
       print("Summary of the number of invalid trials per participant:")
       print(dtemp)
       print("--------------------------------------------------------")
