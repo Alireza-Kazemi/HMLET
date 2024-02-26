@@ -5,13 +5,15 @@
 #' @param data data frame with temporal data for permutation tests routine.
 #' @param ID optional string for column name that represents IDs within data frame, defaults to "ID".
 #' @param trial string for column name that represents trials within data frame.
-#' @param timePoint string for column name that represents time intervals.
+#' @param timePoint string for column name that includes time point or index values in numeric form.
+#' @param timeBinName optional string for the column name that includes time bin names, defaults to NULL.
 #' @param condition string for column name that specifies a condition within the data frame.
 #' @param gazeMeasure string for column name which includes numerical value of the gaze measure at each time point such as gazeproportion.
 #' @param conditionLevels optional array of string column names to denote all the values of conditions, defaults to NULL.
-#' @param targetAOI optional string for column name to focus on specific AOI, defaults to NULL.
+#' @param targetAOI optional string specify the name of the target AOI which should be set as 1 in the gazeMeasure variable, defaults to NULL.
 #' @param testName optional string for name of data -- used as condition name or test names to compare permutation test
 #'                 results between different tests/conditions later, defaults to NULL.
+#'
 #' @import dplyr
 #' @import miceadds
 #' @import purrr

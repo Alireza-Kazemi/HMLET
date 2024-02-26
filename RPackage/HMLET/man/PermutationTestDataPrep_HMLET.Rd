@@ -24,7 +24,7 @@ PermutationTestDataPrep_HMLET(
 
 \item{trial}{string for column name that represents trials within data frame.}
 
-\item{timePoint}{string for column name that represents time intervals.}
+\item{timePoint}{string for column name that includes time point or index values in numeric form.}
 
 \item{condition}{string for column name that specifies a condition within the data frame.}
 
@@ -32,10 +32,12 @@ PermutationTestDataPrep_HMLET(
 
 \item{conditionLevels}{optional array of string column names to denote all the values of conditions, defaults to NULL.}
 
-\item{targetAOI}{optional string for column name to focus on specific AOI, defaults to NULL.}
+\item{targetAOI}{optional string specify the name of the target AOI which should be set as 1 in the gazeMeasure variable, defaults to NULL.}
 
 \item{testName}{optional string for name of data -- used as condition name or test names to compare permutation test
 results between different tests/conditions later, defaults to NULL.}
+
+\item{timeBinName}{optional string for the column name that includes time bin names, defaults to NULL.}
 }
 \value{
 data frame compatible for permutation tests and other HMLET modules

@@ -18,7 +18,7 @@
 #' @param gazeYRelative optional integer Y-coordinate of gaze point relative to an arbitrary center.
 #' @param miscVars optional list of strings containing column names of additional variables to be included in exported file
 #' @param fileName optional string for output csv file, defaults to "HMLET_DataforGUI.csv."
-#' @param Path optional path to identify the destination location default: current working directory
+#' @param path optional path to identify the destination location default: current working directory
 #'
 #' @export
 ExportDataForGUI_HMLET <- function(data, ID = "ID", trial = "trial", timePoint = "timePoint",

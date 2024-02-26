@@ -59,7 +59,7 @@ results between different tests/conditions later, defaults to NULL.}
 
 \item{fileName}{optional string for output csv file, defaults to "HMLET_DataforGUI.csv."}
 
-\item{Path}{optional path to identify the destination location default: current working directory}
+\item{path}{optional path to identify the destination location default: current working directory}
 }
 \description{
 ExportDataForGUI_HMLET

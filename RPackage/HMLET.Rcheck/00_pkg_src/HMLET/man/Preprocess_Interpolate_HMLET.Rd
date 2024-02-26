@@ -26,6 +26,8 @@ Preprocess_Interpolate_HMLET(
 \item{GazeX}{string for column name that includes X coordinate of gazepoints}
 
 \item{GazeY}{string for column name that includes Y coordinate of gazepoints}
+
+\item{maxNAToFill}{numeric value to denote the max number of consecutive NAs that should be interpolated, defaults to Inf}
 }
 \description{
 Gaze Coordinates may have missing values due to blinks, head movement, etc.

@@ -82,12 +82,12 @@ Preprocess_CheckData_HMLET <- function(data, ID, trial, timePoint,
   d$GazeY = d[[GazeY]]
   d = d %>%
     dplyr::group_by_at(c(ID, trial,groupingColumns)) %>%
-    dplyr::summarise(N=n(),nNA = max(sum(is.na(GazeX)),sum(is.na(GazeY))),.groups = "drop")%>%
+    dplyr::summarise(N=n(),nNA = sum(is.na(GazeX)|is.na(GazeY)),.groups = "drop")%>%
     as.data.frame()
 
   #------------------------- Verify Very Short Trials
   dtemp = d
-  dtemp$nSamples = d$N-d$nNA
+  dtemp$nSamples = dtemp$N-dtemp$nNA
   dtemp = dtemp[dtemp$nSamples<shortTrialsThreshold,c(ID, trial,groupingColumns,"nSamples")]
   if(nrow(dtemp)>0){
     print(paste("Trials with very few samples(Less than ",shortTrialsThreshold,") in your dataset:",sep = ""))

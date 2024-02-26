@@ -18,6 +18,7 @@
 #' @param timePoint string for column name that represents time stamps of each sample.
 #' @param GazeX string for column name that includes X coordinate of gazepoints
 #' @param GazeY string for column name that includes Y coordinate of gazepoints
+#' @param maxNAToFill numeric value to denote the max number of consecutive NAs that should be interpolated, defaults to Inf
 #' @export
 Preprocess_Interpolate_HMLET <- function(data, ID = "ID", trial, timePoint,
                                          GazeX, GazeY,maxNAToFill = Inf){

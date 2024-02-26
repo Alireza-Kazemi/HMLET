@@ -42,28 +42,27 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
 
   d = data
 
-  if(removeShortTrials){
-    d$GazeX_HMLETdummy = d[[GazeX]]
-    d$GazeY_HMLETdummy = d[[GazeY]]
-    d = d %>%
-      dplyr::group_by_at(c(ID, trial)) %>%
-      dplyr::mutate(nSamples = min(sum(!is.na(GazeX_HMLETdummy)),sum(!is.na(GazeY_HMLETdummy))))%>%
-      as.data.frame()
-    dtemp = d[d$nSamples<shortTrialsThreshold,c(ID, trial)]
-    d = d[d$nSamples>=shortTrialsThreshold,]
-    if(nrow(dtemp)>0){
-      dtemp = unique(dtemp)
-      dtemp = dtemp %>% dplyr::group_by_at(ID) %>%
-              dplyr::summarise(nInvalidTrials = n(),.groups = "drop")%>%
-              as.data.frame()
-      print("------------------------------------------------------------------------------------------------")
-      print(paste("Invalid trials with which had less than ",shortTrialsThreshold," non-NA gaze points are removed:",sep = ""))
-      print("Summary of the number of invalid trials per participant:")
-      print(dtemp)
-      print("--------------------------------------------------------")
-    }
-    d = d[,!(names(d)%in%c("GazeX_HMLETdummy","GazeY_HMLETdummy","nSamples"))]
+  # Trials with only 1 sample has to be removed
+  d$GazeX_HMLETdummy = d[[GazeX]]
+  d$GazeY_HMLETdummy = d[[GazeY]]
+  d = d %>%
+    dplyr::group_by_at(c(ID, trial)) %>%
+    dplyr::mutate(nSamples = n())%>%
+    as.data.frame()
+  dtemp = d[d$nSamples<2,c(ID, trial)]
+  d = d[d$nSamples>=2,]
+  if(nrow(dtemp)>0){
+    dtemp = unique(dtemp)
+    dtemp = dtemp %>% dplyr::group_by_at(ID) %>%
+            dplyr::summarise(nInvalidTrials = n(),.groups = "drop")%>%
+            as.data.frame()
+    print("------------------------------------------------------------------------------------------------")
+    print(paste("Invalid trials with only 1 sample are removed:",sep = ""))
+    print("Summary of the number of invalid trials per participant:")
+    print(dtemp)
+    print("--------------------------------------------------------")
   }
+  d = d[,!(names(d)%in%c("GazeX_HMLETdummy","GazeY_HMLETdummy","nSamples"))]
 
   if (is.null(samplingInterval)){
     #------------------------- Estimate the sampling interval
@@ -103,8 +102,8 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
     as.data.frame()
 
   #------------------------- Merge the complete data and remove extra columns
-  d$timeMerge = round((ceiling(d$time/d$interval)*d$interval)+0.0005,2)
-  d2$timeMerge = round(ceiling(d2$timeNew/d2$interval)*d2$interval+0.0005,2)
+  d$timeMerge = round((ceiling(d$time/d$interval)*d$interval)+0.005,2)
+  d2$timeMerge = round(ceiling(d2$timeNew/d2$interval)*d2$interval+0.005,2)
   d2 = d2[order(d2[,ID],d2[,trial],d2$sampleIdxNew),]
   d = merge(d2,d,by = c(ID, trial, "timeMerge","interval"), all.x = T)
   d$time = d$timeMerge
@@ -148,6 +147,28 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
       tidyr::fill(tidyr::all_of(columnNames), .direction="downup")
   }
 
+  if(removeShortTrials){
+    d$GazeX_HMLETdummy = d[[GazeX]]
+    d$GazeY_HMLETdummy = d[[GazeY]]
+    d = d %>%
+      dplyr::group_by_at(c(ID, trial)) %>%
+      dplyr::mutate(nSamples = sum(!(is.na(GazeX_HMLETdummy)|is.na(GazeY_HMLETdummy))))%>%
+      as.data.frame()
+    dtemp = d[d$nSamples<shortTrialsThreshold,c(ID, trial)]
+    d = d[d$nSamples>=shortTrialsThreshold,]
+    if(nrow(dtemp)>0){
+      dtemp = unique(dtemp)
+      dtemp = dtemp %>% dplyr::group_by_at(ID) %>%
+        dplyr::summarise(nInvalidTrials = n(),.groups = "drop")%>%
+        as.data.frame()
+      print("------------------------------------------------------------------------------------------------")
+      print(paste("Invalid trials with less than ",shortTrialsThreshold," non-NA gaze points are removed:",sep = ""))
+      print("Summary of the number of invalid trials per participant:")
+      print(dtemp)
+      print("--------------------------------------------------------")
+    }
+    d = d[,!(names(d)%in%c("GazeX_HMLETdummy","GazeY_HMLETdummy","nSamples"))]
+  }
 
   return(d)
 }
