@@ -99,6 +99,7 @@ PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
                                                                ID, trial, condition),
                                                M = mean(AOI, na.rm=T),
                                                tickSize = mean(diff(timePoint, na.rm = T), na.rm = T)))
+  OverallMean$tickSize[is.nan(OverallMean$tickSize)] = mean(OverallMean$tickSize[!is.nan(OverallMean$tickSize)])
   # Second over trials within IDs
   OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(OverallMean, testName,
                                                                ID, condition),
