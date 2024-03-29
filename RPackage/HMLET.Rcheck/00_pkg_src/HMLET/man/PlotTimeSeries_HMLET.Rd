@@ -7,7 +7,7 @@
 PlotTimeSeries_HMLET(
   resultList,
   showDataPointProp = T,
-  showOverallMean = "Point",
+  showOverallMean = "none",
   gazePropRibbonAlpha = 0.1,
   clusterFillColor = "#CC9933",
   clusterFillAlpha = 0.5,
@@ -19,7 +19,7 @@ PlotTimeSeries_HMLET(
   onlySignificantClusters = T,
   clusterData = NULL,
   yLabel = "Gaze Proportion",
-  dataAxisLabel = "Data Points (\%)",
+  dataAxisLabel = "Available Observations (\%)",
   xLabel = "Time (ms)",
   lineWidthGazeProp = 1,
   lineWidthDataPointProp = 1,
@@ -36,7 +36,7 @@ or a list that is the result of PermutationTest_HMLET.}
 
 \item{showDataPointProp}{optional boolean to display data points on the axes, defaults to True.}
 
-\item{showOverallMean}{optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it, defaults to "Point".}
+\item{showOverallMean}{optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it, defaults to "none".}
 
 \item{gazePropRibbonAlpha}{optional float to change opacity of gaze ribbon, defaults to 0.1.}
 
