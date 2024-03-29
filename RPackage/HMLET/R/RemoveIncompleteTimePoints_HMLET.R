@@ -5,23 +5,26 @@
 #'
 #' @export
 RemoveIncompletetimePoints_HMLET <- function(data){
-	rmIdx = as.data.frame(dplyr::summarise(dplyr::group_by(data,ID,timePoint,condition,testName), prop = mean(AOI, na.rm=T)))
+	nSubj = length(unique(data$ID))
+  rmIdx = as.data.frame(dplyr::summarise(dplyr::group_by(data,ID,timePoint,condition,testName), prop = mean(AOI, na.rm=T)))
 	rmIdx = reshape2::dcast(rmIdx, ID+timePoint+testName~condition, value.var = "prop")
 	rmIdx = rmIdx[!complete.cases(rmIdx),]
+
 	if(nrow(rmIdx)>0){
+	  rmDat = rmIdx
+	  rmDat = rmDat%>% dplyr::group_by(ID,timePoint,testName) %>%
+	    dplyr::summarise(N=n()) %>%
+	    dplyr::group_by(timePoint,testName) %>%
+	    dplyr::summarise(N=sum(N,na.rm=T)) %>%
+	    dplyr::group_by(testName) %>%
+	    dplyr::summarise(N=round(mean(N,na.rm=T),2)) %>% as.data.frame()
 	  rmIdx = paste(rmIdx$ID,rmIdx$timePoint,rmIdx$testName,sep = "_")
 	  dIdx = paste(data$ID,data$timePoint,data$testName,sep = "_")
-	  rmDat = data[(dIdx %in% rmIdx),]
-	  rmDat = dplyr::group_by(ID,timePoint,testName) %>%
-	          dplyr::summarise(N=n()) %>%
-	          dplyr::group_by(ID,testName) %>%
-	          dplyr::summarise(N=mean(N,na.rm=T)) %>%
-	          dplyr::group_by(testName) %>%
-	          dplyr::summarise(N=mean(N,na.rm=T)) %>% as.data.frame()
 	  data = data[!(dIdx %in% rmIdx),]
 	  warning(paste("\n    >> In test data: ",unique(data$testName),
-					"\n    >> Time points with missing conditions removed! (N =",
-					length(dIdx[dIdx %in% rmIdx]),")", sep = ""))
+					"\n    >> Time points with missing conditions removed!",
+					"\n       In Average ",rmDat$N," out of ",nSubj," observations per timepoint",
+					"\n       For details run PlotValidPermutationData_HMLET",sep = ""))
 	}
 
 	#--> change to keep the t-value computation consistent with the threshold value for unbalanced data.

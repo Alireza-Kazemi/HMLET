@@ -1,4 +1,4 @@
-#' Plot temporal gaze trends.
+#' Plot temporal trends for time series.
 #'
 #' @param resultList dataframe of the data that is already prepared by PrepareMLETData_HMLET
 #'                   or a list that is the result of PermutationTest_HMLET.
@@ -27,7 +27,7 @@
 #'
 #' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
 #' @export
-PlotTemporalGazeTrends_HMLET <- function(resultList, showDataPointProp = T,
+PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
                                          showOverallMean = "Point",
                                          gazePropRibbonAlpha = .1,
                                          clusterFillColor = "#CC9933",
