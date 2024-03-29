@@ -29,7 +29,7 @@
 #' @param missRateCap Specify the percentage of missing gaze points cap to be counted as high Miss Rate
 #' @param shortTrialsThreshold Specify the minimum number of samples that should be available within a trial to be counted as a valid trial. defaults to 2
 #' @export
-Preprocess_CheckData_HMLET <- function(data, ID, trial, timePoint,
+Preprocess_CheckData_HMLET <- function(data, ID = "ID", trial = "trial", timePoint = "timePoint",
                                        GazeX, GazeY, groupingColumns = NULL,
                                        missRateCap = 50, shortTrialsThreshold = 2){
 
