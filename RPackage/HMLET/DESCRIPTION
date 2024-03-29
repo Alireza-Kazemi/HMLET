@@ -10,7 +10,6 @@ License: MIT + file LICENSE
 Imports: 
     combinat,
     dplyr,
-    utils,
     ggplot2,
     miceadds,
     purrr,
@@ -18,6 +17,7 @@ Imports:
     rray,
     stats,
     tidyr,
+    utils,
     vdiffr,
     zoo
 Suggests: 

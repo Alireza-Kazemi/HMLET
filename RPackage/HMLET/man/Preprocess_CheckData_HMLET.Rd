@@ -6,9 +6,9 @@
 \usage{
 Preprocess_CheckData_HMLET(
   data,
-  ID,
-  trial,
-  timePoint,
+  ID = "ID",
+  trial = "trial",
+  timePoint = "timePoint",
   GazeX,
   GazeY,
   groupingColumns = NULL,
