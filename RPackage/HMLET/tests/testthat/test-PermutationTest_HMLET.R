@@ -11,7 +11,7 @@ test_that("all required parameters work", {
   set.seed(5)
   res = PermutationTest_HMLET(input_df, samples = 1000, paired = T, permuteTrialsWithinSubject = F)
   test_plotNULL <- PlotNullDistribution_HMLET(res)
-  test_plotGT <- PlotTemporalGazeTrends_HMLET(res)
+  test_plotGT <- PlotTimeSeries_HMLET(res)
 
   expect_equal(names(res[[3]]), names(output_df))
   vdiffr::expect_doppelganger("Null Distribution", test_plotNULL)
