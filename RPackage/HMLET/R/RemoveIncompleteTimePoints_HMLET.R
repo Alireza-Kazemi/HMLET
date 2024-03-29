@@ -11,6 +11,13 @@ RemoveIncompletetimePoints_HMLET <- function(data){
 	if(nrow(rmIdx)>0){
 	  rmIdx = paste(rmIdx$ID,rmIdx$timePoint,rmIdx$testName,sep = "_")
 	  dIdx = paste(data$ID,data$timePoint,data$testName,sep = "_")
+	  rmDat = data[(dIdx %in% rmIdx),]
+	  rmDat = dplyr::group_by(ID,timePoint,testName) %>%
+	          dplyr::summarise(N=n()) %>%
+	          dplyr::group_by(ID,testName) %>%
+	          dplyr::summarise(N=mean(N,na.rm=T)) %>%
+	          dplyr::group_by(testName) %>%
+	          dplyr::summarise(N=mean(N,na.rm=T)) %>% as.data.frame()
 	  data = data[!(dIdx %in% rmIdx),]
 	  warning(paste("\n    >> In test data: ",unique(data$testName),
 					"\n    >> Time points with missing conditions removed! (N =",

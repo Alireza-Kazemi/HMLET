@@ -12,7 +12,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   subjLevelPerms = sample(x = 1, size =  nrow(unique(labels[,c("ID","timePoint")])) , replace = T)
   L = length(subjLevelPerms)
   print("Compute subject-level unique labels:")
-  pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
+  pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
   for (i in 1:n){
     rep = 0
     repeat{
@@ -29,7 +29,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
       # if(rep>0){print(paste("-----------------> Repeated in Index = ",i+1,sep = ""))}  # ------------------> Testing for repeat
     }
     subjLevelPerms = rray::rray_bind (subjLevelPerms,newComb, .axis = 2)
-    setTxtProgressBar(pb,i/n)
+    utils::setTxtProgressBar(pb,i/n)
   }
   # print(rep)                                              # ------------------> Debugging
   close(pb)
@@ -50,7 +50,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   condList = levels(factor(labels$condition))
   condLevelPerms = combinat::permn(factorial(condNum))
   print("Compute condition-level unique labels:")
-  pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
+  pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
   #------------------------------------------> Debugging for duplicated permutation sample list
   # A=NULL
   # ------------------------------------------>End
@@ -64,7 +64,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
                     purrr::map_dfr(as.list(subjLevelPerms[,i]),function(x){
                       data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
                     }))
-    setTxtProgressBar(pb,i/n)
+    utils::setTxtProgressBar(pb,i/n)
   }
   close(pb)
   names(labels) = c(names(labels)[1:3],paste(names(labels)[-(1:3)],1:n,sep = ""))

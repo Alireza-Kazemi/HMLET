@@ -17,6 +17,7 @@
 #' @import tidyr
 #' @import vdiffr
 #' @import stats
+#' @import utils
 #'
 #' @return a list of permutation tests in which distribution of desired statistic under the null hypothesis is estimated in a large number of permutations of the original data
 #' @export

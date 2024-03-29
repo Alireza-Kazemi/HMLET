@@ -16,7 +16,7 @@ SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paire
 
   #----------------------------- Perform Permutation tests
   print("Estimate tStatistic distribution:")
-  pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
+  pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
 
   tValueDist = NULL
   for (itt in 1:(samples)){
@@ -32,7 +32,7 @@ SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paire
       tValueTemp = data.frame(Positive =  0, Negative =0)
     }
     tValueDist = rbind(tValueDist,tValueTemp)
-    setTxtProgressBar(pb,itt/samples)
+    utils::setTxtProgressBar(pb,itt/samples)
   }
   tValueDist$Positive = ifelse(tValueDist$Positive>=0,tValueDist$Positive,0)
   tValueDist$Negative = ifelse(tValueDist$Negative<=0,tValueDist$Negative,0)
