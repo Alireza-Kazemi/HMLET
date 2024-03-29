@@ -3,7 +3,7 @@
 #' @param resultList dataframe of the data that is already prepared by PrepareMLETData_HMLET
 #'                   or a list that is the result of PermutationTest_HMLET.
 #' @param showDataPointProp optional boolean to display data points on the axes, defaults to True.
-#' @param showOverallMean optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it, defaults to "Point".
+#' @param showOverallMean optional string to specify the overall mean. "Line" = to display a horizontal line on the y = average. "Point" to display overall average and range in a pointRange format. "none" to not display it, defaults to "none".
 #' @param gazePropRibbonAlpha optional float to change opacity of gaze ribbon, defaults to 0.1.
 #' @param clusterFillColor optional string to change fill color of clustered data points, defaults to "#CC9933".
 #' @param clusterFillAlpha optional float to change opacity of clustered data points, defaults to 0.5.
@@ -28,7 +28,7 @@
 #' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
 #' @export
 PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
-                                         showOverallMean = "Point",
+                                         showOverallMean = "none",
                                          gazePropRibbonAlpha = .1,
                                          clusterFillColor = "#CC9933",
                                          clusterFillAlpha = .5,
@@ -40,7 +40,7 @@ PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
                                          onlySignificantClusters = T,
                                          clusterData = NULL,
                                          yLabel = "Gaze Proportion",
-                                         dataAxisLabel = "Data Points (%)",
+                                         dataAxisLabel = "Available Observations (%)",
                                          xLabel = "Time (ms)",
                                          lineWidthGazeProp = 1,
                                          lineWidthDataPointProp = 1,
@@ -135,7 +135,9 @@ PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
 
 
   if(!is.null(clusterData)){
-    # clusterData = clusterData[,c("testName","timeStart","timeEnd","pValue")]
+    if(!is.data.frame(clusterData)){
+      clusterData = clusterData[[1]]
+    }
 
     if(!is.null(testNameOrder)){
       clusterData$testName = factor(clusterData$testName,levels = testNameOrder)
@@ -207,7 +209,7 @@ PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
       scale_linetype_manual(name = NULL,
                             limits = c("overallMeanLines","DataPointProp"),
                             values = c(lineTypeOverallMean,"dotdash"),
-                            labels = c("Overall Means","Data Point"))
+                            labels = c("Overall Means","Observations"))
 
   }else if(showOverallMean == "Line"){
     #-----------------------------------------------------------------------Update Graph Handle
@@ -223,7 +225,7 @@ PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
       scale_linetype_manual(name = NULL,
                             limits = c("DataPointProp"),
                             values = c("dotdash"),
-                            labels = c("Data Point"))
+                            labels = c("Observations"))
   }
 
   #-----------------------------------------------------------------------Update Graph Handle
