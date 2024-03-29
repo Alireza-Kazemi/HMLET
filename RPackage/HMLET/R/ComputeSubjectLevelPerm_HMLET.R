@@ -9,7 +9,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
 
   ################################################### Compute subject-level unique labels
   #--------- Original labels
-  subjLevelPerms = sample(x = 1, size =  nrow(unique(labels[,c("ID","timePoint")])) , replace = T)
+  subjLevelPerms = sample(x = 1, size =  nrow(unique(labels[,c("ID","timePoint")])), replace = T)
   L = length(subjLevelPerms)
   print("Compute subject-level unique labels:")
   pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)

@@ -41,7 +41,7 @@ PermutationTest_HMLET <- function(data, samples = 2000, paired = T, permuteTrial
     data = datSave[datSave$testName == testName,]
 
     if(is.na(threshold_t)){
-      # Treshold should be based on the permutation sampling
+      # Threshold should be based on the permutation sampling and/or subjects
       num_sub = length(unique(data$ID))
       threshold_t = stats::qt(p=1-.05/2, df=num_sub-1)
     }

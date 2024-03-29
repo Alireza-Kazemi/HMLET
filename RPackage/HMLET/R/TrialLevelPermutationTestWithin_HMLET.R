@@ -10,7 +10,7 @@
 #' @export
 TrialLevelPermutationTestWithin_HMLET <- function(data, samples = 2000, paired = T, threshold_t = NA){
 
-  print("Compute unique permutation labels per subject:")
+  print("Compute unique permutation labels for trials within each subject:")
   labels = unique(data[,c("ID","trial","condition")])
   labelsPerm = NULL
   for (sID in unique(labels$ID)){
