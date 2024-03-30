@@ -19,7 +19,7 @@ UniquePermutations_HMLET <- function(listInput, n = 1){
   for (i in 1:n){
     rep = 0
     repeat{
-      newComb = sample(x = 1:condNum, size =  L, replace = T)
+      newComb = sample(x = 1:factorial(condNum), size =  L, replace = T)
       newComb = rray::rray(newComb, dim = c(L,1))
       if(min(rray::rray_sum(abs(permLabels - newComb),axes = 1))>1){
         break
