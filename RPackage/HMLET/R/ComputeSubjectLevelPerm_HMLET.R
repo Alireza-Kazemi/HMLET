@@ -8,10 +8,10 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   condNum = length(unique(labels$condition))
 
   ################################################### Compute subject-level unique labels
-  #--------- Original labels
+  #--------- Original labels -> all are 1 corresponding to the first combination.
   subjLevelPerms = sample(x = 1, size =  nrow(unique(labels[,c("ID","timePoint")])), replace = T)
   L = length(subjLevelPerms)
-  print("Compute subject-level unique labels:")
+  print("Compute subject-level unique combination of conditions:")
   pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
   for (i in 1:n){
     rep = 0
@@ -49,7 +49,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   ################################################### Compute condition-level unique labels
   condList = levels(factor(labels$condition))
   condLevelPerms = combinat::permn(factorial(condNum))
-  print("Compute condition-level unique labels:")
+  print("Compute condition-level labels:")
   pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
   #------------------------------------------> Debugging for duplicated permutation sample list
   # A=NULL
