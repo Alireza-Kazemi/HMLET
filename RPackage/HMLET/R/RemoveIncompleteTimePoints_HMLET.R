@@ -32,13 +32,6 @@ RemoveIncompletetimePoints_HMLET <- function(data){
 	rmIdx = as.data.frame(dplyr::summarise(dplyr::group_by(rmIdx,timePoint,testName), N = n()))
 	rmIdx = rmIdx[rmIdx$N<=2,] # This is chosen arbitrarily to remove time points with only 1 participant data
 	if(nrow(rmIdx)>0){
-	  rmDat = rmIdx
-	  rmDat = rmDat%>% dplyr::group_by(ID,timePoint,testName) %>%
-	    dplyr::summarise(N=n()) %>%
-	    dplyr::group_by(timePoint,testName) %>%
-	    dplyr::summarise(N=sum(N,na.rm=T)) %>%
-	    dplyr::group_by(testName) %>%
-	    dplyr::summarise(N=round(mean(N,na.rm=T),2)) %>% as.data.frame()
 	  rmIdx = paste(rmIdx$timePoint,rmIdx$testName,sep = "_")
 	  dIdx = paste(data$timePoint,data$testName,sep = "_")
 	  data = data[!(dIdx %in% rmIdx),]
