@@ -31,7 +31,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   subjLevelPerms$ID = unique(labels$ID)
   temp = unique(labels[,c("ID","timePoint")])
   subjLevelPerms = merge(temp,subjLevelPerms,by="ID")
-#
+## Old Version Buggy
 #   subjLevelPerms = rray::rray(subjLevelPerms, dim = c(L,1))
 #   L = length(subjLevelPerms)
 #   print("Compute subject-level unique combination of conditions:")
@@ -74,15 +74,8 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   condLevelPerms = combinat::permn(factorial(condNum))
   print("Compute condition-level labels:")
   pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
-  #------------------------------------------> Debugging for duplicated permutation sample list
-  # A=NULL
-  # ------------------------------------------>End
   for (i in 1:n){
-    #------------------------------------------> Debugging for duplicated permutation sample list
-    # A = rbind(A,paste(purrr::map_dfr(as.list(subjLevelPerms[,i]),function(x){
-    #                                   data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
-    #                                   })$perm, collapse = ""))
-    # ------------------------------------------>End
+    # Old Version Buggy
     # labels <- cbind(labels,
     #                 purrr::map_dfr(as.list(as.numeric(subjLevelPerms[,i])),function(x){
     #                   data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
@@ -98,12 +91,13 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   names(labels) = c(names(labels)[1:3],paste(names(labels)[-(1:3)],1:n,sep = ""))
 
   #------------------------------------------> Debugging for duplicated permutation sample list
-  # A = as.data.frame(A)
-  # length(unique(A$V1))
-  # A$index = 1:nrow(A)
-  # A$UnikIdx =  as.numeric(factor(A$V1))
-  # A = as.data.frame(mutate(group_by(A,V1), nRep = n()))
-  # A = A[A$nRep>1,]
+  # C = t(permLabels)
+  # C = data.frame(apply(C, 1, function(row) {paste(row, collapse = "")}))
+  # names(C) = c("V1")
+  # C$index = 1:nrow(C)
+  # C$UnikIdx =  as.numeric(factor(C$V1))
+  # C = as.data.frame(mutate(group_by(C,V1), nRep = n()))
+  # C[C$nRep>1,]
   # ------------------------------------------>End
 
   return(labels)
