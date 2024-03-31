@@ -4,10 +4,12 @@
 \alias{UniquePermutations_HMLET}
 \title{Generate unique random permutations.}
 \usage{
-UniquePermutations_HMLET(listInput, n = 1)
+UniquePermutations_HMLET(listInput, uniqueLabels, n = 1)
 }
 \arguments{
 \item{listInput}{Arbitrary list.}
+
+\item{uniqueLabels}{All possible Labels.}
 
 \item{n}{An integer number indicating the number of permutations.}
 }
