@@ -27,7 +27,10 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   condLevels = levels(factor(1:factorial(condNum)))
   subjLevelPerms = rep(x = 1, times =  L)
   subjLevelPerms = UniquePermutations_HMLET(subjLevelPerms, uniqueLabels = condLevels, n = samples)
-
+  subjLevelPerms = as.data.frame(subjLevelPerms)
+  subjLevelPerms$ID = unique(labels$ID)
+  temp = unique(labels[,c("ID","timePoint")])
+  subjLevelPerms = merge(temp,subjLevelPerms,by="ID")
 #
 #   subjLevelPerms = rray::rray(subjLevelPerms, dim = c(L,1))
 #   L = length(subjLevelPerms)
@@ -80,10 +83,15 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
     #                                   data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
     #                                   })$perm, collapse = ""))
     # ------------------------------------------>End
+    # labels <- cbind(labels,
+    #                 purrr::map_dfr(as.list(as.numeric(subjLevelPerms[,i])),function(x){
+    #                   data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
+    #                 }))
     labels <- cbind(labels,
-                    purrr::map_dfr(as.list(as.numeric(subjLevelPerms[,i])),function(x){
-                      data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
-                    }))
+                    purrr::map_dfr(as.list(as.numeric(subjLevelPerms[,paste("V",i,sep = "")])),
+                                   function(x){
+                                     data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
+                                   }))
     utils::setTxtProgressBar(pb,i/n)
   }
   close(pb)
