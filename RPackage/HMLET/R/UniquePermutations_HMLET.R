@@ -1,20 +1,36 @@
 #' Generate unique random permutations.
 #'
 #' @param listInput Arbitrary list.
+#' @param uniqueLabels All possible Labels.
 #' @param n An integer number indicating the number of permutations.
 #'
 #' @export
 
-UniquePermutations_HMLET <- function(listInput, n = 1){
+UniquePermutations_HMLET <- function(listInput, uniqueLabels, n = 1){
 
-  Labels = levels(factor(listInput))
+
+  ############# Note for improvement ##################
+  # Later a mathematical function for generating indexed unique permutations
+  # can be used to increase the performance
+
+
+  labels = uniqueLabels
   L = length(listInput)
+  #--------- Original labels
   # Convert original label list to an indexed list
   permLabels = rray::rray(as.numeric(factor(listInput)), dim = c(L,1))
-  condNum = length(Labels)
+  condNum = length(labels)
 
-  ################################################### Compute subject-level unique labels
-  #--------- Original labels
+  if (n>factorial(condNum)^L){
+    print(paste("Maximum number of unique ",
+                "permutations is ",factorial(condNum)^L," while ",
+                "samples is set to ", n,".",sep = ""))
+    print(paste("Re-run the permutation test with samples <= ",factorial(condNum)^L,sep = ""))
+    print("---------------------------------")
+    stop("Error-> impossible number of permutations.
+         ----------------------")
+  }
+
   pb = txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
   for (i in 1:n){
     rep = 0
@@ -25,7 +41,7 @@ UniquePermutations_HMLET <- function(listInput, n = 1){
         break
       }
       if(rep>1000){
-        warning("Unique permutation hasn't been generated!(invalid results)")
+        warning("Unique permutation hasn't been generated!(invalid results, re-try with smaller samples)")
         break
       }
       rep = rep+1
@@ -48,5 +64,5 @@ UniquePermutations_HMLET <- function(listInput, n = 1){
   # C = as.data.frame(mutate(group_by(C,V1), nRep = n()))
   # C[C$nRep>1,]
   # ------------------------------------------>End
-  return(matrix(Labels[permLabels], nrow = L))
+  return(matrix(labels[permLabels], nrow = L))
 }

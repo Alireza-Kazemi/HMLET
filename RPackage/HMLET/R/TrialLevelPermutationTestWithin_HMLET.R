@@ -12,10 +12,11 @@ TrialLevelPermutationTestWithin_HMLET <- function(data, samples = 2000, paired =
 
   print("Compute unique permutation labels for trials within each subject:")
   labels = unique(data[,c("ID","trial","condition")])
+  condLevels = levels(factor(labels$condition))
   labelsPerm = NULL
   for (sID in unique(labels$ID)){
     labelTemp = labels[labels$ID==sID,]
-    L = UniquePermutations_HMLET(labelTemp[,"condition"], n = samples)
+    L = UniquePermutations_HMLET(labelTemp[,"condition"], uniqueLabels = condLevels, n = samples)
     L = data.frame(L)
     names(L) = 1:ncol(L)
     labelTemp = cbind(labelTemp,L)

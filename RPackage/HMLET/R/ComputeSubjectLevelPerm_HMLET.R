@@ -6,35 +6,55 @@
 #'@export
 ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
   condNum = length(unique(labels$condition))
+  L = length(unique(labels$ID))
 
-  ################################################### Compute subject-level unique labels
-  #--------- Original labels -> all are 1 corresponding to the first combination.
-  subjLevelPerms = sample(x = 1, size =  nrow(unique(labels[,c("ID","timePoint")])), replace = T)
-  L = length(subjLevelPerms)
-  print("Compute subject-level unique combination of conditions:")
-  pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
-  for (i in 1:n){
-    rep = 0
-    repeat{
-      newComb = sample(x = 1:factorial(condNum), size =  L, replace = T)
-      newComb = rray::rray(newComb, dim = c(L,1))
-      if(min(rray::rray_sum(abs(subjLevelPerms - newComb),axes = 1))>1){
-        break
-      }
-      if(rep>1000){
-        warning("Unique permutation hasn't been generated!(invalid results)")
-        break
-      }
-      rep = rep+1
-      # if(rep>0){print(paste("-----------------> Repeated in Index = ",i+1,sep = ""))}  # ------------------> Testing for repeat
-    }
-    subjLevelPerms = rray::rray_bind (subjLevelPerms,newComb, .axis = 2)
-    utils::setTxtProgressBar(pb,i/n)
+  #------------> Check whether n number unique re-sampling is possible
+  # In case of M conditions for L number of participants:
+  # Within each participant we have M! enumerations and across participants we
+  # have M!^L number of unique re-sampling.
+  if (n>factorial(condNum)^L){
+    print(paste("With ", L, "number of participants and ",
+                condNum," number of conditions maximum number of unique",
+                "permutations is ",factorial(condNum)^L," while currently ",
+                "samples is set to ", n,".\n",
+                "Re-run the permutation test with samples <=",factorial(condNum)^L,sep = ""))
+    print("---------------------------------")
+    stop("Error-> impossible number of permutations.
+         ----------------------")
   }
-  # print(rep)                                              # ------------------> Debugging
-  close(pb)
-  subjLevelPerms = matrix(subjLevelPerms, nrow = L)
-  subjLevelPerms = subjLevelPerms[, 2:ncol(subjLevelPerms)]  # remove the original labels
+
+  #--------- Original labels -> all are 1 corresponding to the first combination.
+  condLevels = levels(factor(1:factorial(condNum)))
+  subjLevelPerms = rep(x = 1, times =  L)
+  subjLevelPerms = UniquePermutations_HMLET(subjLevelPerms, uniqueLabels = condLevels, n = samples)
+
+#
+#   subjLevelPerms = rray::rray(subjLevelPerms, dim = c(L,1))
+#   L = length(subjLevelPerms)
+#   print("Compute subject-level unique combination of conditions:")
+#   pb = utils::txtProgressBar(min = 0, max = 1 , initial = 0, style = 3)
+#   for (i in 1:n){
+#     rep = 0
+#     repeat{
+#       newComb = sample(x = 1:factorial(condNum), size =  L, replace = T)
+#       newComb = rray::rray(newComb, dim = c(L,1))
+#       if(min(rray::rray_sum(abs(subjLevelPerms - newComb),axes = 1))>1){
+#         break
+#       }
+#       if(rep>1000){
+#         warning("Unique permutation hasn't been generated!(invalid results)")
+#         break
+#       }
+#       rep = rep+1
+#       # if(rep>0){print(paste("-----------------> Repeated in Index = ",i+1,sep = ""))}  # ------------------> Testing for repeat
+#     }
+#     subjLevelPerms = rray::rray_bind (subjLevelPerms,newComb, .axis = 2)
+#     utils::setTxtProgressBar(pb,i/n)
+#   }
+#   # print(rep)                                              # ------------------> Debugging
+#   close(pb)
+#   subjLevelPerms = matrix(subjLevelPerms, nrow = L)
+#   subjLevelPerms = subjLevelPerms[, 2:ncol(subjLevelPerms)]  # remove the original labels
 
   #------------------------------------------> Debugging for duplicated permutation sample list
   # C = t(subjLevelPerms)
@@ -61,7 +81,7 @@ ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
     #                                   })$perm, collapse = ""))
     # ------------------------------------------>End
     labels <- cbind(labels,
-                    purrr::map_dfr(as.list(subjLevelPerms[,i]),function(x){
+                    purrr::map_dfr(as.list(as.numeric(subjLevelPerms[,i])),function(x){
                       data.frame(perm = c(condList[unlist(condLevelPerms[x])]))
                     }))
     utils::setTxtProgressBar(pb,i/n)
