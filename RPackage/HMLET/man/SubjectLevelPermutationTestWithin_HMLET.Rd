@@ -8,7 +8,7 @@ SubjectLevelPermutationTestWithin_HMLET(
   data,
   samples = 2000,
   paired = T,
-  threshold_t = NA
+  threshold_t = NULL
 )
 }
 \arguments{

@@ -8,11 +8,27 @@
 #'                    alpha = 0.025.
 #' @return returns t value distribution presented in a data frame.
 #' @export
-SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paired = T, threshold_t = NA){
+SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paired = T, threshold_t = NULL){
 
   resp_time = as.data.frame(dplyr::summarise(dplyr::group_by(data,ID,timePoint,condition), prop = mean(AOI, na.rm=T)))
   labels = unique(resp_time[,c("ID","timePoint","condition")])
-  labels = ComputeSubjectLevelPerm_HMLET(labels, n = samples)
+  if(paired) {
+    labels = ComputeSubjectLevelPermLabels_HMLET(labels, n = samples)
+  }else{
+    tmp = labels %>% dplyr::group_by(ID) %>%
+      dplyr::summarise(N=n()) %>% as.data.frame()
+    if(max(tmp$N)>1){
+      stop("Some participants has more than 1 condition.\nYou may need to use Paired test for valid results.")
+    }
+    subjLevelLabels = unique(labels[,c("ID","condition")])
+    condLevels = levels(factor(labels$condition))
+    subjLevelPerms = UniquePermutations_HMLET(subjLevelLabels$condition, uniqueLabels = condLevels, n = samples)
+    subjLevelPerms = as.data.frame(subjLevelPerms)
+    names(subjLevelPerms) = gsub("V","perm",names(subjLevelPerms))
+    subjLevelPerms$ID = subjLevelLabels$ID
+    labels = merge(labels,subjLevelPerms,by="ID")
+  }
+
 
   #----------------------------- Perform Permutation tests
   print("Estimate tStatistic distribution:")

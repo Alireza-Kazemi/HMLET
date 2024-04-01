@@ -8,8 +8,8 @@
 #'                    alpha = 0.025.
 #' @return returns t value distribution presented in a data frame.
 #' @export
-TrialLevelPermutationTestWithin_HMLET <- function(data, samples = 2000, paired = T, threshold_t = NA){
-
+TrialLevelPermutationTestWithin_HMLET <- function(data, samples = 2000, paired = T, threshold_t = NULL){
+  # Always has to be paired if t-test is being used.
   print("Compute unique permutation labels for trials within each subject:")
   labels = unique(data[,c("ID","trial","condition")])
   condLevels = levels(factor(labels$condition))

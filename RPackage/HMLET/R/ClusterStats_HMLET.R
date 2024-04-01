@@ -27,7 +27,9 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NUL
   for(testName in unique(datSave$testName)){
     data = datSave[datSave$testName == testName,]
 
-    data = RemoveIncompletetimePoints_HMLET(data)
+    if(paired){
+      data = RemoveIncompletetimePoints_HMLET(data)
+    }
     if(is.null(threshold_t)){
       num_sub = length(unique(data$ID))
       threshold_t = stats::qt(p=1-.05/2, df=num_sub-1)

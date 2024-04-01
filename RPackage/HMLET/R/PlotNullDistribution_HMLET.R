@@ -8,10 +8,14 @@
 #' @export
 PlotNullDistribution_HMLET <- function(resultList, smoothingBandWidth = NULL){
   graphDat = resultList[[2]]
-  P = ggplot(graphDat, aes(x = NullDist, fill = testName)) +
-    geom_histogram(aes(y = after_stat(density)), binwidth = sd(graphDat$NullDist)/3)+
-    geom_density(alpha = 0.5,bw =sd(graphDat$NullDist)/3) +
+  P = ggplot(graphDat, aes(x = NullDist)) +
+    geom_density(alpha = 0.5,bw =sd(graphDat$NullDist)/3, fill = "gray") +
+    geom_histogram(aes(y = after_stat(density)), binwidth = sd(graphDat$NullDist)/3, alpha = .75)+
     facet_wrap(~testName, ncol = 1)+
+    ylab("Density")+
+    xlab("Summed Statistics within Clusters")+
+    title("Estimated Null Distribution")+
+    guides(colour=guide_legend(title="Cluster Index"))+
     geom_vline(data = resultList[[1]], linetype="dashed",
                aes(xintercept = tStatistic,color = as.factor(index)))+
     theme_bw(base_family = "serif")+

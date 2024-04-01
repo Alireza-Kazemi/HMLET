@@ -41,11 +41,13 @@ PermutationTest_HMLET <- function(data, samples = 2000, paired = T, permuteTrial
     data = datSave[datSave$testName == testName,]
 
     if(is.na(threshold_t)){
-      # Threshold should be based on the permutation sampling and/or subjects
+      # Threshold should be based on the number of participants
       num_sub = length(unique(data$ID))
       threshold_t = stats::qt(p=1-.05/2, df=num_sub-1)
     }
-    data = RemoveIncompletetimePoints_HMLET(data)
+    if(paired){
+      data = RemoveIncompletetimePoints_HMLET(data)
+    }
 
 
     res = ClusterStats_HMLET(data, paired = paired, detailed = T, threshold_t = threshold_t)

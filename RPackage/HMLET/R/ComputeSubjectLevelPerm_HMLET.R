@@ -3,8 +3,8 @@
 #' @param labels labels from the data frame.
 #' @param n optional integer for number of permutations to resample data.
 #' @return labels of unique permutation indices to use for subject level permutation test.
-#'@export
-ComputeSubjectLevelPerm_HMLET <- function(labels, n = 1){
+#' @export
+ComputeSubjectLevelPermLabels_HMLET <- function(labels, n = 1){
   condNum = length(unique(labels$condition))
   L = length(unique(labels$ID))
 
