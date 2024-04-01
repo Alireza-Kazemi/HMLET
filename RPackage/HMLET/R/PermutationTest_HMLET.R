@@ -32,8 +32,8 @@ PermutationTest_HMLET <- function(data, samples = 2000, paired = T, permuteTrial
   datSave = data
 
   clusterInfAll = NULL
-  tValueDistAll = NULL
-  tValuesAll    = NULL
+  statValueDistAll = NULL
+  statValuesAll    = NULL
   dataAll       = NULL
 
   for(testName in unique(datSave$testName)){
@@ -50,34 +50,38 @@ PermutationTest_HMLET <- function(data, samples = 2000, paired = T, permuteTrial
 
     res = ClusterStats_HMLET(data, paired = paired, detailed = T, threshold_t = threshold_t)
     clusterInf = res[[1]]
-    tValues = res[[2]]
+    statValues = res[[2]]
 
     if(nrow(clusterInf)>0){
       print("Creating unique permutation labels:")
       if(permuteTrialsWithinSubject){
-        tValueDist = TrialLevelPermutationTestWithin_HMLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
+        statValueDist = TrialLevelPermutationTestWithin_HMLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
 
       }else{
-        tValueDist = SubjectLevelPermutationTestWithin_HMLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
+        statValueDist = SubjectLevelPermutationTestWithin_HMLET(data, samples = samples, paired = paired, threshold_t = threshold_t)
       }
-      tValueDist$testName = unique(testName)
-      tValueDist = tValueDist[,c("testName",names(tValueDist)[names(tValueDist)!="testName"])]
+      statValueDist$testName = unique(testName)
+      statValueDist = statValueDist[,c("testName",names(statValueDist)[names(statValueDist)!="testName"])]
 
       clusterInf$pValue = unique(NA)
       clusterInf$significant = unique("")
       for(i in 1:nrow(clusterInf)){
-        clusterInf$pValue[i]=mean(as.numeric(abs(tValueDist$NullDist)>abs(clusterInf$tStatistic[i])))
+        clusterInf$pValue[i]=mean(as.numeric(abs(statValueDist$NullDist)>abs(clusterInf$tStatistic[i])))
         clusterInf$significant[i] = ifelse(clusterInf$pValue[i]<0.05,"*",ifelse(clusterInf$pValue[i]<0.1,".",""))
       }
     }else{
       clusterInf = NULL
-      tValueDist = NULL
+      statValueDist = NULL
     }
 
     clusterInfAll = rbind(clusterInfAll, clusterInf)
-    tValueDistAll = rbind(tValueDistAll, tValueDist)
-    tValuesAll    = rbind(tValuesAll, tValues)
+    statValueDistAll = rbind(statValueDistAll, statValueDist)
+    statValuesAll    = rbind(statValuesAll, statValues)
     dataAll       = rbind(dataAll, data)
   }
-  return(list(clusterInfAll, tValueDistAll, tValuesAll, samples, dataAll))
+  return(list(clusterStat = clusterInfAll,
+              statNULL = statValueDistAll,
+              stastatValues = statValuesAll,
+              samples = samples,
+              filteredData = dataAll))
 }
