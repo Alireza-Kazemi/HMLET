@@ -26,7 +26,7 @@ ComputeSubjectLevelPermLabels_HMLET <- function(labels, n = 1){
   #--------- Original labels -> all are 1 corresponding to the first combination.
   condLevels = levels(factor(1:factorial(condNum)))
   subjLevelPerms = rep(x = 1, times =  L)
-  subjLevelPerms = UniquePermutations_HMLET(subjLevelPerms, uniqueLabels = condLevels, n = samples)
+  subjLevelPerms = UniquePermutations_HMLET(subjLevelPerms, uniqueLabels = condLevels, n = n)
   subjLevelPerms = as.data.frame(subjLevelPerms)
   subjLevelPerms$ID = unique(labels$ID)
   temp = unique(labels[,c("ID","timePoint")])

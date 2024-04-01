@@ -12,9 +12,9 @@ PlotNullDistribution_HMLET <- function(resultList, smoothingBandWidth = NULL){
     geom_density(alpha = 0.5,bw =sd(graphDat$NullDist)/3, fill = "gray") +
     geom_histogram(aes(y = after_stat(density)), binwidth = sd(graphDat$NullDist)/3, alpha = .75)+
     facet_wrap(~testName, ncol = 1)+
-    ylab("Density")+
-    xlab("Summed Statistics within Clusters")+
-    title("Estimated Null Distribution")+
+    labs(title="Estimated Null Distribution",
+         x ="Summed Statistics within Clusters",
+         y = "Density")+
     guides(colour=guide_legend(title="Cluster Index"))+
     geom_vline(data = resultList[[1]], linetype="dashed",
                aes(xintercept = tStatistic,color = as.factor(index)))+
