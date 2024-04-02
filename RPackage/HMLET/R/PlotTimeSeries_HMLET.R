@@ -116,11 +116,15 @@ PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
   }else{
     OverallMean$tickSize = mean(OverallMean$tickSize) # Make sure the tickSize is unique
   }
+
   ## Added to fix the issue about SD for timePoints with 1 participant
   linedata$SD[is.na(linedata$SD)]=unique(0)
 
+
+  linedata = linedata %>% dplyr::group_by(testName) %>%
+              dplyr::mutate(DataPercent = N/max(N)) %>% as.data.frame()
+
   linedata$SE = linedata$SD/sqrt(linedata$N)
-  linedata$DataPercent = linedata$N/max(linedata$N)
   secondAxisScale = max(linedata$M+linedata$SE)
   linedata$DataPercent = linedata$DataPercent* secondAxisScale
 
