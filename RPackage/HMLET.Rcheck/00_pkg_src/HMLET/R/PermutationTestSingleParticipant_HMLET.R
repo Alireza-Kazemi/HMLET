@@ -11,10 +11,7 @@
 #'
 PermutationTestSingleParticipant_HMLET <- function(data, samples = 2000, threshold_t = NA){
   paired = F  # this test cannot be paired (Maris & Oostenveld, 2007)
-  if(length(unique(data$ID))>1){
-    stop("\nThis routine is for permutation test at trial level for one participant!
-You may want to code your participant IDs within testName column.")
-  }
+  
   if(is.factor(data$timePoint)){
     data$timeBin = data$timePoint
     data$timePoint = as.numeric(factor(data$timeBin, levels = levels(data$timeBin), labels = 1:length(levels(data$timeBin))))
@@ -31,6 +28,11 @@ You may want to code your participant IDs within testName column.")
   for(testName in unique(datSave$testName)){
     print(paste("          -------->","Running permutation test for:",testName,"<--------"))
     data = datSave[datSave$testName == testName,]
+	
+	if(length(unique(data$ID))>1){
+    stop("\nThis routine is for permutation test at trial level for one participant!
+You may want to code your participant IDs within testName column.")
+  }
 
     if(is.na(threshold_t)){
       # Threshold should be based on the number of trials
