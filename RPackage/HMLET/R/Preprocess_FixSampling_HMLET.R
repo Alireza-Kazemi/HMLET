@@ -47,14 +47,14 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
   d$GazeY_HMLETdummy = d[[GazeY]]
   d = d %>%
     dplyr::group_by_at(c(ID, trial)) %>%
-    dplyr::mutate(nSamples = n())%>%
+    dplyr::mutate(nSamples = dplyr::n())%>%
     as.data.frame()
   dtemp = d[d$nSamples<2,c(ID, trial)]
   d = d[d$nSamples>=2,]
   if(nrow(dtemp)>0){
     dtemp = unique(dtemp)
     dtemp = dtemp %>% dplyr::group_by_at(ID) %>%
-            dplyr::summarise(nInvalidTrials = n(),.groups = "drop")%>%
+            dplyr::summarise(nInvalidTrials = dplyr::n(),.groups = "drop")%>%
             as.data.frame()
     print("------------------------------------------------------------------------------------------------")
     print(paste("Invalid trials with only 1 sample are removed:",sep = ""))
@@ -89,7 +89,7 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
   d$overalIdx = seq(1,nrow(d))
   d = d %>%
     dplyr::group_by_at(c(ID, trial)) %>%
-    dplyr::mutate(time = time-min(time),timeDiff = c(0,diff(time)),sampleIdx = seq(from = 1,to = n(), by = 1)) %>%
+    dplyr::mutate(time = time-min(time),timeDiff = c(0,diff(time)),sampleIdx = seq(from = 1,to = dplyr::n(), by = 1)) %>%
     as.data.frame()
   d$time = ceiling(d$time/d$interval)*d$interval
 
@@ -98,7 +98,7 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
     dplyr::group_by_at(c(ID, trial, "interval")) %>%
     dplyr::reframe(timeNew = seq(from = min(time),to = max(time), by = unique(interval))) %>%
     dplyr::group_by_at(c(ID, trial,"interval")) %>%
-    dplyr::mutate(sampleIdxNew = seq(from = 1,to = n(), by = 1)) %>%
+    dplyr::mutate(sampleIdxNew = seq(from = 1,to = dplyr::n(), by = 1)) %>%
     as.data.frame()
 
   #------------------------- Merge the complete data and remove extra columns
@@ -135,7 +135,7 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
   # ReCreate all time points
   d = d %>%
     dplyr::group_by_at(c(ID, trial)) %>%
-    dplyr::mutate(sampleIdx = seq(from = 1,to = n(), by = 1)) %>%
+    dplyr::mutate(sampleIdx = seq(from = 1,to = dplyr::n(), by = 1)) %>%
     as.data.frame()
   d$time = floor((d$sampleIdx*d$interval)*10000+0.5)/10000
   d = d[order(d[[ID]],d[[trial]],d$time),]
@@ -159,7 +159,7 @@ Preprocess_FixSampling_HMLET <- function(data, ID = "ID", trial, timePoint,
     if(nrow(dtemp)>0){
       dtemp = unique(dtemp)
       dtemp = dtemp %>% dplyr::group_by_at(ID) %>%
-        dplyr::summarise(nInvalidTrials = n(),.groups = "drop")%>%
+        dplyr::summarise(nInvalidTrials = dplyr::n(),.groups = "drop")%>%
         as.data.frame()
       print("------------------------------------------------------------------------------------------------")
       print(paste("Invalid trials with less than ",shortTrialsThreshold," non-NA gaze points are removed:",sep = ""))

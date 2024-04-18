@@ -25,6 +25,8 @@
 #' @param shapeCodeOverallMean Specify the shape of the overall mean points when showOverallMean = "Point", defaults to 1 \(circle\).
 #' @param tickSizeOverallMean Optional to specify where to plot the overall means when showOverallMean = "Point", defaults to NULL.
 #'
+#' @import ggplot2
+#'
 #' @return a plot handle that visualizes the data from PrepareMLETData_HMLET or the list from PermuationTest_HMLET.
 #' @export
 PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
@@ -92,7 +94,7 @@ PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
 
   linedata = as.data.frame(dplyr::summarise(dplyr::group_by(linedata,
                                                             testName, timePoint, condition),
-                                            M = mean(Prop, na.rm=T),SD = sd(Prop, na.rm = T),N = n()))
+                                            M = mean(Prop, na.rm=T),SD = sd(Prop, na.rm = T),N = dplyr::n()))
 
   # First over timePoints within IDs+trials
   OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(graphDat, testName,
@@ -109,7 +111,7 @@ PlotTimeSeries_HMLET <- function(resultList, showDataPointProp = T,
   OverallMean = as.data.frame(dplyr::summarise(dplyr::group_by(OverallMean, testName,
                                                                condition),
                                                yM = mean(M, na.rm=T),
-                                               ySE = sd(M, na.rm=T)/sqrt(n()),
+                                               ySE = sd(M, na.rm=T)/sqrt(dplyr::n()),
                                                tickSize = max(tickSize,na.rm = T) ))
   if(!is.null(tickSizeOverallMean)){
     OverallMean$tickSize = tickSizeOverallMean

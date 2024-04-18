@@ -7,7 +7,7 @@
 PermutationTestDataPrep_HMLET(
   data,
   ID = "ID",
-  trial,
+  trial = NULL,
   timePoint,
   condition,
   gazeMeasure,

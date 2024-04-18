@@ -36,7 +36,7 @@ Preprocess_CheckData_HMLET <- function(data, ID = "ID", trial = "trial", timePoi
   #------------------------- Verify time stamps are unique
   d = data %>%
     dplyr::group_by_at(c(ID, trial, timePoint)) %>%
-    dplyr::summarise(N=n(),.groups = "drop") %>%
+    dplyr::summarise(N=dplyr::n(),.groups = "drop") %>%
     as.data.frame()
   if(nrow(d[d$N>1,])>0){
     print("Sample of duplicated time stamps:")
@@ -82,7 +82,7 @@ Preprocess_CheckData_HMLET <- function(data, ID = "ID", trial = "trial", timePoi
   d$GazeY = d[[GazeY]]
   d = d %>%
     dplyr::group_by_at(c(ID, trial,groupingColumns)) %>%
-    dplyr::summarise(N=n(),nNA = sum(is.na(GazeX)|is.na(GazeY)),.groups = "drop")%>%
+    dplyr::summarise(N=dplyr::n(),nNA = sum(is.na(GazeX)|is.na(GazeY)),.groups = "drop")%>%
     as.data.frame()
 
   #------------------------- Verify Very Short Trials
@@ -104,7 +104,7 @@ Preprocess_CheckData_HMLET <- function(data, ID = "ID", trial = "trial", timePoi
   d$highMissRate = ifelse(d$missRate>=missRateCap,1,0)
   d = d %>%
     dplyr::group_by_at(c(ID,groupingColumns)) %>%
-    dplyr::summarise(nTrials = n(),
+    dplyr::summarise(nTrials = dplyr::n(),
                      nTarialsMoreThanCap=sum(highMissRate),
                      averageMissRate = mean(missRate),.groups = "drop") %>%
     as.data.frame()

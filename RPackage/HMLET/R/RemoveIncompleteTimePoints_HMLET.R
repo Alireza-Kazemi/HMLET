@@ -13,11 +13,12 @@ RemoveIncompletetimePoints_HMLET <- function(data){
 	if(nrow(rmIdx)>0){
 	  rmDat = rmIdx
 	  rmDat = rmDat%>% dplyr::group_by(ID,timePoint,testName) %>%
-	    dplyr::summarise(N=n()) %>%
+	    dplyr::summarise(N=dplyr::n()) %>%
 	    dplyr::group_by(timePoint,testName) %>%
 	    dplyr::summarise(N=sum(N,na.rm=T)) %>%
 	    dplyr::group_by(testName) %>%
 	    dplyr::summarise(N=round(mean(N,na.rm=T),2)) %>% as.data.frame()
+
 	  rmIdx = paste(rmIdx$ID,rmIdx$timePoint,rmIdx$testName,sep = "_")
 	  dIdx = paste(data$ID,data$timePoint,data$testName,sep = "_")
 	  data = data[!(dIdx %in% rmIdx),]
@@ -29,7 +30,7 @@ RemoveIncompletetimePoints_HMLET <- function(data){
 
 	#--> change to keep the t-value computation consistent with the threshold value for unbalanced data.
 	rmIdx = unique(data[,c("ID","timePoint","testName")])
-	rmIdx = as.data.frame(dplyr::summarise(dplyr::group_by(rmIdx,timePoint,testName), N = n()))
+	rmIdx = as.data.frame(dplyr::summarise(dplyr::group_by(rmIdx,timePoint,testName), N = dplyr::n()))
 	rmIdx = rmIdx[rmIdx$N<=2,] # This is chosen arbitrarily to remove time points with only 1 participant data
 	if(nrow(rmIdx)>0){
 	  rmIdx = paste(rmIdx$timePoint,rmIdx$testName,sep = "_")

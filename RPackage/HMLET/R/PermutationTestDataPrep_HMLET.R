@@ -14,22 +14,18 @@
 #' @param testName optional string for name of data -- used as condition name or test names to compare permutation test
 #'                 results between different tests/conditions later, defaults to NULL.
 #'
-#' @import dplyr
-#' @import miceadds
-#' @import purrr
-#' @import ggplot2
-#' @import rray
-#' @import tidyr
-#' @import vdiffr
-#' @import combinat
-#' @import reshape2
 #' @return data frame compatible for permutation tests and other HMLET modules
 #' @export
-PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial, timePoint, condition, gazeMeasure,
+PermutationTestDataPrep_HMLET <- function(data, ID = "ID", trial = NULL, timePoint, condition, gazeMeasure,
                                   conditionLevels = NULL, targetAOI = NULL, testName = NULL, timeBinName = NULL){
   if(is.null(testName)){
     data$testName = unique("PermutationTest0")
     testName = "testName"
+  }
+
+  if(is.null(trial)){
+    data$trial = unique("SingleTrial")
+    trial = "trial"
   }
 
   if(is.null(timeBinName)){

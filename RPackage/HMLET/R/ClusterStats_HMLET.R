@@ -50,7 +50,7 @@ ClusterStats_HMLET <- function(data, paired = T, detailed = F, threshold_t = NUL
     tValues$testName = unique(data$testName)
     tValues = tValues[,c("testName",names(tValues)[names(tValues)!="testName"])]
 
-    clusterInf = melt(tValues,id.vars = c("testName","timePoint","value"),variable.name = "Direction", value.name = "index")
+    clusterInf = reshape2::melt(tValues,id.vars = c("testName","timePoint","value"),variable.name = "Direction", value.name = "index")
     clusterInf = clusterInf[clusterInf$index!=0,]
     if(nrow(clusterInf)==0){
       warning(paste("\n    >> In test data: ",unique(data$testName),

@@ -4,6 +4,7 @@
 #'                   or a list that is the result of PermutationTest_HMLET.
 #' @param smoothingBandWidth  The smoothing bandwidth which determines the granularity of distribution estimation, defaults to sd/3
 #' @return null distribution plot handle.
+#' @import ggplot2
 #'
 #' @export
 PlotNullDistribution_HMLET <- function(resultList, smoothingBandWidth = NULL){

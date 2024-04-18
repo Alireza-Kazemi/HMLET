@@ -23,7 +23,7 @@ ComputeSamplingInterval_HMLET <- function(data, ID = "ID", trial, timePoint, app
     dplyr::group_by_at(c(ID, trial)) %>%
     dplyr::summarise(interval = floor(mean(diff(timeStamp_HMLETDummy)*100)+0.5)/100,.groups = "drop") %>%
     dplyr::group_by_at(c(ID, "interval")) %>%
-    dplyr::summarise(N=n(),.groups = "drop") %>%
+    dplyr::summarise(N=dplyr::n(),.groups = "drop") %>%
     dplyr::group_by_at(ID) %>%
     dplyr::summarise(interval = interval[which.max(N)],.groups = "drop") %>%
     as.data.frame()

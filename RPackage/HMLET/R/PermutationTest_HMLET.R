@@ -7,17 +7,6 @@
 #' @param threshold_t optional probability threshold for statistical comparison, defaults to NA and will be computed based on number of trials when "between trials
 #'                    permutation" is called or will be computed based on number of subjects when "between subjects permutation" is called.
 #'                    Alpha = 0.025.
-#' @import combinat
-#' @import dplyr
-#' @import ggplot2
-#' @import miceadds
-#' @import purrr
-#' @import reshape2
-#' @import rray
-#' @import tidyr
-#' @import vdiffr
-#' @import stats
-#' @import utils
 #'
 #' @return a list of permutation tests in which distribution of desired statistic under the null hypothesis is estimated in a large number of permutations of the original data
 #' @export

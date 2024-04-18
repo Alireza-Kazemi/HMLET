@@ -16,7 +16,7 @@ SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paire
     labels = ComputeSubjectLevelPermLabels_HMLET(labels, n = samples)
   }else{
     tmp = labels %>% dplyr::group_by(ID) %>%
-      dplyr::summarise(N=n()) %>% as.data.frame()
+      dplyr::summarise(N=dplyr::n()) %>% as.data.frame()
     if(max(tmp$N)>1){
       stop("Some participants has more than 1 condition.\nYou may need to use Paired test for valid results.")
     }
@@ -39,7 +39,7 @@ SubjectLevelPermutationTestWithin_HMLET <- function(data, samples = 2000 , paire
     resp_time$condition = labels[,paste("perm",itt,sep = "")]
     tValues = ComputeTValues_HMLET(resp_time,paired = paired)
     tValues = FindClusters_HMLET(tValues, threshold_t = threshold_t)
-    sdat = melt(tValues,id.vars = c("timePoint","value"),variable.name = "Direction", value.name = "index")
+    sdat = reshape2::melt(tValues,id.vars = c("timePoint","value"),variable.name = "Direction", value.name = "index")
     sdat = sdat[sdat$index!=0,]
     if(nrow(sdat)!=0){
       sdat = as.data.frame(dplyr::summarise(dplyr::group_by(sdat,Direction,index),tStatistic = sum(value, na.rm=T)))
