@@ -1,4 +1,4 @@
-#' Return a data frame compatible for permutation tests routine.
+#' Add cluster information and stats to the corresponding time points in the initial dataframe.
 #'
 #'
 #' @param data data frame with temporal data for permutation tests routine, output from PermutationTestDataPrep_HMLET.R.
@@ -29,11 +29,11 @@ AddClusterInfotoData_HMLET <- function(data, clusterInf){
     idx = (data$timePoint >= timeStart) & (data$timePoint <= timeEnd)
     idx = idx & (data$testName == clusterInf[index,"testName"])
 
-    data$clusterDirection[idx] = clusterInf[index,"Direction"]
+    data$clusterDirection[idx] = as.character(clusterInf[index,"Direction"])
     data$clusterIndex[idx] = clusterInf[index,"index"]
     data$clusterTime[idx] = paste(timeStart,"->",timeEnd, sep = "")
     if("significant" %in% names(clusterInf)){
-      data$clusterSig[idx] = clusterInf[index,"significant"]
+      data$clusterSig[idx] = as.character(clusterInf[index,"significant"])
       data$clusterpValue[idx] = clusterInf[index,"pValue"]
     }
 

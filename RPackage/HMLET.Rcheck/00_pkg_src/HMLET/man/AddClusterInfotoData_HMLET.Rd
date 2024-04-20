@@ -2,7 +2,7 @@
 % Please edit documentation in R/AddClusterInfotoData_HMLET.R
 \name{AddClusterInfotoData_HMLET}
 \alias{AddClusterInfotoData_HMLET}
-\title{Return a data frame compatible for permutation tests routine.}
+\title{Add cluster information and stats to the corresponding time points in the initial dataframe.}
 \usage{
 AddClusterInfotoData_HMLET(data, clusterInf)
 }
@@ -15,5 +15,5 @@ AddClusterInfotoData_HMLET(data, clusterInf)
 data frame compatible for permutation tests and other HMLET modules
 }
 \description{
-Return a data frame compatible for permutation tests routine.
+Add cluster information and stats to the corresponding time points in the initial dataframe.
 }
