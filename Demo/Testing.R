@@ -518,3 +518,45 @@ for (list_of_rows in list_of_list_of_rows) {
                                                            attrs$predictor_column]
   }
 }
+
+
+############################################ Between Subject eyetrackingR -----
+data(word_recognition)
+data <- make_eyetrackingr_data(word_recognition, 
+                               participant_column = "ParticipantName",
+                               trial_column = "Trial",
+                               time_column = "TimeFromTrialOnset",
+                               trackloss_column = "TrackLoss",
+                               aoi_columns = c('Animate','Inanimate'),
+                               treat_non_aoi_looks_as_missing = TRUE )
+response_window <- subset_by_window(data, window_start_time = 15500, window_end_time = 21000, 
+                                    rezero = FALSE)
+response_time <- make_time_sequence_data(response_window, time_bin_size = 500, aois = "Animate", 
+                                         predictor_columns = "Sex")
+plot(response_time, predictor_column = "Sex")
+time_cluster_data <- make_time_cluster_data(data = response_time, predictor_column = "SexM", 
+                                            aoi = "Animate", test = "lmer", 
+                                            threshold = 1.5, 
+                                            formula = LogitAdjusted ~ Sex + (1|Trial) + (1|ParticipantName))
+
+
+
+summary(time_cluster_data)
+plot(time_cluster_data)
+
+head(response_time)
+dat = PermutationTestDataPrep_HMLET(data = response_time, ID = "ParticipantName", trial = "Trial",
+                                    timePoint = "Time",
+                                    condition = "Sex", conditionLevels = c("F","M"),
+                                    gazeMeasure = "Prop")
+
+
+PlotTimeSeries_HMLET(dat,showDataPointProp = T, showOverallMean = F)
+Res = ClusterStats_HMLET(dat, paired = F, detailed = T)
+
+# analyze time clusters in a non-parametric analysis
+## Not run: 
+tc_analysis <- analyze_time_clusters(time_cluster_data, within_subj = FALSE,
+                                     samples = 200)
+plot(tc_analysis)
+summary(tc_analysis)

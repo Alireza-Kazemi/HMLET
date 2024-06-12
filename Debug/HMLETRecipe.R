@@ -37,7 +37,7 @@ Interpolation_HMLET <- function(data, gazeXCoordinate, gazeYCoordinate, timePoin
 }
 
 
-RD = "D:\\Projects\\HMLET\\DataFiles\\Debug\\"
+RD = "D:\\Projects\\HMLET\\DataFiles\\Debug\\Interpolation Plotting\\"
 dat = read.table(paste(RD,"AlirezaTest2022.csv",sep = ""), header=TRUE, sep=",", strip.white = TRUE)
 dat = dat[dat$PostDec == 0,]
 dat = dat[!(dat$MediaName %in% c("center.jpg","waitTime","Retrieval summary.png")),]
