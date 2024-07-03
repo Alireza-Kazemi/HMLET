@@ -1,10 +1,10 @@
 Type: Package
 Package: HMLET
 Title: What the Package Does (Title Case)
-Version: 0.1
+Version: 2.0
 Author: Alireza Kazemi
 Maintainer: Alireza Kazemi <alireza.kzmi@gmail.com>
-Description: MLET uses machine learning algorithm to analyze Eye-Tracking
+Description: HMLET uses machine learning algorithm to analyze Eye-Tracking
     data.
 License: MIT + file LICENSE
 Imports: 
