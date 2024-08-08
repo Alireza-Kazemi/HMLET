@@ -1,4 +1,4 @@
-#' Generate unique random permutations
+#'
 #' To be completed
 #'
 #'@export
