@@ -91,11 +91,11 @@
 <polyline points='37.39,237.83 40.13,237.83 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='37.39,114.39 40.13,114.39 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='682.31,505.91 682.31,39.43 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
-<polyline points='682.31,484.71 685.05,484.71 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='682.31,378.69 685.05,378.69 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='682.31,272.67 685.05,272.67 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='682.31,166.66 685.05,166.66 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='682.31,60.64 685.05,60.64 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='685.05,484.71 682.31,484.71 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='685.05,378.69 682.31,378.69 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='685.05,272.67 682.31,272.67 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='685.05,166.66 682.31,166.66 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='685.05,60.64 682.31,60.64 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <text x='687.24' y='487.74' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
 <text x='687.24' y='381.72' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>25</text>
 <text x='687.24' y='275.70' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>50</text>
@@ -103,23 +103,23 @@
 <text x='687.24' y='63.67' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='14.68px' lengthAdjust='spacingAndGlyphs'>100</text>
 <text x='361.22' y='529.04' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='49.50px' lengthAdjust='spacingAndGlyphs'>Time (ms)</text>
 <text transform='translate(13.05,272.67) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='80.11px' lengthAdjust='spacingAndGlyphs'>Gaze Proportion</text>
-<text transform='translate(704.67,272.67) rotate(90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='132.69px' lengthAdjust='spacingAndGlyphs'>Available Observations (%)</text>
-<rect x='243.23' y='542.28' width='133.98' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='248.71' y='560.19' style='font-size: 11.00px; font-family: sans;' textLength='44.04px' lengthAdjust='spacingAndGlyphs'>condition</text>
-<rect x='298.22' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #F2F2F2;' />
-<line x1='299.95' y1='556.40' x2='313.77' y2='556.40' style='stroke-width: 2.13; stroke: #F8766D; stroke-opacity: 0.70; stroke-linecap: butt;' />
-<line x1='299.95' y1='556.40' x2='313.77' y2='556.40' style='stroke-width: 2.13; stroke: #F8766D; stroke-linecap: butt;' />
-<rect x='298.93' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D; fill-opacity: 0.10;' />
-<rect x='337.71' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #F2F2F2;' />
-<line x1='339.44' y1='556.40' x2='353.26' y2='556.40' style='stroke-width: 2.13; stroke: #00BFC4; stroke-opacity: 0.70; stroke-linecap: butt;' />
-<line x1='339.44' y1='556.40' x2='353.26' y2='556.40' style='stroke-width: 2.13; stroke: #00BFC4; stroke-linecap: butt;' />
-<rect x='338.42' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4; fill-opacity: 0.10;' />
-<text x='320.98' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='11.25px' lengthAdjust='spacingAndGlyphs'>C1</text>
-<text x='360.47' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='11.25px' lengthAdjust='spacingAndGlyphs'>C2</text>
-<rect x='388.16' y='542.28' width='91.06' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='399.12' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #F2F2F2;' />
-<line x1='400.85' y1='556.40' x2='414.67' y2='556.40' style='stroke-width: 2.13; stroke: #000000; stroke-opacity: 0.70; stroke-dasharray: 2.85,8.54,11.38,8.54; stroke-linecap: butt;' />
-<text x='421.88' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='51.86px' lengthAdjust='spacingAndGlyphs'>Observations</text>
+<text transform='translate(706.95,272.67) rotate(90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='132.69px' lengthAdjust='spacingAndGlyphs'>Available Observations (%)</text>
+<rect x='245.97' y='542.28' width='133.98' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='251.45' y='560.19' style='font-size: 11.00px; font-family: sans;' textLength='44.04px' lengthAdjust='spacingAndGlyphs'>condition</text>
+<rect x='300.96' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
+<line x1='302.69' y1='556.40' x2='316.51' y2='556.40' style='stroke-width: 2.13; stroke: #F8766D; stroke-opacity: 0.70; stroke-linecap: butt;' />
+<line x1='302.69' y1='556.40' x2='316.51' y2='556.40' style='stroke-width: 2.13; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='301.67' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D; fill-opacity: 0.10;' />
+<rect x='340.45' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
+<line x1='342.18' y1='556.40' x2='356.00' y2='556.40' style='stroke-width: 2.13; stroke: #00BFC4; stroke-opacity: 0.70; stroke-linecap: butt;' />
+<line x1='342.18' y1='556.40' x2='356.00' y2='556.40' style='stroke-width: 2.13; stroke: #00BFC4; stroke-linecap: butt;' />
+<rect x='341.16' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #00BFC4; fill-opacity: 0.10;' />
+<text x='323.72' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='11.25px' lengthAdjust='spacingAndGlyphs'>C1</text>
+<text x='363.21' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='11.25px' lengthAdjust='spacingAndGlyphs'>C2</text>
+<rect x='390.90' y='542.28' width='85.58' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='396.38' y='547.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
+<line x1='398.11' y1='556.40' x2='411.93' y2='556.40' style='stroke-width: 2.13; stroke: #000000; stroke-opacity: 0.70; stroke-dasharray: 2.85,8.54,11.38,8.54; stroke-linecap: butt;' />
+<text x='419.14' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='51.86px' lengthAdjust='spacingAndGlyphs'>Observations</text>
 <text x='40.13' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='135.74px' lengthAdjust='spacingAndGlyphs'>Temporal Gaze Trends</text>
 </g>
 </svg>
