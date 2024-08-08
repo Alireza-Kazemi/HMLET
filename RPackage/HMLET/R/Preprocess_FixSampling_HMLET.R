@@ -26,7 +26,7 @@
 #' @param timePoint string for column name that represents time stamps of each sample.
 #' @param GazeX string for column name that includes X coordinate of gazepoints
 #' @param GazeY string for column name that includes Y coordinate of gazepoints
-#' @param samplingInterval specifies working directory of project.
+#' @param samplingInterval Specify the expected sampling interval
 #' @param fillGenratedRows Optional flag to specify whether the new rows generated to fill temporal jumps should be filled or not. This function uses a 'down-up' order (each value filled with its preceding value; otherwise, with its following value) to fill these columns. Defaults to TRUE.
 #' @param ignoreColumns Optional string(s) to specify columns that shouldn't be filled, defaults to NULL.
 #' @param removeShortTrials Optional flag to specify whether short trials has to be removed or not, defaults to T.

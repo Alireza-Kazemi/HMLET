@@ -31,7 +31,7 @@ Preprocess_FixSampling_HMLET(
 
 \item{GazeY}{string for column name that includes Y coordinate of gazepoints}
 
-\item{samplingInterval}{specifies working directory of project.}
+\item{samplingInterval}{Specify the expected sampling interval}
 
 \item{fillGenratedRows}{Optional flag to specify whether the new rows generated to fill temporal jumps should be filled or not. This function uses a 'down-up' order (each value filled with its preceding value; otherwise, with its following value) to fill these columns. Defaults to TRUE.}
 

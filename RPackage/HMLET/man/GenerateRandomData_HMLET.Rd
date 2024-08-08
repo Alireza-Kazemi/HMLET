@@ -2,18 +2,47 @@
 % Please edit documentation in R/GenerateRandomData_HMLET.R
 \name{GenerateRandomData_HMLET}
 \alias{GenerateRandomData_HMLET}
-\title{Generate unique random permutations
-To be completed}
+\title{Generate Data}
 \usage{
 GenerateRandomData_HMLET(
-  tMax = 20,
-  effectOffset = 5,
-  trialNum = 40,
-  subjNum = 20,
-  effectSize = 0.2
+  trialNum = 20,
+  subjectNum = 20,
+  timeMax = 1000,
+  samplingInterval = 17,
+  effectInterval = c(250, 350),
+  effectSize = 0.2,
+  sdCond1 = 1,
+  sdCond2 = 1,
+  smoothingPar = 0.4
 )
 }
+\arguments{
+\item{trialNum}{Number of trials, defaults to 20.}
+
+\item{subjectNum}{Number of subjects, defaults to 20.}
+
+\item{timeMax}{Length of each trial in milliseconds, defaults to 1000.}
+
+\item{samplingInterval}{Specify the expected sampling interval in milliseconds, defaults to 17.}
+
+\item{effectInterval}{The expected time interval to simulate the effect, defaults to c(250,350).}
+
+\item{effectSize}{Size of the effect}
+
+\item{sdCond1}{standard deviation for condition 1, defaults to 1.}
+
+\item{sdCond2}{standard deviation for condition 2, defaults to 1.}
+
+\item{smoothingPar}{smoothing parameter to smooth the generated data based on spar parameter in smooth.spline(), defaults to 0.4}
+}
 \description{
-Generate unique random permutations
-To be completed
+This function generates data to simulate a desired effect size at a specified time interval.
+This data is generated only for testing and evaluation of the HMLET package
+and is not valid for other purposes or research.
+}
+\details{
+Data has two within participants' conditions: Cond1 and Cond2.
+Trial level data for the number of participants will be generated with an effect
+appearing in the specified time interval in which the two conditions are
+different with the specified effect size
 }
