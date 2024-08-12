@@ -6,28 +6,19 @@
 \usage{
 Preprocess_AOIExtraction_HMLET(
   data,
-  ID = "ID",
-  trial,
-  timePoint,
   GazeX,
   GazeY,
   AOI_Names,
-  ContentLabel = "Content",
   AOIs_Center_X,
   AOIs_Center_Y,
-  AOIs_Radius_X,
-  AOIs_Radius_Y,
+  AOIs_Widths,
+  AOIs_Heights,
+  ContentLabel = "Content",
   EllipticAOI = FALSE
 )
 }
 \arguments{
 \item{data}{long format dataframe containing temporal data.}
-
-\item{ID}{string for column name that represents IDs within data frame, defaults to "ID".}
-
-\item{trial}{string for column name that identify unique trials within data frame. Can be numerical or categorical.}
-
-\item{timePoint}{string for column name that represents time stamps of each sample.}
 
 \item{GazeX}{string for column name that includes X coordinate of gazepoints}
 
@@ -35,17 +26,17 @@ Preprocess_AOIExtraction_HMLET(
 
 \item{AOI_Names}{List of Strings for AOIs names}
 
+\item{AOIs_Center_X}{List of numerical values for the horizontal coordinate of the center of all AOIs or list of strings indicating the column names in the input data that have these values}
+
+\item{AOIs_Center_Y}{List of numerical values for the vertical coordinate of the center of all AOIs or list of strings indicating the column names in the input data that have these values}
+
 \item{ContentLabel}{Label for gaze points that are outside all of the AOIs, defaults to "Content"}
 
-\item{AOIs_Center_X}{List of X coordinates for the center of all AOIs}
+\item{EllipticAOI}{Binary value to identify whether elliptic AOIs should be used instead of rectangular ones, defaults to FALSE}
 
-\item{AOIs_Center_Y}{List of Y coordinates for the center of all AOIs}
+\item{AOIs_Radius_X}{List of numerical values for width size/horizontal diameter of all AOIs or list of strings indicating the column names in the input data that have these values}
 
-\item{AOIs_Radius_X}{List of width sizes of all AOIs}
-
-\item{AOIs_Radius_Y}{List of Height sizes of all AOIs}
-
-\item{EllipticAOI}{Binary value indicates to compute AOIs as circules with Radius equal to AOIs_Radius_X, defaults to FALSE}
+\item{AOIs_Radius_Y}{List of numerical values for height size/vertical diameter of all AOIs or list of strings indicating the column names in the input data that have these values.}
 }
 \description{
 AOIs can be computed in rectangular or elliptic forms.
