@@ -55,4 +55,4 @@ Preprocess_AOIExtraction_HMLET(
 
  ```
 
-![AOI Parameters Example](/AOIExtractionParameters.jpg)
+![AOI Parameters Example](AOIExtractionParameters.jpg)
