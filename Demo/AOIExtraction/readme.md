@@ -21,6 +21,8 @@ devtools::install_github("Alireza-Kazemi/HMLET/RPackage/HMLET")
 You can call the function as follows:
 
 ```r
+library(HMLET)
+
 Preprocess_AOIExtraction_HMLET(
   data,
   GazeX,
