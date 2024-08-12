@@ -34,23 +34,23 @@ Preprocess_AOIExtraction_HMLET(
   EllipticAOI = FALSE)
   
   
-<!-- 	data				long format dataframe containing temporal data.
-	GazeX 				string for column name that includes X coordinate of gazepoints
-	GazeY 				string for column name that includes Y coordinate of gazepoints
-	AOI_Names 			List of Strings for AOIs names
-	AOIs_Center_X 		List of numerical values for the horizontal coordinate of the center of all AOIs
-						or list of strings indicating the column names in the input data that have these
-						values
-	AOIs_Center_Y 		List of numerical values for the vertical coordinate of the center of all AOIs
-						or list of strings indicating the column names in the input data that have these
-						values
-	AOIs_Radius_X 		List of numerical values for width size/horizontal diameter of all AOIs or list of
-						strings indicating the column names in the input data that have these values
-	AOIs_Radius_Y 		List of numerical values for height size/vertical diameter of all AOIs or list of
-						strings indicating the column names in the input data that have these values.
-	ContentLabel 		Label for gaze points that are outside all of the AOIs, defaults to "Content"
-	EllipticAOI 		Binary value to identify whether elliptic AOIs should be used instead of rectangular ones, defaults to FALSE
- -->
+# 	data				long format dataframe containing temporal data.
+#	GazeX 				string for column name that includes X coordinate of gazepoints
+#	GazeY 				string for column name that includes Y coordinate of gazepoints
+#	AOI_Names 			List of Strings for AOIs names
+#	AOIs_Center_X 		List of numerical values for the horizontal coordinate of the center of all AOIs
+#						or list of strings indicating the column names in the input data that have these
+#						values
+#	AOIs_Center_Y 		List of numerical values for the vertical coordinate of the center of all AOIs
+#						or list of strings indicating the column names in the input data that have these
+#						values
+#	AOIs_Radius_X 		List of numerical values for width size/horizontal diameter of all AOIs or list of
+#						strings indicating the column names in the input data that have these values
+#	AOIs_Radius_Y 		List of numerical values for height size/vertical diameter of all AOIs or list of
+#						strings indicating the column names in the input data that have these values.
+#	ContentLabel 		Label for gaze points that are outside all of the AOIs, defaults to "Content"
+#	EllipticAOI 		Binary value to identify whether elliptic AOIs should be used instead of rectangular ones, defaults to FALSE
+
  ```
 
 ![AOI Parameters Example](/AOIExtractionParameters.jpg)
