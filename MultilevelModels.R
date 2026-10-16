@@ -77,32 +77,6 @@ RemoveOutliers <- function(data,factorNames,varNames,Criteria=3.29){
 IntegrateVector <- function(vector,dt=1,timeVec = NULL, 
                             interpolate = F, method = "cubic",
                             t0=0){
-  #------------- Example
-  ## requires: pracma and stats packages
-  # dt=1
-  # timeVec = NULL
-  # interpolate = F
-  # method = "cubic"
-  # t0=0
-  # t = seq(0,3*pi/4,by = pi/100)
-  # y = sin(t)
-  # stats::integrate(sin,t[1],t[length(t)])
-  # IntegrateVector(y,dt = pi/100)
-  # IntegrateVector(y,dt = pi/100,interpolate = T,method = "linear")
-  # IntegrateVector(y,dt = pi/100,interpolate = T,method = "cubic")
-  #---------------test
-  # fy = ppfit(t,y,t,method = "linear")
-  # ti = seq(0,3*pi/4,by = pi/1000)
-  # yi = ppval(fy,ti)
-  # 
-  # plot(t,y,type = "b", main = "Piecewise polynomial approximation")
-  # lines(ti, yi, col="red",lwd = 2)
-  # 
-  # t = seq(0,pi,by = pi/100)
-  # y = sin(t)
-  # yi = ppval(fy,t)
-  # plot(t,y,type = "b", main = "Piecewise polynomial approximation")
-  # lines(t, yi, col="red",lwd = 2)
   
   if(is.null(timeVec)){
     timeVec = seq(0,length(vector)-1,1)*dt+t0
@@ -224,23 +198,17 @@ d = dat[(dat$testName == "Far" &
           (dat$testName == "Close" &
              (dat$timePoint >= clusterClose2[1]) & (dat$timePoint <= clusterClose2[2])),]
 
-# d = RemoveOutliers(d,factorNames = c("sessID","testName","timePoint"),varNames = "diff",Criteria=3)
-# d = d[!is.na(d$diff),]
 
 d = d[order(d$SID,d$sessID,d$timePoint,d$testName),]
-# windowSize = 6.6667
 windowSize = 100
-# groupSize = 6
 sDat = d %>% group_by(SID,sessID,testName) %>%
   mutate(diffn = na.approx(diff),
          timeStamp = floor(timePoint/windowSize),
-         # timeStamp = floor((round(timePoint*60/1000)-min(round(unique(timePoint)*60/1000)))/groupSize),
+        
   ) %>%
   group_by(SID,sessID,testName,timeStamp) %>%
   summarize(CorrL = mean(CorrL,na.rm = T),
             diff = mean(diffn,na.rm = T),
-            # integ = IntegrateVector(diffn,dt = 1000/60,t0 = timePoint[1],
-            #                         interpolate = T,method = "cubic")/n(),
             IncorrL = mean(IncorrL,na.rm = T),
             N=n()) %>%
   group_by(testName) %>%
@@ -255,14 +223,13 @@ sDat = merge(sDat, datAge, all.x = T,by = c("SID","sessID","ID","testName"))
 datModel = sDat
 datModel$Condition = datModel$testName
 datModel$Vicinity = datModel$diff
-# datModel$Vicinity = datModel$CorrL - (1-datModel$IncorrL)
 
 datModel$Memory  = datModel$CLR*100
 datModel$Order = factor(datModel$timeStamp,levels = order(unique(datModel$timeStamp)))
-# datModel$Order = as.numeric(datModel$timeStamp)
+
 datModel$ageBase = datModel$ageBase - min(datModel$ageBase)
 datModel$Age = datModel$Age - min(datModel$Age)
-# datModel$ageChange = scale(datModel$ageChange)
+
 datModel$TimePoint = ifelse(datModel$ageChange==0,"T1","T2")
 
 datModel = RemoveOutliers(datModel,factorNames = c("sessID","Condition"),varNames = "Vicinity")
@@ -287,12 +254,10 @@ A = datModel %>% group_by(SID,Condition,TimePoint) %>%
 A$TimePoint = as.factor(A$TimePoint)
 ggplot(A, aes(x=TimePoint, y=Vicinity, fill=TimePoint)) +
   geom_boxplot() +
-  # scale_fill_viridis(discrete = TRUE, alpha=0.6) +
   geom_jitter(color="black", size=0.4, alpha=0.9)+
   geom_line(aes(group=SID))+
   facet_wrap(~Condition)
-# datModel = datModel[,c("SID", "Memory", "ageBase", "ageChange", "Condition", 'Vicinity',"Order","TimePoint")]
-# datModelVic = datModel
+
 
 DV = "Memory ~"
 rEff = "+(1+Condition|SID)+(1+Vicinity|Order)"
@@ -300,8 +265,8 @@ models = c("1",
            "ageBase+",
            "ageBase+ageChange",
            "ageBase+ageChange+Condition",
-           "ageBase+ageChange+Condition+Vicinity+",
-           # "ageBase+ageChange+Condition+Vicinity+Condition*Vicinity",
+           "ageBase+ageChange+Condition+Vicinity",
+           "ageBase+ageChange+Condition+Vicinity+Condition*Vicinity",
            "ageBase+ageChange+Condition+Vicinity+Condition*Vicinity+ageBase*Vicinity",
            "ageBase+ageChange+Condition+Vicinity+Condition*Vicinity+ageBase*Vicinity+ageChange*Vicinity",
            "ageBase+ageChange+Condition+Vicinity+Condition*Vicinity+ageBase*Vicinity+ageChange*Vicinity+ageChange:Condition:Vicinity")
@@ -362,28 +327,11 @@ A = sim_slopes(M, pred = Vicinity, modx = Condition,
 print(A)
 plot(A)
 
-# datM = datModel %>% group_by(SID,Condition,TimePoint) %>%
-#   summarise(Vicinity = median(Vicinity, na.rm =T),
-#             Memory = mean(Memory, na.rm =T),
-#             resid = mean(resid,na.rm=T),
-#             ageBase = mean(ageBase,na.rm=T),
-#             ageChange = mean(ageChange,na.rm=T),
-#             .groups = "drop") %>%
-#   as.data.frame()
-
 datM = datModel %>% group_by(SID,Condition,TimePoint) %>%
   reframe(
     Vicinity = c(min(Vicinity, na.rm =T),max(Vicinity, na.rm =T)),
-    # Memory    =  c(min(Memory, na.rm =T)+(sd(Memory, na.rm =T)),max(Memory, na.rm =T)-(sd(Memory, na.rm =T))),
     Memory    =  c(min(Memory, na.rm =T),max(Memory, na.rm =T)),
     ) %>%
-  # summarise(
-  #   Vicinity  = mean(Vic, na.rm = TRUE),
-  #   Memory    = mean(Memory, na.rm = TRUE),
-  #   ageBase   = mean(ageBase, na.rm = TRUE),
-  #   ageChange = mean(ageChange, na.rm = TRUE),
-  #   .groups = "drop"
-  # ) %>%
   as.data.frame()
 
 p =  interact_plot(M, pred = Vicinity, modx = Condition,
@@ -400,11 +348,6 @@ p = p+
     size = .25,
     position = position_jitter(width = 0.01, height = 0)
   )+
-  # geom_line(
-  #   data = datM,
-  #   aes(x = Vicinity, y = Memory, group = paste(SID,Condition)),
-  #   alpha = 0.4,
-  # )+
   labs(
     x = "Differential Vicinity",
     y = "Memory",
@@ -412,8 +355,8 @@ p = p+
     fill = "Condition"
   ) +
   scale_x_continuous(
-    limits = c(-.5, .9),
-    breaks = round(seq(-.5, .9,length.out = 5),1),
+    limits = c(round(min(datM$Vicinity),1), round(max(datM$Vicinity),1)),
+    breaks = round(seq(round(min(datM$Vicinity),1), round(max(datM$Vicinity),1),length.out = 5),1),
     labels = round(seq(0, 1,length.out = 5),1)
   ) +
   scale_y_continuous(
@@ -426,8 +369,6 @@ p = p+
     color = "gray50",
     linewidth = 0.6
   )+
-  # scale_color_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
-  # scale_fill_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
   theme_bw()+gDefault
 plot(p)
 
@@ -468,58 +409,6 @@ pred_dat <- ggeffects::ggpredict(
 )
 
 
-
-######### ageChange*Vicinity effect
-A = sim_slopes(M, pred = Vicinity, modx = ageChange, modx.values = c(8.92), 
-               confint = F, jnplot =T)
-print(A)
-
-p =  interact_plot(M, pred = Vicinity, modx = ageChange, modx.values = c(.5,1.5),
-                   plot.points = F, point.alpha = 0.3,point.size = .5,point.shape = F,
-                   line.thickness = 2,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F, partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Proportional Vicinity",
-                   colors =c("#7ED7AFFF","#3A2C59FF") )
-p = p+theme_bw()+gDefault
-plot(p)
-graph2ppt(file= paste(WD,"Vicinity_Fig5B.pptx",sep = ""), width = 14, height = 10)
-# graph2ppt(file= paste(WD,"Vicinity_Fig5B.pptx",sep = ""), width = 6, height = 5)
-
-
-
-######### Condition*Vicinity effect
-A = sim_slopes(M, pred = Vicinity, modx = Condition, 
-               confint = F, jnplot =T)
-print(A)
-
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   plot.points = F, point.alpha = 0.25,point.size = .5,point.shape = T,
-                   line.thickness = 1,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity")
-p = p+theme_bw()+gDefault
-plot(p)
-graph2ppt(file= paste(WD,"Vicinity_Fig5A.pptx",sep = ""), width = 10, height = 5)
-rocket(20, alpha = 1, begin = 0, end = 1, direction = 1)
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   # modx.values = c(8,10,12),
-                   plot.points = F, point.alpha = 0.1,point.size = .5,point.shape = F,
-                   line.thickness = 1.2,vary.lty=T, interval = F,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "CLR",#"Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity",
-                   colors =c("#7ED7AFFF","#3573A1FF","#3A2C59FF") )
-p = p+
-  # theme_bw()+gDefault+
-  # theme(legend.position.inside="top")+
-  theme(
-    legend.position = "inside", legend.position.inside = c(0.5, 0.9),
-    legend.direction = "horizontal", legend.box.background = element_rect(color="red") )
-plot(p)
 #------ ageBase*Vicinity effect Separate Conditions ----
 mClose = lmer(Memory ~ ageBase+ageChange+Vicinity+
                 ageBase:Vicinity+
@@ -618,8 +507,8 @@ p = p+
     fill = "ageChange"
   ) +
   scale_x_continuous(
-    limits = c(-.5, .9),
-    breaks = round(seq(-.5, .9,length.out = 5),1),
+    limits = c(round(min(datM$Vicinity),1), round(max(datM$Vicinity),1)),
+    breaks = round(seq(round(min(datM$Vicinity),1), round(max(datM$Vicinity),1),length.out = 5),1),
     labels = round(seq(0, 1,length.out = 5),1)
   ) +
   scale_y_continuous(
@@ -632,8 +521,6 @@ p = p+
     color = "gray50",
     linewidth = 0.6
   )+
-  # scale_color_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
-  # scale_fill_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
   theme_bw()+gDefault
 plot(p)
 
@@ -648,330 +535,10 @@ graph2ppt(file= paste(WD,"Vicinity_Figures.pptx",sep = ""),
           margins = c(top = 0, right = 0, bottom = 0, left = 0),
 )
 
-#-------------- CLR Model Testing ----
-datModel = sDat
-datModel$Condition = datModel$testName
-
-# datModel$Vicinity = datModel$diff
-datModel$Vicinity = datModel$diff+abs(min(datModel$diff,na.rm = T))
-datModel$Vicinity = datModel$Vicinity/max(datModel$Vicinity,na.rm=T)
-# datModel$Vicinity[datModel$Condition=="Close"] = scale(datModel$Vicinity[datModel$Condition=="Close"],center = T,scale = T)
-# datModel$Vicinity[datModel$Condition=="Far"] = scale(datModel$Vicinity[datModel$Condition=="Far"],center = T,scale = T)
-
-datModel$Memory  = datModel$CLR*100
-datModel$Order = factor(datModel$timeStamp,levels = order(unique(datModel$timeStamp)))
-# datModel$Order = as.numeric(datModel$timeStamp)
-datModel$ageBase = datModel$ageBase - min(datModel$ageBase)
-datModel$Age = datModel$Age - min(datModel$Age)
-# datModel$ageChange = scale(datModel$ageChange)
-datModel$TimePoint = ifelse(datModel$ageChange==0,1,2)
-
-datModel = RemoveOutliers(datModel,factorNames = c("sessID","Condition"),varNames = "Vicinity")
-datModel = datModel%>% group_by(SID,Condition,TimePoint) %>% fill(Vicinity, .direction = "downup")
-datModel = datModel[!is.na(datModel$Vicinity),]
-
-datModel %>% group_by(SID,Condition,TimePoint) %>%
-  summarise(Vicinity = mean(Vicinity, na.rm =T),N=n(),
-            CLR = mean(CLR, na.rm =T),CLR_50 = mean(CLR_50, na.rm =T)) %>%
-  group_by(Condition,TimePoint) %>%
-  summarise(meanV = mean(Vicinity, na.rm =T),
-            sdV = sd(Vicinity, na.rm =T),
-            MaxV = max(Vicinity, na.rm =T),
-            MinV = min(Vicinity, na.rm =T),
-            N=n(),
-            ,CLR = mean(CLR, na.rm =T),CLR_50 = mean(CLR_50, na.rm =T)) %>% as.data.frame()
-
-
-A = datModel %>% group_by(SID,Condition,TimePoint) %>%
-  summarise(Vicinity = mean(Vicinity, na.rm =T),N=n()) %>% as.data.frame()
-
-A$TimePoint = as.factor(A$TimePoint)
-ggplot(A, aes(x=TimePoint, y=Vicinity, fill=TimePoint)) +
-  geom_boxplot() +
-  # scale_fill_viridis(discrete = TRUE, alpha=0.6) +
-  geom_point(color="black", size=1, alpha=0.7)+
-  geom_line(aes(group=SID), alpha=0.5)+
-  facet_wrap(~Condition)
-
-# datModel = datModel[,c("SID", "Memory", "ageBase", "ageChange", "Condition", 'Vicinity',"Order","TimePoint")]
-# datModelVic = datModel
-
-DV = "Memory ~"
-rEff = "+(1+Condition|SID)+(1+Vicinity|Order)"
-models = c("1",
-           "ageBase+",
-           "ageBase+ageChange",
-           "ageBase+ageChange+Condition",
-           "ageBase+ageChange+Condition+Vicinity+",
-           "ageBase+ageChange+Condition+Vicinity+",
-           "ageBase+ageChange+Condition+Vicinity+ageChange*Vicinity",
-           "ageBase+ageChange+Condition+Vicinity+ageChange*Vicinity+ageBase*Vicinity",
-           "ageBase+ageChange+Condition+Vicinity+ageChange*Vicinity+ageBase*Vicinity+Condition*Vicinity",
-           "ageBase+ageChange+Condition+Vicinity+ageChange*Vicinity+ageBase*Vicinity+Condition*Vicinity+ageChange:Condition:Vicinity")
-i=1
-m=list()
-for (idx in seq(1,length(models))){
-  m[[idx]] = lmer(paste(DV,models[idx],rEff,sep = ""), 
-                  data=datModel, na.action=na.exclude)
-}
-mComp <- do.call(anova,m)
-# row.names(mComp) = models
-mComp$Best = seq(1,nrow(mComp))*as.numeric(mComp$`Pr(>Chisq)`<0.05)
-print(mComp)
-
-mNULL = lmer(Vicinity ~ 1+(1|SID), data=datModel, na.action=na.exclude)
-M = m[[max(mComp$Best,na.rm=T)]]
-tab_model(M,show.se = T,show.stat = T,show.est = T)
-
-
-p =  interact_plot(M, pred = Vicinity, modx = ageChange, mod2 = Condition, 
-                   plot.points = F, point.alpha = 0.25,point.size = .5,point.shape = T,
-                   line.thickness = 1,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = F,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity")
-p = p+theme_bw()+gDefault
-plot(p)
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   plot.points = F, point.alpha = 0.25,point.size = .5,point.shape = T,
-                   line.thickness = 1,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity")
-p = p+theme_bw()+gDefault
-plot(p)
-
-newdat <- make_predictions(
-  M,
-  pred = "Vicinity",
-  at = list(
-    Vicinity = seq(0.1, 1.0, by = 0.1),
-    Condition = levels(datModel$Condition)
-  )
-)
-
-ggplot(newdat, aes(x = Vicinity, y = predicted, color = Condition)) +
-  geom_line()
-
-summary(M)
-vif(M)
-hist(resid(M))
-anova(mNULL,M)
-VarCorr(M)
-M = lmer(Memory ~ 
-           Vicinity*(ageBase+ageChange+Condition)+
-           # ageChange:Condition:Vicinity+
-           (1+Condition|SID)+
-           (1+Vicinity|Order), 
-                data=datModel, na.action=na.exclude)
-tab_model(M,show.se = T,show.stat = T,show.est = T)
-
-
-
-
-plot(allEffects(M))
-######### ageChange*Vicinity effect
-A = sim_slopes(M, pred = Vicinity, modx = ageChange, modx.values = c(8.92), 
-               confint = F, jnplot =T)
-print(A)
-
-p =  interact_plot(M, pred = Vicinity, modx = ageChange, modx.values = c(.5,1.5),
-                   plot.points = F, point.alpha = 0.3,point.size = .5,point.shape = F,
-                   line.thickness = 2,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F, partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Proportional Vicinity",
-                   colors =c("#7ED7AFFF","#3A2C59FF") )
-p = p+theme_bw()+gDefault
-plot(p)
-graph2ppt(file= paste(WD,"Vicinity_Fig5B.pptx",sep = ""), width = 14, height = 10)
-# graph2ppt(file= paste(WD,"Vicinity_Fig5B.pptx",sep = ""), width = 6, height = 5)
-
-
-
-######### Condition*Vicinity effect
-A = sim_slopes(M, pred = Vicinity, modx = Condition, 
-               confint = F, jnplot =T)
-print(A)
-
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   plot.points = F, point.alpha = 0.25,point.size = .5,point.shape = T,
-                   line.thickness = 1,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity")
-p = p+theme_bw()+gDefault
-plot(p)
-graph2ppt(file= paste(WD,"Vicinity_Fig5A.pptx",sep = ""), width = 10, height = 5)
-rocket(20, alpha = 1, begin = 0, end = 1, direction = 1)
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   # modx.values = c(8,10,12),
-                   plot.points = F, point.alpha = 0.1,point.size = .5,point.shape = F,
-                   line.thickness = 1.2,vary.lty=T, interval = F,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "CLR",#"Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity",
-                   colors =c("#7ED7AFFF","#3573A1FF","#3A2C59FF") )
-p = p+
-  # theme_bw()+gDefault+
-  # theme(legend.position.inside="top")+
-  theme(
-    legend.position = "inside", legend.position.inside = c(0.5, 0.9),
-    legend.direction = "horizontal", legend.box.background = element_rect(color="red") )
-plot(p)
-#-------------- CLR Model Vicinity Correct+Incorrect ----
-datModel = sDat
-datModel$Condition = datModel$testName
-datModel$Vicinity = datModel$diff
-datModel$Vicinity = datModel$CorrL - (1-datModel$IncorrL)
-# datModel$VicinityI = datModel$IncorrL 
-# datModel$VicinityC = datModel$CorrL
-# datModel$VicinityI = datModel$IncorrL 
-
-datModel$Memory  = datModel$CLR*100
-datModel$Order = factor(datModel$timeStamp,levels = order(unique(datModel$timeStamp)))
-# datModel$Order = as.numeric(datModel$timeStamp)
-datModel$ageBase = datModel$ageBase - min(datModel$ageBase)
-datModel$Age = datModel$Age - min(datModel$Age)
-# datModel$ageChange = scale(datModel$ageChange)
-datModel$TimePoint = ifelse(datModel$ageChange==0,1,2)
-
-datModel = RemoveOutliers(datModel,factorNames = c("sessID","Condition"),varNames = "Vicinity")
-datModel = datModel%>% group_by(SID,Condition,TimePoint) %>% fill(Vicinity, .direction = "downup")
-datModel = datModel[!is.na(datModel$Vicinity),]
-
-datModel %>% group_by(SID,Condition,TimePoint) %>%
-  summarise(Vicinity = mean(Vicinity, na.rm =T),CLR = mean(CLR, na.rm =T),CLR_50 = mean(CLR_50, na.rm =T)) %>%
-  group_by(Condition,TimePoint) %>%
-  summarise(Vicinity = mean(Vicinity, na.rm =T),CLR = mean(CLR, na.rm =T),CLR_50 = mean(CLR_50, na.rm =T)) %>% as.data.frame()
-
-# datModel = datModel[,c("SID", "Memory", "ageBase", "ageChange", "Condition", 'Vicinity',"Order","TimePoint")]
-# datModelVic = datModel
-
-DV = "Memory ~"
-rEff = "+(1+Condition|SID)+(1+Vicinity|Order)"
-models = c("1",
-           "ageBase+",
-           "ageBase+ageChange",
-           "ageBase+ageChange+Condition",
-           "ageBase+ageChange+Condition+Vicinity+",
-           "ageBase+ageChange+Condition+(VicinityC+VicinityI)+",
-           "ageBase+ageChange+Condition+(VicinityC+VicinityI)+ageChange*(VicinityC+VicinityI)",
-           "ageBase+ageChange+Condition+(VicinityC+VicinityI)+ageChange*(VicinityC+VicinityI)+ageBase*(VicinityC+VicinityI)",
-           "ageBase+ageChange+Condition+(VicinityC+VicinityI)+ageChange*(VicinityC+VicinityI)+ageBase*(VicinityC+VicinityI)+Condition*(VicinityC+VicinityI)",
-           "ageBase+ageChange+Condition+(VicinityC+VicinityI)+ageChange*(VicinityC+VicinityI)+ageBase*(VicinityC+VicinityI)+Condition*(VicinityC+VicinityI)+ageChange:Condition:Vicinity")
-i=1
-m=list()
-for (idx in seq(1,length(models))){
-  m[[idx]] = lmer(paste(DV,models[idx],rEff,sep = ""), 
-                  data=datModel, na.action=na.exclude)
-}
-mComp <- do.call(anova,m)
-# row.names(mComp) = models
-mComp$Best = seq(1,nrow(mComp))*as.numeric(mComp$`Pr(>Chisq)`<0.05)
-print(mComp)
-
-mNULL = lmer(Vicinity ~ 1+(1|SID), data=datModel, na.action=na.exclude)
-M = m[[max(mComp$Best,na.rm=T)]]
-tab_model(M,show.se = T,show.stat = T,show.est = T)
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   plot.points = F, point.alpha = 0.25,point.size = .5,point.shape = T,
-                   line.thickness = 1,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity")
-p = p+theme_bw()+gDefault
-plot(p)
-
-
-
-summary(M)
-vif(M)
-hist(resid(M))
-anova(mNULL,M)
-VarCorr(M)
-M = lmer(Memory ~ 
-           Vicinity*(ageBase+ageChange+Condition)+
-           # ageChange:Condition:Vicinity+
-           (1+Condition|SID)+
-           (1+Vicinity|Order), 
-         data=datModel, na.action=na.exclude)
-summary(M)
-
-tab_model(M,show.se = T,show.stat = T,show.est = T)
-
-plot(allEffects(M))
-######### ageChange*Vicinity effect
-A = sim_slopes(M, pred = Vicinity, modx = ageChange, modx.values = c(8.92), 
-               confint = F, jnplot =T)
-print(A)
-
-p =  interact_plot(M, pred = Vicinity, modx = ageChange, modx.values = c(.5,1.5),
-                   plot.points = F, point.alpha = 0.3,point.size = .5,point.shape = F,
-                   line.thickness = 2,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F, partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Proportional Vicinity",
-                   colors =c("#7ED7AFFF","#3A2C59FF") )
-p = p+theme_bw()+gDefault
-plot(p)
-graph2ppt(file= paste(WD,"Vicinity_Fig5B.pptx",sep = ""), width = 14, height = 10)
-# graph2ppt(file= paste(WD,"Vicinity_Fig5B.pptx",sep = ""), width = 6, height = 5)
-
-
-
-######### Condition*Vicinity effect
-A = sim_slopes(M, pred = Vicinity, modx = Condition, 
-               confint = F, jnplot =T)
-print(A)
-
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   plot.points = F, point.alpha = 0.25,point.size = .5,point.shape = T,
-                   line.thickness = 1,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity")
-p = p+theme_bw()+gDefault
-plot(p)
-graph2ppt(file= paste(WD,"Vicinity_Fig5A.pptx",sep = ""), width = 10, height = 5)
-rocket(20, alpha = 1, begin = 0, end = 1, direction = 1)
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   # modx.values = c(8,10,12),
-                   plot.points = F, point.alpha = 0.1,point.size = .5,point.shape = F,
-                   line.thickness = 1.2,vary.lty=T, interval = F,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "CLR",#"Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity",
-                   colors =c("#7ED7AFFF","#3573A1FF","#3A2C59FF") )
-p = p+
-  # theme_bw()+gDefault+
-  # theme(legend.position.inside="top")+
-  theme(
-    legend.position = "inside", legend.position.inside = c(0.5, 0.9),
-    legend.direction = "horizontal", legend.box.background = element_rect(color="red") )
-plot(p)
 #######################################################  Exploration-Map Similarity Table 2 and Figure 6-----
 #----------------- prepare cluster ----
 dat = datGaze[datGaze$MeasureName == "EMS",]
 dat$timePoint = round(dat$timePoint)
-
-# dat = RemoveOutliers(dat,factorNames = c("ID","condition","timePoint"),varNames = "value")
-# dat = dat%>% group_by(ID,condition,testName) %>%
-#   fill(value, .direction = "downup")
-
-# dat = RemoveOutliers(dat,factorNames = c("ID","condition","testName"),varNames = "value")
-# dat = dat%>% group_by(ID,condition,testName) %>%
-#   fill(value, .direction = "downup")
-
-# dat = dat%>% group_by(ID,condition,testName) %>% 
-#   mutate(value = na.approx(value))%>%
-#   as.data.frame()
 
 dat =  pivot_wider(dat,id_cols = c("SID","sessID","timePoint","testName"),
                    names_from = c("condition"), 
@@ -993,16 +560,6 @@ d = dat[(dat$testName == "Far" &
            (dat$timePoint >= clusterFar[1]) & (dat$timePoint <= clusterFar[2]))|
           (dat$testName == "Close" &
              (dat$timePoint >= clusterClose[1]) & (dat$timePoint <= clusterClose[2]))  ,]
-
-# d = RemoveOutliers(d,factorNames = c("sessID","testName","timePoint"),varNames = "diff",Criteria=3)
-# d = d[!is.na(d$diff),]
-# head(d)
-# d=dat
-# dat = PermutationTestDataPrep_HMLET(data = d[d$SID=="hc708",], ID = "SID", trial = NULL, 
-#                                     timePoint = "timePoint",
-#                                     condition = "testName",
-#                                     gazeMeasure = "diff", testName = "sessID")
-# PlotTimeSeries_HMLET(dat,showDataPointProp = F, showOverallMean = F)
 
 
 d = d[order(d$SID,d$sessID,d$timePoint,d$testName),]
@@ -1153,58 +710,38 @@ A = sim_slopes(M, pred = Vicinity, modx = Condition,
 print(A)
 plot(A)
 
-# datM = datModel %>% group_by(SID,Condition,TimePoint) %>%
-#   summarise(Vicinity = median(Vicinity, na.rm =T),
-#             Memory = mean(Memory, na.rm =T),
-#             resid = mean(resid,na.rm=T),
-#             ageBase = mean(ageBase,na.rm=T),
-#             ageChange = mean(ageChange,na.rm=T),
-#             .groups = "drop") %>%
-#   as.data.frame()
+
 
 datM = datModel %>% group_by(SID,Condition,TimePoint) %>%
   reframe(
-    Vicinity = c(min(Vicinity, na.rm =T),max(Vicinity, na.rm =T)),
-    # Memory    =  c(min(Memory, na.rm =T)+(sd(Memory, na.rm =T)),max(Memory, na.rm =T)-(sd(Memory, na.rm =T))),
+    Similarity = c(min(Similarity, na.rm =T),max(Similarity, na.rm =T)),
     Memory    =  c(min(Memory, na.rm =T),max(Memory, na.rm =T)),
   ) %>%
-  # summarise(
-  #   Vicinity  = mean(Vic, na.rm = TRUE),
-  #   Memory    = mean(Memory, na.rm = TRUE),
-  #   ageBase   = mean(ageBase, na.rm = TRUE),
-  #   ageChange = mean(ageChange, na.rm = TRUE),
-  #   .groups = "drop"
-  # ) %>%
   as.data.frame()
 
-p =  interact_plot(M, pred = Vicinity, modx = Condition,
+p =  interact_plot(M, pred = Similarity, modx = Condition,
                    plot.points = F, point.alpha = 0.3,point.size = .5, point.shape = F,
                    line.thickness = 1.5,vary.lty=F, interval = T,int.type = "confidence",
                    linearity.check =F, rug =F,partial.residuals = F,centered = "all",
                    y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity")
+                   x.label = "Differential Similarity")
 p = p+
   geom_point(
     data = datM,
-    aes(x = Vicinity, y = Memory, color = Condition),
+    aes(x = Similarity, y = Memory, color = Condition),
     alpha = 0.3,
     size = .25,
     position = position_jitter(width = 0.01, height = 0)
   )+
-  # geom_line(
-  #   data = datM,
-  #   aes(x = Vicinity, y = Memory, group = paste(SID,Condition)),
-  #   alpha = 0.4,
-  # )+
   labs(
-    x = "Differential Vicinity",
+    x = "Differential Similarity",
     y = "Memory",
     color = "Condition",
     fill = "Condition"
   ) +
   scale_x_continuous(
-    limits = c(-.5, .9),
-    breaks = round(seq(-.5, .9,length.out = 5),1),
+    limits = c(round(min(datM$Similarity),3), round(max(datM$Similarity),3)),
+    breaks = round(seq(round(min(datM$Similarity),3), round(max(datM$Similarity),3),length.out = 5),3),
     labels = round(seq(0, 1,length.out = 5),1)
   ) +
   scale_y_continuous(
@@ -1217,100 +754,9 @@ p = p+
     color = "gray50",
     linewidth = 0.6
   )+
-  # scale_color_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
-  # scale_fill_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
   theme_bw()+gDefault
 plot(p)
 
-graph2ppt(file= paste(WD,"Vicinity_Figures.pptx",sep = ""),
-          width = 4, 
-          height = 3,
-          paper = "letter",
-          orient = "portrait",
-          scaling = 100,
-          append = T,
-          center = T,
-          margins = c(top = 0, right = 0, bottom = 0, left = 0),
-)
-
-
-datModel$resid <- resid(M)
-datPoint = datModel %>% group_by(SID,Condition,TimePoint) %>%
-  summarise(Vicinity = median(Vicinity, na.rm =T),
-            Memory = mean(Memory, na.rm =T),
-            resid = mean(resid,na.rm=T),
-            ageBase = mean(ageBase),
-            ageChange = mean(ageChange)) %>%
-  group_by(SID,Condition) %>%
-  summarise(Vicinity = max(Vicinity, na.rm =T),
-            Memory = mean(Memory, na.rm =T),
-            resid = mean(resid,na.rm=T),
-            ageBase = mean(ageBase),
-            ageChange = mean(ageChange)) %>%
-  as.data.frame()
-
-pred_dat <- ggeffects::ggpredict(
-  M,
-  terms = c("Vicinity [-.5:1 by=0.01]", "Condition"),
-  condition = c(
-    ageBase = mean(datModel$ageBase, na.rm = TRUE),
-    ageChange = mean(datModel$ageChange, na.rm = TRUE)
-  )
-)
-
-
-
-######### ageChange*Vicinity effect
-A = sim_slopes(M, pred = Vicinity, modx = ageChange, modx.values = c(8.92), 
-               confint = F, jnplot =T)
-print(A)
-
-p =  interact_plot(M, pred = Vicinity, modx = ageChange, modx.values = c(.5,1.5),
-                   plot.points = F, point.alpha = 0.3,point.size = .5,point.shape = F,
-                   line.thickness = 2,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F, partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Proportional Vicinity",
-                   colors =c("#7ED7AFFF","#3A2C59FF") )
-p = p+theme_bw()+gDefault
-plot(p)
-graph2ppt(file= paste(WD,"Vicinity_Fig5B.pptx",sep = ""), width = 14, height = 10)
-# graph2ppt(file= paste(WD,"Vicinity_Fig5B.pptx",sep = ""), width = 6, height = 5)
-
-
-
-######### Condition*Vicinity effect
-A = sim_slopes(M, pred = Vicinity, modx = Condition, 
-               confint = F, jnplot =T)
-print(A)
-
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   plot.points = F, point.alpha = 0.25,point.size = .5,point.shape = T,
-                   line.thickness = 1,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity")
-p = p+theme_bw()+gDefault
-plot(p)
-graph2ppt(file= paste(WD,"Vicinity_Fig5A.pptx",sep = ""), width = 10, height = 5)
-rocket(20, alpha = 1, begin = 0, end = 1, direction = 1)
-
-p =  interact_plot(M, pred = Vicinity, modx = Condition, 
-                   # modx.values = c(8,10,12),
-                   plot.points = F, point.alpha = 0.1,point.size = .5,point.shape = F,
-                   line.thickness = 1.2,vary.lty=T, interval = F,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                   y.label = "CLR",#"Item-Location Memory Accuracy",
-                   x.label = "Differential Vicinity",
-                   colors =c("#7ED7AFFF","#3573A1FF","#3A2C59FF") )
-p = p+
-  # theme_bw()+gDefault+
-  # theme(legend.position.inside="top")+
-  theme(
-    legend.position = "inside", legend.position.inside = c(0.5, 0.9),
-    legend.direction = "horizontal", legend.box.background = element_rect(color="red") )
-plot(p)
 #------ ageBase*Similarity effect Separate Conditions ----
 mClose = lmer(Memory ~ ageBase+ageChange+Similarity+
                 ageBase:Similarity+
@@ -1384,19 +830,6 @@ p = A$jn[[1]]$plot
 sapply(p$layers, function(x) class(x$geom)[1])
 p$layers[[9]]$aes_params$colour = "#595959"
 
-# p = p+annotate(geom="text", x=round(A$slopes$`Value of ageChange`,2), y=round(A$slopes$Est.,2), 
-#                label=paste("ageChange = ",round(A$slopes[[1]]$`Value of ageChange`,2),
-#                            ", Beta = ",round(A$slopes$Est.,2),sep = ""),
-#                color="#595959")+
-#   theme(legend.position = "bottom")+
-#   scale_x_continuous(
-#     limits = c(-.5, 6),
-#     breaks = seq(-.17, 5.83,length.out = 5),
-#     labels = round(seq(0, 6,length.out = 5)+8,1)
-#   )
-# 
-# plot(p)
-
 
 datM = datModel %>% group_by(SID,ageChange,Condition,TimePoint) %>%
   reframe(
@@ -1414,7 +847,7 @@ p =  interact_plot(M, pred = Similarity, modx = ageChange, modx.values = c(.5,1.
                    linearity.check =F, rug =F, partial.residuals = F,centered = "all",
                    y.label = "Item-Location Memory Accuracy",
                    x.label = "Proportional Similarity",
-                   colors =c("#F6AE86FF","#661F54FF") )
+                   colors =c("#A6BC09","#005148","#3A2C59FF") )
 p = p+
   geom_point(
     data = datM,
@@ -1429,8 +862,8 @@ p = p+
     fill = "ageChange"
   ) +
   scale_x_continuous(
-    limits = c(-.07, .1),
-    breaks = seq(-.07, .1,length.out = 5),
+    limits = c(round(min(datM$Similarity),3), round(max(datM$Similarity),3)),
+    breaks = round(seq(round(min(datM$Similarity),3), round(max(datM$Similarity),3),length.out = 5),3),
     labels = round(seq(0, 1,length.out = 5),1)
   ) +
   scale_y_continuous(
@@ -1443,21 +876,10 @@ p = p+
     color = "gray50",
     linewidth = 0.6
   )+
-  # scale_color_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
-  # scale_fill_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
   theme_bw()+gDefault
 plot(p)
 
-# graph2ppt(file= paste(WD,"Similarity_Figures.pptx",sep = ""),
-#           width = 4, 
-#           height = 3,
-#           paper = "letter",
-#           orient = "portrait",
-#           scaling = 100,
-#           append = T,
-#           center = T,
-#           margins = c(top = 0, right = 0, bottom = 0, left = 0),
-# )
+
 #------ Condition*ageChange*Similarity effect ------
 anova(m[[8]],m[[9]])
 tab_model(m[[9]],show.se = T,show.stat = T,show.est = T)
@@ -1488,10 +910,9 @@ p = p+annotate(geom="text", x=round(A$slopes[[1]]$`Value of ageChange`,2), y=rou
     breaks = seq(0,3,length.out = 3),
     labels = round(seq(0, 3,length.out = 3),1)
   )+ ggtitle("Johnson-Neyman Plot for Close")
-
 plot(p)
 
-plot(p)
+
 graph2ppt(file= paste(WD,"Similarity_Figures.pptx",sep = ""),
           width = 3.5, 
           height = 4.5,
@@ -1565,8 +986,8 @@ p = p+
     fill = "ageChange"
   ) +
   scale_x_continuous(
-    limits = c(-.07, .1),
-    breaks = seq(-.07, .1,length.out = 5),
+    limits = c(round(min(datM$Similarity[datM$Condition=="Close"]),3), round(max(datM$Similarity[datM$Condition=="Close"]),3)),
+    breaks = round(seq(round(min(datM$Similarity[datM$Condition=="Close"]),3), round(max(datM$Similarity[datM$Condition=="Close"]),3),length.out = 5),3),
     labels = round(seq(0, 1,length.out = 5),1)
   ) +
   scale_y_continuous(
@@ -1579,8 +1000,6 @@ p = p+
     color = "gray50",
     linewidth = 0.6
   )+
-  # scale_color_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
-  # scale_fill_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
   theme_bw()+gDefault
 plot(p)
 
@@ -1618,8 +1037,8 @@ p = p+
     fill = "ageChange"
   ) +
   scale_x_continuous(
-    limits = c(-.07, .1),
-    breaks = seq(-.07, .1,length.out = 5),
+    limits = c(round(min(datM$Similarity[datM$Condition=="Far"]),3), round(max(datM$Similarity[datM$Condition=="Far"]),3)),
+    breaks = round(seq(round(min(datM$Similarity[datM$Condition=="Far"]),3), round(max(datM$Similarity[datM$Condition=="Far"]),3),length.out = 5),3),
     labels = round(seq(0, 1,length.out = 5),1)
   ) +
   scale_y_continuous(
@@ -1632,8 +1051,6 @@ p = p+
     color = "gray50",
     linewidth = 0.6
   )+
-  # scale_color_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
-  # scale_fill_manual(values = c("#7ED7AFFF","#3573A1FF","#3A2C59FF") ) +
   theme_bw()+gDefault
 plot(p)
 
@@ -1674,141 +1091,6 @@ mFar = lmer(Memory ~ ageBase+ageChange+Similarity+
 tab_model(mFar,show.se = T,show.stat = T,show.est = T)
 sort(unique(datModel$ageChange))
 sort(unique(datModel$ageBase)); hist(datModel$ageBase)
-
-#-------------- CLR Model test ----
-datModel = sDat
-datModel$Condition = datModel$testName
-datModel$Similarity = datModel$diff
-
-# datModel$Similarity = datModel$Similarity + abs(min(datModel$Similarity,na.rm=T))
-# datModel$Similarity = as.numeric(scale(datModel$Similarity,center = F))
-# datModel$Similarity = datModel$Similarity +abs(min(datModel$Similarity,na.rm=T))
-# datModel$Similarity = datModel$Similarity/max(datModel$Similarity,na.rm=T)
-
-
-datModel$Memory  = datModel$CLR*100
-# datModel$Memory  = datModel$CLR_50*100
-datModel$Order = datModel$timeStamp 
-datModel$ageBase = datModel$ageBase - min(datModel$ageBase)
-datModel$Age = datModel$Age - min(datModel$Age)
-# datModel$ageChange = scale(datModel$ageChange)
-datModel$TimePoint = ifelse(datModel$ageChange==0,1,2)
-
-datModel = RemoveOutliers(datModel,factorNames = c("sessID","Condition"),varNames = "Similarity")
-datModel = datModel%>% group_by(SID,Condition,TimePoint) %>% fill(Similarity, .direction = "downup")
-datModel = datModel[!is.na(datModel$Similarity),]
-
-
-
-datModel %>% group_by(SID,Condition,TimePoint) %>%
-  summarise(Similarity = mean(Similarity, na.rm =T),CLR = mean(CLR, na.rm =T),CLR_50 = mean(CLR_50, na.rm =T)) %>%
-  group_by(Condition,TimePoint) %>%
-  summarise(Similarity = mean(Similarity, na.rm =T),CLR = mean(CLR, na.rm =T),CLR_50 = mean(CLR_50, na.rm =T)) %>% as.data.frame()
-
-
-
-datModel = datModel[,c("SID", "Memory", "ageBase", "ageChange", "Condition", 'Similarity',"Order")]
-datModelEMS = datModel
-
-DV = "Memory ~"
-rEff = "+(1+Condition|SID)+(1|Order)"
-models = c("1",
-           "ageBase", 
-           "ageBase+ageChange",
-           "ageBase+ageChange+Condition",
-           "ageBase+ageChange+Condition+Similarity",
-           "ageBase+ageChange+Condition+Similarity+ageChange:Similarity", 
-           "ageBase+ageChange+Condition+Similarity+ageChange*Similarity+ageBase*Similarity", 
-           "ageBase+ageChange+Condition+Similarity+ageChange*Similarity+ageBase*Similarity+ageChange:Condition:Similarity",
-           "ageBase+ageChange+Condition+Similarity+ageChange*Similarity+ageBase*Similarity+Condition*Similarity+ageChange:Condition:Similarity")
-i=1
-m=list()
-for (idx in seq(1,length(models))){
-  m[[idx]] = lmer(paste(DV,models[idx],rEff,sep = ""), 
-                  data=datModel, na.action=na.exclude)
-}
-mComp <- do.call(anova,m)
-row.names(mComp) = models
-mComp$Best = seq(1,nrow(mComp))*as.numeric(mComp$`Pr(>Chisq)`<0.05)
-print(mComp)
-tab_model(m[[max(mComp$Best,na.rm=T)]],show.se = T,show.stat = T,show.est = T)
-
-tab_model(m[5],show.se = T,show.stat = T,show.est = T)
-
-mNULL = lmer(Similarity ~ 1+(1|SID), data=datModel, na.action=na.exclude)
-M = m[[max(mComp$Best,na.rm=T)]]
-tab_model(M,show.se = T,show.stat = T,show.est = T)
-
-# summary(M)
-# vif(M)
-# hist(resid(M))
-# anova(mNULL,M)
-
-
-p =  interact_plot(M, pred = Similarity, modx = ageBase, 
-                   # modx.values = c(8,10,12),
-                   plot.points = F, point.alpha = 0.2,point.size = .75,point.shape = F,
-                   line.thickness = 1.2,vary.lty=F, interval = T,int.type = "confidence",
-                   linearity.check =F, rug =F,partial.residuals = F,centered = "all",
-                   y.label = "Item-Location Memory Accuracy",
-                   x.label = "Differential EMS",
-                   colors =c("#7ED7AFFF","#3573A1FF","#3A2C59FF") )
-p = p+theme_bw()+gDefault
-plot(p)
-
-p = interact_plot(M, pred = Similarity, modx = Condition, 
-                  mod2 = ageChange, mod2.values = c(.5,1.5),
-                  plot.points = F, point.alpha = 0.5,point.size = .5,point.shape = T,
-                  line.thickness = 1,vary.lty=F, interval = T,int.type = "confidence",
-                  linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                  y.label = "Item-Location Memory Accuracy",
-                  x.label = "Differential EMS")
-p = p+theme_bw()+gDefault
-plot(p)
-
-p = interact_plot(M, pred = Similarity, mod2 = Condition, mod2.values = "Close", 
-                  modx = ageChange, modx.values = c(.5,1.5),
-                  plot.points = F, point.alpha = 0.3,point.size = .5,point.shape = T,
-                  line.thickness = 2,vary.lty=F, interval = T,int.type = "confidence",
-                  linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                  y.label = "Item-Location Memory Accuracy",
-                  x.label = "Differential EMS",
-                  colors =c("#7ED7AFFF","#3A2C59FF"))
-p = p+theme_bw()+gDefault
-plot(p)
-
-p = interact_plot(M, pred = Similarity, mod2 = Condition,  
-                  modx = ageChange, modx.values = c(.5,1.5),
-                  plot.points = F, point.alpha = 0.3,point.size = .5,point.shape = T,
-                  line.thickness = 2,vary.lty=F, interval = T,int.type = "confidence",
-                  linearity.check =F, rug =F,partial.residuals = T,centered = "all",
-                  y.label = "Item-Location Memory Accuracy",
-                  x.label = "Differential EMS",
-                  colors =c("#F6AE86FF","#661F54FF"))
-p = p+theme_bw()+gDefault+theme(
-  legend.position = "inside", legend.position.inside = c(0.5, 0.9),
-  legend.direction = "horizontal", legend.box.background = element_rect(color="red") )
-plot(p)
-
-graph2ppt(file= paste(WD,"EMS_Fig6CD.pptx",sep = ""), width = 12, height = 7)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ########################################## Invetigate Perfomance changes ------------------
 

@@ -334,3 +334,6 @@ Help for any exported function:
 ```r
 ?PermutationTest_HMLET
 ```
+# R Scripts used in the manuscript
+ Behavioral Analysis.R is used for generating behavioral descriptives and statistical tests reported in the manuscript and supplementary information.
+ MultilevelModels.R is used for performing longitudinal tests using multilevel models and generating graphs reported in the manuscript and supplementary information.
